@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?page_default_bg"
+        tools:context=".view.fragment.ChatFragment">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationY="-15dp"
+            app:cardBackgroundColor="?toolbar_color"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_110sdp">
+
+                <ImageView
+                    android:id="@+id/overflowIcon"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:src="@drawable/menu_icon"
+                    app:tint="?toolbar_icon_color"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/toolBar"
+                    app:layout_constraintTop_toTopOf="@id/toolBar" />
+
+                <TextView
+                    android:id="@+id/chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:fontFamily="?regularFont"
+                    android:text="@string/all_chats"
+                    android:textColor="?toolbar_text_color"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/overflowIcon"
+                    app:layout_constraintStart_toStartOf="@id/toolBar"
+                    app:layout_constraintTop_toTopOf="@id/overflowIcon" />
+
+
+                <View
+                    android:id="@+id/searchBarBg"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_22sdp"
+                    android:background="@drawable/search_bar_bg"
+                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
+                    app:layout_constraintStart_toStartOf="@id/toolBar" />
+
+
+                <ImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:src="@drawable/search_icon"
+                    app:tint="?text_border_color_hint"
+                    app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
+                    app:layout_constraintStart_toStartOf="@id/searchBarBg"
+                    app:layout_constraintTop_toTopOf="@id/searchBarBg" />
+
+                <EditText
+                    android:id="@+id/searchText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@null"
+                    android:hint="@string/search"
+                    android:textSize="@dimen/_13sdp"
+                    android:imeOptions="flagNoPersonalizedLearning"
+                    android:textColor="@color/white"
+                    android:textColorHint="?text_border_color_hint"
+                    app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
+                    app:layout_constraintEnd_toEndOf="@+id/searchBarBg"
+                    app:layout_constraintStart_toEndOf="@+id/searchIcon"
+                    app:layout_constraintTop_toTopOf="@id/searchBarBg" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/selectionPanel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_gravity="bottom"
+                android:paddingTop="@dimen/_10sdp"
+                android:visibility="gone"
+                app:cardBackgroundColor="?toolbar_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/toolBar"
+                app:layout_constraintTop_toTopOf="@+id/searchBarBg">
+
+                <ImageView
+                    android:id="@+id/backPressed"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_arrow_back_black_24dp"
+                    app:tint="?toolbar_icon_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/selectedCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="?mediumFont"
+                    android:text="1"
+                    android:textColor="?toolbar_text_color"
+                    android:textSize="@dimen/_14sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/backPressed"
+                    app:layout_constraintStart_toEndOf="@+id/backPressed"
+                    app:layout_constraintTop_toTopOf="@+id/backPressed" />
+
+
+                <ImageView
+                    android:id="@+id/deleteChat"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:padding="5dp"
+                    android:src="@drawable/delete_icon"
+                    app:tint="?toolbar_icon_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/selectionMenu"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/selectionMenu"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:padding="6dp"
+                    android:src="@drawable/menu_icon"
+                    app:tint="?toolbar_icon_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatLists"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/contactButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/count_circle_bg"
+            android:backgroundTint="@color/bg_one"
+            android:padding="@dimen/_12sdp"
+            android:contentDescription="@string/edit_name"
+            app:fabCustomSize="@dimen/_35sdp"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/active_text_color" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/newUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/count_circle_bg"
+            android:backgroundTint="@color/bg_one"
+            android:padding="@dimen/_11sdp"
+            app:fabCustomSize="@dimen/_35sdp"
+            android:src="@drawable/add_new_user"
+            app:layout_constraintBottom_toTopOf="@+id/contactButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/active_text_color" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

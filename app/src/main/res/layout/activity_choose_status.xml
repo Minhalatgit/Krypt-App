@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?page_default_bg"
+        tools:context=".view.activity.ChooseStatusActivity">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:translationY="-20dp"
+            app:cardBackgroundColor="?toolbar_color"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/_19sdp"
+            android:layout_height="@dimen/_19sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:onClick="onBackButtonPressed"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            app:tint="?toolbar_icon_color"
+            app:layout_constraintStart_toStartOf="@+id/toolBar"
+            app:layout_constraintTop_toTopOf="@id/toolBar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:fontFamily="?regularFont"
+            android:text="@string/available"
+            android:textColor="?toolbar_text_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/backButton"
+            app:layout_constraintStart_toEndOf="@+id/backButton"
+            app:layout_constraintTop_toTopOf="@id/backButton" />
+
+
+        <ImageView
+            android:id="@+id/doneButton"
+            android:layout_width="@dimen/_19sdp"
+            android:layout_height="@dimen/_19sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:onClick="onSaveButtonPressed"
+            android:src="@drawable/ic_done"
+            app:tint="?toolbar_icon_color"
+            app:layout_constraintEnd_toEndOf="@id/toolBar"
+            app:layout_constraintTop_toTopOf="@id/toolBar" />
+
+
+        <TextView
+            android:id="@+id/currently"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="?mediumFont"
+            android:text="@string/currently"
+            android:textColor="?colorPrimary"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/backButton"
+            app:layout_constraintTop_toBottomOf="@id/toolBar" />
+
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@null"
+            android:fontFamily="?mediumFont"
+            android:text="@string/available"
+            android:textColor="?primary_text_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/backButton"
+            app:layout_constraintTop_toBottomOf="@id/currently" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/editIcon"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/edit_icon_white"
+            app:tint="?inactive_tab_icon_color"
+            app:layout_constraintEnd_toEndOf="@id/toolBar"
+            app:layout_constraintTop_toTopOf="@id/status" />
+
+
+        <TextView
+            android:id="@+id/chooseAnyOneHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:fontFamily="?mediumFont"
+            android:text="@string/choose_any_one"
+            android:textColor="?colorPrimary"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/backButton"
+            app:layout_constraintTop_toBottomOf="@id/status" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/statusRecyclerView"
+            app:layout_constrainedWidth="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@+id/editIcon"
+            app:layout_constraintStart_toStartOf="@id/chooseAnyOneHeader"
+            app:layout_constraintTop_toBottomOf="@+id/chooseAnyOneHeader"
+            tools:listitem="@layout/item_status" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

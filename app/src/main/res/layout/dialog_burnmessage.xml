@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_270sdp"
+    android:background="?page_default_bg"
+    android:padding="@dimen/_20sdp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="?mediumFont"
+        android:text="@string/burn_message"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title">
+
+
+        <RadioButton
+            android:id="@+id/oneMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="?regularFont"
+            android:paddingStart="@dimen/_8sdp"
+            android:text="@string/_1_month"
+            android:textColor="?primary_text_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/threeMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="?regularFont"
+            android:paddingStart="@dimen/_8sdp"
+            android:text="@string/_3_months"
+            android:textColor="?primary_text_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/oneYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="?regularFont"
+            android:paddingStart="@dimen/_8sdp"
+            android:text="@string/_1_year"
+            android:textColor="?primary_text_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/minutes"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:background="@drawable/selected_burntime_bg"
+        android:fontFamily="?regularFont"
+        android:gravity="center"
+        android:text="@string/minutes"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:textColor="?text_color_content"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toStartOf="@+id/timeSelector"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seconds" />
+
+    <TextView
+        android:id="@+id/hours"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:background="@drawable/selected_burntime_bg"
+        android:fontFamily="?regularFont"
+        android:gravity="center"
+        android:text="@string/hours"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:textColor="?text_color_content"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toStartOf="@+id/timeSelector"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minutes" />
+
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/selected_burntime_bg"
+        android:fontFamily="?regularFont"
+        android:gravity="center"
+        android:text="@string/days"
+
+        android:textColor="?text_color_content"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toStartOf="@+id/timeSelector"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hours" />
+
+    <TextView
+        android:id="@+id/seconds"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:background="@drawable/selected_burntime_bg"
+        android:fontFamily="?regularFont"
+        android:gravity="center"
+        android:text="@string/seconds"
+        android:textColor="?text_color_content"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toStartOf="@+id/timeSelector"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />-->
+
+    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
+        android:id="@+id/unitSelector"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/_45sdp"
+        android:paddingBottom="@dimen/_45sdp"
+        app:layout_constraintEnd_toStartOf="@id/timeSelector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+        app:rvp_triggerOffset="0.1"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:elevation="@dimen/_7sdp"
+        />
+
+
+    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
+        android:id="@+id/timeSelector"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/_45sdp"
+        android:paddingBottom="@dimen/_45sdp"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/unitSelector"
+        app:rvp_triggerOffset="0.1"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:elevation="@dimen/_7sdp"
+        />
+
+    <View
+        android:id="@+id/outer_border"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_155sdp"
+        android:background="@drawable/burn_time_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/timeSelector"
+        app:layout_constraintEnd_toEndOf="@+id/timeSelector"
+        app:layout_constraintStart_toStartOf="@+id/timeSelector"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+        android:layout_marginTop="@dimen/_20sdp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/selected_burntime_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/timeSelector"
+        app:layout_constraintEnd_toEndOf="@+id/timeSelector"
+        app:layout_constraintStart_toStartOf="@+id/timeSelector"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+        android:layout_marginTop="@dimen/_20sdp"
+        />
+
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/timeSelector"
+        app:layout_constraintEnd_toEndOf="@+id/timeSelector"
+        app:layout_constraintStart_toStartOf="@+id/timeSelector"
+        app:layout_constraintTop_toTopOf="@+id/timeSelector" />
+
+    <TextView
+        android:id="@+id/done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="?mediumFont"
+        android:text="@string/done"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeSelector" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

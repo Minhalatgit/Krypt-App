@@ -1,0 +1,3 @@
+include ':ucrop'
+rootProject.name='Krpyt'
+include ':app', ':lightcompressor'

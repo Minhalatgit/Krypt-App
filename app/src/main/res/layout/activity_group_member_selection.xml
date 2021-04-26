@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="?page_default_bg">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:translationY="-20dp"
+            app:cardBackgroundColor="?toolbar_color"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            app:tint="?toolbar_icon_color"
+            app:layout_constraintStart_toStartOf="@+id/toolBar"
+            app:layout_constraintTop_toTopOf="@id/toolBar" />
+
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:fontFamily="?regularFont"
+            android:text="@string/new_message"
+            android:textColor="?toolbar_text_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/backButton"
+            app:layout_constraintStart_toEndOf="@+id/backButton"
+            app:layout_constraintTop_toTopOf="@id/backButton" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/toolBar"
+            app:layout_constraintEnd_toEndOf="@id/toolBar"
+            app:layout_constraintStart_toStartOf="@id/toolBar"
+            app:layout_constraintTop_toTopOf="@+id/toolBar">
+
+            <View
+                android:id="@+id/searchBarBg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/search_bar_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/searchIcon"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:src="@drawable/search_icon"
+                app:tint="?text_border_color_hint"
+                app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
+                app:layout_constraintStart_toStartOf="@id/searchBarBg"
+                app:layout_constraintTop_toTopOf="@id/searchBarBg" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@null"
+                android:hint="@string/search"
+                android:textColorHint="?text_border_color_hint"
+                app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
+                app:layout_constraintStart_toEndOf="@+id/searchIcon"
+                app:layout_constraintTop_toTopOf="@id/searchBarBg"
+                android:imeOptions="flagNoPersonalizedLearning"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/newGroup"
+                    android:layout_width="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:hint="@string/add_people"
+                    android:background="@null"
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="?dialog_text_color"
+                    android:textColorHint="?text_color_hint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toolBar"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/selectedContactLists"
+                    app:layout_constraintTop_toBottomOf="@id/newGroup"
+                    android:layout_height="wrap_content"/>
+
+                <include layout="@layout/contact_lists"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constrainedHeight="true"
+                    app:layout_constraintTop_toBottomOf="@id/selectedContactLists"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <ImageView
+            android:id="@+id/nextButton"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/count_circle_bg"
+            android:backgroundTint="@color/bg_one"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_done"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

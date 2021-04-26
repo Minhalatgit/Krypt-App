@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?page_default_bg">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:context=".view.fragment.VaultFragment">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/toolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:translationY="-10dp"
+                    app:cardBackgroundColor="?toolbar_color"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    app:layout_constraintEnd_toEndOf="@id/toolBar"
+                    app:layout_constraintStart_toStartOf="@id/toolBar"
+                    app:layout_constraintTop_toTopOf="@id/toolBar" />
+
+                <TextView
+                    android:id="@+id/galleryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:fontFamily="?mediumFont"
+                    android:text="@string/gallery"
+                    android:textColor="?text_color_hint"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
+                    app:layout_constraintEnd_toEndOf="@id/divider"
+                    app:layout_constraintStart_toStartOf="@id/toolBar" />
+
+                <View
+                    android:id="@+id/gallerySelectedView"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="?active_tab_icon_color"
+                    android:translationY="-10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
+                    app:layout_constraintEnd_toEndOf="@id/galleryText"
+                    app:layout_constraintStart_toStartOf="@id/galleryText" />
+
+
+                <View
+                    android:id="@+id/savedSelectedView"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="?active_tab_icon_color"
+                    android:translationY="-10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
+                    app:layout_constraintEnd_toEndOf="@id/savedText"
+                    app:layout_constraintStart_toStartOf="@id/savedText" />
+
+
+                <TextView
+                    android:id="@+id/savedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:fontFamily="?mediumFont"
+                    android:text="@string/saved"
+                    android:textColor="?text_color_hint"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
+                    app:layout_constraintEnd_toEndOf="@id/toolBar"
+                    app:layout_constraintStart_toStartOf="@id/divider" />
+
+
+                <TextView
+                    android:id="@+id/imageText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:fontFamily="?mediumFont"
+                    android:gravity="center"
+                    android:text="@string/image"
+                    android:textColor="?text_color_hint"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toStartOf="@id/videoText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toolBar"
+                    app:layout_constraintTop_toTopOf="@id/videoText" />
+
+                <TextView
+                    android:id="@+id/videoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:fontFamily="?mediumFont"
+                    android:gravity="center"
+                    android:minWidth="@dimen/_120sdp"
+                    android:text="@string/video"
+                    android:textColor="?text_color_hint"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toolBar" />
+
+                <TextView
+                    android:id="@+id/docText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:fontFamily="?mediumFont"
+                    android:gravity="center"
+                    android:text="@string/documents"
+                    android:textColor="?text_color_hint"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/videoText"
+                    app:layout_constraintTop_toBottomOf="@id/toolBar"
+                    app:layout_constraintTop_toTopOf="@id/videoText" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/topToolbarLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:constraint_referenced_ids="imageText,videoText,docText" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/selectionPanel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_55sdp"
+                android:elevation="2dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:translationY="-10dp"
+                    app:cardBackgroundColor="?toolbar_color"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_55sdp"
+                        android:layout_gravity="bottom"
+                        android:background="?toolbar_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/toolBar"
+                        app:layout_constraintTop_toTopOf="@+id/searchBarBg">
+
+                        <ImageView
+                            android:id="@+id/backPressed"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_arrow_back_black_24dp"
+                            app:tint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/selectedCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:fontFamily="?mediumFont"
+                            android:text="1"
+                            android:textColor="?toolbar_text_color"
+                            android:textSize="@dimen/_14sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/backPressed"
+                            app:layout_constraintStart_toEndOf="@+id/backPressed"
+                            app:layout_constraintTop_toTopOf="@+id/backPressed" />
+
+
+                        <ImageView
+                            android:id="@+id/forward"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:padding="5dp"
+                            android:src="@drawable/forward"
+                            app:tint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/delete"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <ImageView
+                            android:id="@+id/delete"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:padding="5dp"
+                            android:src="@drawable/delete_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/selectionPanelSaved"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_55sdp"
+                android:elevation="2dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:translationY="-10dp"
+                    app:cardBackgroundColor="?toolbar_color"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_55sdp"
+                        android:layout_gravity="bottom"
+                        android:background="?toolbar_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/toolBar"
+                        app:layout_constraintTop_toTopOf="@+id/searchBarBg">
+
+                        <ImageView
+                            android:id="@+id/backPressedsaved"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_arrow_back_black_24dp"
+                            app:tint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/selectedCountsaved"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:fontFamily="?mediumFont"
+                            android:text="1"
+                            android:textColor="?toolbar_text_color"
+                            android:textSize="@dimen/_14sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/backPressedsaved"
+                            app:layout_constraintStart_toEndOf="@+id/backPressedsaved"
+                            app:layout_constraintTop_toTopOf="@+id/backPressedsaved" />
+
+
+                        <ImageView
+                            android:id="@+id/unsave"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:padding="5dp"
+                            android:src="@drawable/unbookmark_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_camera_alt_24"
+            app:tint="@color/white"
+            android:contentDescription="@string/camera"
+            app:backgroundTint="?fab_color"
+            android:id="@+id/cameraFAB"
+            app:elevation="@dimen/_10sdp"
+            android:layout_margin="@dimen/_25sdp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imageRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBarLayout"
+            app:spanCount="3"
+            tools:itemCount="12"
+            tools:listitem="@layout/item_vault" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
