@@ -11,14 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?page_default_bg"
             tools:context=".view.fragment.ProfileFragment">
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/toolBar"
@@ -30,7 +28,6 @@
                 app:cardElevation="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <ImageView
                 android:id="@+id/backButton"
@@ -55,7 +52,6 @@
                 app:layout_constraintBottom_toBottomOf="@id/backButton"
                 app:layout_constraintStart_toEndOf="@+id/backButton"
                 app:layout_constraintTop_toTopOf="@id/backButton" />
-
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImage"
@@ -89,7 +85,6 @@
                 android:textSize="@dimen/_13sdp"
                 app:layout_constraintStart_toEndOf="@id/userImage"
                 app:layout_constraintTop_toTopOf="@id/userImage" />
-
 
             <ImageView
                 android:id="@+id/editNameIcon"
@@ -125,7 +120,6 @@
                 android:translationY="-35dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolBar" />
-
 
             <TextView
                 android:id="@+id/phoneNumberText"
@@ -173,7 +167,6 @@
                 android:background="?text_color_hint"
                 app:layout_constraintTop_toBottomOf="@id/kryptCode" />
 
-
             <TextView
                 android:id="@+id/availableText"
                 android:layout_width="wrap_content"
@@ -219,7 +212,6 @@
                 app:layout_constraintStart_toStartOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/currentStatus" />
 
-
             <TextView
                 android:id="@+id/sub"
                 android:layout_width="wrap_content"
@@ -231,7 +223,6 @@
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="@id/userImage"
                 app:layout_constraintTop_toBottomOf="@+id/view3" />
-
 
             <TextView
                 android:id="@+id/start"
@@ -245,7 +236,6 @@
                 app:layout_constraintStart_toStartOf="@id/userImage"
                 app:layout_constraintTop_toBottomOf="@id/sub" />
 
-
             <TextView
                 android:id="@+id/startDate"
                 android:layout_width="wrap_content"
@@ -257,7 +247,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/start"
                 app:layout_constraintEnd_toEndOf="@+id/view3"
                 app:layout_constraintTop_toTopOf="@+id/start" />
-
 
             <TextView
                 android:id="@+id/end"
@@ -271,7 +260,6 @@
                 app:layout_constraintStart_toStartOf="@id/userImage"
                 app:layout_constraintTop_toBottomOf="@id/start" />
 
-
             <TextView
                 android:id="@+id/endDate"
                 android:layout_width="wrap_content"
@@ -284,7 +272,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/view3"
                 app:layout_constraintTop_toTopOf="@+id/end" />
 
-
             <View
                 android:id="@+id/view19"
                 android:layout_width="0dp"
@@ -295,7 +282,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/divider"
                 app:layout_constraintStart_toStartOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/end" />
-
 
             <TextView
                 android:id="@+id/textView2"
@@ -309,18 +295,16 @@
                 app:layout_constraintStart_toStartOf="@id/userImage"
                 app:layout_constraintTop_toBottomOf="@+id/view19" />
 
-
-
             <ImageView
                 android:id="@+id/changePasswordImage"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:padding="@dimen/_2sdp"
-                app:tint="?text_color_hint"
                 android:src="@drawable/change_password"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -346,7 +330,6 @@
                 app:layout_constraintStart_toStartOf="@+id/changePasswordImage"
                 app:layout_constraintTop_toBottomOf="@+id/changePasswordImage" />
 
-
             <View
                 android:id="@+id/changePasswordView"
                 android:layout_width="0dp"
@@ -357,19 +340,16 @@
                 app:layout_constraintStart_toStartOf="@+id/changePasswordImage"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
-
             <ImageView
                 android:id="@+id/burnMessageImage"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:padding="@dimen/_2sdp"
-                app:tint="?text_color_hint"
                 android:src="@drawable/burn_message"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/view4" />
-
+                app:layout_constraintTop_toBottomOf="@+id/view4"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -408,8 +388,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/view5"
                 app:layout_constraintTop_toTopOf="@+id/textView4" />
 
-
-
             <View
                 android:id="@+id/burnMessageView"
                 android:layout_width="0dp"
@@ -419,18 +397,16 @@
                 app:layout_constraintStart_toStartOf="@+id/changePasswordImage"
                 app:layout_constraintTop_toBottomOf="@+id/view4" />
 
-
-
             <ImageView
                 android:id="@+id/blockImage"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:padding="@dimen/_2sdp"
-                app:tint="?text_color_hint"
                 android:src="@drawable/blocked_contact"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/view5" />
+                app:layout_constraintTop_toBottomOf="@+id/view5"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -456,7 +432,6 @@
                 app:layout_constraintStart_toStartOf="@+id/blockImage"
                 app:layout_constraintTop_toBottomOf="@+id/blockImage" />
 
-
             <ImageView
                 android:id="@+id/autoLockImg"
                 android:layout_width="@dimen/_20sdp"
@@ -480,7 +455,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/autoLockImg"
                 app:layout_constraintStart_toEndOf="@+id/autoLockImg"
                 app:layout_constraintTop_toTopOf="@+id/autoLockImg" />
-
 
             <TextView
                 android:id="@+id/autoLockTxtTime"
@@ -506,17 +480,16 @@
                 app:layout_constraintStart_toStartOf="@+id/autoLockImg"
                 app:layout_constraintTop_toBottomOf="@+id/autoLockImg" />
 
-
             <ImageView
                 android:id="@+id/deleteImage"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                app:tint="?text_color_hint"
                 android:padding="@dimen/_2sdp"
                 android:src="@drawable/delete_chat"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/autoLockView" />
+                app:layout_constraintTop_toBottomOf="@+id/autoLockView"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -542,17 +515,16 @@
                 app:layout_constraintStart_toStartOf="@+id/deleteImage"
                 app:layout_constraintTop_toBottomOf="@+id/deleteImage" />
 
-
             <ImageView
                 android:id="@+id/changeThemeImage"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:padding="@dimen/_1sdp"
-                app:tint="?text_color_hint"
                 android:src="@drawable/change_theme"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/view8" />
+                app:layout_constraintTop_toBottomOf="@+id/view8"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -560,7 +532,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="?regularFont"
-                android:text="@string/dark_theme"
+                android:text="@string/light_theme"
                 android:textColor="?primary_text_color"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/changeThemeImage"
@@ -584,10 +556,10 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:padding="@dimen/_1sdp"
-                app:tint="?text_color_hint"
                 android:src="@drawable/change_chat_theme"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/view10" />
+                app:layout_constraintTop_toBottomOf="@+id/view10"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -634,11 +606,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/divider"
                 app:layout_constraintStart_toStartOf="@+id/deleteImage"
                 app:layout_constraintTop_toBottomOf="@+id/burnDisableImage" />
-
-
-
-
-
 
             <View
                 android:id="@+id/blockedView"
@@ -704,18 +671,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/autoLockTxtTime"
                 app:layout_constraintTop_toTopOf="@+id/changeThemeView" />
 
-
-
             <ImageView
                 android:id="@+id/vaultPasswordImage"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:padding="@dimen/_2sdp"
-                app:tint="?text_color_hint"
                 android:src="@drawable/vault_passowrd_enable"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/changeChatThemeView" />
+                app:layout_constraintTop_toBottomOf="@+id/changeChatThemeView"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -739,17 +704,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/autoLockTxtTime"
                 app:layout_constraintTop_toTopOf="@+id/vaultPasswordImage" />
 
-
             <ImageView
                 android:id="@+id/burnDisableImage"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:padding="@dimen/_2sdp"
-                app:tint="?text_color_hint"
                 android:src="@drawable/burn_message"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/view11" />
+                app:layout_constraintTop_toBottomOf="@+id/view11"
+                app:tint="?text_color_hint" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -768,14 +732,12 @@
                 android:id="@+id/burnDisableSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                  android:theme="@style/SwitchStyle"
+                android:theme="@style/SwitchStyle"
                 app:layout_constraintBottom_toBottomOf="@+id/burnDisableImage"
                 app:layout_constraintEnd_toEndOf="@+id/autoLockTxtTime"
                 app:layout_constraintTop_toTopOf="@+id/burnDisableImage" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </ScrollView>
 

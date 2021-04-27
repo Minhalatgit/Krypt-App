@@ -39,10 +39,10 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:src="@drawable/menu_icon"
-                    app:tint="?toolbar_icon_color"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/toolBar"
-                    app:layout_constraintTop_toTopOf="@id/toolBar" />
+                    app:layout_constraintTop_toTopOf="@id/toolBar"
+                    app:tint="?toolbar_icon_color" />
 
                 <TextView
                     android:id="@+id/chat"
@@ -80,10 +80,10 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:src="@drawable/search_icon"
-                    app:tint="?text_border_color_hint"
                     app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
                     app:layout_constraintStart_toStartOf="@id/searchBarBg"
-                    app:layout_constraintTop_toTopOf="@id/searchBarBg" />
+                    app:layout_constraintTop_toTopOf="@id/searchBarBg"
+                    app:tint="?text_border_color_hint" />
 
                 <EditText
                     android:id="@+id/searchText"
@@ -92,10 +92,10 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:background="@null"
                     android:hint="@string/search"
-                    android:textSize="@dimen/_13sdp"
                     android:imeOptions="flagNoPersonalizedLearning"
                     android:textColor="@color/white"
                     android:textColorHint="?text_border_color_hint"
+                    android:textSize="@dimen/_13sdp"
                     app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
                     app:layout_constraintEnd_toEndOf="@+id/searchBarBg"
                     app:layout_constraintStart_toEndOf="@+id/searchIcon"
@@ -123,10 +123,10 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:padding="3dp"
                     android:src="@drawable/ic_arrow_back_black_24dp"
-                    app:tint="?toolbar_icon_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?toolbar_icon_color" />
 
                 <TextView
                     android:id="@+id/selectedCount"
@@ -149,10 +149,10 @@
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:padding="5dp"
                     android:src="@drawable/delete_icon"
-                    app:tint="?toolbar_icon_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/selectionMenu"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?toolbar_icon_color" />
 
 
                 <ImageView
@@ -162,10 +162,10 @@
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:padding="6dp"
                     android:src="@drawable/menu_icon"
-                    app:tint="?toolbar_icon_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?toolbar_icon_color" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -193,10 +193,10 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/count_circle_bg"
             android:backgroundTint="@color/bg_one"
-            android:padding="@dimen/_12sdp"
             android:contentDescription="@string/edit_name"
-            app:fabCustomSize="@dimen/_35sdp"
+            android:padding="@dimen/_12sdp"
             android:src="@drawable/ic_baseline_edit_24"
+            app:fabCustomSize="@dimen/_35sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/active_text_color" />
@@ -211,8 +211,8 @@
             android:background="@drawable/count_circle_bg"
             android:backgroundTint="@color/bg_one"
             android:padding="@dimen/_11sdp"
-            app:fabCustomSize="@dimen/_35sdp"
             android:src="@drawable/add_new_user"
+            app:fabCustomSize="@dimen/_35sdp"
             app:layout_constraintBottom_toTopOf="@+id/contactButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/active_text_color" />

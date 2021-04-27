@@ -35,7 +35,6 @@ open class BaseActivity : AppCompatActivity() {
 
     lateinit var timerBase: CountDownTimer
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (SharedHelper(this).theme == "light") {
@@ -45,7 +44,6 @@ open class BaseActivity : AppCompatActivity() {
         }
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -96,7 +94,6 @@ open class BaseActivity : AppCompatActivity() {
         }
         intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
         registerReceiver(reciver, intentFilter)
-
 
     }
 
@@ -173,7 +170,6 @@ open class BaseActivity : AppCompatActivity() {
                 sharedHelper.showKryptScreen = true
             }
         }, 1000)
-
 
 //        MyApp.xmppOperations.getInstance().updateOnlinePresence(false)
     }

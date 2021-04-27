@@ -1,6 +1,5 @@
 package com.pyra.krpytapplication.view.activity
 
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -37,7 +36,6 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     private val callViewModel: CallViewModel by viewModels()
     var sharedHelper: SharedHelper? = null
 
-
     private val chatListViewModel: ChatListViewModel by viewModels()
 
     private lateinit var profielFragment: ProfileFragment
@@ -60,7 +58,6 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     var lastSelectedTab: Int by Delegates.observable(R.id.chat) { _, _, _ -> }
     var isVerified = false
 
-
     @SuppressLint("BatteryLife")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,15 +79,12 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
 //            }
 //        }
 
-
     }
-
 
     private fun getGroupDetails() {
         chatListViewModel.getGroupDetails()
         chatListViewModel.getProfileImages()
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -99,11 +93,9 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
         NotificationUtils(this).removeNotification()
 
         askPermissions()
-
     }
 
     private fun askPermissions() {
-
 
         checkSelfPermission(
             Manifest.permission.RECORD_AUDIO,
@@ -173,10 +165,9 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
                     return@OnNavigationItemSelectedListener true
                 }
 
-
                 R.id.vault -> {
 
-                    if(sharedHelper?.vaultPasswordEnabled!!) {
+                    if (sharedHelper?.vaultPasswordEnabled!!) {
                         if (isVerified) {
                             if (this@MainActivity::vaultFragment.isInitialized) {
                                 fm.beginTransaction().hide(active).show(vaultFragment).commit()
@@ -200,9 +191,8 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
                                     "vaultPassDialogFragment"
                                 )
                             }
-
                         }
-                    }else{
+                    } else {
 
                         if (this@MainActivity::vaultFragment.isInitialized) {
                             fm.beginTransaction().hide(active).show(vaultFragment).commit()
@@ -218,21 +208,14 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
                         }
 
                     }
-
-
-
                     return@OnNavigationItemSelectedListener true
                 }
             }
 
-
             return@OnNavigationItemSelectedListener false
-
         }
 
     override fun onClickListener() {
         openActivity(ContactActivity::class.java)
     }
-
-
 }

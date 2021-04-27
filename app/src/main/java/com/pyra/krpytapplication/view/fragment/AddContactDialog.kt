@@ -32,13 +32,10 @@ import showToast
 
 class AddContactDialog : BottomSheetDialogFragment() {
 
-
     private val searchViewModel by viewModels<SearchViewModel>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         setStyle(STYLE_NORMAL, R.style.DialogStyle)
     }
@@ -65,10 +62,8 @@ class AddContactDialog : BottomSheetDialogFragment() {
         return viewDialog
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         contactDialogClose.setOnClickListener {
             dismiss()
@@ -129,7 +124,6 @@ class AddContactDialog : BottomSheetDialogFragment() {
 
                 Log.e("usernam", contactNameEditText.text.toString())
 
-
             } else {
                 dialog?.window?.decorView?.let { view ->
                     requireContext().showToast(getString(R.string.enter_valid_contact_name))
@@ -139,5 +133,4 @@ class AddContactDialog : BottomSheetDialogFragment() {
         }
 
     }
-
 }

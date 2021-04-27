@@ -4,10 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
 import com.pyra.krpytapplication.Utils.SharedHelper
@@ -20,10 +21,10 @@ import getImei
 import isValidPassword
 import kotlinx.android.synthetic.main.activity_password.*
 import org.jetbrains.anko.doAsync
+import showHidePass
 import showToast
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class PasswordActivity : AppCompatActivity() {
 
@@ -38,22 +39,40 @@ class PasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        var isLight = false
+
         if (SharedHelper(this).theme == "light") {
             setTheme(R.style.lightTheme)
+            isLight = true
         } else {
             setTheme(R.style.darkTheme)
+            isLight = false
         }
         setContentView(R.layout.activity_password)
+
+        if (isLight) {
+            hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
+        } else {
+            hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+        }
+
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         chatListViewModel = ViewModelProvider(this).get(ChatListViewModel::class.java)
         kryptCode = intent.getStringExtra("kryptCode") ?: ""
         isBackEnabled = intent.getBooleanExtra("isBackEnabled", false)
     }
 
+    fun showHidePass(view: View) {
+
+        if (view.id == R.id.hideShowPassword) {
+            passwordField.showHidePass(view)
+        }
+    }
+
     fun onLoginButtonClicked(view: View) {
         val password = passwordField.text.toString()
         println("Login pressed with kryptCode $kryptCode and Password $password")
-
 
         isValidPassword(this, password, getString(R.string.password)).let {
 
@@ -218,7 +237,6 @@ class PasswordActivity : AppCompatActivity() {
 
     }
 
-
     override fun onBackPressed() {
         if (isBackEnabled)
             super.onBackPressed()
@@ -231,15 +249,11 @@ class PasswordActivity : AppCompatActivity() {
                 "yyyy-MM-dd HH:mm:ss",
                 Locale.ENGLISH
             ).format(Calendar.getInstance().time)
-
     }
 
     private fun clearAllData() {
-
         chatListViewModel?.clearDb()
         chatListViewModel?.removeCache()
         chatListViewModel?.clearLocalStorage()
-
-
     }
 }

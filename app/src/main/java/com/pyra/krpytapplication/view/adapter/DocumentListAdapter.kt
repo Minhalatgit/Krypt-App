@@ -59,7 +59,7 @@ class DocumentListAdapter(
         holder.binding.fileIcon.setImageDrawable(
             ContextCompat.getDrawable(
                 context,
-                getDocumentIcon(viewModel?.getFile(position)?.getFileExtention())
+                getDocumentIcon(viewModel?.getFile(position)?.getFileExtension())
             )
         )
 

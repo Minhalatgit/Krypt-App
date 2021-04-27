@@ -3,6 +3,7 @@ package com.pyra.krpytapplication.view.activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.SharedHelper
@@ -10,6 +11,8 @@ import com.pyra.krpytapplication.chat.XMPPOperations
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 import isValidPassword
 import kotlinx.android.synthetic.main.activity_change_password.*
+import kotlinx.android.synthetic.main.activity_create_password.*
+import showHidePass
 import showToast
 
 class ChangePasswordActivity : BaseActivity() {
@@ -21,6 +24,71 @@ class ChangePasswordActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
 
+        //setting eye color wrt theme
+        if (SharedHelper(this).theme == "light") {
+            hideShowLoginPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
+            hideShowConfirmLoginPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
+            hideShowDuressPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
+            hideShowConfirmDuressPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
+            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
+            hideShowConfirmVaultPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
+        } else {
+            hideShowLoginPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+            hideShowConfirmLoginPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+            hideShowDuressPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+            hideShowConfirmDuressPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.white
+                )
+            )
+            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+            hideShowConfirmVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+        }
+    }
+
+    fun showHidePass(view: View) {
+
+        when (view.id) {
+            R.id.hideShowLoginPassword -> {
+                loginPassword.showHidePass(view)
+            }
+            R.id.hideShowConfirmLoginPassword -> {
+                loginConfirmPassword.showHidePass(view)
+            }
+            R.id.hideShowDuressPassword -> {
+                duressPassword.showHidePass(view)
+            }
+            R.id.hideShowConfirmDuressPassword -> {
+                duressConfirmPassword.showHidePass(view)
+            }
+            R.id.hideShowVaultPassword -> {
+                vaultPassword.showHidePass(view)
+            }
+            R.id.hideShowConfirmVaultPassword -> {
+                confirmVaultPassword.showHidePass(view)
+            }
+        }
     }
 
     fun onSubmitButtonClicked(view: View) {
@@ -61,7 +129,6 @@ class ChangePasswordActivity : BaseActivity() {
             }
         }
 
-
         when {
             duressPassword.text.trim().toString() == vaultPassword.text.trim().toString() ||
                     duressPassword.text.trim().toString() == sharedHelper.password ||
@@ -93,16 +160,14 @@ class ChangePasswordActivity : BaseActivity() {
 
                 changePassword()
 
-
             }
         }
-
 
     }
 
     private fun changePassword() {
 
-        XMPPOperations.changePassword(loginPassword.text.toString()) { it ->
+        XMPPOperations.changePassword(loginPassword.text.toString()) {
             if (it) {
 
                 viewModel.changePassword(
@@ -117,12 +182,9 @@ class ChangePasswordActivity : BaseActivity() {
                             sharedHelper.duressPassword = duressPassword.text.trim().toString()
                             sharedHelper.vaultPassword = vaultPassword.text.trim().toString()
                             finish()
-
                         }
 
                     })
-
-
             }
         }
 

@@ -7,105 +7,96 @@
     android:background="?page_default_bg"
     tools:context=".view.activity.MainActivity">
 
-
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:defaultNavHost="true"
         android:visibility="visible"
-        app:navGraph="@navigation/bottom_nav_graph"
-        app:layout_constraintTop_toTopOf="parent"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        tools:context=".view.activity.CameraActivity"/>
-
-
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/bottom_nav_graph"
+        tools:context=".view.activity.CameraActivity" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottomNavigation"
         android:background="?toolbar_color"
-        app:menu="@menu/bottom_menu"
         android:visibility="visible"
         app:itemIconTint="@color/bottom_nav_color"
         app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_menu" />
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/tabLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/_45sdp"-->
+    <!--        android:background="?toolbar_color"-->
+    <!--        android:weightSum="3"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent">-->
+
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:onClick="onTabOneClicked"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1">-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="@dimen/_20sdp"-->
+    <!--                android:id="@+id/tabIconOne"-->
+    <!--                android:layout_height="@dimen/_20sdp"-->
+    <!--                android:layout_centerInParent="true"-->
+    <!--                android:src="@drawable/chat_tab_icon"-->
+    <!--                app:tint="?active_tab_icon_color" />-->
+    <!--        </RelativeLayout>-->
+
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:onClick="onTabTwoClicked"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1">-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="@dimen/_20sdp"-->
+    <!--                android:layout_height="@dimen/_20sdp"-->
+    <!--                android:layout_centerInParent="true"-->
+    <!--                android:id="@+id/tabIconTwo"-->
+    <!--                android:src="@drawable/tab_profile_icon"-->
+    <!--                app:tint="?inactive_tab_icon_color" />-->
+    <!--        </RelativeLayout>-->
 
 
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:onClick="onTabThreeClicked"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1">-->
 
+    <!--            <ImageView-->
+    <!--                android:layout_width="@dimen/_20sdp"-->
+    <!--                android:id="@+id/tabIconThree"-->
+    <!--                android:layout_height="@dimen/_20sdp"-->
+    <!--                android:layout_centerInParent="true"-->
+    <!--                android:src="@drawable/tab_vault_icon"-->
+    <!--                app:tint="?inactive_tab_icon_color" />-->
+    <!--        </RelativeLayout>-->
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/tabLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/_45sdp"-->
-<!--        android:background="?toolbar_color"-->
-<!--        android:weightSum="3"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
+    <!--    </LinearLayout>-->
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:onClick="onTabOneClicked"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="@dimen/_20sdp"-->
-<!--                android:id="@+id/tabIconOne"-->
-<!--                android:layout_height="@dimen/_20sdp"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:src="@drawable/chat_tab_icon"-->
-<!--                app:tint="?active_tab_icon_color" />-->
-<!--        </RelativeLayout>-->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:onClick="onTabTwoClicked"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="@dimen/_20sdp"-->
-<!--                android:layout_height="@dimen/_20sdp"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:id="@+id/tabIconTwo"-->
-<!--                android:src="@drawable/tab_profile_icon"-->
-<!--                app:tint="?inactive_tab_icon_color" />-->
-<!--        </RelativeLayout>-->
-
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:onClick="onTabThreeClicked"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="@dimen/_20sdp"-->
-<!--                android:id="@+id/tabIconThree"-->
-<!--                android:layout_height="@dimen/_20sdp"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:src="@drawable/tab_vault_icon"-->
-<!--                app:tint="?inactive_tab_icon_color" />-->
-<!--        </RelativeLayout>-->
-
-<!--    </LinearLayout>-->
-
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:id="@+id/contentLayout"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/tabLayout"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:id="@+id/contentLayout"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/tabLayout"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

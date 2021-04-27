@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">1Krypt</string>
-    <string name="generate_krypt_code">Generate Krypt code</string>
+    <string name="generate_krypt_code">Generate Krypt Code</string>
     <string name="krypt_code_content">Note: When you set set up an additional code, a lock icon will appear on the chats page. Tap generate krypt code button and generate your code for your app</string>
     <string name="create_password">Create Password</string>
     <string name="enter_password">Enter Password</string>
@@ -55,7 +55,7 @@
     <string name="voice_call">Voice Call</string>
     <string name="video_call">Video Call</string>
     <string name="connected">Connected</string>
-    <string name="new_group">New Group</string>
+    <string name="new_group">Create New Group</string>
     <string name="my_contact">My Contacts</string>
     <string name="new_message">New Message</string>
     <string name="change_chat_color">Change Chat Color</string>

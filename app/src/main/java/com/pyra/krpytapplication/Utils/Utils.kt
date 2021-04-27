@@ -18,8 +18,13 @@ import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.provider.Settings
 import android.telephony.TelephonyManager
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
@@ -33,6 +38,7 @@ import com.pyra.krpytapplication.Utils.Constants
 import com.pyra.krpytapplication.Utils.MediaType
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
+import kotlinx.android.synthetic.main.activity_create_password.*
 import org.jetbrains.anko.collections.forEachByIndex
 import org.jivesoftware.smack.packet.Presence
 import org.json.JSONObject
@@ -843,4 +849,14 @@ fun Context.showToast(string: String) {
     val toast = Toast.makeText(this, string, Toast.LENGTH_LONG)
     toast.setGravity(Gravity.CENTER, 0, 0)
     toast.show()
+}
+
+fun EditText.showHidePass(view: View) {
+    if (this.transformationMethod == PasswordTransformationMethod.getInstance()) {
+        (view as ImageView).setImageResource(R.drawable.eye_icon_hide)
+        this.transformationMethod = HideReturnsTransformationMethod.getInstance()
+    } else {
+        (view as ImageView).setImageResource(R.drawable.eye_icon_show)
+        this.transformationMethod = PasswordTransformationMethod.getInstance()
+    }
 }

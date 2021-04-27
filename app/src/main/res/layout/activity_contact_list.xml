@@ -7,13 +7,11 @@
 
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:background="?page_default_bg">
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/toolBar"
@@ -33,9 +31,9 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:src="@drawable/ic_arrow_back_black_24dp"
-            app:tint="?toolbar_icon_color"
             app:layout_constraintStart_toStartOf="@+id/toolBar"
-            app:layout_constraintTop_toTopOf="@id/toolBar" />
+            app:layout_constraintTop_toTopOf="@id/toolBar"
+            app:tint="?toolbar_icon_color" />
 
         <ImageView
             android:id="@+id/searchButton"
@@ -46,9 +44,9 @@
             android:onClick="onSearchClicked"
             android:padding="@dimen/_3sdp"
             android:src="@drawable/search_icon"
-            app:tint="?toolbar_icon_color"
             app:layout_constraintEnd_toEndOf="@+id/toolBar"
-            app:layout_constraintTop_toTopOf="@id/toolBar" />
+            app:layout_constraintTop_toTopOf="@id/toolBar"
+            app:tint="?toolbar_icon_color" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +83,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <ImageView
                 android:id="@+id/searchIcon"
                 android:layout_width="@dimen/_10sdp"
@@ -93,10 +90,10 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:src="@drawable/search_icon"
-                app:tint="?text_border_color_hint"
                 app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
                 app:layout_constraintStart_toStartOf="@id/searchBarBg"
-                app:layout_constraintTop_toTopOf="@id/searchBarBg" />
+                app:layout_constraintTop_toTopOf="@id/searchBarBg"
+                app:tint="?text_border_color_hint" />
 
             <EditText
                 android:id="@+id/searchBox"
@@ -105,33 +102,31 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:background="@null"
                 android:hint="@string/search"
+                android:imeOptions="flagNoPersonalizedLearning"
                 android:textColor="?active_text_color"
                 android:textColorHint="?text_border_color_hint"
                 app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/searchIcon"
-                app:layout_constraintTop_toTopOf="@id/searchBarBg"
-                android:imeOptions="flagNoPersonalizedLearning"/>
+                app:layout_constraintTop_toTopOf="@id/searchBarBg" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/searchPanel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_70sdp"
             android:translationY="-20dp"
+            android:visibility="gone"
             app:cardBackgroundColor="?toolbar_color"
             app:cardCornerRadius="25dp"
-            android:visibility="gone"
             app:cardElevation="1dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingTop="@dimen/_15sdp"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_15sdp">
 
                 <ImageView
                     android:id="@+id/backPressed"
@@ -140,10 +135,10 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:padding="3dp"
                     android:src="@drawable/ic_arrow_back_black_24dp"
-                    app:tint="?toolbar_icon_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?toolbar_icon_color" />
 
                 <TextView
                     android:id="@+id/selectedCount"
@@ -163,13 +158,13 @@
                     android:id="@+id/edit"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="5dp"
-                    app:tint="?toolbar_icon_color"
                     android:layout_marginEnd="@dimen/_20sdp"
+                    android:padding="5dp"
                     android:src="@drawable/edit_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/delete"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?toolbar_icon_color" />
 
                 <ImageView
                     android:id="@+id/delete"
@@ -177,12 +172,11 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:padding="5dp"
-                    app:tint="?toolbar_icon_color"
                     android:src="@drawable/delete_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?toolbar_icon_color" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -209,9 +203,9 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:padding="@dimen/_3sdp"
                     android:src="@drawable/call_user_icon"
-                    app:tint="@color/bg_one"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/bg_one" />
 
                 <TextView
                     android:id="@+id/newGroup"
@@ -221,8 +215,8 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:onClick="onNewGroupClicked"
                     android:text="@string/new_group"
-                    android:textSize="@dimen/_12sdp"
                     android:textColor="?title_color"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/group_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/group_icon"
@@ -237,7 +231,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/newGroup" />
-
 
                 <TextView
                     android:id="@+id/krypt_code_title"
@@ -256,9 +249,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/kryptLists"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -293,9 +286,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/contactList"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"

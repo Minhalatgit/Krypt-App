@@ -1,28 +1,26 @@
 package com.pyra.krpytapplication.view.fragment
 
-
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.Utils.openNewTaskActivity
 import com.pyra.krpytapplication.view.activity.KryptCodeActivity
 import com.pyra.krpytapplication.view.activity.MainActivity
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_password.*
+import showHidePass
 import showToast
-
 
 class VaultPassDialogFragment : BottomSheetDialogFragment() {
 
-
     private val chatListViewModel: ChatListViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +35,25 @@ class VaultPassDialogFragment : BottomSheetDialogFragment() {
         return inflater.inflate(R.layout.dialog_password, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (SharedHelper(requireContext()).theme == "light") {
+            hideShowPassword.setColorFilter(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.dark_page_bg
+                )
+            )
+        } else {
+            hideShowPassword.setColorFilter(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+
+        hideShowPassword.setOnClickListener {
+            password.showHidePass(it)
+        }
 
         buttonBg.setOnClickListener {
-
 
             if (password.text.trim().toString() != "") {
                 when {
@@ -77,14 +87,9 @@ class VaultPassDialogFragment : BottomSheetDialogFragment() {
             } else
                 dialog?.window?.decorView?.let {
                     requireContext().showToast(requireActivity().getString(R.string.invalid_password))
-
                 }
-
-
         }
-
     }
-
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
@@ -94,6 +99,5 @@ class VaultPassDialogFragment : BottomSheetDialogFragment() {
                 (requireActivity() as MainActivity).lastSelectedTab
 
     }
-
 
 }

@@ -2,13 +2,16 @@ package com.pyra.krpytapplication.view.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.Utils.openNewTaskActivity
 import isValidPassword
+import kotlinx.android.synthetic.main.activity_create_password.*
 import kotlinx.android.synthetic.main.activity_duress_password.*
+import showHidePass
 import showToast
 import java.util.*
 
@@ -21,10 +24,60 @@ class DuressPasswordActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_duress_password)
 
+        //setting eye color wrt to theme
+        if (SharedHelper(this).theme == "light") {
+            hideShowDuressPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
+            hideShowConfirmDuressPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
+            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
+            hideShowConfirmVaultPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
+        } else {
+            hideShowDuressPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+            hideShowConfirmDuressPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.white
+                )
+            )
+            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+            hideShowConfirmVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
+        }
+
         intent?.extras?.let {
             isChangePasswordFlow = it.getBoolean(Constants.IntentKeys.CHANGEPASSWORDFLOW)
         }
+    }
 
+    fun showHidePass(view: View) {
+
+        when (view.id) {
+            R.id.hideShowDuressPassword -> {
+                duressPassword.showHidePass(view)
+            }
+            R.id.hideShowConfirmDuressPassword -> {
+                duressConfirmPassword.showHidePass(view)
+            }
+            R.id.hideShowVaultPassword -> {
+                vaultPassword.showHidePass(view)
+            }
+            R.id.hideShowConfirmVaultPassword -> {
+                confirmVaultPassword.showHidePass(view)
+            }
+        }
     }
 
     fun onSubmitButtonClicked(view: View) {
@@ -54,7 +107,6 @@ class DuressPasswordActivity : BaseActivity() {
                 return
             }
         }
-
 
         when {
             duressPassword.text.trim().toString() == vaultPassword.text.trim().toString() ||
@@ -112,7 +164,6 @@ class DuressPasswordActivity : BaseActivity() {
                 }
             }
         }
-
 
     }
 }

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
 import com.pyra.krpytapplication.Utils.getDocumentType
-import com.pyra.krpytapplication.Utils.getFileExtention
+import com.pyra.krpytapplication.Utils.getFileExtension
 import com.pyra.krpytapplication.databinding.ItemDocumentsBinding
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
 import com.pyra.krpytapplication.viewmodel.GalleryViewModel
@@ -58,7 +58,7 @@ class GalleryDocumentListAdapter(
         holder.binding.fileIcon.setImageDrawable(
             ContextCompat.getDrawable(
                 context,
-                getDocumentIcon(viewModel?.getFile(position)?.getFileExtention())
+                getDocumentIcon(viewModel?.getFile(position)?.getFileExtension())
             )
         )
 

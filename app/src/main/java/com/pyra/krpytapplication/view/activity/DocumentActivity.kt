@@ -24,12 +24,10 @@ import java.util.*
 
 class DocumentActivity : BaseActivity() {
 
-
     var isNewDoc = true
     var path = ""
     private val galleryViewModel by viewModels<GalleryViewModel>()
     private val chatMessageViewModel by viewModels<ChatMessagesViewModel>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +41,6 @@ class DocumentActivity : BaseActivity() {
 
     private fun initListener() {
 
-
         save.setOnClickListener {
 
 
@@ -55,7 +52,6 @@ class DocumentActivity : BaseActivity() {
             } else {
                 saveFile()
             }
-
 
         }
     }
@@ -97,8 +93,6 @@ class DocumentActivity : BaseActivity() {
 
             galleryViewModel.uploadDocument(file)
         }
-
-
     }
 
     private fun getIntentValues() {
@@ -115,7 +109,6 @@ class DocumentActivity : BaseActivity() {
     }
 
     fun onBlockClicked(view: View) {}
-
 
     private fun storeData(absolutePath: String?, url: String) {
 
@@ -144,11 +137,8 @@ class DocumentActivity : BaseActivity() {
 
         }
 
-
         finish()
-
     }
-
 
     private fun observeValues() {
 
@@ -183,10 +173,8 @@ class DocumentActivity : BaseActivity() {
                     }
                 }
 
-
             }
         }
-
 
     }
 
@@ -208,6 +196,5 @@ class DocumentActivity : BaseActivity() {
         }
 
     }
-
 
 }

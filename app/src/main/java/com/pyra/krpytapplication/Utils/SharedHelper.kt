@@ -245,7 +245,7 @@ class SharedHelper(context: Context) {
 
     var vaultPasswordEnabled: Boolean
         get() : Boolean {
-            return sharedPreference.getBoolean("vaultPasswordEnabled")
+            return sharedPreference.getBooleanDefaultTrue("vaultPasswordEnabled")
         }
         set(value) {
             sharedPreference.putBoolean("vaultPasswordEnabled", value)
@@ -253,7 +253,7 @@ class SharedHelper(context: Context) {
 
     var isBurnMessageEnabled: Boolean
         get() : Boolean {
-            return sharedPreference.getBoolean("isBurnMessageEnabled")
+            return sharedPreference.getBooleanDefaultTrue("isBurnMessageEnabled")
         }
         set(value) {
             sharedPreference.putBoolean("isBurnMessageEnabled", value)

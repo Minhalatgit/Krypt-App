@@ -44,12 +44,10 @@ import showToast
 import java.io.File
 import java.util.*
 
-
 /**
  * A simple [Fragment] subclass.
  */
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
-
 
     var uploadFile: File? = null
     private val sharedHelper: SharedHelper by lazy {
@@ -80,7 +78,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         initListners()
         setMessageTime()
 
-
         profileViewModel.getUserDeatilsResponse(sharedHelper.kryptKey, UrlHelper.GETUSERDETAILS)
             .observe(viewLifecycleOwner) {
 
@@ -105,7 +102,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
             }
 
-
     }
 
     private fun initView() {
@@ -115,17 +111,16 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         kryptCode.text = sharedHelper.kryptKey
         currentStatus.text = sharedHelper.status
 
-        darkTheme.isChecked = sharedHelper.theme == "dark"
+        darkTheme.isChecked = sharedHelper.theme == "light"
 
         darkTheme.setOnCheckedChangeListener { _, b ->
             if (b)
-                sharedHelper.theme = "dark"
-            else
                 sharedHelper.theme = "light"
+            else
+                sharedHelper.theme = "dark"
 
             context?.openNewTaskActivity(MainActivity::class.java)
         }
-
     }
 
     override fun onResume() {
@@ -152,9 +147,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         burnDisableSwitch.setOnCheckedChangeListener { p0, p1 ->
             sharedHelper.isBurnMessageEnabled = p1
             chatListViewModel.updateLoginTime()
-
         }
-
 
         editIcon.setOnClickListener {
             moveStatusActivity()
@@ -271,11 +264,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
             // changeView(MessageBurnType.SECONDS.type)
             initBurnMessageScrollview()
-
-
         }
-
-
     }
 
     private fun showBurnMessageDialog() {
@@ -484,16 +473,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                     )
                 )
 
-
-
                 seconds?.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.white
                     )
                 )
-
-
 
                 days?.setTextColor(
                     fetchThemeColor(R.attr.text_color_content, requireContext())
@@ -513,7 +498,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         setUnitViewPager()
     }
 
-
     private fun setViewPager() {
 
         viewPager.layoutManager =
@@ -528,7 +512,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
             override fun onScrolled(recyclerView: RecyclerView, i: Int, i2: Int) {
                 Log.d("Value", "SCroll Called")
-
 
                 val childCount = viewPager.childCount
                 val width = viewPager.getChildAt(0).width

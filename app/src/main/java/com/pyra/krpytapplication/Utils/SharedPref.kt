@@ -14,7 +14,6 @@ class SharedPref(private val context: Context) {
         const val Cache = "Cache"
     }
 
-
     fun putKey(key: String, value: String) {
         sharedPreferences = context.getSharedPreferences(Cache, Context.MODE_PRIVATE)
         editor = sharedPreferences!!.edit()
@@ -44,6 +43,11 @@ class SharedPref(private val context: Context) {
         return sharedPreferences!!.getBoolean(Key, false)
     }
 
+    fun getBooleanDefaultTrue(Key: String): Boolean {
+        sharedPreferences = context.getSharedPreferences(Cache, Context.MODE_PRIVATE)
+        return sharedPreferences!!.getBoolean(Key, true)
+    }
+
     fun putInt(key: String, value: Int) {
         sharedPreferences = context.getSharedPreferences(Cache, Context.MODE_PRIVATE)
         editor = sharedPreferences!!.edit()
@@ -65,7 +69,10 @@ class SharedPref(private val context: Context) {
         sharedPreferencesEditor.apply()
     }
 
-    fun <GenericClass> getSavedObjectFromPreference(preferenceKey: String, classType: Class<GenericClass>): GenericClass? {
+    fun <GenericClass> getSavedObjectFromPreference(
+        preferenceKey: String,
+        classType: Class<GenericClass>
+    ): GenericClass? {
         sharedPreferences = context.getSharedPreferences(Cache, Context.MODE_PRIVATE)
         if (sharedPreferences!!.contains(preferenceKey)) {
             val gson = Gson()
@@ -74,7 +81,7 @@ class SharedPref(private val context: Context) {
         return null
     }
 
-    fun removeValues(){
+    fun removeValues() {
         val preferences: SharedPreferences = context.getSharedPreferences(Cache, 0)
         preferences.edit().clear().apply()
     }

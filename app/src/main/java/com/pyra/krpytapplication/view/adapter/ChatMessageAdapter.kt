@@ -946,7 +946,7 @@ class ChatMessageAdapter(
                 senderDocument.binding.documentIcon.setImageDrawable(
                     ContextCompat.getDrawable(
                         context,
-                        getDocumentIcon(viewmodel.getSenderFile(position)?.getFileExtention())
+                        getDocumentIcon(viewmodel.getSenderFile(position)?.getFileExtension())
                     )
                 )
 
@@ -1553,7 +1553,7 @@ class ChatMessageAdapter(
                 receiverDocument.binding.documentIcon.setImageDrawable(
                     ContextCompat.getDrawable(
                         context,
-                        getDocumentIcon(viewmodel.getReciverFile(position)?.getFileExtention())
+                        getDocumentIcon(viewmodel.getReciverFile(position)?.getFileExtension())
                     )
                 )
 

@@ -37,7 +37,6 @@ class KryptCodeActivity : BaseActivity() {
         checkKryptKeyboardEnabled()
 
         getIntentValues()
-
     }
 
     private fun getIntentValues() {
@@ -51,11 +50,9 @@ class KryptCodeActivity : BaseActivity() {
     }
 
     private fun deleteLocalStorage() {
-
         chatListViewModel.clearDb()
         chatListViewModel.removeCache()
         chatListViewModel.clearLocalStorage()
-
     }
 
     private fun showSubEbdedDialog() {
@@ -98,7 +95,7 @@ class KryptCodeActivity : BaseActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(dialogView)
         val window: Window = dialog.window!!
-        window.setGravity(Gravity.BOTTOM)
+        window.setGravity(Gravity.CENTER)
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
@@ -117,7 +114,6 @@ class KryptCodeActivity : BaseActivity() {
                 openActivity(intent)
             } else {
                 print("Failed")
-
                 showToast(getString(R.string.invalid_krypt_code))
             }
         }

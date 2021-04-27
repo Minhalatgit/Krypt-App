@@ -19,7 +19,6 @@ import com.pyra.krpytapplication.R
 import org.jxmpp.jid.Jid
 import java.io.File
 
-
 fun <T> Context.openActivity(it: Class<T>) {
     val intent = Intent(this, it)
     startActivity(intent)
@@ -72,8 +71,6 @@ fun ImageView.loadImage(imageUrl: String?) {
                 .error(R.drawable.man)
         )
         .into(this)
-
-
 }
 
 fun ImageView.loadChatImage(imageUrl: String?, thumbNail: String?) {
@@ -94,14 +91,11 @@ fun ImageView.loadChatImage(imageUrl: String?, thumbNail: String?) {
                 .load(thumbNail)
         )
         .into(this)
-
-
 }
 
 fun Context.openActivity(intent: Intent) {
     startActivity(intent)
 }
-
 
 fun Context.saveToGlideCache(url: String) {
     val rm: RequestManager = Glide.with(this)
@@ -192,7 +186,7 @@ fun File.getDocumentType(): String {
     return extension
 }
 
-fun File.getFileExtention(): String {
+fun File.getFileExtension(): String {
 
     val extension = MimeTypeMap.getFileExtensionFromUrl(this.absolutePath)
     var extention = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
@@ -209,5 +203,4 @@ fun Context.isDisplayOn(): Boolean {
         }
     }
     return false
-
 }
