@@ -285,9 +285,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
             }
         })
         return responseModel
-
     }
-
 
    fun getUserDetails(apiParams: ApiInput):MutableLiveData<GetUserDetailsResponse> {
        val responseModel: MutableLiveData<GetUserDetailsResponse> = MutableLiveData()
@@ -299,9 +297,6 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
                     val response: GetUserDetailsResponse =
                         gson.fromJson(jsonObject.toString(), GetUserDetailsResponse::class.java)
                     responseModel.value = response
-
-
-
                 }
 
                 override fun setErrorResponse(error: String) {

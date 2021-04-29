@@ -134,6 +134,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         enableVaultPassword.isChecked = sharedHelper.vaultPasswordEnabled
         burnDisableSwitch.isChecked = sharedHelper.isBurnMessageEnabled
 
+//        if (sharedHelper.isBurnMessageEnabled) {
+//            showBurnView()
+//        } else {
+//            hideBurnView()
+//        }
+
         changeThemeView.setOnClickListener {
 //            getChangeThemeDialog(requireContext()) {
 //                requireContext().openNewTaskActivity(MainActivity::class.java)
@@ -145,6 +151,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
 
         burnDisableSwitch.setOnCheckedChangeListener { p0, p1 ->
+//            if (p1) {
+//                showBurnView()
+//            } else {
+//                hideBurnView()
+//            }
             sharedHelper.isBurnMessageEnabled = p1
             chatListViewModel.updateLoginTime()
         }
@@ -170,13 +181,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         })
 
-
         profileViewModel.success.observe(viewLifecycleOwner, Observer {
             if (it) {
                 progressBar.visibility = View.GONE
             }
         })
-
 
         editNameIcon.setOnClickListener {
             showEditNameDialog()
@@ -215,7 +224,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
         }
 
-
         lockView.setOnClickListener {
             val dialog = getMessageBurnDialog(requireContext())
             done = dialog.findViewById(R.id.done)
@@ -224,7 +232,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             unitViewPager = dialog.findViewById(R.id.unitSelector)
 
             setDialogTitle("Auto Logout")
-
 
             // minutes = dialog.findViewById(R.id.minutes)
             // hours = dialog.findViewById(R.id.hours)
@@ -363,7 +370,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                 days?.setTextColor(
                     fetchThemeColor(R.attr.text_color_content, requireContext())
                 )
-
 
             }
             MessageBurnType.HOURS.type -> {
@@ -697,7 +703,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         requireActivity().startActivity(intent)
     }
 
-
     override fun handleGallery(data: Intent?) {
         if (data != null) {
             data.getStringExtra("imageUrl")?.let { mediaUrl ->
@@ -723,7 +728,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         }
     }
-
 
     private fun uploadFileToAws(file: File?) {
 
@@ -755,7 +759,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         messageBurnTime.text =
             sharedHelper.burnMessageTime.toString() + " " + sharedHelper.burnMessageType.toString()
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun autoLockTime() {
@@ -813,9 +816,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             )
         }
 
-
     }
-
 
     private fun countDown() {
 
@@ -896,7 +897,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         dialogTitle?.text = text
     }
 
+    private fun showBurnView() {
+        burnMessageImage.visibility = View.VISIBLE
+        textView4.visibility = View.VISIBLE
+        view5.visibility = View.VISIBLE
+        messageBurnTime.visibility = View.VISIBLE
+    }
 
+    private fun hideBurnView() {
+        burnMessageImage.visibility = View.GONE
+        textView4.visibility = View.GONE
+        view5.visibility = View.GONE
+        messageBurnTime.visibility = View.GONE
+    }
 }
 
 

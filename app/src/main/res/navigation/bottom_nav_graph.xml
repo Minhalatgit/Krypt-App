@@ -6,7 +6,6 @@
     android:id="@+id/bottom_nav_graph"
     app:startDestination="@id/chat">
 
-
     <fragment
         android:id="@+id/chat"
         android:name="com.pyra.krpytapplication.view.fragment.ChatFragment"

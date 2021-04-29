@@ -12,5 +12,4 @@ class ApiInput{
     var file: File? = null
     var context: Context? = null
 
-
 }

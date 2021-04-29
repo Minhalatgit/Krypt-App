@@ -2,14 +2,8 @@ package com.pyra.krpytapplication.view.fragment
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -22,7 +16,6 @@ import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.*
 import com.pyra.krpytapplication.domain.OnClickButtonListener
 import com.pyra.krpytapplication.view.activity.KryptCodeActivity
-import com.pyra.krpytapplication.view.activity.PasswordActivity
 import com.pyra.krpytapplication.view.adapter.ChatListAdapter
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
@@ -41,6 +34,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     lateinit var searchViewModel: SearchViewModel
     var loader: Dialog? = null
     val profileViewModel: ProfileViewModel by viewModels()
+
+    private val loadBar by lazy {
+        showLoader(requireContext())
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -184,7 +181,6 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         }
 
         chatListViewModel.getChatList()
-
     }
 
     private fun listener() {
@@ -193,37 +189,6 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         }
         newUser.setOnClickListener {
             findNavController().navigate(ChatFragmentDirections.actionChatToAddContactDialog())
-
-            //Todo Change bottom sheet to dialog box
-//            val dialogView = View.inflate(requireContext(), R.layout.dialog_enter_krypt_code, null)
-//            val dialog = Dialog(requireContext())
-//            val kryptCodeEditText = dialogView.findViewById<EditText>(R.id.kryptCode)
-//            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//            dialog.setContentView(dialogView)
-//            val window: Window = dialog.window!!
-//            window.setGravity(Gravity.CENTER)
-//            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-//            dialog.show()
-//
-//            val backButton = dialog.findViewById<ImageView>(R.id.backIcon)
-//            backButton.setOnClickListener { dialog.dismiss() }
-//
-//            val submitButton = dialog.findViewById<TextView>(R.id.submitButton)
-//            submitButton.setOnClickListener {
-//                val kryptCode = kryptCodeEditText.text.toString()
-//                if (isValidKryptCode(kryptCode)) {
-//                    dialog.dismiss()
-//                    val intent = Intent(this, PasswordActivity::class.java)
-//                    intent.putExtra("isBackEnabled", true)
-//                    intent.putExtra("kryptCode", kryptCode)
-//                    openActivity(intent)
-//                } else {
-//                    print("Failed")
-//
-//                    showToast(getString(R.string.invalid_krypt_code))
-//                }
-//            }
         }
     }
 

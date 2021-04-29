@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="?page_default_bg">
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menuGallery"
         android:layout_width="match_parent"
@@ -17,13 +16,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/gallery_menu" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imageRecycler"
         android:layout_width="match_parent"
-        android:visibility="visible"
         android:layout_height="0dp"
         android:layout_margin="@dimen/_5sdp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,9 +30,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/videoRecycler"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="0dp"
         android:layout_margin="@dimen/_5sdp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,23 +42,23 @@
         android:id="@+id/documentRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:layout_margin="@dimen/_5sdp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menuGallery" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cameraFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_camera_alt_24"
+        android:layout_margin="@dimen/_25sdp"
         android:contentDescription="@string/camera"
+        android:src="@drawable/ic_camera_alt_24"
         app:backgroundTint="?fab_color"
-        android:id="@+id/cameraFAB"
         app:elevation="@dimen/_10sdp"
-        android:layout_margin="@dimen/_25sdp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

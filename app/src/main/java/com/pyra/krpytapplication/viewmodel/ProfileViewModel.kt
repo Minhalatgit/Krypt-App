@@ -410,7 +410,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         updateGroupInfo(jsonObject)
     }
 
-
     private fun getBlockedUser() {
         Coroutien.mainWorker {
             kryptId.get()?.let {
@@ -441,7 +440,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         } else {
             jsonObject.put(Constants.ApiKeys.STATUS, "true")
         }
-
 
         profileRepository.blockCall(getApiParams(jsonObject, UrlHelper.BLOCKUSERACCOUNT))
             ?.observeForever {
@@ -515,7 +513,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             )
         )
 
-
     }
 
     fun removeFromGroupDB(roomId: String) {
@@ -533,14 +530,12 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         jsonObject.put(Constants.ApiKeys.PASSWORD, password)
         jsonObject.put(Constants.ApiKeys.NEWPASSWORD, newPassword)
 
-
         return profileRepository.changePassword(
             getApiParams(
                 jsonObject,
                 UrlHelper.UPDATEPASSWORD
             )
         )
-
     }
 
     fun setOnNotificationChanged(b: Boolean, roomId: String) {
@@ -548,6 +543,5 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             profileRepository.chageNotification(b,roomId.toUpperCase())
         }
     }
-
 
 }

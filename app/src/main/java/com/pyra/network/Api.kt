@@ -70,7 +70,6 @@ object Api {
         }
     }
 
-
     fun getMethod(input: ApiInput, apiResponseCallback: ApiResponseCallback) {
         if (input.context!!.isNetworkConnected()) {
 
@@ -125,8 +124,4 @@ object Api {
             apiResponseCallback.setErrorResponse("No Internet Connection")
         }
     }
-
-
-
-
 }

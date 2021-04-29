@@ -93,6 +93,12 @@ class ChangePasswordActivity : BaseActivity() {
 
     fun onSubmitButtonClicked(view: View) {
 
+        when (view.id) {
+            R.id.login -> showToast("Login btn")
+            R.id.duress -> showToast("Duress btn")
+            R.id.vault -> showToast("Vault btn")
+        }
+
         isValidPassword(
             this,
             loginPassword.text.trim().toString(),

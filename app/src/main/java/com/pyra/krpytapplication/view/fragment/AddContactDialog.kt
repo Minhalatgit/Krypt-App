@@ -1,6 +1,5 @@
 package com.pyra.krpytapplication.view.fragment
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.gson.Gson
 import com.pyra.krpytapplication.R
@@ -28,7 +28,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import showToast
-
 
 class AddContactDialog : BottomSheetDialogFragment() {
 
@@ -116,11 +115,9 @@ class AddContactDialog : BottomSheetDialogFragment() {
                     })
 
                 searchViewModel.getSearchResultAndAddUser(kryptCodeEditText.text.toString())
-                    ?.observe(viewLifecycleOwner,
-                        {
+                    ?.observe(viewLifecycleOwner, Observer {
 
-
-                        })
+                    })
 
                 Log.e("usernam", contactNameEditText.text.toString())
 

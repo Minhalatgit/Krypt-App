@@ -11,16 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.viewModels
+import androidx.cardview.widget.CardView
 import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.openActivity
 import com.pyra.krpytapplication.Utils.subEnded
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import isValidKryptCode
+import org.jetbrains.anko.toast
 import showToast
 
 class KryptCodeActivity : BaseActivity() {
@@ -77,15 +77,42 @@ class KryptCodeActivity : BaseActivity() {
     }
 
     fun onGenerateButtonClicked(view: View) {
-        enableKryptKeyboard()
 
-        openActivity(CreatePasswordActivity::class.java)
+        showTermsDialog()
+
     }
 
     fun onKryptButtonClicked(view: View) {
         enableKryptKeyboard()
 
         showKryptCodeDialog()
+    }
+
+    private fun showTermsDialog() {
+        val dialogView = View.inflate(this, R.layout.dialog_terms_of_services, null)
+        val dialog = Dialog(this)
+        val termsCheckBox = dialogView.findViewById<CheckBox>(R.id.termsCheckBox)
+        val cancelBtn = dialogView.findViewById<CardView>(R.id.cancelBtn)
+        val proceedBtn = dialogView.findViewById<CardView>(R.id.proceedBtn)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogView)
+        val window: Window = dialog.window!!
+        window.setGravity(Gravity.CENTER)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.show()
+
+        cancelBtn.setOnClickListener { dialog.dismiss() }
+
+        proceedBtn.setOnClickListener {
+            if (termsCheckBox.isChecked) {
+                enableKryptKeyboard()
+                openActivity(CreatePasswordActivity::class.java)
+                dialog.dismiss()
+            } else {
+                showToast("Accept terms and condition to continue")
+            }
+        }
     }
 
     private fun showKryptCodeDialog() {

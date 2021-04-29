@@ -44,10 +44,6 @@ class ChangeChatThemeActivity : BaseActivity() {
         if (!SharedHelper(this).chatBubbleColorReciver.equals("", ignoreCase = true)) {
             receiverparent.setBackgroundColor(Color.parseColor(SharedHelper(this).chatBubbleColorReciver))
         }
-
-
-
-
     }
 
     private fun setChatTheme() {

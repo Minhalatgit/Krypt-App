@@ -14,7 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/createPasswordTitle"
         android:layout_width="wrap_content"
@@ -30,7 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backIcon" />
 
-
     <EditText
         android:id="@+id/enterKrypt"
         android:layout_width="match_parent"
@@ -44,6 +42,7 @@
         android:enabled="false"
         android:fontFamily="?regularFont"
         android:hint="@string/enter_krypt_code"
+        android:imeOptions="flagNoPersonalizedLearning"
         android:paddingStart="@dimen/_10sdp"
         android:paddingLeft="@dimen/_11sdp"
         android:textColor="?text_color_hint"
@@ -51,8 +50,7 @@
         android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createPasswordTitle"
-        android:imeOptions="flagNoPersonalizedLearning"/>
+        app:layout_constraintTop_toBottomOf="@+id/createPasswordTitle" />
 
     <EditText
         android:id="@+id/contactName"
@@ -66,6 +64,7 @@
         android:background="@drawable/border_line"
         android:fontFamily="?regularFont"
         android:hint="@string/enter_contact_name"
+        android:imeOptions="flagNoPersonalizedLearning"
         android:paddingStart="@dimen/_10sdp"
         android:paddingLeft="@dimen/_11sdp"
         android:textColor="?text_color_hint"
@@ -73,13 +72,7 @@
         android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterKrypt"
-        android:imeOptions="flagNoPersonalizedLearning"/>
-
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/enterKrypt" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/buttonBg"
@@ -94,7 +87,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactName" />
-
 
     <TextView
         android:id="@+id/submitButton"

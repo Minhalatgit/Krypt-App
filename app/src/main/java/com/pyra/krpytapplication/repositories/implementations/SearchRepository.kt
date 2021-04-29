@@ -47,9 +47,4 @@ class SearchRepository private constructor() {
         })
         return responseModel
     }
-
-
-
-
-
 }

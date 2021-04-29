@@ -177,7 +177,6 @@ fun deleteAllChat(
 
 fun showLoader(context: Context): Dialog {
 
-
     var loaderDialog = Dialog(context)
     loaderDialog.setCancelable(false)
     loaderDialog.setCanceledOnTouchOutside(false)
@@ -194,9 +193,7 @@ fun showLoader(context: Context): Dialog {
 
 //    loaderDialog!!.anim_view.playAnimation()
 
-
     return loaderDialog
-
 }
 
 fun showEditNameDialog(context: Context): Dialog {
