@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.work.*
 import com.pyra.krpytapplication.Utils.*
 import com.pyra.krpytapplication.app.MyApp
-import com.pyra.krpytapplication.chat.ChatMessageDeleteWorker
 import com.pyra.krpytapplication.chat.ChatRoomConnection
 import com.pyra.krpytapplication.chat.GetOfflineMessagesWorker
 import com.pyra.krpytapplication.model.BlockedUsers
@@ -86,7 +85,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun insertData(entity: ChatListSchema) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             try {
                 chatListRepository.insertData(entity)
             } catch (e: SQLiteException) {
@@ -98,28 +97,28 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun insertOrReplace(entity: ChatListSchema) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.insertOrReplace(entity)
         }
 
     }
 
     fun updateUserName(kryptKey: String, userName: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.updateUserName(kryptKey, userName)
         }
 
     }
 
     fun clearDb() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.clearDb()
         }
 
     }
 
     fun burnMessage() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.burnMessage()
         }
     }
@@ -475,7 +474,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
     private fun syncBlockedUser(blockedUsers: ArrayList<BlockedUsers>) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             var kryptList = ArrayList<String>()
             for (i in blockedUsers.indices) {
                 kryptList.add(blockedUsers[i].toUser.toUpperCase())
@@ -493,7 +492,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
         data?.let {
 
-            Coroutien.iOWorker {
+            Coroutine.iOWorker {
 
                 var nameList = getNameList(applicationInstance?.baseContext!!)
 
@@ -656,7 +655,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
     fun getProfileImages() {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             var chatListSchema = chatListRepository.getPrivateMessageUsers()
             chatListSchema?.let {
 
@@ -672,7 +671,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
                     request.put(Constants.ApiKeys.USERNAME, array.toString())
 
-                    Coroutien.mainWorker {
+                    Coroutine.mainWorker {
                         chatListRepository.getProfilePictures(
                             getApiParams(
                                 applicationInstance?.baseContext!!,
@@ -680,7 +679,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
                                 UrlHelper.GETUSERSPROPERTY
                             )
                         )?.observeForever { response ->
-                            Coroutien.iOWorker {
+                            Coroutine.iOWorker {
                                 if (!response.error) {
                                     if (!response.data.isNullOrEmpty()) {
                                         for (i in response.data!!.indices) {
@@ -745,7 +744,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     }
 
     private fun getRoomName() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             if (selectedRoomIds.size == 1) {
                 var detail = chatListRepository.getRoomDetails(selectedRoomIds[0])
                 detail?.let {
@@ -781,14 +780,14 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
     fun deleteSelectedChats(checked: Boolean) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
             chatListRepository.deleteChats(selectedRoomIds)
             chatListRepository.deleteMessages(selectedRoomIds)
 
             if (checked) {
 
-                Coroutien.mainWorker {
+                Coroutine.mainWorker {
                     removeSelection()
                 }
 
@@ -844,9 +843,9 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
     fun deleteSelectedContact() {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.removeContacts(selectedContactList)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 unselectContact()
                 getNamedUser()
                 getUnnamedUser()
@@ -857,22 +856,22 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
     fun getContactName() {
         if (selectedContactList.size != 0) {
-            Coroutien.iOWorker {
+            Coroutine.iOWorker {
                 val details = chatListRepository.getRoomData(selectedContactList[0].toUpperCase())
                 details?.let { selectedDetail = it }
-                Coroutien.mainWorker { notifyContact.value = null }
+                Coroutine.mainWorker { notifyContact.value = null }
             }
 
         }
     }
 
     fun updateValue(name: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.updateUserName(
                 selectedDetail.kryptId.toUpperCase(Locale.getDefault()),
                 name
             )
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 unselectContact()
                 getNamedUser()
                 getUnnamedUser()
@@ -959,11 +958,11 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun clearAllChats() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             selectedRoomIds.clear()
             isMultiSelectionEnabled = false
             chatListRepository.clearAllMessages()
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 update.value = true
             }
         }

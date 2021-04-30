@@ -309,7 +309,7 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
 
     fun sendImage(position: Int, isVideo: Boolean) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
 
             var selectedChatUsers: ChatListSchema? = null
@@ -374,7 +374,7 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
 
     fun sendDocument(position: Int) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
 
             var selectedChatUsers: ChatListSchema? = null

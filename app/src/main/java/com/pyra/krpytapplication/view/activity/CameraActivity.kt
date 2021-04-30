@@ -12,14 +12,12 @@ import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.view.fragment.FLAGS_FULLSCREEN
 import java.io.File
 
-
 const val KEY_EVENT_ACTION = "key_event_action"
 const val KEY_EVENT_EXTRA = "key_event_extra"
 private const val IMMERSIVE_FLAG_TIMEOUT = 500L
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var container: FrameLayout
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +30,12 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         container.postDelayed({
             container.systemUiVisibility = FLAGS_FULLSCREEN
         }, IMMERSIVE_FLAG_TIMEOUT)
     }
-
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         return when (keyCode) {
@@ -52,14 +48,11 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-
-
     companion object {
         fun getOutputDirectory(context: Context): File {
             val appContext = context.applicationContext
             return appContext.filesDir
         }
     }
-
 
 }

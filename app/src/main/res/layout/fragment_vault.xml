@@ -12,13 +12,11 @@
         android:layout_height="match_parent"
         android:background="?page_default_bg">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -192,10 +190,10 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:padding="3dp"
                             android:src="@drawable/ic_arrow_back_black_24dp"
-                            app:tint="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:id="@+id/selectedCount"
@@ -210,7 +208,6 @@
                             app:layout_constraintStart_toEndOf="@+id/backPressed"
                             app:layout_constraintTop_toTopOf="@+id/backPressed" />
 
-
                         <ImageView
                             android:id="@+id/forward"
                             android:layout_width="30dp"
@@ -218,11 +215,10 @@
                             android:layout_marginEnd="@dimen/_20sdp"
                             android:padding="5dp"
                             android:src="@drawable/forward"
-                            app:tint="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/delete"
-                            app:layout_constraintTop_toTopOf="parent" />
-
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
                         <ImageView
                             android:id="@+id/delete"
@@ -279,10 +275,10 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:padding="3dp"
                             android:src="@drawable/ic_arrow_back_black_24dp"
-                            app:tint="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:id="@+id/selectedCountsaved"
@@ -318,19 +314,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cameraFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_25sdp"
+            android:contentDescription="@string/camera"
+            android:src="@drawable/ic_camera_alt_24"
+            app:backgroundTint="?fab_color"
+            app:elevation="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_camera_alt_24"
-            app:tint="@color/white"
-            android:contentDescription="@string/camera"
-            app:backgroundTint="?fab_color"
-            android:id="@+id/cameraFAB"
-            app:elevation="@dimen/_10sdp"
-            android:layout_margin="@dimen/_25sdp" />
+            app:tint="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/imageRecyclerView"

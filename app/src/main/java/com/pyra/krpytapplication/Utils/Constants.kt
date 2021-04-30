@@ -109,11 +109,11 @@ object Constants {
 
     object RequestCode {
 
-
         const val CAMERA_INTENT = 101
         const val GALLERY_INTENT = 102
         const val FILE_INTENT = 103
         const val AUDIO_INTENT = 104
+        const val DOC_INTENT = 105
 
     }
 

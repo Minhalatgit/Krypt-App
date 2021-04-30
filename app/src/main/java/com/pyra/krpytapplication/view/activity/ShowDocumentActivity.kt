@@ -17,7 +17,6 @@ import java.io.IOException
 
 class ShowDocumentActivity : BaseActivity() {
 
-
     var path = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +58,6 @@ class ShowDocumentActivity : BaseActivity() {
         }
         content.text = text
         doctitle.text = file.name
-
     }
 
     private fun getIntentValues() {

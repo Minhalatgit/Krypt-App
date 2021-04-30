@@ -49,7 +49,7 @@ class AppRunningService : Service() {
             socket?.let {
                 if (it.connected()) {
 
-                    var jsonObject = JSONObject()
+                    val jsonObject = JSONObject()
                     jsonObject.put(
                         Constants.SocketKeys.USERNAME,
                         sharedHelper?.kryptKey.toString().toUpperCase()
@@ -66,7 +66,6 @@ class AppRunningService : Service() {
 
         }
     }
-
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -125,7 +124,6 @@ class AppRunningService : Service() {
 
         runnable = Runnable {
 
-
             if (socket == null || !socket?.connected()!!) {
                 initSockets()
             }
@@ -160,7 +158,6 @@ class AppRunningService : Service() {
                 handler.postDelayed(runnable, 4000)
             }
         }
-
 
         handler.removeCallbacks(runnable)
         handler.postDelayed(runnable, 1000)

@@ -5,7 +5,7 @@ import android.os.Looper
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.implementations.ForwardRepository
 import com.pyra.krpytapplication.roomDb.ChatMessageSchemaFactory
@@ -74,7 +74,7 @@ class ForwardViewModel(application: Application) : AndroidViewModel(application)
 
     fun getRawMessage(list: java.util.ArrayList<String>) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             repository.getMessageList(list)?.let { list ->
                 messageList = list as ArrayList<ChatMessagesSchema>
             }
@@ -85,7 +85,7 @@ class ForwardViewModel(application: Application) : AndroidViewModel(application)
     fun forwardmessage() {
 
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
             var selectedChatUsers: List<ChatListSchema>? =
                 repository.getselectedChatData(selectedList)
@@ -112,7 +112,7 @@ class ForwardViewModel(application: Application) : AndroidViewModel(application)
                 }
             }
 
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 android.os.Handler(Looper.getMainLooper()).postDelayed({
                     messageForwarded.value = null
                 }, 500)

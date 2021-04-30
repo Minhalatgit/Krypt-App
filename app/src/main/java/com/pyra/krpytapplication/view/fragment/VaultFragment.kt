@@ -85,8 +85,8 @@ class VaultFragment : Fragment() {
         return fragmentVaultBinding.root
     }
 
-    private fun handlingFab(){
-        if (currentTab==0 || currentTab==1) fragmentVaultBinding.cameraFAB.setImageResource(R.drawable.ic_camera_alt_24)
+    private fun handlingFab() {
+        if (currentTab == 0 || currentTab == 1) fragmentVaultBinding.cameraFAB.setImageResource(R.drawable.ic_camera_alt_24)
         else fragmentVaultBinding.cameraFAB.setImageResource(R.drawable.add_doc)
     }
 
@@ -119,24 +119,23 @@ class VaultFragment : Fragment() {
         }
 
         fragmentVaultBinding.cameraFAB.clickWithDebounce {
-            if (currentTab == 0 || currentTab == 1){
+            if (currentTab == 0 || currentTab == 1) {
                 Intent(requireActivity(), CameraActivity::class.java).apply {
                     putExtra(Constants.IntentKeys.ISVIDEOAVAILABLE, true)
                     putExtra(Constants.IntentKeys.ISUPLOADAVAILABLE, true)
                     putExtra(Constants.IntentKeys.ISVAULT, true)
                     startActivityForResult(this, Constants.RequestCode.CAMERA_INTENT)
                 }
-        }else {
-                startActivity(
-                        Intent(requireContext(), DocumentActivity::class.java)
-                                .putExtra("isNewDoc", true)
-                                .putExtra("path", "")
+            } else {
+                startActivityForResult(
+                    Intent(requireContext(), DocumentActivity::class.java)
+                        .putExtra("isNewDoc", true)
+                        .putExtra("path", ""), Constants.RequestCode.DOC_INTENT
                 )
             }
 
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
@@ -210,9 +209,9 @@ class VaultFragment : Fragment() {
                     }
                 }
             }
+            Constants.RequestCode.DOC_INTENT -> setDocSelected()
         }
     }
-
 
     private fun setDocSelected() {
 
@@ -265,13 +264,10 @@ class VaultFragment : Fragment() {
 
     private fun setImageAdapter() {
 
-
         val linearLayoutManager = GridLayoutManager(activity, 3)
         imageViewAdapter = ImageViewAdapter(requireActivity(), false, viewModel)
         fragmentVaultBinding.imageRecyclerView.layoutManager = linearLayoutManager
         fragmentVaultBinding.imageRecyclerView.adapter = imageViewAdapter
-
-
 
         viewModel.notifyItemImage.observe(viewLifecycleOwner, Observer {
             fragmentVaultBinding.imageRecyclerView.recycledViewPool.clear()
@@ -280,7 +276,6 @@ class VaultFragment : Fragment() {
         })
 
         viewModel.getDownloadedImageList()
-
     }
 
     override fun onResume() {
@@ -319,9 +314,7 @@ class VaultFragment : Fragment() {
             checkForDeletePannel()
         })
 
-
         viewModel.getDownloadedVideoList()
-
     }
 
     private fun setChatMessageAdapter() {
@@ -365,7 +358,6 @@ class VaultFragment : Fragment() {
         }
     }
 
-
     private fun setDocumentAdapter() {
 
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -382,7 +374,6 @@ class VaultFragment : Fragment() {
         viewModel.getDownloadedDocumentList()
 
     }
-
 
 }
 

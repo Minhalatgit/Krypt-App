@@ -1,5 +1,7 @@
 package com.pyra.krpytapplication.view.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -16,10 +18,13 @@ import com.pyra.krpytapplication.viewmodel.ChatMessagesViewModel
 import com.pyra.krpytapplication.viewmodel.GalleryViewModel
 import getTxtFile
 import kotlinx.android.synthetic.main.activity_document.*
+import kotlinx.android.synthetic.main.activity_document.content
+import kotlinx.android.synthetic.main.activity_document.doctitle
+import kotlinx.android.synthetic.main.activity_view_document.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileWriter
+import showToast
+import java.io.*
 import java.util.*
 
 class DocumentActivity : BaseActivity() {
@@ -34,15 +39,26 @@ class DocumentActivity : BaseActivity() {
         setContentView(R.layout.activity_document)
 
         getIntentValues()
+
+        if (!isNewDoc)
+            readDocument()
+
         initListener()
         observeValues()
+    }
+
+    private fun getIntentValues() {
+
+        intent.extras?.let {
+            isNewDoc = it.getBoolean("isNewDoc")
+            path = it.getString("path", "")
+        }
 
     }
 
     private fun initListener() {
 
         save.setOnClickListener {
-
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
@@ -56,19 +72,40 @@ class DocumentActivity : BaseActivity() {
         }
     }
 
-    fun saveFile() {
+    private fun readDocument() {
 
-        if (doctitle.text.toString() != "")
-            if (isNewDoc) {
-                saveNewFile()
-            } else {
-                updateFile()
+        if (path == "") {
+            return
+        }
+
+        val file = File(path)
+        //Read text from file
+        val text = java.lang.StringBuilder()
+
+        try {
+            val br = BufferedReader(FileReader(file))
+            var line: String?
+            while (br.readLine().also { line = it } != null) {
+                text.append(line)
+                text.append('\n')
             }
+            br.close()
+        } catch (e: IOException) {
+            //You'll need to add proper error handling here
+        }
+        content.setText(text)
+        doctitle.setText(file.name)
     }
 
-    private fun updateFile() {
+    private fun saveFile() {
 
-
+        if (doctitle.text.toString() != "")
+            saveNewFile()
+//        if (isNewDoc) {
+//                saveNewFile()
+//            } else {
+//                updateFile()
+//            }
     }
 
     private fun saveNewFile() {
@@ -85,7 +122,7 @@ class DocumentActivity : BaseActivity() {
         blockView.visibility = View.VISIBLE
         progress.visibility = View.VISIBLE
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             val writer = FileWriter(file, true)
             writer.append(contentTxt)
             writer.flush()
@@ -93,15 +130,6 @@ class DocumentActivity : BaseActivity() {
 
             galleryViewModel.uploadDocument(file)
         }
-    }
-
-    private fun getIntentValues() {
-
-        intent.extras?.let {
-            isNewDoc = it.getBoolean("isNewDoc")
-            path = it.getString("path", "")
-        }
-
     }
 
     fun onBackButtonPressed(view: View) {
@@ -134,10 +162,12 @@ class DocumentActivity : BaseActivity() {
             messagesEntity.mediaDocumentType = File(absolutePath).getDocumentType()
 
             chatMessageViewModel.addImageToLocal(messagesEntity)
-
         }
 
-        finish()
+        Intent().apply {
+            setResult(Activity.RESULT_OK, this)
+            finish()
+        }
     }
 
     private fun observeValues() {
@@ -190,8 +220,12 @@ class DocumentActivity : BaseActivity() {
                 saveFile()
             } else {
 
-                Snackbar.make(parentView, "Need Permission create document", Snackbar.LENGTH_LONG)
-                    .show()
+                val message = if (isNewDoc) {
+                    "Need permission to create document"
+                } else {
+                    "Need permission to view document"
+                }
+                Snackbar.make(parentView, message, Snackbar.LENGTH_LONG).show()
             }
         }
 

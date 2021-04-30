@@ -148,8 +148,6 @@ class CameraFragment : Fragment() {
         // Shut down our background executor
         cameraExecutor.shutdown()
 
-
-
         // Unregister the broadcast receivers and listeners
         broadcastManager.unregisterReceiver(volumeDownReceiver)
         displayManager.unregisterDisplayListener(displayListener)
@@ -177,8 +175,6 @@ class CameraFragment : Fragment() {
                     .apply(RequestOptions.circleCropTransform())
                     .into(thumbnail)
         }
-
-
     }
 
     @SuppressLint("MissingPermission")
@@ -186,7 +182,6 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         container = view as ConstraintLayout
         viewFinder = container.findViewById(R.id.view_finder)
-
 
         // Initialize our background executor
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -216,8 +211,6 @@ class CameraFragment : Fragment() {
             setUpCamera()
         }
 
-
-
     }
 
     /**
@@ -239,7 +232,7 @@ class CameraFragment : Fragment() {
     }
 
     /** Initialize CameraX, and prepare to bind the camera use cases  */
-    private fun  setUpCamera() {
+    private fun setUpCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(Runnable {
 
@@ -378,7 +371,6 @@ class CameraFragment : Fragment() {
             controls.findViewById<ImageButton>(R.id.videoBtn).visibility = View.GONE
         }
 
-
         controls.findViewById<ImageButton>(R.id.videoBtn).setOnClickListener {
 
             Navigation.findNavController(
@@ -388,7 +380,6 @@ class CameraFragment : Fragment() {
 
         // Listener for button used to capture photo
         controls.findViewById<ImageButton>(R.id.camera_capture_button).setOnClickListener {
-
 
             // Get a stable reference of the modifiable image capture use case
             imageCapture?.let { imageCapture ->

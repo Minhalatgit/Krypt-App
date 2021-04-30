@@ -108,7 +108,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         audioRecordView.setContainerView(R.layout.activity_chat)
     }
 
-
     private val selectedLayout by lazy {
         containerView?.findViewById<Group>(R.id.selectedLayout)
     }
@@ -116,7 +115,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
     private val unSelectedLayout by lazy {
         containerView?.findViewById<Group>(R.id.unSelectedLayout)
     }
-
 
     private val backButton by lazy {
         containerView?.findViewById<ImageView>(R.id.backButton)
@@ -182,7 +180,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         containerView?.findViewById<LinearLayout>(R.id.bottomView)
     }
 
-
     private var time: Long = 0
 
     private val AUDIO_EXTENSION = ".3gp"
@@ -193,7 +190,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
     private val loader by lazy {
         showLoader(this)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -518,7 +514,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
     private fun initAdapter() {
 
-
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         linearLayoutManager.stackFromEnd = true
         linearLayoutManager.reverseLayout = true
@@ -527,7 +522,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         chatMessageLists.layoutManager = linearLayoutManager
         chatMessageLists.itemAnimator = null
         chatMessageLists?.adapter = chatMessageAdapter // mention the position in place of 0
-
 
         val itemTouchHelperCallBack = MessageSwipeController(this) {
             chatMessagesViewModel.setReply(it)
@@ -577,7 +571,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             }, 500)
         })
 
-
     }
 
     private fun changeUi() {
@@ -591,12 +584,10 @@ class ChatActivity : BaseActivity(), RecordingListener {
             forward?.hide()
         }
         setCallUi()
-
     }
 
 
     private fun setCallUi() {
-
 
         if (chatMessagesViewModel.isMultiSelectedEnabled) {
             audioCallIcon?.hide()
@@ -616,9 +607,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
             }
         }
 
-
     }
-
 
     private fun initIntentData() {
         if (intent.extras != null) {
@@ -637,7 +626,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             }
         }
     }
-
 
     fun showAddContactDialog(view: View) {
         showKryptCodeDialog()
@@ -687,14 +675,12 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
 
         when (requestCode) {
             Constants.Permission.AUDIO_CALL_PERMISSION -> {
@@ -742,14 +728,12 @@ class ChatActivity : BaseActivity(), RecordingListener {
             } else {
                 showToast(getString(R.string.storage_permission_error))
 
-
             }
 
             Constants.Permission.READ_AUDIO_PERMISSIONS -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openAudioIntent(this)
             } else {
                 showToast(getString(R.string.storage_permission_error))
-
 
             }
 
@@ -768,7 +752,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
             Constants.Permission.RECORD_AUDIO -> {
 
-
                 if (grantResults.isNotEmpty()) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED
@@ -786,7 +769,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             }
         }
     }
-
 
     private fun createCall(callType: String) {
 
@@ -814,7 +796,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
                 Constants.NotificationIntentValues.IMAGE,
                 image
             )
-
 
         callViewModel.createCall(
             sharedHelper.kryptKey, kryptCode, callType
@@ -896,7 +877,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
             }
 
-
         }
 
     }
@@ -919,7 +899,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
     fun onDeleteClicked(view: View) {
 
-
         if (chatMessagesViewModel.deleteForEveryOne) {
             deleteMessageDialog(this, {
                 chatMessagesViewModel.onDeleteClicked()
@@ -934,7 +913,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         }
 
     }
-
 
     private val MyBroadcastReceiver: BroadcastReceiver =
         object : BroadcastReceiver() {

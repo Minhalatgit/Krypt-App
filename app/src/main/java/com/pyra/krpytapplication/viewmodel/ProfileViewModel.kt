@@ -2,12 +2,11 @@ package com.pyra.krpytapplication.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableField
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.Utils.jidString
 import com.pyra.krpytapplication.app.MyApp
@@ -198,10 +197,10 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun getParticipationList(roomId: String) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
             var details = profileRepository.getRoomProfile(roomId)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 if (details?.groupType == "PRIVATE") {
                     profileRepository.getParticipation(roomId)?.observeForever {
 
@@ -284,7 +283,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun getProfileDetails(roomId: String) {
 
-        Coroutien.mainWorker {
+        Coroutine.mainWorker {
             var data = profileRepository.getRoomProfile(roomId)
             data?.let {
                 profileData = it
@@ -343,7 +342,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun removeUserFromGroupDB(roomId: String, userId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             profileRepository.removeUserFromGroupDb(
                 roomId.toUpperCase(),
                 userId.toUpperCase()
@@ -386,7 +385,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private fun updateToDb(jsonObject: JSONObject) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             profileRepository.updateGroupInfo(
                 jsonObject.get(Constants.ApiKeys.IMAGE).toString(),
                 jsonObject.get(Constants.ApiKeys.GROUPTITLENAME).toString(),
@@ -411,7 +410,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private fun getBlockedUser() {
-        Coroutien.mainWorker {
+        Coroutine.mainWorker {
             kryptId.get()?.let {
                 profileRepository.getBlockedUser(it)?.observeForever { count ->
                     updateBlockList.value = count != 0
@@ -454,7 +453,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun getBlockedUsers() {
-        Coroutien.mainWorker {
+        Coroutine.mainWorker {
             profileRepository.getAllBlockedUsers()?.observeForever {
                 blockedUsers = it as ArrayList<BlockListSchema>
                 updateBlockedUser.value = null
@@ -479,7 +478,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun deleteAllChatMessages() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             profileRepository.deleteAllMessages()
         }
     }
@@ -539,7 +538,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun setOnNotificationChanged(b: Boolean, roomId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             profileRepository.chageNotification(b,roomId.toUpperCase())
         }
     }

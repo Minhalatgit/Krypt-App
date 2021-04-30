@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.model.SearchUserData
 import com.pyra.krpytapplication.model.SearchUserResult
@@ -113,7 +113,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             }
         }
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             try {
                 chatListRepository.insertData(entity)
             } catch (e: SQLiteException) {
@@ -143,7 +143,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 }
             }
 
-            Coroutien.iOWorker {
+            Coroutine.iOWorker {
                 try {
                     chatListRepository.insertData(entity)
                 } catch (e: SQLiteException) {
@@ -182,7 +182,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             }
         }
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             try {
                 chatListRepository.insertData(entity)
             } catch (e: SQLiteException) {

@@ -139,12 +139,9 @@ class FcmReciver : FirebaseMessagingService() {
                 "GroupRequest",
                 ExistingWorkPolicy.KEEP, connectRequest
             )
-
-
     }
 
     private fun incomingCall(jsonObject: JSONObject) {
-
 
         val bundle = Bundle()
 
@@ -171,12 +168,11 @@ class FcmReciver : FirebaseMessagingService() {
             )
         }
 
-
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
             val data = chatListRepository?.getRoomData(jsonObject["fromUserName"].toString())
 
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 bundle.putString(
                     Constants.NotificationIntentValues.CALL_TYPE,
                     jsonObject["callType"].toString()
@@ -212,7 +208,6 @@ class FcmReciver : FirebaseMessagingService() {
                         jsonObject["fromUserName"].toString()
                     )
 
-
                 }
 
                 bundle.putString(Constants.NotificationIntentValues.IMAGE, data?.roomImage)
@@ -227,19 +222,17 @@ class FcmReciver : FirebaseMessagingService() {
             }
         }
 
-
     }
 
     private fun incomingGroupCall(jsonObject: JSONObject) {
 
-
         val bundle = Bundle()
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
             val data = chatListRepository?.getRoomData(jsonObject["fromUserName"].toString())
 
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
 
 
                 bundle.putString(
@@ -277,7 +270,6 @@ class FcmReciver : FirebaseMessagingService() {
                 setIncomingGroupNotification(jsonObject, intent, bundle)
             }
         }
-
 
     }
 
@@ -339,12 +331,10 @@ class FcmReciver : FirebaseMessagingService() {
         saveToken(p0)
     }
 
-
     private fun saveToken(token: String) {
         val sharedHelper = SharedHelper(this)
         sharedHelper.firebaseToken = token
     }
-
 
     private fun sampleNotification() {
         Log.d("Workmanager ", "notification start running")
@@ -365,7 +355,6 @@ class FcmReciver : FirebaseMessagingService() {
                 .setSmallIcon(R.drawable.ic_launcher_background)
         manager.notify(System.currentTimeMillis().toInt(), builder.build())
     }
-
 
     private fun isAppIsInBackground(context: Context): Boolean {
         var isInBackground = true

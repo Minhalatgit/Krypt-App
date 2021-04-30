@@ -44,7 +44,7 @@ class AddMemberViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun setRoomId(roomId: String) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.getProfileData(roomId).let {
                 roomDetails = it
             }
@@ -54,7 +54,7 @@ class AddMemberViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun getNamedUser(roomId: String) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             var listOfUsers = chatListRepository.getParticipants(roomId)
 
             var listofUser = ArrayList<String>()
@@ -63,7 +63,7 @@ class AddMemberViewModel(application: Application) : AndroidViewModel(applicatio
                     listofUser.add(listOfUsers[i].kryptId.toUpperCase(Locale.ROOT))
                 }
             }
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 chatListRepository.getNamedUser(listofUser)?.observeForever {
 
 
@@ -79,7 +79,7 @@ class AddMemberViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun getUnnamedUser(roomId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
             var listOfUsers = chatListRepository.getParticipants(roomId)
 
@@ -89,7 +89,7 @@ class AddMemberViewModel(application: Application) : AndroidViewModel(applicatio
                     listofUser.add(listOfUsers[i].kryptId.toUpperCase(Locale.ROOT).bareUsername())
                 }
             }
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 chatListRepository.getUnnamedUser(listofUser)?.observeForever {
 
                     unNamedContacts = it as ArrayList<ChatListSchema>

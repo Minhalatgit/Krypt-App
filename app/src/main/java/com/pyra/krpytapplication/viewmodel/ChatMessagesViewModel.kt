@@ -24,7 +24,6 @@ import com.pyra.krpytapplication.repositories.implementations.ChatMessagesReposi
 import com.pyra.krpytapplication.repositories.implementations.ProfileRepository
 import com.pyra.krpytapplication.roomDb.ChatMessageSchemaFactory
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema
-import com.pyra.krpytapplication.view.adapter.MessageViewTypes
 import com.pyra.network.UrlHelper
 import getApiParams
 import isUserOnline
@@ -261,7 +260,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 //        this.roomId = getRoomId(app.applicationContext, kryptId)
         this.roomId = roomId
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.getProfileData(roomId).let {
                 this.roomImage = it?.roomImage ?: ""
                 this.roomName = it?.roomName ?: ""
@@ -273,7 +272,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
                 getOnlineStatus(kryptId)
             }
 
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 if (!isGroup) {
                     chatMessagesRepository.addUserToRoster(kryptId)
                     getPresence()
@@ -294,7 +293,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             isUserBlocked.value = false
             return
         }
-        Coroutien.mainWorker {
+        Coroutine.mainWorker {
             chatMessagesRepository.getIsUserBlocked(kryptId)?.observeForever {
                 isUserBlocked.value = it != 0
             }
@@ -311,7 +310,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun updateSeenStatus() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             if (!isGroup) {
                 val unreadMessages =
                     chatMessagesRepository.getUnreadMessages(roomId.toUpperCase(Locale.ROOT))
@@ -329,10 +328,10 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun clearChat() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesRepository.clearMessage(this.roomId)
             chatListRepository.clearMessage(this.roomId)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 reply.value = ChatMessagesSchema()
                 unselectAll()
             }
@@ -367,7 +366,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     private fun getIsDeleteForEveryOne() {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             var list = chatMessagesRepository.getAllMessages(selectedChatMessage)
 
             list?.let {
@@ -388,7 +387,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
 
     private fun getIsForwardable() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             var list = chatMessagesRepository.getIsForwardable(selectedChatMessage)
             list?.let {
                 isAllMessageForwadable = true
@@ -404,7 +403,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
                     }
                 }
 
-                Coroutien.mainWorker {
+                Coroutine.mainWorker {
                     notifySelection.value = null
                 }
             }
@@ -417,9 +416,9 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun getIsAllSelected() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             isAllSavedMessage = chatMessagesRepository.getIsAllSaved(selectedChatMessage)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 notifySelection.value = null
             }
         }
@@ -427,9 +426,9 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     fun onSaveClicked() {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesRepository.saveMessage(selectedChatMessage, isAllSavedMessage)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 unselectAll()
             }
         }
@@ -439,9 +438,9 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     fun onDeleteClicked() {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesRepository.deleteMessage(selectedChatMessage)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 unselectAll()
             }
         }
@@ -567,7 +566,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     }
 
-
     fun insertThumbImage(thumbImage: String) {
         app.baseContext.saveToGlideCache(thumbImage)
         chatMessagesRepository.updateThumbImage(thumbImage, messageId)
@@ -600,13 +598,13 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
                     override fun onSuccess() {
 
-                        Coroutien.iOWorker {
+                        Coroutine.iOWorker {
 
                             var isCancelled = chatMessagesRepository.isUserCanceledUpload(messageId)
                             isCancelled?.let {
 
                                 if (!isCancelled) {
-                                    Coroutien.mainWorker {
+                                    Coroutine.mainWorker {
                                         uploadMedia(newFile)
                                     }
                                 }
@@ -1132,9 +1130,9 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun unsaveSelected() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesRepository.saveMessage(selectedChatMessage, true)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 unselectAll()
             }
         }
@@ -1145,9 +1143,9 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun setReply(it: Int) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             val message = chatMessagesRepository.getreplyMessage(chatMessages[it].messageId)
-            Coroutien.mainWorker { message?.let { reply.value = it } }
+            Coroutine.mainWorker { message?.let { reply.value = it } }
         }
     }
 
@@ -1155,13 +1153,13 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         if (it?.isSender!!) {
             replerName.value = "You"
         } else {
-            Coroutien.iOWorker {
+            Coroutine.iOWorker {
                 var chatData =
                     chatListRepository.getRoomNameByKryptId(it.kryptId.toString().toUpperCase())
                 if (chatData?.toUpperCase() == "" || chatData == null) {
-                    Coroutien.mainWorker { replerName.value = it.kryptId.bareUsername() }
+                    Coroutine.mainWorker { replerName.value = it.kryptId.bareUsername() }
                 } else {
-                    Coroutien.mainWorker { replerName.value = chatData.toString() }
+                    Coroutine.mainWorker { replerName.value = chatData.toString() }
                 }
             }
         }
@@ -1265,11 +1263,11 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     fun deleteForEveryOne() {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesRepository.deleteMessage(selectedChatMessage)
             chatMessagesRepository.sendDeleteMessage(selectedChatMessage, isGroup, kryptId, roomId)
 
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 unselectAll()
             }
 
@@ -1315,7 +1313,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     fun getOnlineStatus(kryptCode: String) {
 
-        Coroutien.mainWorker {
+        Coroutine.mainWorker {
             chatListRepository.getonlineStatus(kryptCode)?.observeForever {
 
                 if (it.isOnline == 1) {
@@ -1344,7 +1342,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         apiInputs.url = UrlHelper.GETUSERDETAILS
 
 
-        Coroutien.mainWorker {
+        Coroutine.mainWorker {
             profileRepository.getUserDetails(apiInputs).observeForever {
                 if (it.error == "false" && it.data.isNotEmpty()) {
                     updateStatus(kryptCode, it.data[0].isOnline, it.data[0].lastLoginTime!!)
@@ -1356,14 +1354,14 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun updateStatus(kryptCode: String, i: Int, lastSeen: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListRepository.updateStatus(kryptCode.toUpperCase(), i, lastSeen)
         }
     }
 
 
     fun addImageToLocal(messagesEntity: ChatMessagesSchema) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesRepository.insertMessage(messagesEntity)
         }
     }

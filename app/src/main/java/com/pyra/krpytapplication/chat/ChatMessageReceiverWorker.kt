@@ -198,7 +198,7 @@ class ChatMessageReceiverWorker(appContext: Context, workerParams: WorkerParamet
             ) + " " + name
         }
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             val roomDetails = chatListRepository.getProfileData(roomId.toUpperCase())
 
             val isAddedToContact = roomDetails?.roomName != ""

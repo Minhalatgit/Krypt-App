@@ -3,7 +3,7 @@ package com.pyra.krpytapplication.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.Utils.longDateToDisplayTimeString
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.implementations.VaultFragRepository
@@ -31,10 +31,10 @@ class VaultFragViewModel(application: Application) : AndroidViewModel(applicatio
     var currentTab = 0
 
     fun getDownloadedImageList() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             val list = repository.getDownloadedImageList()
             chatMessageImage = checkFileExist(list as ArrayList)
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 notifyItemImage.value = null
             }
         }
@@ -42,18 +42,18 @@ class VaultFragViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun getDownloadedVideoList() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             val list = repository.getDownloadedVideoList()
             chatMessageVideo = checkFileExist(list as ArrayList)
-            Coroutien.mainWorker { notifyItemVideo.value = null }
+            Coroutine.mainWorker { notifyItemVideo.value = null }
         }
     }
 
     fun getDownloadedDocumentList() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             val list = repository.getDownloadedDocumentList()
             chatMessageDocument = checkFileExist(list as ArrayList)
-            Coroutien.mainWorker { notifyItemDocument.value = null }
+            Coroutine.mainWorker { notifyItemDocument.value = null }
         }
     }
 
@@ -191,7 +191,7 @@ class VaultFragViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun removeSelection() {
-        Coroutien.mainWorker {
+        Coroutine.mainWorker {
             selectedImageList.clear()
             selectedVideoList.clear()
             selectedDocumentList.clear()
@@ -220,7 +220,7 @@ class VaultFragViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun deleteSelectedItem() {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             when (currentTab) {
                 0 -> {
                     repository.deleteSelectedItems(selectedImageList)

@@ -3,7 +3,7 @@ package com.pyra.krpytapplication.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.implementations.ProfileRepository
@@ -24,11 +24,11 @@ class CreateRoomViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getGroupMembers(roomId: String) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 
             val details = profileRepository.getRoomProfile(roomId)
 
-            Coroutien.mainWorker {
+            Coroutine.mainWorker {
                 if (details?.groupType == "PRIVATE") {
                     profileRepository.getParticipation(roomId)?.observeForever {
                         participationList = it as ArrayList

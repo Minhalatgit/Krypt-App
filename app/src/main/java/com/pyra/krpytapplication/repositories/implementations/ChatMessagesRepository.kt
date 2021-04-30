@@ -8,7 +8,7 @@ import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import com.app.hakeemUser.network.ApiInput
 import com.google.gson.Gson
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.Utils.MessageStatus
 import com.pyra.krpytapplication.Utils.toMessageString
 import com.pyra.krpytapplication.app.MyApp
@@ -182,7 +182,7 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
 
     fun insertLocalMedia(chatMessagesEntity: ChatMessagesSchema): String {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesDao?.insertLocalMedia(chatMessagesEntity)
         }
         return chatMessagesEntity.messageId
@@ -304,7 +304,7 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun updateSeenStatus(messageId: String, kryptId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             MyApp.xmppOperations.updateSeenStatus(messageId, kryptId)
             chatMessagesDao?.updateMessageStatus(
                 messageId,
@@ -318,25 +318,25 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun updateThumbImage(thumbImage: String, messageId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesDao?.updateThumbImage(thumbImage, messageId.toUpperCase(Locale.ROOT))
         }
     }
 
     fun uploadCancelledByUser(messageId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesDao?.uploadCancelledByUser(messageId.toUpperCase(Locale.ROOT))
         }
     }
 
     fun uploadstartedByUser(messageId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesDao?.uploadStartedByUser(messageId.toUpperCase(Locale.ROOT))
         }
     }
 
     fun setMediaDownloded(messageId: String, downlodedFilePath: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesDao?.setMediaDownloded(
                 messageId.toUpperCase(Locale.ROOT),
                 downlodedFilePath
@@ -345,14 +345,14 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun downloadStartByUser(messageId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesDao?.downloadStartByUser(messageId.toUpperCase(Locale.ROOT))
         }
 
     }
 
     fun downloadCanceledByUser(messageId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatMessagesDao?.downloadCanceledByUser(messageId.toUpperCase(Locale.ROOT))
         }
     }
@@ -392,7 +392,7 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun burnMessage(kryptId: String, messageId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             if (burnMessageDao?.isMessageAvailable(messageId.toUpperCase()) == 0) {
 
                 var message = BurnMessageSchema()

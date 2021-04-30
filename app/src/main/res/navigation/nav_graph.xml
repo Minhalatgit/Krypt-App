@@ -56,7 +56,6 @@
             app:destination="@id/videoFragment"
             />
 
-
     </fragment>
 
     <fragment

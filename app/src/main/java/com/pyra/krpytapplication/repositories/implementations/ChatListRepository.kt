@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.hakeemUser.network.ApiInput
 import com.google.gson.Gson
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.chat.XMPPOperations
 import com.pyra.krpytapplication.model.CommonResponseModel
@@ -339,7 +339,7 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun burnSentMessage() {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
 //            chatMessageDao?.clearSentMessage()
             chatMessageDao?.updateAsDeleteSentMessage()
             var list = chatListDao?.getUsers()

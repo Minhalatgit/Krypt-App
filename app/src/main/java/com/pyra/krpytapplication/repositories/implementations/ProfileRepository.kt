@@ -2,10 +2,9 @@ package com.pyra.krpytapplication.repositories.implementations
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.app.hakeemUser.network.ApiInput
 import com.google.gson.Gson
-import com.pyra.krpytapplication.Utils.Coroutien
+import com.pyra.krpytapplication.Utils.Coroutine
 import com.pyra.krpytapplication.model.CommonResponseModel
 import com.pyra.krpytapplication.model.GetProfileResponseModel
 import com.pyra.krpytapplication.model.GetUserDetailsResponse
@@ -19,11 +18,6 @@ import com.pyra.krpytapplication.roomDb.entity.BlockListSchema
 import com.pyra.krpytapplication.roomDb.entity.ChatListSchema
 import com.pyra.krpytapplication.roomDb.entity.GroupParticipationSchema
 import com.pyra.network.Api
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
 
@@ -178,14 +172,14 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
     fun unblockUser(kryptId: String?) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             blockListDao?.removeUser(kryptId.toString().toUpperCase())
         }
     }
 
     fun blockUser(kryptId: String?, roomImage: String) {
 
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             var blockListSchema = BlockListSchema()
             blockListSchema.kryptId = kryptId.toString().toUpperCase()
             blockListSchema.roomName = kryptId.toString().toUpperCase()
@@ -254,7 +248,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun removeFromGroup(roomId: String) {
-        Coroutien.iOWorker {
+        Coroutine.iOWorker {
             chatListDao?.deleteGroup(roomId)
             groupParticipationDao?.quitGroup(roomId)
 //            chatMessagesDao?.clearMessage(roomId)

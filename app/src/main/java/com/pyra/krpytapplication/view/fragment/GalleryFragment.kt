@@ -72,7 +72,6 @@ class GalleryFragment internal constructor() : Fragment() {
         // Mark this as a retain fragment, so the lifecycle does not get restarted on config change
         retainInstance = true
 
-
         // Get root directory of media from navigation arguments
         val rootDirectory = File(args.rootDirectory)
         mediaList.add(rootDirectory)
@@ -156,7 +155,6 @@ class GalleryFragment internal constructor() : Fragment() {
 
         // Handle share button press
         view.findViewById<ImageButton>(R.id.share_button).setOnClickListener {
-
 
             mediaList.getOrNull(mediaViewPager.currentItem)?.let { mediaFile ->
 

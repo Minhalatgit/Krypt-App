@@ -5,14 +5,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.net.Uri
 import android.os.*
-import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.*
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.app.AppRunningService
@@ -22,7 +18,6 @@ import isAppIsInBackground
 import isMyServiceRunning
 import isWifiTurnOn
 import java.util.*
-
 
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {

@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="?page_default_bg">
 
-
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="@dimen/_19sdp"
@@ -17,7 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?toolbar_icon_color" />
-
 
     <TextView
         android:id="@+id/doctitle"
@@ -50,6 +48,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/doctitle" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

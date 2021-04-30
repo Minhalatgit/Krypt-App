@@ -45,10 +45,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
-//        debug {
-//            gable true
-//        }
-
     }
 
     kotlinOptions { jvmTarget = "1.8" }
@@ -211,7 +207,5 @@ dependencies {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
-
-
 
 }

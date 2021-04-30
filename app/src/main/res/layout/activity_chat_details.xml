@@ -33,7 +33,6 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -49,14 +48,12 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
-
                     <ImageView
                         android:id="@+id/profileImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:onClick="onImageCliked"
                         android:scaleType="centerCrop" />
-
 
                     <TextView
                         android:id="@+id/titleTxt"
@@ -81,7 +78,6 @@
                         app:layout_constraintStart_toEndOf="@+id/titleTxt"
                         app:layout_constraintTop_toTopOf="@+id/titleTxt" />
 
-
                     <ImageView
                         android:id="@+id/videoCall"
                         android:layout_width="@dimen/_20sdp"
@@ -94,7 +90,6 @@
                         app:layout_constraintEnd_toEndOf="@+id/bottomHeader"
                         app:layout_constraintTop_toTopOf="@+id/bottomHeader"
                         app:tint="@color/white" />
-
 
                     <ImageView
                         android:id="@+id/audioCall"
@@ -124,7 +119,6 @@
                         app:layout_constraintBottom_toTopOf="@+id/status"
                         app:layout_constraintStart_toStartOf="parent" />
 
-
                     <TextView
                         android:id="@+id/kryptId"
                         android:layout_width="wrap_content"
@@ -153,7 +147,6 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -205,9 +198,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                 </androidx.appcompat.widget.Toolbar>
-
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -217,7 +208,6 @@
             android:id="@+id/contentLayout"
             layout="@layout/chat_details_content_layout"
             bind:profileViewModel="@{profileViewModel}" />
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

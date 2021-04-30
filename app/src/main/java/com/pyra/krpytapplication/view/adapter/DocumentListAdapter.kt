@@ -1,5 +1,6 @@
 package com.pyra.krpytapplication.view.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.*
 import com.pyra.krpytapplication.databinding.ItemDocumentsBinding
+import com.pyra.krpytapplication.view.activity.DocumentActivity
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
 import com.pyra.krpytapplication.view.activity.ShowDocumentActivity
 import com.pyra.krpytapplication.viewmodel.VaultFragViewModel
@@ -49,12 +51,8 @@ class DocumentListAdapter(
         holder as MyViewHolder
         holder.binding.fileName.text = viewModel?.getDocFileName(position)
         holder.binding.fileDate.text = viewModel?.getDate(position)
-        holder.binding.fileType.text = viewModel?.getDocFileType(position)
+        //holder.binding.fileType.text = viewModel?.getDocFileType(position)
         holder.binding.fileSize.text = viewModel?.getDocFileSize(position)
-
-        holder.itemView.setOnClickListener {
-
-        }
 
         holder.binding.fileIcon.setImageDrawable(
             ContextCompat.getDrawable(
@@ -78,9 +76,15 @@ class DocumentListAdapter(
                 if (it) {
                     viewModel.selectMultiDocument(position)
                 } else {
-                    context.startActivity(
-                        Intent(context, ShowDocumentActivity::class.java)
-                            .putExtra("filePath", viewModel.getFilePath(position))
+//                    context.startActivity(
+//                        Intent(context, ShowDocumentActivity::class.java)
+//                            .putExtra("filePath", viewModel.getFilePath(position))
+//                    )
+                    (context as Activity).startActivityForResult(
+                        Intent(context, DocumentActivity::class.java)
+                            .putExtra("isNewDoc", false)
+                            .putExtra("path", viewModel.getFilePath(position)),
+                        Constants.RequestCode.DOC_INTENT
                     )
 //                    openDocument(viewModel?.getFilePath(position), position)
                 }

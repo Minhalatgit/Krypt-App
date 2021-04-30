@@ -649,7 +649,7 @@ fun Context.getNewFile(): File {
 
 fun Context.getTxtFile(fileName: String): File? {
 
-    val newFile = File(getExternalFilesDir(null)!!.absolutePath, "/$fileName.txt")
+    val newFile = File(getExternalFilesDir(null)!!.absolutePath, "/$fileName")
 
     if (!newFile.exists()) {
         newFile.createNewFile()
@@ -658,14 +658,13 @@ fun Context.getTxtFile(fileName: String): File? {
     }
 
     return newFile
-
 }
 
 fun getViewIntent(uri: Uri): Intent {
     //Uri uri = Uri.parse(uripath);
 
-    var intent = Intent(Intent.ACTION_VIEW)
-    var url = uri.toString();
+    val intent = Intent(Intent.ACTION_VIEW)
+    val url = uri.toString();
     if (url.contains(".doc") || url.contains(".docx")) {
         // Word document
         intent.setDataAndType(uri, "application/msword");
