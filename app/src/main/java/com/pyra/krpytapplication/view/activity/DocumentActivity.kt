@@ -31,6 +31,7 @@ class DocumentActivity : BaseActivity() {
 
     var isNewDoc = true
     var path = ""
+    var previousFileName = ""
     private val galleryViewModel by viewModels<GalleryViewModel>()
     private val chatMessageViewModel by viewModels<ChatMessagesViewModel>()
 
@@ -95,17 +96,17 @@ class DocumentActivity : BaseActivity() {
         }
         content.setText(text)
         doctitle.setText(file.name)
+        previousFileName = file.name
     }
 
     private fun saveFile() {
 
         if (doctitle.text.toString() != "")
-            saveNewFile()
-//        if (isNewDoc) {
-//                saveNewFile()
-//            } else {
-//                updateFile()
-//            }
+            if (isNewDoc) {
+                saveNewFile()
+            } else {
+                updateFile()
+            }
     }
 
     private fun saveNewFile() {
@@ -124,11 +125,52 @@ class DocumentActivity : BaseActivity() {
 
         Coroutine.iOWorker {
             val writer = FileWriter(file, true)
+
             writer.append(contentTxt)
             writer.flush()
             writer.close()
 
             galleryViewModel.uploadDocument(file)
+        }
+    }
+
+    private fun updateFile() {
+        val contentTxt = content.text.trim()
+        val file: File? = getTxtFile(doctitle.text.toString())
+
+        blockView.visibility = View.VISIBLE
+        progress.visibility = View.VISIBLE
+
+        if (file == null) {
+            //file already exists just update the content
+            val newFile = File(getExternalFilesDir(null)!!.absolutePath, "/${doctitle.text}")
+            path = newFile.absolutePath
+            Coroutine.iOWorker {
+                val writer = FileWriter(newFile, false)
+
+                writer.append(contentTxt)
+                writer.flush()
+                writer.close()
+
+                galleryViewModel.uploadDocument(newFile)
+            }
+        } else {
+            //file does not exists creating new file and deleting previous one
+            val previousFile =
+                File(getExternalFilesDir(null)!!.absolutePath, "/${previousFileName}")
+            previousFile.delete()
+
+            path = file.absolutePath
+
+            Coroutine.iOWorker {
+                val writer = FileWriter(file, true)
+
+                writer.append(contentTxt)
+                writer.flush()
+                writer.close()
+
+                galleryViewModel.uploadDocument(file)
+            }
         }
     }
 

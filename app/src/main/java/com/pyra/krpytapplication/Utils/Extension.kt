@@ -178,7 +178,6 @@ fun File.getDocumentType(): String {
     val extension = MimeTypeMap.getFileExtensionFromUrl(this.absolutePath)
     var extention = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
 
-
     extention?.let {
         return it
     }

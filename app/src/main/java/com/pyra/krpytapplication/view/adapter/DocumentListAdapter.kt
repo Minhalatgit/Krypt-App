@@ -3,31 +3,33 @@ package com.pyra.krpytapplication.view.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.*
 import com.pyra.krpytapplication.databinding.ItemDocumentsBinding
 import com.pyra.krpytapplication.view.activity.DocumentActivity
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
+import com.pyra.krpytapplication.view.activity.MainActivity
 import com.pyra.krpytapplication.view.activity.ShowDocumentActivity
 import com.pyra.krpytapplication.viewmodel.VaultFragViewModel
 import getDocumentIcon
 import getViewIntent
 import java.io.File
 
-
 class DocumentListAdapter(
-    private val context: Context,
+    private val fragment: Fragment,
+    private val context: Activity,
     val viewModel: VaultFragViewModel?
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -38,13 +40,11 @@ class DocumentListAdapter(
             false
         )
         return MyViewHolder(binding as ItemDocumentsBinding)
-
     }
 
     override fun getItemCount(): Int {
         return viewModel?.getDocumentListSize() ?: 0
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -76,11 +76,7 @@ class DocumentListAdapter(
                 if (it) {
                     viewModel.selectMultiDocument(position)
                 } else {
-//                    context.startActivity(
-//                        Intent(context, ShowDocumentActivity::class.java)
-//                            .putExtra("filePath", viewModel.getFilePath(position))
-//                    )
-                    (context as Activity).startActivityForResult(
+                    fragment.startActivityForResult(
                         Intent(context, DocumentActivity::class.java)
                             .putExtra("isNewDoc", false)
                             .putExtra("path", viewModel.getFilePath(position)),
@@ -100,7 +96,6 @@ class DocumentListAdapter(
     inner class MyViewHolder(itemView: ItemDocumentsBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         var binding: ItemDocumentsBinding = itemView
-
     }
 
     fun openDocument(file: File?, position: Int) {

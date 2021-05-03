@@ -57,8 +57,6 @@ class VaultFragViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-
-
     private fun checkFileExist(list: ArrayList<ChatMessagesSchema>): ArrayList<ChatMessagesSchema> {
 
         var i = 0

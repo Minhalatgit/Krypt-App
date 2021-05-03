@@ -633,7 +633,6 @@ fun getNewFileName(fileType: Int, docName: String): String {
     }
 }
 
-
 fun Context.getNewFile(): File {
 
     val newFileName = getNewFileName(MediaType.IMAGE.value, "")
@@ -644,7 +643,6 @@ fun Context.getNewFile(): File {
     }
 
     return newFile
-
 }
 
 fun Context.getTxtFile(fileName: String): File? {

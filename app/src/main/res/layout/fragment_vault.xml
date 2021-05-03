@@ -150,7 +150,6 @@
                     android:layout_height="0dp"
                     app:constraint_referenced_ids="imageText,videoText,docText" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

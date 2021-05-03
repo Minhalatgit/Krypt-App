@@ -361,7 +361,7 @@ class VaultFragment : Fragment() {
     private fun setDocumentAdapter() {
 
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        documentListAdapter = DocumentListAdapter(requireActivity(), viewModel)
+        documentListAdapter = DocumentListAdapter(this, requireActivity(), viewModel)
         fragmentVaultBinding.imageRecyclerView.layoutManager = linearLayoutManager
         fragmentVaultBinding.imageRecyclerView.adapter = documentListAdapter
 
@@ -376,7 +376,6 @@ class VaultFragment : Fragment() {
     }
 
 }
-
 
 private fun TextView.activeText() {
     this.setTextColor(fetchThemeColor(R.attr.active_text_color, this.context))
