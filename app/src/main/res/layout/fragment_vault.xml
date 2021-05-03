@@ -69,7 +69,6 @@
                     app:layout_constraintEnd_toEndOf="@id/galleryText"
                     app:layout_constraintStart_toStartOf="@id/galleryText" />
 
-
                 <View
                     android:id="@+id/savedSelectedView"
                     android:layout_width="@dimen/_20sdp"
@@ -79,7 +78,6 @@
                     app:layout_constraintBottom_toBottomOf="@id/toolBar"
                     app:layout_constraintEnd_toEndOf="@id/savedText"
                     app:layout_constraintStart_toStartOf="@id/savedText" />
-
 
                 <TextView
                     android:id="@+id/savedText"
@@ -94,7 +92,6 @@
                     app:layout_constraintBottom_toBottomOf="@id/toolBar"
                     app:layout_constraintEnd_toEndOf="@id/toolBar"
                     app:layout_constraintStart_toStartOf="@id/divider" />
-
 
                 <TextView
                     android:id="@+id/imageText"
@@ -292,7 +289,6 @@
                             app:layout_constraintStart_toEndOf="@+id/backPressedsaved"
                             app:layout_constraintTop_toTopOf="@+id/backPressedsaved" />
 
-
                         <ImageView
                             android:id="@+id/unsave"
                             android:layout_width="30dp"
@@ -305,7 +301,6 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 </androidx.cardview.widget.CardView>
 
@@ -340,7 +335,6 @@
             app:spanCount="3"
             tools:itemCount="12"
             tools:listitem="@layout/item_vault" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,14 +2,10 @@ package com.pyra.krpytapplication.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.View
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
 import com.pyra.krpytapplication.Utils.SharedHelper
@@ -20,7 +16,6 @@ import isValidPassword
 import kotlinx.android.synthetic.main.activity_create_password.*
 import kotlinx.android.synthetic.main.activity_create_password.hideShowPassword
 import kotlinx.android.synthetic.main.activity_create_password.password
-import kotlinx.android.synthetic.main.dialog_password.*
 import showHidePass
 import showToast
 
@@ -33,7 +28,12 @@ class CreatePasswordActivity : BaseActivity() {
 
         if (SharedHelper(this).theme == "light") {
             hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
-            hideShowConfirmPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
+            hideShowConfirmPassword.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.dark_page_bg
+                )
+            )
         } else {
             hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
             hideShowConfirmPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
@@ -65,8 +65,8 @@ class CreatePasswordActivity : BaseActivity() {
                 else -> {
                     val imei = getImei(this)
                     val password = password.text.toString()
-                    var kryptCode = generateKryptCode()
-                    println("IMEI" + imei)
+                    val kryptCode = generateKryptCode()
+                    println("IMEI $imei")
                     //            XMPPOperations().registerNewUser(kryptCode,password,imei)
                     registerUser(imei, password, kryptCode)
                     //            openActivity(MainActivity::class.java)

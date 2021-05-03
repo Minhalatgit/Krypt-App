@@ -22,13 +22,11 @@ import com.pyra.krpytapplication.view.activity.ChatActivity
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import fetchThemeColor
 
-
 class ChatListAdapter(
     private val context: Context,
     var viewmodel: ChatListViewModel
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -44,7 +42,6 @@ class ChatListAdapter(
     override fun getItemCount(): Int {
         return viewmodel.getNumberOfChatList()
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder
@@ -112,12 +109,9 @@ class ChatListAdapter(
 
     }
 
-
     inner class MyViewHolder(itemView: ItemChatsBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         var binding: ItemChatsBinding = itemView
-
-
     }
 
 }

@@ -706,7 +706,6 @@ class ChatMessageAdapter(
                             senderAudio.binding.pause
                         )
 
-
                     }
                 } else {
                     if (viewmodel.isUploadCancelledByUser(position)) {
@@ -777,9 +776,7 @@ class ChatMessageAdapter(
                 } else {
                     senderVideo.binding.headerText.hide()
 
-
                     if (viewmodel.getIsReply(position)) {
-
 
                         senderVideo.binding.layoutReply.show()
 
@@ -1025,7 +1022,6 @@ class ChatMessageAdapter(
                     (receiverText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
 
-
                 } else {
                     receiverText.binding.headerText.hide()
                     if (viewmodel.getIsGroupChat()) {
@@ -1044,7 +1040,6 @@ class ChatMessageAdapter(
                     }
 
                     if (viewmodel.getIsReply(position)) {
-
 
                         receiverText.binding.layoutReply.show()
 
@@ -1118,7 +1113,6 @@ class ChatMessageAdapter(
                         receiverImage.binding.messageUserName.hide()
                     }
 
-
                     if (viewmodel.getIsReply(position)) {
 
 
@@ -1152,7 +1146,6 @@ class ChatMessageAdapter(
                     } else {
                         receiverImage.binding.layoutReply.hide()
                     }
-
 
                 }
 
@@ -1190,7 +1183,6 @@ class ChatMessageAdapter(
                     }
 
                 }
-
 
                 receiverImage.binding.downloadLayout.downloadLayout.setOnClickListener {
                     viewmodel.downloadMedia(position)
@@ -1245,7 +1237,6 @@ class ChatMessageAdapter(
                         receiverAudio.binding.messageUserName.hide()
                     }
 
-
                     if (viewmodel.getIsReply(position)) {
 
 
@@ -1280,7 +1271,6 @@ class ChatMessageAdapter(
                         receiverAudio.binding.layoutReply.hide()
                     }
 
-
                 }
                 receiverAudio.binding.messageTime.text = viewmodel.getChatMessageTime(position)
 
@@ -1291,8 +1281,6 @@ class ChatMessageAdapter(
                 }
 
                 receiverAudio.binding.messageContent.text = viewmodel.getDocumentName(position)
-
-
 
                 if (viewmodel.isMediaDownload(position)) {
 
@@ -1380,9 +1368,7 @@ class ChatMessageAdapter(
                         receiverVideo.binding.messageUserName.hide()
                     }
 
-
                     if (viewmodel.getIsReply(position)) {
-
 
                         receiverVideo.binding.layoutReply.show()
 
@@ -1427,7 +1413,6 @@ class ChatMessageAdapter(
                     receiverVideo.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
-
                 if (viewmodel.isMediaDownload(position)) {
                     setVideoDownloded(
                         receiverVideo.binding.downloadingLayout.uploadLayout,
@@ -1455,7 +1440,6 @@ class ChatMessageAdapter(
                     viewmodel.getReciverVideo(position),
                     viewmodel.getThumbNail(position)
                 )
-
 
                 receiverVideo.binding.downloadLayout.downloadLayout.setOnClickListener {
                     viewmodel.downloadMedia(position)
@@ -1510,7 +1494,6 @@ class ChatMessageAdapter(
                         receiverDocument.binding.messageUserName.hide()
                     }
 
-
                     if (viewmodel.getIsReply(position)) {
 
 
@@ -1544,7 +1527,6 @@ class ChatMessageAdapter(
                     } else {
                         receiverDocument.binding.layoutReply.hide()
                     }
-
 
                 }
                 receiverDocument.binding.messageTime.text =
@@ -1720,7 +1702,6 @@ class ChatMessageAdapter(
 
     }
 
-
     private fun setDocumentUploaded(
         uploadLayout: View,
         uploadingLayout: View
@@ -1818,25 +1799,20 @@ class ChatMessageAdapter(
         downloadLayout.hide()
     }
 
-
     fun setUploading(upLoadingLayout: View, upLoadLayout: View) {
         upLoadingLayout.show()
         upLoadLayout.hide()
-
     }
-
 
     fun setUploadPending(upLoadingLayout: View, upLoadLayout: View) {
         upLoadingLayout.hide()
         upLoadLayout.show()
     }
 
-
     fun setUploaded(upLoadingLayout: View, upLoadLayout: View) {
         upLoadingLayout.hide()
         upLoadLayout.hide()
     }
-
 
     fun setDownloading(
         downLoadingLayout: View,
@@ -1844,8 +1820,6 @@ class ChatMessageAdapter(
     ) {
         downLoadingLayout.show()
         downLoadLayout.hide()
-
-
     }
 
     fun setDownloaded(
@@ -1859,7 +1833,6 @@ class ChatMessageAdapter(
         }
     }
 
-
     fun setDownloadPending(downLoadingLayout: View, downLoadLayout: View) {
         downLoadingLayout.hide()
         downLoadLayout.show()
@@ -1870,14 +1843,12 @@ class ChatMessageAdapter(
         notifyDataSetChanged()
     }
 
-
     inner class viewHolderSenderText(itemView: ItemSenderTextBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         var binding: ItemSenderTextBinding
 
         init {
             binding = itemView
-
         }
 
     }
@@ -1890,7 +1861,6 @@ class ChatMessageAdapter(
             binding = itemView
         }
     }
-
 
     inner class viewHolderSenderVideo(itemView: ItemSenderVideoBinding) :
         RecyclerView.ViewHolder(itemView.root) {
@@ -1937,7 +1907,6 @@ class ChatMessageAdapter(
         }
     }
 
-
     inner class viewHolderReceiverText(itemView: ItemReceiverTextBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         var binding: ItemReceiverTextBinding
@@ -1956,7 +1925,6 @@ class ChatMessageAdapter(
             binding = itemView
         }
     }
-
 
     inner class viewHolderReceiverVideo(itemView: ItemReceiverVideoBinding) :
         RecyclerView.ViewHolder(itemView.root) {
@@ -1984,7 +1952,6 @@ class ChatMessageAdapter(
             binding = itemView
         }
     }
-
 
     class MissedCallViewHolder(itemView: ItemReceiverMissedcallBinding) :
         RecyclerView.ViewHolder(itemView.root) {

@@ -40,13 +40,10 @@ import java.util.concurrent.TimeUnit
 
 class MyApp : Application() {
 
-
-
     override fun onCreate() {
         super.onCreate()
 
         EmojiManager.install(IosEmojiProvider())
-
 
         val myPeriodicWorkRequest =
             PeriodicWorkRequestBuilder<ChatWorker>(15, TimeUnit.MINUTES).build()
@@ -81,7 +78,6 @@ class MyApp : Application() {
             createNotificationChannel()
         }
     }
-
 
     private fun createRtcEngine() {
         val context = applicationContext

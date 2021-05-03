@@ -159,7 +159,6 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         onClickButtonListener = (activity as OnClickButtonListener?)
-
     }
 
     private fun initAdapter() {

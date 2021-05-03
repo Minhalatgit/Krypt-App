@@ -177,7 +177,7 @@ fun deleteAllChat(
 
 fun showLoader(context: Context): Dialog {
 
-    var loaderDialog = Dialog(context)
+    val loaderDialog = Dialog(context)
     loaderDialog.setCancelable(false)
     loaderDialog.setCanceledOnTouchOutside(false)
     loaderDialog.window?.setLayout(

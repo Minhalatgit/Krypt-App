@@ -37,7 +37,6 @@ import kotlin.math.roundToInt
  */
 class AudioRecordView {
 
-
     enum class UserBehaviour {
         CANCELING, LOCKING, NONE
     }
@@ -45,7 +44,6 @@ class AudioRecordView {
     enum class RecordingBehaviour {
         CANCELED, LOCKED, LOCK_DONE, RELEASED
     }
-
 
     private val TAG = "AudioRecordView"
     private var viewContainer: LinearLayout? = null
@@ -186,7 +184,6 @@ class AudioRecordView {
         messageView?.setOnClickListener {
            if (layoutAttachment?.visibility == View.VISIBLE){
                hideAttachmentOption()
-
            }
         }
        // setupAttachmentOptions()

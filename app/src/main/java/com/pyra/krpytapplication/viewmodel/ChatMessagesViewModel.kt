@@ -885,7 +885,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         uploadAudioToAws(file)
     }
 
-
     private fun uploadAudioToAws(file: File) {
 
         amazonRepository.uploadToAWS(app.baseContext, file).observeForever {

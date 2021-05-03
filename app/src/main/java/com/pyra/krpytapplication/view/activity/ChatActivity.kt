@@ -72,7 +72,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class ChatActivity : BaseActivity(), RecordingListener {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -103,27 +102,21 @@ class ChatActivity : BaseActivity(), RecordingListener {
     private val audioRecordView by lazy {
         AudioRecordView()
     }
-
     private val containerView by lazy {
         audioRecordView.setContainerView(R.layout.activity_chat)
     }
-
     private val selectedLayout by lazy {
         containerView?.findViewById<Group>(R.id.selectedLayout)
     }
-
     private val unSelectedLayout by lazy {
         containerView?.findViewById<Group>(R.id.unSelectedLayout)
     }
-
     private val backButton by lazy {
         containerView?.findViewById<ImageView>(R.id.backButton)
     }
-
     private val closeButton by lazy {
         containerView?.findViewById<ImageView>(R.id.closeButton)
     }
-
     private val userImage by lazy {
         containerView?.findViewById<CircleImageView>(R.id.userImage)
     }
@@ -136,46 +129,36 @@ class ChatActivity : BaseActivity(), RecordingListener {
     private val menuIcon by lazy {
         containerView?.findViewById<ImageView>(R.id.menuIcon)
     }
-
     private val deleteIcon by lazy {
         containerView?.findViewById<ImageView>(R.id.deleteIcon)
     }
-
     private val bookmarkIcon by lazy {
         containerView?.findViewById<ImageView>(R.id.bookmarkIcon)
     }
     private val forward by lazy {
         containerView?.findViewById<ImageView>(R.id.forward)
     }
-
     private val editIcon by lazy {
         containerView?.findViewById<ImageView>(R.id.editIcon)
     }
-
     private val audioCallIcon by lazy {
         containerView?.findViewById<ImageView>(R.id.audioCallIcon)
     }
-
     private val groupCall by lazy {
         containerView?.findViewById<ImageView>(R.id.groupCall)
     }
-
     private val videoCallIcon by lazy {
         containerView?.findViewById<ImageView>(R.id.videoCallIcon)
     }
-
     private val addContactLayout by lazy {
         containerView?.findViewById<ConstraintLayout>(R.id.addContactLayout)
     }
-
     private val addContactImage by lazy {
         containerView?.findViewById<CircleImageView>(R.id.addContactImage)
     }
-
     private val addContactTitle by lazy {
         containerView?.findViewById<TextView>(R.id.addContactTitle)
     }
-
     private val bottomView by lazy {
         containerView?.findViewById<LinearLayout>(R.id.bottomView)
     }
@@ -209,7 +192,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
         intentFilter.addAction("PRESENCE")
         intentFilter.addAction("TYPING")
         LocalBroadcastManager.getInstance(this)
-            .registerReceiver(MyBroadcastReceiver, intentFilter);
+            .registerReceiver(MyBroadcastReceiver, intentFilter)
         audioRecordView.recordingListener = this
         setListener()
         initSockets()
@@ -217,7 +200,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         initService()
 
         getUserOnlineStatus()
-
     }
 
     private fun initService() {
@@ -1134,8 +1116,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
                     }
                 }
-
-
             }
             Constants.RequestCode.FILE_INTENT
             -> if (resultCode == Activity.RESULT_OK) {
@@ -1156,11 +1136,11 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
             if (data.getStringExtra("type") == MessageType.DOCUMENT.toString().toLowerCase()) {
 
-                var file = File(data?.getStringExtra("path"))
+                val file = File(data?.getStringExtra("path"))
                 uploadDocumentToAWS(file)
 
             } else {
-                var file = File(data?.getStringExtra("path"))
+                val file = File(data?.getStringExtra("path"))
 
                 uploadFileToAws(file)
             }
@@ -1174,7 +1154,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
             val uri = data.data
             if (uri != null) {
 
-                var file = File(getPath(this, uri))
+                val file = File(getPath(this, uri))
 
                 uploadDocumentToAWS(file)
 
@@ -1194,7 +1174,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
             val uri = data.data
             if (uri != null) {
 
-                var file = File(getPath(this, uri))
+                val file = File(getPath(this, uri))
 
                 uploadAudioToAWS(copyFile(this, file))
 
