@@ -19,7 +19,6 @@ import java.io.File
 
 open class BaseFragment(layout: Int) : Fragment(layout) {
 
-
     fun openGallery() {
         Intent(requireContext(), GalleryImageActivity::class.java).apply {
             startActivityForResult(this, Constants.RequestCode.GALLERY_INTENT)

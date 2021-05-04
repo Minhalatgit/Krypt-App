@@ -60,13 +60,11 @@
                     </androidx.cardview.widget.CardView>
                 </FrameLayout>
 
-
                 <LinearLayout
                     android:id="@+id/messageContainerLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/replyCard"
@@ -111,7 +109,6 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_chainStyle="packed" />
-
 
                             <TextView
                                 android:id="@+id/messageReply"
@@ -180,7 +177,6 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
-
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/tagUserListView"
@@ -271,9 +267,7 @@
 
                     </androidx.cardview.widget.CardView>
 
-
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -390,7 +384,6 @@
                     android:src="@drawable/dustbin_wheel_ic"
                     android:visibility="gone" />
             </LinearLayout>
-
 
             <TextView
                 android:id="@+id/textViewTime"
@@ -539,6 +532,5 @@
             android:src="@drawable/send_msg_ic" />
 
     </androidx.cardview.widget.CardView>
-
 
 </FrameLayout>

@@ -220,16 +220,13 @@ class ChatActivity : BaseActivity(), RecordingListener {
         voiceCall = createRoomDialog?.findViewById(R.id.voiceCall)
         videoCall = createRoomDialog?.findViewById(R.id.videoCall)
 
-
         val selectedAdapter = SelectedUsersAdapter(this, createRoomViewModel)
         selectedView?.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         selectedView?.adapter = selectedAdapter
 
-
         val participationAdapter = ParticipationListAdapter(this, createRoomViewModel)
         groupMembers?.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         groupMembers?.adapter = participationAdapter
-
 
         createRoomViewModel.notifyAdapter.observe(this, Observer {
             selectedAdapter.notifyChanges()
@@ -276,12 +273,11 @@ class ChatActivity : BaseActivity(), RecordingListener {
         }
 
         createRoomDialog?.show()
-
     }
 
     private fun createGroupCall(callType: String) {
 
-        var channelName = UUID.randomUUID().toString();
+        val channelName = UUID.randomUUID().toString();
 
         chatMessagesViewModel.createGroupCall(
             this,
@@ -335,7 +331,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
                     .putExtra("isGroup", chatMessagesViewModel.getIsGroupChat()),
                 Constants.RequestCode.GALLERY_INTENT
             )
-
 
         }
 

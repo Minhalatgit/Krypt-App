@@ -22,9 +22,6 @@ class NotificationUtils(var context: Context) {
     private var notificationManager: NotificationManager? = null
     private val DEFAULT_NOTIFICATION_ICON: Int = R.mipmap.ic_launcher
 
-
-
-
     fun notificationIncomingCallVoice(
         docName: String,
         body: String,
@@ -43,8 +40,6 @@ class NotificationUtils(var context: Context) {
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
-
-
 
         val notification =
             NotificationCompat.Builder(context, Constants.NotificationIds.INCOMING_CALL_CHANNEL_ID)
@@ -84,7 +79,6 @@ class NotificationUtils(var context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-
         notification.addAction(
             R.drawable.call_icon,
             Constants.NotificationActions.ACCEPT_CALL,
@@ -96,13 +90,11 @@ class NotificationUtils(var context: Context) {
             pendingActionReject
         )
 
-
         notificationManager?.notify(
             Constants.NotificationIds.CALL_NOTIFICATION_ID,
             notification.build()
         )
     }
-
 
     fun notificationIncomingCallVideo(
         docName: String,
@@ -233,7 +225,6 @@ class NotificationUtils(var context: Context) {
             notification.build()
         )
     }
-
 
     fun notificationHangupCall(docName: String, body: String) {
 

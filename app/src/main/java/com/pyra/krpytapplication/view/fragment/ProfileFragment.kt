@@ -70,7 +70,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     lateinit var burnMsgUnitAdapter: BurnMsgUnitAdapter
     var dialogTitle: TextView? = null
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         amazonViewModel = ViewModelProvider(this).get(AmazonViewModel::class.java)
@@ -140,22 +139,22 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 //            hideBurnView()
 //        }
 
-        changeThemeView.setOnClickListener {
+//        changeThemeView.setOnClickListener {
 //            getChangeThemeDialog(requireContext()) {
 //                requireContext().openNewTaskActivity(MainActivity::class.java)
 //            }
-        }
+//        }
 
         enableVaultPassword.setOnCheckedChangeListener { p0, p1 ->
             sharedHelper.vaultPasswordEnabled = p1
         }
 
         burnDisableSwitch.setOnCheckedChangeListener { p0, p1 ->
-//            if (p1) {
-//                showBurnView()
-//            } else {
-//                hideBurnView()
-//            }
+            if (p1) {
+                showBurnView()
+            } else {
+                hideBurnView()
+            }
             sharedHelper.isBurnMessageEnabled = p1
             chatListViewModel.updateLoginTime()
         }
@@ -191,21 +190,21 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             showEditNameDialog()
         }
 
-        changePasswordView.setOnClickListener {
+        changePassLayout.setOnClickListener {
             val intent = Intent(requireContext(), ChangePasswordActivity::class.java)
             startActivity(intent)
         }
 
-        changeChatThemeView.setOnClickListener {
+        changeThemeLayout.setOnClickListener {
             val intent = Intent(requireContext(), ChangeChatThemeActivity::class.java)
             startActivity(intent)
         }
 
-        burnMessageView.setOnClickListener {
+        burnMessageLayout.setOnClickListener {
             showBurnMessageDialog()
         }
 
-        blockedView.setOnClickListener {
+        blockContactLayout.setOnClickListener {
             context?.openActivity(BlockedListActivity::class.java)
         }
 
@@ -217,14 +216,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             Toast.makeText(requireContext(), "Code Copied", Toast.LENGTH_SHORT).show()
         }
 
-        deleteView.setOnClickListener {
+        deleteChatLayout.setOnClickListener {
 
             deleteAllChat(requireContext()) {
                 profileViewModel.deleteAllChatMessages()
             }
         }
 
-        lockView.setOnClickListener {
+        autoLogoutLayout.setOnClickListener {
             val dialog = getMessageBurnDialog(requireContext())
             done = dialog.findViewById(R.id.done)
             dialogTitle = dialog.findViewById(R.id.dialog_title)
@@ -681,7 +680,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         doneIcon.setOnClickListener {
             dialog.dismiss()
         }
-
     }
 
     private fun showEditImageDialog() {
@@ -898,17 +896,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     }
 
     private fun showBurnView() {
-        burnMessageImage.visibility = View.VISIBLE
-        textView4.visibility = View.VISIBLE
-        view5.visibility = View.VISIBLE
-        messageBurnTime.visibility = View.VISIBLE
+        burnMessageLayout.visibility = View.VISIBLE
     }
 
     private fun hideBurnView() {
-        burnMessageImage.visibility = View.GONE
-        textView4.visibility = View.GONE
-        view5.visibility = View.GONE
-        messageBurnTime.visibility = View.GONE
+        burnMessageLayout.visibility = View.GONE
     }
 }
 

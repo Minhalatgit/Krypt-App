@@ -197,12 +197,11 @@
 
                 <ImageView
                     android:id="@+id/group_icon"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:padding="@dimen/_3sdp"
-                    android:src="@drawable/call_user_icon"
+                    android:src="@drawable/group_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/bg_one" />
