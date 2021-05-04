@@ -336,52 +336,6 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/burnMessageLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <ImageView
-                        android:id="@+id/burnMessageImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:padding="@dimen/_2sdp"
-                        android:src="@drawable/burn_message"
-                        app:tint="?text_color_hint" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_toRightOf="@id/burnMessageImage"
-                        android:fontFamily="?regularFont"
-                        android:text="@string/burn_message"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <TextView
-                        android:id="@+id/messageBurnTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:fontFamily="?mediumFont"
-                        android:text="@string/_1_month"
-                        android:textColor="?colorPrimary"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <View
-                        android:id="@+id/view5"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_below="@id/textView4"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:alpha="0.2"
-                        android:background="?text_color_hint" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
                     android:id="@+id/blockContactLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -617,6 +571,52 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
                         android:layout_below="@id/textView17"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:alpha="0.2"
+                        android:background="?text_color_hint" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/burnMessageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp">
+
+                    <ImageView
+                        android:id="@+id/burnMessageImage"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/burn_message"
+                        app:tint="?text_color_hint" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/burnMessageImage"
+                        android:fontFamily="?regularFont"
+                        android:text="@string/burn_message"
+                        android:textColor="?primary_text_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <TextView
+                        android:id="@+id/messageBurnTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="?mediumFont"
+                        android:text="@string/_1_month"
+                        android:textColor="?colorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <View
+                        android:id="@+id/view5"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@id/textView4"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:alpha="0.2"
                         android:background="?text_color_hint" />
