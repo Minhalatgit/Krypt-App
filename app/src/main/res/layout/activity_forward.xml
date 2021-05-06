@@ -14,7 +14,6 @@
         android:animateLayoutChanges="true"
         android:background="?page_default_bg">
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/toolBar"
             android:layout_width="match_parent"

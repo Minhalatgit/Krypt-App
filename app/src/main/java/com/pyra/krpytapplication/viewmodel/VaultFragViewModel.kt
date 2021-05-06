@@ -136,7 +136,7 @@ class VaultFragViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun getDocFileSize(position: Int): String? {
 
-        var file = File(chatMessageDocument[position].localMediaPath)
+        val file = File(chatMessageDocument[position].localMediaPath)
         val df = DecimalFormat("#.##")
         df.roundingMode = RoundingMode.CEILING
         return df.format(file.length() / 1024000f).toString() + " mb"

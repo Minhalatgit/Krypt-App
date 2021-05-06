@@ -27,9 +27,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
-
 class EditImageActivity : BaseActivity() {
-
 
     private lateinit var binding: ActivityEditImageBinding
     private var originalPath: String? = null
@@ -134,7 +132,6 @@ class EditImageActivity : BaseActivity() {
             }
         }
 
-
     }
 
     private fun storeData(absolutePath: String?, url: String, thumbUrl: String?) {
@@ -164,14 +161,12 @@ class EditImageActivity : BaseActivity() {
             }
         }
 
-
     }
 
-
     fun getBitmapFromView(view: View, defaultColor: Int): Bitmap? {
-        var bitmap =
+        val bitmap =
             Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        var canvas = Canvas(bitmap)
+        val canvas = Canvas(bitmap)
         canvas.drawColor(defaultColor)
         view.draw(canvas)
         return bitmap
@@ -194,14 +189,13 @@ class EditImageActivity : BaseActivity() {
 
             val bmpFactoryOptions = BitmapFactory.Options()
 
-
             bmpFactoryOptions.inJustDecodeBounds = false
-            var bmp = BitmapFactory
+            val bmp = BitmapFactory
                 .decodeStream(
                     File(it).inputStream(), null, bmpFactoryOptions
                 )
 
-            var alteredBitmap = Bitmap.createBitmap(
+            val alteredBitmap = Bitmap.createBitmap(
                 bmp!!.width,
                 bmp.height, bmp.config
             )
@@ -209,13 +203,11 @@ class EditImageActivity : BaseActivity() {
             val bmRotated: Bitmap? = rotateBitmap(alteredBitmap!!, orientation)
 
             binding.drawerView.setNewImage(bmRotated!!, bmp)
-
         }
 
     }
 
-
-    fun rotateBitmap(bitmap: Bitmap, orientation: Int): Bitmap? {
+    private fun rotateBitmap(bitmap: Bitmap, orientation: Int): Bitmap? {
         val matrix = Matrix()
         when (orientation) {
             ExifInterface.ORIENTATION_NORMAL -> return bitmap
@@ -272,7 +264,6 @@ class EditImageActivity : BaseActivity() {
         originalPath = intent.getStringExtra("imageUrl")
 
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

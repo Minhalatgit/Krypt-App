@@ -17,7 +17,6 @@ import com.pyra.krpytapplication.view.activity.EditImageActivity
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
 import com.pyra.krpytapplication.viewmodel.VaultFragViewModel
 
-
 class ImageViewAdapter(
     private val context: Context,
     private val isVideoValue: Boolean,
@@ -35,13 +34,11 @@ class ImageViewAdapter(
             false
         )
         return MyViewHolder(binding as ItemVaultBinding)
-
     }
 
     override fun getItemCount(): Int {
         return viewModel?.getImageCount(isVideoValue) ?: 0
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder
@@ -52,7 +49,6 @@ class ImageViewAdapter(
         }
 
         holder.itemView.setOnClickListener {
-
 
             val intent = Intent(context, ImageAndVideoViewer::class.java)
             intent.putExtra(
@@ -80,7 +76,6 @@ class ImageViewAdapter(
                 }
             }
 
-
         }
 
         viewModel?.getIsSelected(position, isVideo)?.let {
@@ -100,7 +95,6 @@ class ImageViewAdapter(
             }
         }
 
-
         holder.binding.editImage.setOnClickListener {
 
             context.startActivity(
@@ -108,7 +102,6 @@ class ImageViewAdapter(
                     .putExtra("imageUrl", viewModel?.getLocalPath(position, false))
             )
         }
-
 
         holder.itemView.setOnLongClickListener {
             if (isVideo)
@@ -120,13 +113,11 @@ class ImageViewAdapter(
 
 
         holder.binding.thumpImage.loadImage(viewModel?.getThumpImage(position, isVideoValue))
-
     }
 
     inner class MyViewHolder(itemView: ItemVaultBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         var binding: ItemVaultBinding = itemView
-
     }
 }
 

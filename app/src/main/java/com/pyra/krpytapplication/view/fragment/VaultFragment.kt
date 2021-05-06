@@ -78,7 +78,6 @@ class VaultFragment : Fragment() {
                 2 -> bundle.putStringArrayList("list", viewModel.selectedDocumentList)
             }
             requireContext().openActivity(ForwardActivity::class.java, bundle)
-
         }
         handlingFab()
 

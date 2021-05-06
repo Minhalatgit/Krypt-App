@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 
-
 class DrawerImageView : androidx.appcompat.widget.AppCompatImageView, OnTouchListener {
     var downx = 0f
     var downy = 0f
@@ -15,7 +14,7 @@ class DrawerImageView : androidx.appcompat.widget.AppCompatImageView, OnTouchLis
     var upy = 0f
     lateinit var canvas: Canvas
     lateinit var paint: Paint
-    lateinit var EditImagematrix: Matrix
+    lateinit var editImageMatrix: Matrix
 
     constructor(context: Context) : super(context) {
         setOnTouchListener(this)
@@ -40,14 +39,13 @@ class DrawerImageView : androidx.appcompat.widget.AppCompatImageView, OnTouchLis
         paint = Paint()
         paint.color = Color.RED
         paint.strokeWidth = 18f
-        EditImagematrix = Matrix()
-        canvas.drawBitmap(bmp, EditImagematrix, paint)
+        editImageMatrix = Matrix()
+        canvas.drawBitmap(bmp, editImageMatrix, paint)
         setImageBitmap(alteredBitmap)
     }
 
     override fun onTouch(v: View?, event: MotionEvent): Boolean {
-        val action = event.action
-        when (action) {
+        when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 downx = getPointerCoords(event)[0] //event.getX();
                 downy = getPointerCoords(event)[1] //event.getY();
@@ -74,7 +72,7 @@ class DrawerImageView : androidx.appcompat.widget.AppCompatImageView, OnTouchLis
         return true
     }
 
-    fun getPointerCoords(e: MotionEvent): FloatArray {
+    private fun getPointerCoords(e: MotionEvent): FloatArray {
         val index = e.actionIndex
         val coords = floatArrayOf(e.getX(index), e.getY(index))
         val matrix = Matrix()

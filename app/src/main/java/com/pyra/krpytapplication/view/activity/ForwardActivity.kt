@@ -25,8 +25,6 @@ class ForwardActivity : BaseActivity() {
         initView()
         getMessageList()
         initListeners()
-
-
     }
 
     private fun initListeners() {

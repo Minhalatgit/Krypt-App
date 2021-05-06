@@ -16,9 +16,7 @@ import com.pyra.krpytapplication.Utils.show
 import kotlinx.android.synthetic.main.activity_view.*
 import kotlin.math.sqrt
 
-
 class ImageAndVideoViewer : BaseActivity() {
-
 
     var matrix: Matrix = Matrix()
     var savedMatrix: Matrix = Matrix()
@@ -80,11 +78,9 @@ class ImageAndVideoViewer : BaseActivity() {
         }
     }
 
-
     fun onBackButtonPressed(view: View) {
         onBackPressed()
     }
-
 
     fun onTouch(v: View, event: MotionEvent): Boolean {
         // TODO Auto-generated method stub
@@ -108,7 +104,6 @@ class ImageAndVideoViewer : BaseActivity() {
                 mode = NONE
             }
             MotionEvent.ACTION_MOVE -> if (mode == DRAG) {
-                // ...
                 matrix.set(savedMatrix)
                 matrix.postTranslate(
                     event.x - start.x, event.y
@@ -123,7 +118,7 @@ class ImageAndVideoViewer : BaseActivity() {
                 }
             }
         }
-        view.setImageMatrix(matrix)
+        view.imageMatrix = matrix
         return true
     }
 
