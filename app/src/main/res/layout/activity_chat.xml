@@ -155,7 +155,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:onClick="onSaveCliked"
+            android:onClick="onSaveClicked"
             android:src="@drawable/bookmark_icon"
             app:layout_constraintEnd_toStartOf="@id/deleteIcon"
             app:layout_constraintTop_toTopOf="parent" />

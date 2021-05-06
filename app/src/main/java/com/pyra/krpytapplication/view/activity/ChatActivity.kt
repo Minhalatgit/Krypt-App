@@ -405,7 +405,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
     }
 
-
 //    fun onAttachmentClicked(view: View) {
 //        mediaAttachmentLayout.toggleVisibility()
 //    }
@@ -427,7 +426,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         })
         setCallUi()
         chatMessagesViewModel.saveCurrentChatUser()
-
 
         editTextMessage.addTextChangedListener {
 
@@ -870,7 +868,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
         }
     }
 
-    fun onSaveCliked(view: View) {
+    fun onSaveClicked(view: View) {
         chatMessagesViewModel.onSaveClicked()
     }
 

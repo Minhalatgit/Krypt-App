@@ -145,12 +145,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:18.0.0'
     implementation 'com.google.firebase:firebase-messaging-directboot:21.0.0'
 
-
     // room
     implementation 'androidx.room:room-ktx:2.2.5'
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
-
 
     //image loader
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -169,7 +167,6 @@ dependencies {
     //emoji
     implementation 'com.vanniktech:emoji-ios:0.6.0'
 
-
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
     implementation project(path: ":lightcompressor")
@@ -181,7 +178,6 @@ dependencies {
 
     //elevated recyclurview pageradapter
     implementation 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.1'
-
 
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.1"
@@ -200,7 +196,6 @@ dependencies {
     implementation 'androidx.camera:camera-view:1.0.0-alpha19'
 
     implementation "androidx.camera:camera-extensions:1.0.0-alpha19"
-
 
     //socket
     implementation('io.socket:socket.io-client:1.0.0') {

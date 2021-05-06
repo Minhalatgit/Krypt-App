@@ -24,7 +24,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-
 public class TextureRenderer {
 
     private static final int FLOAT_SIZE_BYTES = 4;
@@ -83,7 +82,6 @@ public class TextureRenderer {
     void drawFrame(SurfaceTexture st) {
         checkGlError("onDrawFrame start");
         st.getTransformMatrix(mSTMatrix);
-
 
         GLES20.glUseProgram(mProgram);
         checkGlError("glUseProgram");
