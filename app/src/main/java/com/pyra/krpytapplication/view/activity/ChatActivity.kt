@@ -64,6 +64,7 @@ import openAudioIntent
 import openCamera
 import openFileIntent
 import openGallery
+import org.jivesoftware.smackx.jingle.element.JingleReason.Gone
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
@@ -446,7 +447,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         NotificationUtils(this).removeNotification()
     }
 
-
     private fun initKeyboardListener() {
         var timer = Timer()
         val DELAY: Long = 2000
@@ -819,7 +819,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
 //        nManager.cancelAll()
     }
 
-
     private fun showKryptCodeDialog() {
         val dialogView = View.inflate(this, R.layout.dialog_add_contact, null)
         val dialog = Dialog(this)
@@ -920,7 +919,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
                 }
             }
         }
-
 
     fun checkOnline() {
 
@@ -1035,7 +1033,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
         layoutAttachment.hide()
     }
 
-    fun OnCameraClicked(view: View) {
+    fun onCameraClicked(view: View) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(
                 Constants.Permission.CAMERA_PERM_LIST,
@@ -1207,9 +1205,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
         else
             showToast(getString(R.string.file_size_limit_exceeded))
 
-
     }
-
 
     override fun onBackPressed() {
         if (chatMessagesViewModel.isMultiSelectedEnabled) {
@@ -1239,7 +1235,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         openActivity(ForwardActivity::class.java, bundle)
     }
 
-
     override fun requestRecordPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(
@@ -1251,7 +1246,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             )
         }
     }
-
 
     override fun onRecordingStarted() {
         audioRecordView.cancelTxt?.visibility = View.GONE
@@ -1341,7 +1335,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
 //            "outgoing $callType call"
 //        )
 
-        var intent = Intent(this, GroupCallActivity::class.java)
+        val intent = Intent(this, GroupCallActivity::class.java)
         intent.putExtra(Constants.NotificationIntentValues.CHANNEL_ID, channelName)
         intent.putExtra(Constants.NotificationIntentValues.CALL_TYPE, callType)
         intent.putExtra(
@@ -1351,8 +1345,5 @@ class ChatActivity : BaseActivity(), RecordingListener {
         intent.putExtra(Constants.IntentKeys.ROOMID, roomId)
         startActivity(intent)
 
-
     }
-
-
 }

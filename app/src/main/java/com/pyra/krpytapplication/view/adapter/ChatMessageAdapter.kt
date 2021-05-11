@@ -337,7 +337,6 @@ class ChatMessageAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-
         holder.itemView.findViewById<TextView>(R.id.messageTime)
             .setTextColor(context.getResources().getColor(R.color.white))
         holder.itemView.findViewById<TextView>(R.id.dateSectionHeader)
@@ -442,7 +441,7 @@ class ChatMessageAdapter(
                     (senderText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (senderText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (senderText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -513,7 +512,7 @@ class ChatMessageAdapter(
                     (senderImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (senderImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (senderImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -522,7 +521,6 @@ class ChatMessageAdapter(
                     senderImage.binding.headerText.hide()
 
                     if (viewmodel.getIsReply(position)) {
-
 
                         senderImage.binding.layoutReply.show()
 
@@ -550,7 +548,6 @@ class ChatMessageAdapter(
                     } else {
                         senderImage.binding.layoutReply.hide()
                     }
-
 
                 }
                 senderImage.binding.messageTime.text = viewmodel.getChatMessageTime(position)
@@ -590,9 +587,7 @@ class ChatMessageAdapter(
                         )
                     }
 
-
                 }
-
 
                 senderImage.binding.uploadLayout.uploadLayout.setOnClickListener {
                     viewmodel.startUpload(position)
@@ -612,7 +607,6 @@ class ChatMessageAdapter(
                     )
                     MessageStatus.READ -> senderImage.binding.messageStatus.setImageResource(R.drawable.ic_blue_tick)
                 }
-
 
                 holder.itemView.rootView.setOnClickListener {
                     if (viewmodel.isMultiSelectedEnabled) {
@@ -638,7 +632,7 @@ class ChatMessageAdapter(
                     (senderAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (senderAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (senderAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -648,7 +642,6 @@ class ChatMessageAdapter(
 
 
                     if (viewmodel.getIsReply(position)) {
-
 
                         senderAudio.binding.layoutReply.show()
 
@@ -676,7 +669,6 @@ class ChatMessageAdapter(
                     } else {
                         senderAudio.binding.layoutReply.hide()
                     }
-
 
                 }
                 senderAudio.binding.messageTime.text = viewmodel.getChatMessageTime(position)
@@ -758,7 +750,6 @@ class ChatMessageAdapter(
                     MessageStatus.READ -> senderAudio.binding.messageStatus.setImageResource(R.drawable.ic_blue_tick)
                 }
 
-
             }
             MessageViewTypes.SENDER_VIDEO.value -> {
                 val senderVideo: viewHolderSenderVideo = holder as viewHolderSenderVideo
@@ -769,7 +760,7 @@ class ChatMessageAdapter(
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
 
@@ -889,7 +880,7 @@ class ChatMessageAdapter(
                     (senderDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (senderDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (senderDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -1017,7 +1008,7 @@ class ChatMessageAdapter(
                     (receiverText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (receiverText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (receiverText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -1097,7 +1088,7 @@ class ChatMessageAdapter(
                     (receiverImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (receiverImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (receiverImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -1222,7 +1213,7 @@ class ChatMessageAdapter(
                     (receiverAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (receiverAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (receiverAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -1354,7 +1345,7 @@ class ChatMessageAdapter(
                     (receiverVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (receiverVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (receiverVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)
@@ -1479,7 +1470,7 @@ class ChatMessageAdapter(
                     (receiverDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewmodel.getSenderName(position)
                     (receiverDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReciverName(position)
+                        .text = viewmodel.getReceiverName(position)
 
                     (receiverDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewmodel.getChatMessageTime(position)

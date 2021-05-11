@@ -16,7 +16,6 @@ import android.view.*
 import android.view.View.OnTouchListener
 import android.view.animation.*
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -25,11 +24,9 @@ import com.pyra.krpytapplication.R
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
-import  com.pyra.krpytapplication.customview.RecordingListener
 import com.vanniktech.emoji.EmojiEditText
 import kotlinx.android.synthetic.main.activity_whts_app_record_option.*
 import kotlin.math.hypot
-import kotlin.math.roundToInt
 
 /**
  * Created by Varun John on 4 Dec, 2018
@@ -47,13 +44,14 @@ class AudioRecordView {
 
     private val TAG = "AudioRecordView"
     private var viewContainer: LinearLayout? = null
-   // private var layoutAttachmentOptions: LinearLayout? = null
+
+    // private var layoutAttachmentOptions: LinearLayout? = null
     private var imageViewAudio: View? = null
     private var imageViewLockArrow: View? = null
     private var imageViewLock: View? = null
     private var imageViewMic: View? = null
     private var dustin: View? = null
-    private var dustin_cover: View? = null
+    private var dustbinCover: View? = null
     private var imageViewStop: View? = null
     var sendView: View? = null
         private set
@@ -76,7 +74,7 @@ class AudioRecordView {
     private var textViewSlide: TextView? = null
     private var stop: ImageView? = null
     private var audio: ImageView? = null
-     var send: ImageView? = null
+    var send: ImageView? = null
     private var animBlink: Animation? = null
     private var animJump: Animation? = null
     private var animJumpFast: Animation? = null
@@ -95,8 +93,8 @@ class AudioRecordView {
     private var cancelOffset = 0f
     private var lockOffset = 0f
     private var dp = 0f
-     var isLocked = false
-    private var userBehaviour:UserBehaviour = UserBehaviour.NONE
+    var isLocked = false
+    private var userBehaviour: UserBehaviour = UserBehaviour.NONE
     var recordingListener: RecordingListener? = null
     var isLayoutDirectionRightToLeft = false
     var screenWidth = 0
@@ -110,7 +108,7 @@ class AudioRecordView {
     var isShowEmojiIcon = true
         private set
     private var removeAttachmentOptionAnimation = false
-     var cancelTxt:View? = null
+    var cancelTxt: View? = null
 
     fun initView(view: ViewGroup?) {
         if (view == null) {
@@ -131,7 +129,7 @@ class AudioRecordView {
         screenWidth = displayMetrics.widthPixels
         isLayoutDirectionRightToLeft = view.context.resources.getBoolean(R.bool.is_right_to_left)
         viewContainer = view.findViewById(R.id.layoutContainer)
-       // layoutAttachmentOptions = view.findViewById(R.id.layoutAttachmentOptions)
+        // layoutAttachmentOptions = view.findViewById(R.id.layoutAttachmentOptions)
         attachmentView = view.findViewById(R.id.imageViewAttachment)
         cameraView = view.findViewById(R.id.imageViewCamera)
         emojiView = view.findViewById(R.id.imageViewEmoji)
@@ -160,9 +158,10 @@ class AudioRecordView {
         layoutLock = view.findViewById(R.id.layoutLock)
         imageViewMic = view.findViewById(R.id.imageViewMic)
         dustin = view.findViewById(R.id.dustin)
-        dustin_cover = view.findViewById(R.id.dustin_cover)
+        dustbinCover = view.findViewById(R.id.dustin_cover)
         cancelTxt = view.findViewById(R.id.cancelTxt)
         handler = Handler(Looper.getMainLooper())
+
         dp = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             1f,
@@ -182,11 +181,11 @@ class AudioRecordView {
         )
         setupRecording()
         messageView?.setOnClickListener {
-           if (layoutAttachment?.visibility == View.VISIBLE){
-               hideAttachmentOption()
-           }
+            if (layoutAttachment?.visibility == View.VISIBLE) {
+                hideAttachmentOption()
+            }
         }
-       // setupAttachmentOptions()
+        // setupAttachmentOptions()
     }
 
     fun changeSlideToCancelText(textResourceId: Int) {
@@ -302,8 +301,8 @@ class AudioRecordView {
             if (isDeleting) {
                 return@OnTouchListener true
             }
-            if (checkPermissions()){
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+            if (checkPermissions()) {
+                if (motionEvent.action == MotionEvent.ACTION_DOWN) {
 
                     cancelOffset = (screenWidth / 2.8).toFloat()
                     lockOffset = (screenWidth / 2.5).toFloat()
@@ -316,51 +315,51 @@ class AudioRecordView {
                     startRecord()
 
 
-            } else if (motionEvent.action == MotionEvent.ACTION_UP
-                || motionEvent.action == MotionEvent.ACTION_CANCEL
-            ) {
-                if (motionEvent.action == MotionEvent.ACTION_UP) {
-                    stopRecording(RecordingBehaviour.RELEASED)
-                }
-            } else if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                if (stopTrackingAction) {
-                    return@OnTouchListener true
-                }
-                var direction: UserBehaviour = UserBehaviour.NONE
-                val motionX = abs(firstX - motionEvent.rawX)
-                val motionY = abs(firstY - motionEvent.rawY)
-                if (if (isLayoutDirectionRightToLeft) motionX > directionOffset && lastX > firstX && lastY > firstY else motionX > directionOffset && lastX < firstX && lastY < firstY) {
-                    if (if (isLayoutDirectionRightToLeft) motionX > motionY && lastX > firstX else motionX > motionY && lastX < firstX) {
+                } else if (motionEvent.action == MotionEvent.ACTION_UP
+                    || motionEvent.action == MotionEvent.ACTION_CANCEL
+                ) {
+                    if (motionEvent.action == MotionEvent.ACTION_UP) {
+                        stopRecording(RecordingBehaviour.RELEASED)
+                    }
+                } else if (motionEvent.action == MotionEvent.ACTION_MOVE) {
+                    if (stopTrackingAction) {
+                        return@OnTouchListener true
+                    }
+                    var direction: UserBehaviour = UserBehaviour.NONE
+                    val motionX = abs(firstX - motionEvent.rawX)
+                    val motionY = abs(firstY - motionEvent.rawY)
+                    if (if (isLayoutDirectionRightToLeft) motionX > directionOffset && lastX > firstX && lastY > firstY else motionX > directionOffset && lastX < firstX && lastY < firstY) {
+                        if (if (isLayoutDirectionRightToLeft) motionX > motionY && lastX > firstX else motionX > motionY && lastX < firstX) {
+                            direction = UserBehaviour.CANCELING
+                        } else if (motionY > motionX && lastY < firstY) {
+                            direction = UserBehaviour.LOCKING
+                        }
+                    } else if (if (isLayoutDirectionRightToLeft) motionX > motionY && motionX > directionOffset && lastX > firstX else motionX > motionY && motionX > directionOffset && lastX < firstX) {
                         direction = UserBehaviour.CANCELING
-                    } else if (motionY > motionX && lastY < firstY) {
+                    } else if (motionY > motionX && motionY > directionOffset && lastY < firstY) {
                         direction = UserBehaviour.LOCKING
                     }
-                } else if (if (isLayoutDirectionRightToLeft) motionX > motionY && motionX > directionOffset && lastX > firstX else motionX > motionY && motionX > directionOffset && lastX < firstX) {
-                    direction = UserBehaviour.CANCELING
-                } else if (motionY > motionX && motionY > directionOffset && lastY < firstY) {
-                    direction = UserBehaviour.LOCKING
+                    if (direction == UserBehaviour.CANCELING) {
+                        if (userBehaviour == UserBehaviour.NONE || motionEvent.rawY + imageViewAudio!!.width / 2 > firstY) {
+                            userBehaviour = UserBehaviour.CANCELING
+                        }
+                        if (userBehaviour == UserBehaviour.CANCELING) {
+                            translateX(-(firstX - motionEvent.rawX))
+                        }
+                    } else if (direction == UserBehaviour.LOCKING) {
+                        if (userBehaviour == UserBehaviour.NONE || motionEvent.rawX + imageViewAudio!!.width / 2 > firstX) {
+                            userBehaviour = UserBehaviour.LOCKING
+                        }
+                        if (userBehaviour == UserBehaviour.LOCKING) {
+                            translateY(-(firstY - motionEvent.rawY))
+                        }
+                    }
+                    lastX = motionEvent.rawX
+                    lastY = motionEvent.rawY
                 }
-                if (direction == UserBehaviour.CANCELING) {
-                    if (userBehaviour == UserBehaviour.NONE || motionEvent.rawY + imageViewAudio!!.width / 2 > firstY) {
-                        userBehaviour = UserBehaviour.CANCELING
-                    }
-                    if (userBehaviour == UserBehaviour.CANCELING) {
-                        translateX(-(firstX - motionEvent.rawX))
-                    }
-                } else if (direction == UserBehaviour.LOCKING) {
-                    if (userBehaviour == UserBehaviour.NONE || motionEvent.rawX + imageViewAudio!!.width / 2 > firstX) {
-                        userBehaviour = UserBehaviour.LOCKING
-                    }
-                    if (userBehaviour == UserBehaviour.LOCKING) {
-                        translateY(-(firstY - motionEvent.rawY))
-                    }
-                }
-                lastX = motionEvent.rawX
-                lastY = motionEvent.rawY
-            }
-            view.onTouchEvent(motionEvent)
-            true
-            }else{
+                view.onTouchEvent(motionEvent)
+                true
+            } else {
                 recordingListener!!.requestRecordPermission()
                 true
             }
@@ -413,19 +412,20 @@ class AudioRecordView {
         isLocked = true
     }
 
-     fun canceled() {
+    fun canceled() {
         stopTrackingAction = true
         stopRecording(RecordingBehaviour.CANCELED)
     }
 
-     fun stopRecording(recordingBehaviour: RecordingBehaviour) {
+    fun stopRecording(recordingBehaviour: RecordingBehaviour) {
         stopTrackingAction = true
         firstX = 0f
         firstY = 0f
         lastX = 0f
         lastY = 0f
         userBehaviour = UserBehaviour.NONE
-        imageViewAudio!!.animate().scaleX(1f).scaleY(1f).translationX(0f).translationY(0f).setDuration(100).setInterpolator(LinearInterpolator()).start()
+        imageViewAudio!!.animate().scaleX(1f).scaleY(1f).translationX(0f).translationY(0f)
+            .setDuration(100).setInterpolator(LinearInterpolator()).start()
         layoutSlideCancel!!.translationX = 0f
         layoutSlideCancel!!.visibility = View.GONE
         layoutLock!!.visibility = View.GONE
@@ -539,8 +539,8 @@ class AudioRecordView {
                         -dp * 40
                     }
                     dustin!!.translationX = displacement
-                    dustin_cover!!.translationX = displacement
-                    dustin_cover!!.animate().translationX(0f).rotation(-120f).setDuration(350)
+                    dustbinCover!!.translationX = displacement
+                    dustbinCover!!.animate().translationX(0f).rotation(-120f).setDuration(350)
                         .setInterpolator(
                             DecelerateInterpolator()
                         ).start()
@@ -549,7 +549,7 @@ class AudioRecordView {
                     ).setListener(object : Animator.AnimatorListener {
                         override fun onAnimationStart(animation: Animator) {
                             dustin!!.visibility = View.VISIBLE
-                            dustin_cover!!.visibility = View.VISIBLE
+                            dustbinCover!!.visibility = View.VISIBLE
                         }
 
                         override fun onAnimationEnd(animation: Animator) {}
@@ -572,14 +572,14 @@ class AudioRecordView {
                                     } else {
                                         -dp * 40
                                     }
-                                    dustin_cover!!.animate().rotation(0f).setDuration(150)
+                                    dustbinCover!!.animate().rotation(0f).setDuration(150)
                                         .setStartDelay(50)
                                         .start()
                                     dustin!!.animate().translationX(displacement).setDuration(200)
                                         .setStartDelay(250).setInterpolator(
                                             DecelerateInterpolator()
                                         ).start()
-                                    dustin_cover!!.animate().translationX(displacement)
+                                    dustbinCover!!.animate().translationX(displacement)
                                         .setDuration(200)
                                         .setStartDelay(250).setInterpolator(
                                             DecelerateInterpolator()
@@ -605,18 +605,48 @@ class AudioRecordView {
                 override fun onAnimationRepeat(animation: Animator) {}
             }).start()
     }
+
     private fun showErrorLog(s: String) {
         Log.e(TAG, s)
     }
 
 
-    private fun hideAttachmentOption(){
+    private fun hideAttachmentOption() {
+        val x =
+            if (isLayoutDirectionRightToLeft) (dp * (18 + 40 + 4 + 56)) else (screenWidth - dp * (18 + 40 + 4 + 56))
+        val y = (dp * 220)
+        val startRadius = 0
+        val endRadius =
+            Math.hypot(screenWidth - (dp * (8 + 8)).toDouble(), (dp * 220).toDouble())
+                .toInt()
+        val anim = ViewAnimationUtils.createCircularReveal(
+            layoutAttachment,
+            x.toInt(),
+            y.toInt(),
+            endRadius.toFloat(),
+            startRadius.toFloat()
+        )
+        anim.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animator: Animator) {}
+            override fun onAnimationEnd(animator: Animator) {
+                layoutAttachment?.visibility = View.GONE
+            }
+
+            override fun onAnimationCancel(animator: Animator) {}
+            override fun onAnimationRepeat(animator: Animator) {}
+        })
+        anim.start()
+    }
+
+
+    fun setupAttachmentOptions(layoutAttachment: View) {
+        if (layoutAttachment.visibility == View.VISIBLE) {
             val x =
                 if (isLayoutDirectionRightToLeft) (dp * (18 + 40 + 4 + 56)) else (screenWidth - dp * (18 + 40 + 4 + 56))
             val y = (dp * 220)
             val startRadius = 0
             val endRadius =
-                Math.hypot(screenWidth - (dp * (8 + 8)).toDouble(), (dp * 220).toDouble())
+                hypot(screenWidth - (dp * (8 + 8)).toDouble(), (dp * 220).toDouble())
                     .toInt()
             val anim = ViewAnimationUtils.createCircularReveal(
                 layoutAttachment,
@@ -628,83 +658,52 @@ class AudioRecordView {
             anim.addListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animator: Animator) {}
                 override fun onAnimationEnd(animator: Animator) {
-                    layoutAttachment?.visibility = View.GONE
+                    layoutAttachment.visibility = View.GONE
                 }
 
                 override fun onAnimationCancel(animator: Animator) {}
                 override fun onAnimationRepeat(animator: Animator) {}
             })
             anim.start()
-    }
-
-
-
-
-     fun setupAttachmentOptions(layoutAttachment:View) {
-            if (layoutAttachment.visibility == View.VISIBLE) {
-                val x =
-                    if (isLayoutDirectionRightToLeft) (dp * (18 + 40 + 4 + 56)) else (screenWidth - dp * (18 + 40 + 4 + 56))
-                val y = (dp * 220)
-                val startRadius = 0
-                val endRadius =
-                    hypot(screenWidth - (dp * (8 + 8)).toDouble(), (dp * 220).toDouble())
-                        .toInt()
-                val anim = ViewAnimationUtils.createCircularReveal(
-                    layoutAttachment,
-                    x.toInt(),
-                    y.toInt(),
-                    endRadius.toFloat(),
-                    startRadius.toFloat()
-                )
-                anim.addListener(object : Animator.AnimatorListener {
-                    override fun onAnimationStart(animator: Animator) {}
-                    override fun onAnimationEnd(animator: Animator) {
-                        layoutAttachment.visibility = View.GONE
-                    }
-
-                    override fun onAnimationCancel(animator: Animator) {}
-                    override fun onAnimationRepeat(animator: Animator) {}
-                })
-                anim.start()
-            } else {
-                val x =
-                    if (isLayoutDirectionRightToLeft) (dp * (18 + 40 + 4 + 56)) else (screenWidth - dp * (18 + 40 + 4 + 56))
-                val y = (dp * 220)
-                val startRadius = 0
-                val endRadius =
-                    hypot(screenWidth - (dp * (8 + 8)).toDouble(), (dp * 220).toDouble())
-                        .toInt()
-                val anim = ViewAnimationUtils.createCircularReveal(
-                    layoutAttachment,
-                    x.toInt(),
-                    y.toInt(),
-                    startRadius.toFloat(),
-                    endRadius.toFloat()
-                )
-                anim.duration = 500
-                layoutAttachment.visibility = View.VISIBLE
-                anim.start()
-            }
-
-    }
-
-
-
-    private fun checkPermissions(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            val storage = ContextCompat.checkSelfPermission(context!!,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        } else {
+            val x =
+                if (isLayoutDirectionRightToLeft) (dp * (18 + 40 + 4 + 56)) else (screenWidth - dp * (18 + 40 + 4 + 56))
+            val y = (dp * 220)
+            val startRadius = 0
+            val endRadius =
+                hypot(screenWidth - (dp * (8 + 8)).toDouble(), (dp * 220).toDouble())
+                    .toInt()
+            val anim = ViewAnimationUtils.createCircularReveal(
+                layoutAttachment,
+                x.toInt(),
+                y.toInt(),
+                startRadius.toFloat(),
+                endRadius.toFloat()
             )
-            val audio = ContextCompat.checkSelfPermission(context!!,
-                Manifest.permission.RECORD_AUDIO
-            )
-            storage == PackageManager.PERMISSION_GRANTED && audio == PackageManager.PERMISSION_GRANTED
-        }else{
-            true
+            anim.duration = 500
+            layoutAttachment.visibility = View.VISIBLE
+            anim.start()
         }
 
     }
 
+
+    private fun checkPermissions(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val storage = ContextCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            val audio = ContextCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.RECORD_AUDIO
+            )
+            storage == PackageManager.PERMISSION_GRANTED && audio == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
+
+    }
 
 
 }

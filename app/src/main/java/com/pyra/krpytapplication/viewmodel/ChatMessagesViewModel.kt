@@ -100,7 +100,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
                 update.postValue(null)
             }
 
-
         }
 
 
@@ -117,11 +116,9 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     }
 
-
     fun isSenderBubble(position: Int): Boolean {
         return chatMessages[position].isSender
     }
-
 
     fun sendMessage(
         content: String,
@@ -281,9 +278,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
                 notifySelection.value = null
             }
 
-
         }
-
 
     }
 
@@ -299,7 +294,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             }
         }
     }
-
 
     fun saveCurrentChatUser() {
         SharedHelper(app.baseContext).currentChatingUser = roomId
@@ -349,7 +343,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-
     fun makeSelectionUnselection(position: Int) {
         if (selectedChatMessage.contains(chatMessages[position].messageId.toUpperCase(Locale.ROOT))) {
             selectedChatMessage.remove(chatMessages[position].messageId.toUpperCase(Locale.ROOT))
@@ -382,9 +375,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             }
         }
 
-
     }
-
 
     private fun getIsForwardable() {
         Coroutine.iOWorker {
@@ -410,7 +401,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-
     fun isSelected(position: Int): Boolean {
         return selectedChatMessage.contains(chatMessages[position].messageId.toUpperCase(Locale.ROOT))
     }
@@ -433,7 +423,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             }
         }
 
-
     }
 
     fun onDeleteClicked() {
@@ -444,8 +433,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
                 unselectAll()
             }
         }
-
-
     }
 
     fun unselectAll() {
@@ -465,16 +452,10 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             } else {
                 chatMessages[position].userName
             }
-
         }
-
     }
 
-    fun getSenderProfilePic(position: Int): String {
-        return chatMessages[position].userImage.toString()
-    }
-
-    fun getReciverName(position: Int): String? {
+    fun getReceiverName(position: Int): String? {
 
         return if (chatMessages[position].isSender) {
             if (chatMessages[position].userName == "") {
@@ -487,16 +468,18 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
+    fun getSenderProfilePic(position: Int): String {
+        return chatMessages[position].userImage.toString()
+    }
+
     fun sendTypingStatus(typing: Boolean) {
         if (!isGroup)
             chatMessagesRepository.sendTypingStatus(kryptId, typing)
     }
 
-
     fun uploadToLocal(file: File) {
 
         uploadingFile = file
-
 
         var chatMessagesEntity = ChatMessagesSchema()
         if (uploadingFile?.getFileType() == MediaType.IMAGE.value) {
@@ -533,12 +516,10 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             )
         }
 
-
         messageId = chatMessagesRepository.insertLocalMedia(chatMessagesEntity)
         chatListRepository.updateLastMessage(chatMessagesEntity)
         reply.value = ChatMessagesSchema()
         uploadImageFullyCompressed(file, file.getFileType())
-
     }
 
     fun uploadImageFullyCompressed(
@@ -651,7 +632,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         }
 
     }
-
 
     fun uploadMedia(
         file: File
@@ -792,7 +772,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     private fun setFileDownloded(file: File) {
         chatMessagesRepository.setMediaDownloded(messageId, file.absolutePath)
     }
-
 
     fun downloadCanceledByUser(position: Int) {
         chatMessagesRepository.downloadCanceledByUser(chatMessages[position].messageId)
@@ -935,7 +914,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     }
 
-    fun getDocumentName(position: Int): String? {
+    fun getDocumentName(position: Int): String {
         return chatMessages[position].mediaDocumentName
     }
 
