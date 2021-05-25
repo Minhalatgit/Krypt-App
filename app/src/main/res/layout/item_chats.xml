@@ -37,7 +37,6 @@
                     android:layout_gravity="center_vertical"
                     app:civ_border_width="0dp" />
 
-
             </RelativeLayout>
 
             <ImageView
@@ -104,7 +103,6 @@
 
             </LinearLayout>
 
-
             <TextView
                 android:id="@+id/lastMsgTime"
                 android:layout_width="wrap_content"
@@ -118,7 +116,6 @@
                 android:visibility="visible"
                 tools:ignore="Deprecated,RtlHardcoded" />
 
-
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -129,7 +126,6 @@
                 android:layout_marginTop="3dp"
                 android:animateLayoutChanges="true"
                 android:gravity="end">
-
 
                 <TextView
                     android:id="@+id/unreadCountText"
@@ -143,7 +139,6 @@
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/_8sdp"
                     android:visibility="visible" />
-
 
             </LinearLayout>
 

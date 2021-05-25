@@ -1174,8 +1174,6 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
         message.addBody("deleteMessage", "1")
         message.addBody("from", SharedHelper(MyApp.getInstance().baseContext).kryptKey)
 
-
-
         multiUserChatJoin.sendMessage(message)
         DeliveryReceiptRequest.addTo(message)
 

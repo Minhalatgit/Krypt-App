@@ -2,10 +2,9 @@ package com.pyra.krpytapplication.viewmodel
 
 import android.app.Application
 import android.content.Context
-import android.media.AudioAttributes
-import android.media.MediaMetadataRetriever
-import android.media.MediaPlayer
+import android.media.*
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -30,13 +29,10 @@ import isUserOnline
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
+import java.lang.RuntimeException
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class ChatMessagesViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -838,30 +834,39 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     fun uploadAudio(file: File) {
         uploadingFile = file
         val filename = file.name
+
+        Log.e("ChatMessagesView", "File: ${file.absolutePath}")
+
         val retriever = MediaMetadataRetriever()
-        retriever.setDataSource(app.baseContext, Uri.fromFile(file))
-        val time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
-        val seconds = time.toLong() / 1000
-        retriever.release()
 
-        val chatMessagesEntity = ChatMessageSchemaFactory.createLocalAudioMesssage(
-            roomId,
-            kryptId,
-            roomName,
-            roomImage,
-            app.getString(R.string.send_a_audio),
-            uploadingFile!!.absolutePath,
-            seconds.toString(),
-            filename,
-            reply.value,
-            SharedHelper(app).kryptKey, isGroup
-        )
+        try {
+            retriever.setDataSource(app.baseContext, Uri.fromFile(file))
 
-        messageId = chatMessagesRepository.insertLocalMedia(chatMessagesEntity)
-        chatListRepository.updateLastMessage(chatMessagesEntity)
-        reply.value = ChatMessagesSchema()
+            val time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
+            val seconds = time.toLong() / 1000
+            retriever.release()
 
-        uploadAudioToAws(file)
+            val chatMessagesEntity = ChatMessageSchemaFactory.createLocalAudioMesssage(
+                roomId,
+                kryptId,
+                roomName,
+                roomImage,
+                app.getString(R.string.send_a_audio),
+                uploadingFile!!.absolutePath,
+                seconds.toString(),
+                filename,
+                reply.value,
+                SharedHelper(app).kryptKey, isGroup
+            )
+
+            messageId = chatMessagesRepository.insertLocalMedia(chatMessagesEntity)
+            chatListRepository.updateLastMessage(chatMessagesEntity)
+            reply.value = ChatMessagesSchema()
+
+            uploadAudioToAws(file)
+        } catch (e: RuntimeException) {
+            Log.e("ChatMessagesView", "uploadAudio: ${e.message}")
+        }
     }
 
     private fun uploadAudioToAws(file: File) {
@@ -1015,6 +1020,26 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             false
     }
 
+    private fun playRecord(file: File) {
+        val shortSizeInBytes = Short.SIZE_BYTES / Short.SIZE_BYTES
+        val bufferSizeInBytes = (file.length() / shortSizeInBytes).toInt()
+        val audioData = ShortArray(bufferSizeInBytes)
+        val inputStream = FileInputStream(file.absolutePath)
+        val bufferedInputStream = BufferedInputStream(inputStream)
+        val dataInputStream = DataInputStream(bufferedInputStream)
+        var i = 0
+        while (dataInputStream.available() > 0) {
+            audioData[i] = dataInputStream.readShort()
+            i++
+        }
+
+        dataInputStream.close()
+
+        val audioTrack = AudioTrack(3, 16000, 2, 2, bufferSizeInBytes, 1)
+        audioTrack.play()
+        audioTrack.write(audioData, 0, bufferSizeInBytes)
+    }
+
     fun playAudio(position: Int) {
 
         if (chatMessages[position].localMediaPath != "")
@@ -1034,6 +1059,10 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     private fun startNewPlayer(position: Int) {
+
+        Log.d("ChatMessagesView", "Audio file path: ${chatMessages[position].localMediaPath}")
+
+//        playRecord(File(chatMessages[position].localMediaPath))
 
         mediaPlayer?.let {
             if (it.isPlaying) {

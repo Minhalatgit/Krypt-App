@@ -755,7 +755,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun setMessageTime() {
 
         messageBurnTime.text =
-            sharedHelper.burnMessageTime.toString() + " " + sharedHelper.burnMessageType.toString()
+            sharedHelper.burnMessageTime.toString() + " " + sharedHelper.burnMessageType
     }
 
     @SuppressLint("SetTextI18n")

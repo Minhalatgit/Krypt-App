@@ -43,7 +43,6 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     var update: MutableLiveData<Boolean> = MutableLiveData()
     var amazonRepository = AmazonRepository.getInstance()
 
-
     //create group
     var selectedList = ArrayList<ChatListSchema>()
     var selectedListUpdate: MutableLiveData<Boolean> = MutableLiveData()
@@ -60,14 +59,12 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     var selectedDetail = ChatListSchema()
     var notifyContact = MutableLiveData<Void>()
 
-
     init {
         applicationInstance = application
         chatListRepository =
             ChatListRepository.getInstance((applicationInstance as MyApp).getAppDatabase())
         sharedHelper = SharedHelper(application)
     }
-
 
     fun getNamedUser() {
 
@@ -143,7 +140,6 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
         }
         return chatList[at].roomName != ""
     }
-
 
     fun getChatListAsync() {
         chatListRepository.getChatList()?.observeForever(Observer {
@@ -910,12 +906,10 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
                 return
             }
 
-
             val burnTime: Date? = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(it)
             burnTime?.let {
                 val calender = Calendar.getInstance()
                 calender.time = burnTime
-
 
                 val currentTime = Calendar.getInstance()
 

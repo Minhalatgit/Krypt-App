@@ -11,11 +11,11 @@ data class AwsUploadResponse(
 
     var message: String? = null,
 
-    var completed:Boolean = false,
+    var completed: Boolean = false,
 
     var file: File? = null,
 
-    var fileUrl:String? = null,
+    var fileUrl: String? = null,
 
-    var thumbUrl:String? = null
+    var thumbUrl: String? = null
 )

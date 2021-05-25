@@ -10,11 +10,8 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.media.MediaRecorder
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.media.*
+import android.os.*
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -30,13 +27,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.*
 import com.pyra.krpytapplication.app.AppRunningService
@@ -64,14 +59,13 @@ import openAudioIntent
 import openCamera
 import openFileIntent
 import openGallery
-import org.jivesoftware.smackx.jingle.element.JingleReason.Gone
 import org.json.JSONObject
-import java.io.File
-import java.io.IOException
+import java.io.*
 import java.net.URISyntaxException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.experimental.and
 
 class ChatActivity : BaseActivity(), RecordingListener {
 
@@ -164,12 +158,32 @@ class ChatActivity : BaseActivity(), RecordingListener {
         containerView?.findViewById<LinearLayout>(R.id.bottomView)
     }
 
+    private lateinit var audioTrack: AudioTrack
+
     private var time: Long = 0
 
-    private val AUDIO_EXTENSION = ".3gp"
     private lateinit var myAudioRecorder: MediaRecorder
 
     private lateinit var file: File
+    private lateinit var audioRecord: AudioRecord
+    private lateinit var outputStream: FileOutputStream
+    private lateinit var bufferedOutputStream: BufferedOutputStream
+    private lateinit var dataOutputStream: DataOutputStream
+    private lateinit var audioData: ShortArray
+    private var bufferSize = 0
+    private var isRecording = false
+
+    companion object {
+        private const val AUDIO_EXTENSION = ".pcm"
+        private var SAMPLE_RATE = 16000 //44100 or 8000 or 16000
+        private var CONFIG = AudioFormat.CHANNEL_IN_MONO
+        private var ENCODING = AudioFormat.ENCODING_PCM_16BIT
+        private var SOURCE = MediaRecorder.AudioSource.MIC
+        private var BufferElements2Rec = 1024
+        private var BytesPerElement = 2
+
+        private const val TAG = "ChatActivity"
+    }
 
     private val loader by lazy {
         showLoader(this)
@@ -934,7 +948,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             }
         }
 
-
         socket?.on("offline_$kryptId") {
 
             runOnUiThread {
@@ -965,7 +978,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
                     membersCount?.text = "Offline"
             }, 3000)
 
-
     }
 
     private fun initSockets() {
@@ -995,8 +1007,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             if (!it.connected())
                 socket?.connect()
         }
-
-
     }
 
     fun onGalleryClicked(view: View) {
@@ -1078,9 +1088,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         }
 
     }
-//
-//
-//
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -1204,7 +1211,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             chatMessagesViewModel.uploadToLocal(file)
         else
             showToast(getString(R.string.file_size_limit_exceeded))
-
     }
 
     override fun onBackPressed() {
@@ -1248,43 +1254,62 @@ class ChatActivity : BaseActivity(), RecordingListener {
     }
 
     override fun onRecordingStarted() {
-        audioRecordView.cancelTxt?.visibility = View.GONE
-        try {
-            file = createFile(
-                filesDir,
-                AUDIO_EXTENSION
-            )
-            myAudioRecorder = MediaRecorder().apply {
-                setAudioSource(MediaRecorder.AudioSource.MIC)
-                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                setOutputFile(file.absolutePath)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-                try {
-                    prepare()
-                } catch (e: IOException) {
-                    Log.e("Record", "prepare() failed")
-                }
 
-                start()
-            }
-        } catch (ise: IllegalStateException) {
-        } catch (ioe: IOException) {
-        }
-        time = System.currentTimeMillis() / 1000
+        Thread {
+            isRecording = true
+            startRecord()
+        }.start()
+
+//        Thread {
+//            startRecording()
+//        }.start()
+//        recordThread.start()
+
+//        Log.d(TAG, "onRecordingStarted")
+//        audioRecordView.cancelTxt?.visibility = View.GONE
+//
+//        try {
+//            file = createFile(
+//                filesDir,
+//                AUDIO_EXTENSION
+//            )
+//
+//            myAudioRecorder = MediaRecorder().apply {
+//
+//                setAudioSource(MediaRecorder.AudioSource.MIC)
+//                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+//                setOutputFile(file.absolutePath)
+//                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+//                try {
+//                    prepare()
+//                } catch (e: IOException) {
+//                    Log.e("Record", "prepare() failed")
+//                }
+//
+//                start()
+//            }
+//        } catch (ise: IllegalStateException) {
+//        } catch (ioe: IOException) {
+//        }
+//        time = System.currentTimeMillis() / 1000
     }
 
     override fun onRecordingLocked() {
-        showToast("locked")
+        Log.d("ChatActivity", "onRecordingLocked")
         audioRecordView.cancelTxt?.visibility = View.VISIBLE
     }
 
     override fun onRecordingCompleted() {
+        Log.d(TAG, "onRecordingCompleted")
         audioRecordView.cancelTxt?.visibility = View.GONE
         val recordTime = (System.currentTimeMillis() / 1000 - time).toInt()
         if (recordTime > 1) {
             try {
-                myAudioRecorder.stop()
-                myAudioRecorder.release()
+                isRecording = false
+                playRecord()
+//                stopRecording()
+//                myAudioRecorder.stop()
+//                myAudioRecorder.release()
             } catch (ise: IllegalStateException) {
             } catch (ioe: IOException) {
             }
@@ -1293,11 +1318,12 @@ class ChatActivity : BaseActivity(), RecordingListener {
     }
 
     override fun onRecordingCanceled() {
-
+        Log.d(TAG, "onRecordingCanceled")
         audioRecordView.cancelTxt?.visibility = View.GONE
         try {
-            myAudioRecorder.stop()
-            myAudioRecorder.release()
+//            stopRecording()
+//            myAudioRecorder.stop()
+//            myAudioRecorder.release()
         } catch (ise: IllegalStateException) {
         } catch (ioe: IOException) {
         }
@@ -1307,13 +1333,11 @@ class ChatActivity : BaseActivity(), RecordingListener {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-
     private fun createFile(baseFolder: File, extension: String): File =
         File(
             baseFolder, SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
                 .format(System.currentTimeMillis()) + extension
         )
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -1324,7 +1348,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             }
         }
     }
-
 
     private fun startGroupChat(callType: String, channelName: String) {
 
@@ -1344,6 +1367,116 @@ class ChatActivity : BaseActivity(), RecordingListener {
         )
         intent.putExtra(Constants.IntentKeys.ROOMID, roomId)
         startActivity(intent)
+    }
 
+    private fun stopRecording() {
+        Log.d(TAG, "Stop recording")
+        if (this::audioRecord.isInitialized) {
+            isRecording = false
+            audioRecord.stop()
+            audioRecord.release()
+            dataOutputStream.close()
+        }
+    }
+
+    private fun startRecording() {
+        Log.d(TAG, "Start recording")
+
+        try {
+            audioRecordView.cancelTxt?.visibility = View.GONE
+
+            bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CONFIG, ENCODING)
+            audioData = ShortArray(bufferSize)
+
+            audioRecord = AudioRecord(
+                SOURCE,
+                SAMPLE_RATE,
+                CONFIG,
+                ENCODING,
+                bufferSize
+            )
+            audioRecord.startRecording()
+            isRecording = true
+
+            //file = createFile(filesDir, AUDIO_EXTENSION)
+
+            outputStream = FileOutputStream(file.absolutePath)
+            bufferedOutputStream = BufferedOutputStream(outputStream)
+            dataOutputStream = DataOutputStream(bufferedOutputStream)
+
+            while (isRecording) {
+                Log.d(TAG, "Saving data, isRecording: $isRecording")
+
+                val numberOfShort = audioRecord.read(audioData, 0, bufferSize)
+                for (i in 0 until numberOfShort) {
+                    dataOutputStream.writeShort(audioData[i].toInt())
+                }
+            }
+
+            time = System.currentTimeMillis() / 1000
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error: ${e.message}")
+        }
+
+    }
+
+    private fun short2byte(sData: ShortArray): ByteArray {
+        val arraySize = sData.size
+        val bytes = ByteArray(arraySize * 2)
+        for (i in 0 until arraySize) {
+            bytes[i * 2] = (sData[i].and(0x00FF)).toByte()
+            bytes[i * 2 + 1] = (sData[i].toInt() shr 8).toByte()
+            sData[i] = 0
+        }
+        return bytes
+    }
+
+    private fun startRecord() {
+        file = createFile(filesDir, AUDIO_EXTENSION)
+
+        val outputStream = FileOutputStream(file.absolutePath)
+        val bufferedOutputStream = BufferedOutputStream(outputStream)
+        val dataOutputStream = DataOutputStream(bufferedOutputStream)
+
+        val minBufferSize = AudioRecord.getMinBufferSize(11025, 2, 2)
+
+        val audioData = ShortArray(minBufferSize)
+
+        val audioRecord = AudioRecord(1, 11025, 2, 2, minBufferSize)
+
+        audioRecord.startRecording()
+
+        while (isRecording) {
+            val numberOfShorts = audioRecord.read(audioData, 0, minBufferSize)
+            for (i in 0 until numberOfShorts) {
+                dataOutputStream.writeShort(audioData[i].toInt())
+            }
+        }
+
+        if (!isRecording) {
+            audioRecord.stop()
+            dataOutputStream.close()
+        }
+    }
+
+    private fun playRecord() {
+        val shortSizeInBytes = Short.SIZE_BYTES / Short.SIZE_BYTES
+        val bufferSizeInBytes = (file.length() / shortSizeInBytes).toInt()
+        val audioData = ShortArray(bufferSizeInBytes)
+        val inputStream = FileInputStream(file.absolutePath)
+        val bufferedInputStream = BufferedInputStream(inputStream)
+        val dataInputStream = DataInputStream(bufferedInputStream)
+        var i = 0
+        while (dataInputStream.available() > 0) {
+            audioData[i] = dataInputStream.readShort()
+            i++
+        }
+
+        dataInputStream.close()
+
+        audioTrack = AudioTrack(3, 16000, 2, 2, bufferSizeInBytes, 1)
+        audioTrack.play()
+        audioTrack.write(audioData, 0, bufferSizeInBytes)
     }
 }

@@ -342,10 +342,10 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         Coroutine.iOWorker {
 //            chatMessageDao?.clearSentMessage()
             chatMessageDao?.updateAsDeleteSentMessage()
-            var list = chatListDao?.getUsers()
-            var participationList = groupParticipationDao?.getUsers()
+            val list = chatListDao?.getUsers()
+            val participationList = groupParticipationDao?.getUsers()
 
-            var userList = HashSet<String>()
+            val userList = HashSet<String>()
 
             list?.let {
                 for (i in list.indices) {

@@ -249,7 +249,6 @@
                                     android:padding="8dp"
                                     android:src="@drawable/camera_ic" />
 
-
                                 <TextView
                                     android:id="@+id/cancelTxt"
                                     android:layout_width="wrap_content"
@@ -263,7 +262,6 @@
                             </LinearLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                     </androidx.cardview.widget.CardView>
 
@@ -355,7 +353,6 @@
                 android:translationZ="10dp"
                 android:visibility="gone"
                 app:tint="@android:color/holo_red_light" />
-
 
             <LinearLayout
                 android:id="@+id/layoutDustin"

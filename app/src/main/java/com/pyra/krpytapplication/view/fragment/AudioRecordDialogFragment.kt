@@ -27,14 +27,11 @@ class AudioRecordDialogFragment:DialogFragment(),View.OnClickListener {
 
     private lateinit var file: File
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =  inflater.inflate(R.layout.record_dialog, container, false)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,14 +48,11 @@ class AudioRecordDialogFragment:DialogFragment(),View.OnClickListener {
         )
     }
 
-
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog: Dialog = super.onCreateDialog(savedInstanceState)
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -125,10 +119,6 @@ class AudioRecordDialogFragment:DialogFragment(),View.OnClickListener {
         }
     }
 
-
-
-
-
     companion object{
         fun newInstance(): AudioRecordDialogFragment {
             return AudioRecordDialogFragment()
@@ -149,5 +139,4 @@ class AudioRecordDialogFragment:DialogFragment(),View.OnClickListener {
             baseFolder, SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
                 .format(System.currentTimeMillis()) + extension
         )
-
 }

@@ -27,7 +27,6 @@ import getDocumentIcon
 import getViewIntent
 import java.io.File
 
-
 public enum class MessageViewTypes(val value: Int) {
     SENDER_TEXT(1),
     SENDER_IMAGE(2),
@@ -586,7 +585,6 @@ class ChatMessageAdapter(
                             senderImage.binding.uploadLayout.uploadLayout
                         )
                     }
-
                 }
 
                 senderImage.binding.uploadLayout.uploadLayout.setOnClickListener {
@@ -612,7 +610,7 @@ class ChatMessageAdapter(
                     if (viewmodel.isMultiSelectedEnabled) {
                         viewmodel.singleClick(position)
                     } else {
-                        var intent = Intent(context, ImageAndVideoViewer::class.java)
+                        val intent = Intent(context, ImageAndVideoViewer::class.java)
                         intent.putExtra(
                             Constants.IntentKeys.CONTENT, viewmodel.getLocalFilePath(position)
                         )

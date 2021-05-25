@@ -16,6 +16,7 @@ import android.view.*
 import android.view.View.OnTouchListener
 import android.view.animation.*
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -313,7 +314,6 @@ class AudioRecordView {
                         firstY = motionEvent.rawY
                     }
                     startRecord()
-
 
                 } else if (motionEvent.action == MotionEvent.ACTION_UP
                     || motionEvent.action == MotionEvent.ACTION_CANCEL

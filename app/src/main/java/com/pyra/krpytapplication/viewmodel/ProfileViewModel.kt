@@ -59,8 +59,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     var updateBlockedUser = MutableLiveData<Void>()
     var blockedUsers = ArrayList<BlockListSchema>()
 
-
-
     fun getUser(roomId: String): LiveData<ChatListSchema>? =
         AppDataBase.getInstance(getApplication())?.chatListDao()?.getUser(roomId)?.asLiveData()
 
@@ -70,16 +68,13 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-
     init {
         applicationInstance = application
         profileRepository =
             ProfileRepository.getInstance((application as MyApp).getAppDatabase())
         sharedHelper = SharedHelper(application)
 
-
     }
-
 
     fun getUserDeatilsResponse(username: String, url: String): LiveData<GetUserDetailsResponse> {
         val apiInputs = ApiInput()
@@ -90,9 +85,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         apiInputs.url = url
 
         return profileRepository.getUserDetails(apiInputs)
-
     }
-
 
     private fun getApiParams(jsonObject: JSONObject?, url: String): ApiInput {
 
@@ -159,7 +152,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-
     fun updateImage(image: String) {
 
         var propertiesValue = JSONArray()
@@ -194,12 +186,11 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             }
     }
 
-
     fun getParticipationList(roomId: String) {
 
         Coroutine.iOWorker {
 
-            var details = profileRepository.getRoomProfile(roomId)
+            val details = profileRepository.getRoomProfile(roomId)
             Coroutine.mainWorker {
                 if (details?.groupType == "PRIVATE") {
                     profileRepository.getParticipation(roomId)?.observeForever {
@@ -265,7 +256,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                 }
             }
 
-
         }
     }
 
@@ -303,7 +293,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     }
 
-
     fun getRoomImage(): String {
         return profileData.roomImage
     }
@@ -318,7 +307,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun removeUser(position: Int) {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.GROUPNAME, participationList[position].roomId)
         jsonObject.put(Constants.ApiKeys.USERNAME, participationList[position].kryptId.jidString())
         jsonObject.put(Constants.ApiKeys.ROLE, participationList[position].role)
@@ -431,7 +420,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     private fun blockOnBlockUsers(block: Boolean, kryptId: String) {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.FROMUSER, sharedHelper?.kryptKey.toString())
         jsonObject.put(Constants.ApiKeys.TOUSER, kryptId)
         if (block) {
@@ -495,7 +484,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun leaveGroup(roomId: String): MutableLiveData<CommonResponseModel>? {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.GROUPNAME, roomId)
         jsonObject.put(Constants.ApiKeys.USERNAME, sharedHelper?.kryptKey?.jidString())
         if (isGroupAdmin) {
@@ -503,7 +492,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         } else {
             jsonObject.put(Constants.ApiKeys.ROLE, "members")
         }
-
 
         return profileRepository.leaveGroup(
             getApiParams(
@@ -524,7 +512,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         newPassword: String
     ): MutableLiveData<CommonResponseModel>? {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.USER_NAME, kryptKey)
         jsonObject.put(Constants.ApiKeys.PASSWORD, password)
         jsonObject.put(Constants.ApiKeys.NEWPASSWORD, newPassword)
