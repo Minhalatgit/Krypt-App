@@ -4,7 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.media.*
 import android.net.Uri
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -30,6 +32,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.*
+import java.lang.IllegalStateException
 import java.lang.RuntimeException
 import java.util.*
 import kotlin.collections.ArrayList
@@ -1020,26 +1023,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
             false
     }
 
-    private fun playRecord(file: File) {
-        val shortSizeInBytes = Short.SIZE_BYTES / Short.SIZE_BYTES
-        val bufferSizeInBytes = (file.length() / shortSizeInBytes).toInt()
-        val audioData = ShortArray(bufferSizeInBytes)
-        val inputStream = FileInputStream(file.absolutePath)
-        val bufferedInputStream = BufferedInputStream(inputStream)
-        val dataInputStream = DataInputStream(bufferedInputStream)
-        var i = 0
-        while (dataInputStream.available() > 0) {
-            audioData[i] = dataInputStream.readShort()
-            i++
-        }
-
-        dataInputStream.close()
-
-        val audioTrack = AudioTrack(3, 16000, 2, 2, bufferSizeInBytes, 1)
-        audioTrack.play()
-        audioTrack.write(audioData, 0, bufferSizeInBytes)
-    }
-
     fun playAudio(position: Int) {
 
         if (chatMessages[position].localMediaPath != "")
@@ -1062,8 +1045,6 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
         Log.d("ChatMessagesView", "Audio file path: ${chatMessages[position].localMediaPath}")
 
-//        playRecord(File(chatMessages[position].localMediaPath))
-
         mediaPlayer?.let {
             if (it.isPlaying) {
                 it.pause()
@@ -1080,11 +1061,20 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
                 .build()
         )
         mediaPlayer?.setDataSource(chatMessages[position].localMediaPath)
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            mediaPlayer?.playbackParams = PlaybackParams().apply {
+                pitch = 0.75f
+//            speed = 0.75f
+            }
+        }
+
         mediaPlayer?.prepare()
         mediaPlayer?.start()
         isMediaPlaying = true
 
         mediaPlayer?.setOnCompletionListener {
+            //pauseAudio()
             playingMessageId = ""
             audioCurrentPosition = 0
             isMediaPlaying = false

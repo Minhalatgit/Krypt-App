@@ -638,7 +638,6 @@ class ChatMessageAdapter(
                 } else {
                     senderAudio.binding.headerText.hide()
 
-
                     if (viewmodel.getIsReply(position)) {
 
                         senderAudio.binding.layoutReply.show()
