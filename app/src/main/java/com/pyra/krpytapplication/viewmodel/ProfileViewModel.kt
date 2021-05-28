@@ -104,10 +104,10 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun getProperties(imei: String) {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.IMEI, imei)
         jsonObject.put(Constants.ApiKeys.USER_NAME, sharedHelper?.kryptKey)
-        profileRepository.getProfielDetails(getApiParams(jsonObject, UrlHelper.GETPROPERTIES))
+        profileRepository.getProfileDetails(getApiParams(jsonObject, UrlHelper.GETPROPERTIES))
             ?.observeForever {
                 it.error?.let { error ->
                     if (!error) {
@@ -121,7 +121,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                                     }
                                     profileImage.value = properties.value
                                 } else if (properties.key == "status") {
-                                    var stat: Status = stringToStatus(properties.value)
+                                    val stat: Status = stringToStatus(properties.value)
                                     sharedHelper?.status = statusToString(stat)
                                     status.value = properties.value
                                 }

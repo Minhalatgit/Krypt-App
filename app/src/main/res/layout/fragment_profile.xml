@@ -457,6 +457,83 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/morphVoiceLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp">
+
+                    <ImageView
+                        android:id="@+id/morphVoiceImage"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:src="@drawable/mic_icon"
+                        app:tint="?text_color_hint" />
+
+                    <TextView
+                        android:id="@+id/morphVoiceLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/morphVoiceImage"
+                        android:fontFamily="?regularFont"
+                        android:text="Morph Voice"
+                        android:textColor="?primary_text_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/morphVoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:theme="@style/SwitchStyle" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@id/morphVoiceLabel"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:alpha="0.2"
+                        android:background="?text_color_hint" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/morphFrequencyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp">
+
+                    <ImageView
+                        android:id="@+id/morphFrequencyImage"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:src="@drawable/mic_icon"
+                        app:tint="?text_color_hint" />
+
+                    <TextView
+                        android:id="@+id/morphFrequencyLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/morphFrequencyImage"
+                        android:fontFamily="?regularFont"
+                        android:text="Morph Frequency"
+                        android:textColor="?primary_text_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@id/morphFrequencyLabel"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:alpha="0.2"
+                        android:background="?text_color_hint" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/themeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

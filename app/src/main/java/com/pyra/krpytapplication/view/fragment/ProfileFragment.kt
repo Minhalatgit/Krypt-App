@@ -15,8 +15,9 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.*
-import androidx.appcompat.widget.SwitchCompat
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -25,8 +26,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.amitshekhar.utils.Utils
-import com.google.android.material.snackbar.Snackbar
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.*
@@ -37,6 +36,9 @@ import com.pyra.krpytapplication.viewmodel.AmazonViewModel
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 import com.pyra.network.UrlHelper
+import com.warkiz.widget.IndicatorSeekBar
+import com.warkiz.widget.OnSeekChangeListener
+import com.warkiz.widget.SeekParams
 import fetchThemeColor
 import getImei
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -74,7 +76,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
         amazonViewModel = ViewModelProvider(this).get(AmazonViewModel::class.java)
 
-        initListners()
+        initListeners()
         setMessageTime()
 
         profileViewModel.getUserDeatilsResponse(sharedHelper.kryptKey, UrlHelper.GETUSERDETAILS)
@@ -128,10 +130,23 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         countDown()
     }
 
-    private fun initListners() {
+    private fun initListeners() {
 
         enableVaultPassword.isChecked = sharedHelper.vaultPasswordEnabled
         burnDisableSwitch.isChecked = sharedHelper.isBurnMessageEnabled
+        morphVoice.isChecked = sharedHelper.isMorphVoiceEnabled
+
+        if (burnDisableSwitch.isChecked) {
+            hideBurnView()
+        } else {
+            showBurnView()
+        }
+        if (morphVoice.isChecked) {
+            showMorphFrequencyView()
+        } else {
+            sharedHelper.morphVoiceFrequency = ""
+            hideMorphFrequencyView()
+        }
 
 //        if (sharedHelper.isBurnMessageEnabled) {
 //            showBurnView()
@@ -157,6 +172,21 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
             sharedHelper.isBurnMessageEnabled = p1
             chatListViewModel.updateLoginTime()
+        }
+
+        morphFrequencyLayout.setOnClickListener {
+            showMorphFrequencyDialog()
+        }
+
+        morphVoice.setOnCheckedChangeListener { _, p1 ->
+            sharedHelper.isMorphVoiceEnabled = p1
+
+            if (p1) {
+                showMorphFrequencyView()
+            } else {
+                sharedHelper.morphVoiceFrequency = ""
+                hideMorphFrequencyView()
+            }
         }
 
         editIcon.setOnClickListener {
@@ -682,6 +712,40 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
     }
 
+    private fun showMorphFrequencyDialog() {
+        val dialogView = View.inflate(activity, R.layout.dialog_morph_frequency, null)
+        val dialog = Dialog(requireActivity())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogView)
+        //dialog.setCancelable(true)
+        //dialog.setCanceledOnTouchOutside(true)
+        val window: Window = dialog.window!!
+        window.setGravity(Gravity.CENTER)
+        //window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.show()
+        val seekbar = dialog.findViewById<IndicatorSeekBar>(R.id.seekBar)
+        if (sharedHelper.morphVoiceFrequency == "")
+            seekbar.setProgress(0.0f)
+        else
+            seekbar.setProgress(sharedHelper.morphVoiceFrequency.toFloat())
+
+        seekbar.onSeekChangeListener = object : OnSeekChangeListener {
+            override fun onSeeking(seekParams: SeekParams?) {
+                Log.d("onSeeking", "onSeeking: ${seekParams?.tickText}")
+            }
+
+            override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
+                Log.d("Seekbar", "onStartTrackingTouch: $seekBar")
+            }
+
+            override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
+                Log.d("SeekbarStop", "onStopTrackingTouch: ${seekBar?.progressFloat}")
+                sharedHelper.morphVoiceFrequency = seekBar?.progressFloat?.toString()!!
+            }
+        }
+    }
+
     private fun showEditImageDialog() {
         val dialogView = View.inflate(activity, R.layout.dialog_edit_profile_image, null)
         val dialog = Dialog(requireActivity())
@@ -893,6 +957,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun setDialogTitle(text: String) {
         dialogTitle?.text = text
+    }
+
+    private fun showMorphFrequencyView() {
+        morphFrequencyLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideMorphFrequencyView() {
+        morphFrequencyLayout.visibility = View.GONE
     }
 
     private fun showBurnView() {

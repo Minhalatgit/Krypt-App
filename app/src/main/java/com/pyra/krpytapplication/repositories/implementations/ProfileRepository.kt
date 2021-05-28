@@ -52,7 +52,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
         Api.postMethod(apiInput, object : ApiResponseCallback {
 
-            override  fun setResponseSuccess(jsonObject: JSONObject) {
+            override fun setResponseSuccess(jsonObject: JSONObject) {
                 var gson = Gson()
                 var response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
@@ -71,20 +71,20 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
     }
 
-    fun getProfielDetails(apiInput: ApiInput): MutableLiveData<GetProfileResponseModel>? {
-        var responseModel: MutableLiveData<GetProfileResponseModel>? = MutableLiveData()
+    fun getProfileDetails(apiInput: ApiInput): MutableLiveData<GetProfileResponseModel>? {
+        val responseModel: MutableLiveData<GetProfileResponseModel>? = MutableLiveData()
 
         Api.postMethod(apiInput, object : ApiResponseCallback {
 
-            override  fun setResponseSuccess(jsonObject: JSONObject) {
-                var gson = Gson()
-                var response: GetProfileResponseModel =
+            override fun setResponseSuccess(jsonObject: JSONObject) {
+                val gson = Gson()
+                val response: GetProfileResponseModel =
                     gson.fromJson(jsonObject.toString(), GetProfileResponseModel::class.java)
                 responseModel?.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = GetProfileResponseModel()
+                val response = GetProfileResponseModel()
                 response.error = true
                 response.message = error
                 responseModel?.value = response
@@ -99,7 +99,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
         Api.postMethod(apiInput, object : ApiResponseCallback {
 
-            override  fun setResponseSuccess(jsonObject: JSONObject) {
+            override fun setResponseSuccess(jsonObject: JSONObject) {
                 var gson = Gson()
                 var response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
@@ -139,7 +139,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
-            override  fun setResponseSuccess(jsonObject: JSONObject) {
+            override fun setResponseSuccess(jsonObject: JSONObject) {
                 var gson = Gson()
                 var response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
@@ -199,7 +199,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
-            override  fun setResponseSuccess(jsonObject: JSONObject) {
+            override fun setResponseSuccess(jsonObject: JSONObject) {
                 var gson = Gson()
                 var response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
@@ -229,7 +229,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
-            override  fun setResponseSuccess(jsonObject: JSONObject) {
+            override fun setResponseSuccess(jsonObject: JSONObject) {
                 var gson = Gson()
                 var response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
@@ -263,7 +263,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
-            override  fun setResponseSuccess(jsonObject: JSONObject) {
+            override fun setResponseSuccess(jsonObject: JSONObject) {
                 var gson = Gson()
                 var response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
@@ -281,29 +281,30 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
         return responseModel
     }
 
-   fun getUserDetails(apiParams: ApiInput):MutableLiveData<GetUserDetailsResponse> {
-       val responseModel: MutableLiveData<GetUserDetailsResponse> = MutableLiveData()
+    fun getUserDetails(apiParams: ApiInput): MutableLiveData<GetUserDetailsResponse> {
+        val responseModel: MutableLiveData<GetUserDetailsResponse> = MutableLiveData()
 
-            Api.postMethod(apiParams, object : ApiResponseCallback {
+        Api.postMethod(apiParams, object : ApiResponseCallback {
 
-                override  fun setResponseSuccess(jsonObject: JSONObject) {
-                    val gson = Gson()
-                    val response: GetUserDetailsResponse =
-                        gson.fromJson(jsonObject.toString(), GetUserDetailsResponse::class.java)
-                    responseModel.value = response
-                }
+            override fun setResponseSuccess(jsonObject: JSONObject) {
+                val gson = Gson()
+                val response: GetUserDetailsResponse =
+                    gson.fromJson(jsonObject.toString(), GetUserDetailsResponse::class.java)
+                responseModel.value = response
+            }
 
-                override fun setErrorResponse(error: String) {
-                    val response = GetUserDetailsResponse(error = "true",message = error,data = emptyList())
-                    responseModel.value = response
-                }
-            })
+            override fun setErrorResponse(error: String) {
+                val response =
+                    GetUserDetailsResponse(error = "true", message = error, data = emptyList())
+                responseModel.value = response
+            }
+        })
 
-       return responseModel
+        return responseModel
     }
 
     fun chageNotification(b: Boolean, roomId: String) {
-        chatListDao?.changeNotification(roomId,b)
+        chatListDao?.changeNotification(roomId, b)
     }
 
 }

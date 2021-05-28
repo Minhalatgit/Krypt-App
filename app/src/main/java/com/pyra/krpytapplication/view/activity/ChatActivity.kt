@@ -1255,6 +1255,8 @@ class ChatActivity : BaseActivity(), RecordingListener {
                 setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
                 setOutputFile(file.absolutePath)
                 setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+                //setAudioSamplingRate(48000)
+
                 try {
                     prepare()
                 } catch (e: IOException) {
@@ -1264,7 +1266,9 @@ class ChatActivity : BaseActivity(), RecordingListener {
                 start()
             }
         } catch (ise: IllegalStateException) {
+            ise.printStackTrace()
         } catch (ioe: IOException) {
+            ioe.printStackTrace()
         }
         time = System.currentTimeMillis() / 1000
     }

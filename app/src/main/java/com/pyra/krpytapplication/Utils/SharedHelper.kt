@@ -205,7 +205,7 @@ class SharedHelper(context: Context) {
     var theme: String
         get() : String {
 
-            var themeData = sharedPreference.getKey("theme")
+            val themeData = sharedPreference.getKey("theme")
 
             return if (themeData == "") {
                 "dark"
@@ -217,7 +217,6 @@ class SharedHelper(context: Context) {
             sharedPreference.putKey("theme", value)
         }
 
-
     var imageUrlPath: String
         get() : String {
             return sharedPreference.getKey("imageUrlPath")
@@ -225,7 +224,6 @@ class SharedHelper(context: Context) {
         set(value) {
             sharedPreference.putKey("imageUrlPath", value)
         }
-
 
     var imagePath: String
         get() : String {
@@ -259,12 +257,28 @@ class SharedHelper(context: Context) {
             sharedPreference.putBoolean("isBurnMessageEnabled", value)
         }
 
+    var isMorphVoiceEnabled: Boolean
+        get() : Boolean {
+            return sharedPreference.getBoolean("isMorphVoiceEnabled")
+        }
+        set(value) {
+            sharedPreference.putBoolean("isMorphVoiceEnabled", value)
+        }
+
+    var morphVoiceFrequency: String
+        get() : String {
+            return sharedPreference.getKey("morphVoiceFrequency")
+        }
+        set(value) {
+            sharedPreference.putKey("morphVoiceFrequency", value)
+        }
+
     var chatBubbleColor: String
         get() : String {
             return sharedPreference.getKey("chatBubbleColor")
         }
         set(value) {
-            Log.d("TAG", ": " + value)
+            Log.d("TAG", ": $value")
             return sharedPreference.putKey("chatBubbleColor", value)
         }
 

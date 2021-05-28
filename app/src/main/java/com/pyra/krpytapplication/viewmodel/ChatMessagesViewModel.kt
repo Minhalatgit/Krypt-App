@@ -1062,10 +1062,15 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         )
         mediaPlayer?.setDataSource(chatMessages[position].localMediaPath)
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            mediaPlayer?.playbackParams = PlaybackParams().apply {
-                pitch = 0.75f
-//            speed = 0.75f
+        val sharedPref = SharedHelper(app)
+
+        if (sharedPref.isMorphVoiceEnabled) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                mediaPlayer?.playbackParams = PlaybackParams().apply {
+                    if (sharedPref.morphVoiceFrequency != "") {
+                        pitch = sharedPref.morphVoiceFrequency.toFloat()
+                    }
+                }
             }
         }
 

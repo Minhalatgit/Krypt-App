@@ -52,9 +52,7 @@ class FcmReciver : FirebaseMessagingService() {
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)
 
-
         chatListRepository = ChatListRepository.getInstance((application as MyApp).getAppDatabase())
-
 
         startChatWorkerService()
 

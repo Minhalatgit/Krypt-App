@@ -9,7 +9,6 @@ import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.isNetworkConnected
 import com.pyra.krpytapplication.repositories.interfaces.ApiResponseCallback
 
-
 object Api {
 
     private var MY_SOCKET_TIMEOUT_MS = 50000
@@ -18,8 +17,8 @@ object Api {
         if (input.context!!.isNetworkConnected()) {
 
             Log.d("api request ", input.url + "  " + input.jsonObject.toString())
-            var jsonObjectRequest =
-                object : JsonObjectRequest(Request.Method.POST, input.url, input.jsonObject, {
+            val jsonObjectRequest =
+                object : JsonObjectRequest(Method.POST, input.url, input.jsonObject, {
                     apiResponseCallback.setResponseSuccess(it)
                     Log.d("api response ", input.url + "  " + it.toString())
                 }, {
@@ -47,7 +46,7 @@ object Api {
                 }) {
                     override fun getHeaders(): MutableMap<String, String> {
                         return if (input.headers != null) {
-                            val params: HashMap<String, String> = HashMap<String, String>()
+                            val params: HashMap<String, String> = HashMap()
 
                             for ((key, value) in input.headers!!) {
                                 params[key] = value
