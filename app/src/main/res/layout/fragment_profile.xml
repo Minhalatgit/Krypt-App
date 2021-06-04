@@ -23,49 +23,30 @@
             <RelativeLayout
                 android:id="@+id/headerLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/toolBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_120sdp"
-                    android:translationY="-20dp"
-                    app:cardBackgroundColor="?toolbar_color"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="0dp" />
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_20sdp">
 
                 <ImageView
                     android:id="@+id/backButton"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/_19sdp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:src="@drawable/ic_arrow_back_black_24dp"
-                    android:visibility="invisible"
+                    android:src="@drawable/back_icon"
+                    android:visibility="visible"
                     app:tint="?toolbar_icon_color" />
 
                 <TextView
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/backButton"
-                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
                     android:layout_toEndOf="@id/backButton"
-                    android:fontFamily="?regularFont"
+                    android:fontFamily="?mediumFont"
                     android:text="@string/account"
                     android:textColor="?toolbar_text_color"
                     android:textSize="@dimen/_12sdp" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/userImage"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_below="@id/backButton"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:src="@drawable/user" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -78,14 +59,15 @@
                     android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/userImage"
+                    android:layout_below="@id/profileImageLayout"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/userImage"
                     android:fontFamily="?mediumFont"
-                    android:text="@string/demo_user_name"
                     android:textColor="?toolbar_text_color"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_16sdp"
+                    tools:text="@string/demo_user_name" />
 
                 <ImageView
                     android:id="@+id/editNameIcon"
@@ -101,22 +83,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/userName"
-                    android:layout_alignStart="@id/userName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="?regularFont"
                     android:text="@string/available"
                     android:textColor="?colorPrimary"
                     android:textSize="@dimen/_11sdp" />
 
-                <ImageView
-                    android:id="@+id/editProfile"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_below="@id/toolBar"
-                    android:layout_alignEnd="@id/toolBar"
-                    android:layout_marginLeft="@dimen/_25sdp"
-                    android:layout_marginRight="@dimen/_25sdp"
-                    android:src="@drawable/camera_icon"
-                    android:translationY="-35dp" />
+                <RelativeLayout
+                    android:id="@+id/profileImageLayout"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_below="@id/title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_30sdp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/userImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/user" />
+
+                    <RelativeLayout
+                        android:id="@+id/editProfile"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/grey_oval_background">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/camera_icon"
+                            app:tint="@color/emoji_black" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -154,7 +161,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="3dp"
                     android:src="@drawable/copy"
-                    app:tint="@color/grey_icon_tint" />
+                    app:tint="?colorPrimary" />
 
                 <View
                     android:id="@+id/divider"
@@ -200,6 +207,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/_10sdp"
+                    app:tint="?colorPrimary"
                     android:src="@drawable/edit_icon" />
 
                 <View
@@ -287,6 +295,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/openWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:fontFamily="?mediumFont"
+                    android:gravity="center"
+                    android:text="Open Wallet"
+                    android:textColor="?toolbar_text_color"
+                    android:textSize="@dimen/_13sdp"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/changePassLayout"

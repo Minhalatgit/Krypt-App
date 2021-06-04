@@ -13,10 +13,6 @@ import android.os.Build
 import android.text.TextUtils
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -71,7 +67,7 @@ class MyApp : Application() {
 
 //        startService(Intent(this, ChatRoomConnection::class.java))
 
-        subscripeToTopic()
+        subscribeToTopic()
         createRtcEngine()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -91,9 +87,7 @@ class MyApp : Application() {
             RtcEngine.create(context, appId, mEventHandler)
         } catch (e: Exception) {
             throw RuntimeException(
-                "NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(
-                    e
-                )
+                "NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e)
             )
         }
 
@@ -120,7 +114,7 @@ class MyApp : Application() {
         xmppOperations = XMPPOperations.getInstance()
     }
 
-    private fun subscripeToTopic() {
+    private fun subscribeToTopic() {
 
         FirebaseMessaging.getInstance().subscribeToTopic("heartbeat").addOnSuccessListener {
             Log.d("Susbscribed", "HeartBeat")
@@ -239,6 +233,5 @@ class MyApp : Application() {
         notificationManager.createNotificationChannel(messageGroup)
 
     }
-
 
 }

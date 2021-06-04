@@ -301,6 +301,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             // changeView(MessageBurnType.SECONDS.type)
             initBurnMessageScrollview()
         }
+
+        openWallet.setOnClickListener {
+            //open wallet app screens
+        }
     }
 
     private fun showBurnMessageDialog() {

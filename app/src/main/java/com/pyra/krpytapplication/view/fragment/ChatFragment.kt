@@ -50,12 +50,12 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
     private fun showSearchLayout() {
         selectionPanel.show()
-        toolBar.hide()
+        topLayout.hide()
     }
 
     private fun showNormalLayout() {
         selectionPanel.hide()
-        toolBar.show()
+        topLayout.show()
     }
 
     private fun initListener() {
@@ -131,7 +131,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
                         endDatedate?.let {
                             if (endDatedate != "Not Updated") {
-                                var isSubscriptionEnded =
+                                val isSubscriptionEnded =
                                     isSubScriptionEnded(endDatedate, "yyyy-MM-dd")
 
                                 if (isSubscriptionEnded) {

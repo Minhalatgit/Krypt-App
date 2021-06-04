@@ -24,7 +24,6 @@ class KryptCodeAdapter(
     var onLongClick: (Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
@@ -39,7 +38,6 @@ class KryptCodeAdapter(
     override fun getItemCount(): Int {
         return viewModel?.unNamedContacts?.size ?: 0
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder
@@ -62,7 +60,6 @@ class KryptCodeAdapter(
             }
         }
 
-
         viewHolder.itemView.setOnLongClickListener {
             onLongClick(position)
             true
@@ -79,7 +76,6 @@ class KryptCodeAdapter(
         }
 
     }
-
 
     inner class MyViewHolder(itemView: ItemContactBinding) :
         RecyclerView.ViewHolder(itemView.root) {

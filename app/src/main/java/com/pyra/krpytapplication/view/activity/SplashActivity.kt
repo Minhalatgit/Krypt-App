@@ -51,33 +51,6 @@ class SplashActivity : AppCompatActivity() {
         checkForPhoneStatePermission()
 
         getNewToken()
-
-        Glide.with(this).asGif().load(R.raw.loader)
-            .listener(object : RequestListener<GifDrawable> {
-
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<GifDrawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return false
-                }
-
-                override fun onResourceReady(
-                    resource: GifDrawable?,
-                    model: Any?,
-                    target: Target<GifDrawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    resource?.setLoopCount(10)
-                    return false;
-                }
-
-            }).into(splashLoader)
-
-
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -200,7 +173,6 @@ class SplashActivity : AppCompatActivity() {
                 openNewTaskActivity(KryptCodeActivity::class.java)
             } else {
                 showToast(getString(R.string.phone_state_permission_required))
-
             }
         }
     }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0B68DF</color>
+    <color name="colorPrimary">#dead06</color>
     <color name="colorPrimaryDark">#1F2A3D</color>
     <color name="colorAccent">#0B68DF</color>
 
-
     <!--    dark theme  1F2A3D  -->
-    <color name="dark_page_bg">#000000</color>
+    <color name="dark_page_bg">#191a1d</color>
     <color name="dark_toolbar_color">#394351</color>
     <color name="dark_toolbar_icon_tint">#ffffff</color>
     <color name="dark_toolbar_text_color">#ffffff</color>
@@ -21,11 +20,10 @@
     <color name="inactive_white_color">#707070</color>
     <color name="active_white_color">#FFFFFF</color>
 
-
     <color name="active_text_color">#FFFFFF</color>
     <color name="inactive_text_color">#33FFFFFF</color>
 
-    <color name="text_hint_color_white">#90ffffff</color>
+    <color name="text_hint_color_white">#ffffff</color>
     <color name="text_border_color_hint">#40ffffff</color>
     <color name="text_color_content">#919191</color>
     <color name="grey_icon_tint">#919191</color>
@@ -110,5 +108,10 @@
     <color name="disable_view_bg">#22827b92</color>
 
     <color name="default_chat_bubble">#0B68DF</color>
+
+    <color name="yellow">#dead06</color>
+    <color name="black">#26272b</color>
+    <color name="grey">#828588</color>
+    <color name="bottom_view">#2c2e33</color>
 
 </resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.RelativeLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -46,7 +47,7 @@ class AddContactDialog : BottomSheetDialogFragment() {
     private lateinit var contactNameEditText: EditText
     private lateinit var kryptCodeEditText: EditText
     private lateinit var contactSubmit: Button
-    private lateinit var contactDialogClose: ImageButton
+    private lateinit var contactDialogClose: RelativeLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

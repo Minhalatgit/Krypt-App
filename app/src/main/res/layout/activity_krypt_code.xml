@@ -4,187 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?page_default_bg"
+    android:background="@drawable/generate_krypt_bg"
     tools:context=".view.activity.KryptCodeActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_62sdp"
-        android:translationY="-10dp"
-        app:cardBackgroundColor="?toolbar_color"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="0dp"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="?mediumFont"
+        android:text="@string/generate_krypt_code"
+        android:textColor="?toolbar_text_color"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="@dimen/_19sdp"
-        android:layout_height="@dimen/_19sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:src="@drawable/ic_arrow_back_black_24dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/toolBar"
-        app:layout_constraintTop_toTopOf="@id/toolBar"
-        app:tint="?toolbar_icon_color" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:fontFamily="?regularFont"
-        android:text="@string/generate_krypt_code"
-        android:textColor="?toolbar_text_color"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toBottomOf="@id/backButton"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="@id/backButton" />
-
-    <ImageView
         android:id="@+id/profileIcon"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:src="@drawable/ic_profile_icon_blue"
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:src="@drawable/user_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBar" />
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardBg"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_22sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:cardBackgroundColor="?colorPrimary"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileIcon" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/cardBg"
-        app:layout_constraintEnd_toEndOf="@id/cardBg"
-        app:layout_constraintStart_toStartOf="@id/cardBg"
-        app:layout_constraintTop_toTopOf="@id/cardBg">
-
-        <TextView
-            android:id="@+id/one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/_14sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/_14sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/one"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/_14sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/two"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/four"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/_14sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/three"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/five"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/_14sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/four"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/kryptCodeDesc"
+    <Button
+        android:id="@+id/generateKrypt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_15sdp"
-        android:fontFamily="?regularFont"
-        android:text="@string/krypt_code_content"
-        android:textColor="@color/text_color_content"
-        android:textSize="@dimen/_11sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardBg" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/buttonBg"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_margin="@dimen/_40sdp"
-        android:onClick="onGenerateButtonClicked"
-        app:cardBackgroundColor="?colorPrimary"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="?regularFont"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:background="@drawable/round_yellow_btn_bg"
+        android:elevation="20dp"
+        android:fontFamily="?mediumFont"
         android:onClick="onGenerateButtonClicked"
         android:text="@string/generate_krypt_code"
-        android:textColor="@color/text_color_white"
-        android:textSize="@dimen/_11sdp"
-        app:layout_constraintBottom_toBottomOf="@id/buttonBg"
-        app:layout_constraintEnd_toEndOf="@id/buttonBg"
-        app:layout_constraintStart_toStartOf="@id/buttonBg"
-        app:layout_constraintTop_toTopOf="@id/buttonBg" />
+        android:textAllCaps="false"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/enterKrypt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:fontFamily="?regularFont"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:background="@drawable/round_black_btn_bg"
+        android:elevation="20dp"
+        android:fontFamily="?mediumFont"
         android:onClick="onKryptButtonClicked"
         android:text="@string/enter_krypt_code"
-        android:textColor="@color/text_color_content"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="@dimen/_11sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBg" />
+        app:layout_constraintTop_toBottomOf="@+id/generateKrypt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

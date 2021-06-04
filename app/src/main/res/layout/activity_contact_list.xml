@@ -13,102 +13,62 @@
         android:animateLayoutChanges="true"
         android:background="?page_default_bg">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_70sdp"
-            android:translationY="-20dp"
-            app:cardBackgroundColor="?toolbar_color"
-            app:cardCornerRadius="25dp"
-            app:cardElevation="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:src="@drawable/ic_arrow_back_black_24dp"
-            app:layout_constraintStart_toStartOf="@+id/toolBar"
-            app:layout_constraintTop_toTopOf="@id/toolBar"
-            app:tint="?toolbar_icon_color" />
-
-        <ImageView
-            android:id="@+id/searchButton"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:onClick="onSearchClicked"
-            android:padding="@dimen/_3sdp"
-            android:src="@drawable/search_icon"
-            app:layout_constraintEnd_toEndOf="@+id/toolBar"
-            app:layout_constraintTop_toTopOf="@id/toolBar"
-            app:tint="?toolbar_icon_color" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:fontFamily="?regularFont"
-            android:text="@string/new_message"
-            android:textColor="?toolbar_text_color"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="@id/backButton"
-            app:layout_constraintStart_toEndOf="@+id/backButton"
-            app:layout_constraintTop_toTopOf="@id/backButton" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/toolBar"
-            app:layout_constraintEnd_toEndOf="@id/toolBar"
-            app:layout_constraintStart_toStartOf="@id/toolBar"
-            app:layout_constraintTop_toTopOf="@+id/toolBar">
-
-            <View
-                android:id="@+id/searchBarBg"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/search_bar_bg"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_15sdp"
+                android:fontFamily="?mediumFont"
+                android:text="@string/new_message"
+                android:textColor="?toolbar_text_color"
+                android:textSize="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/searchIcon"
-                android:layout_width="@dimen/_10sdp"
-                android:layout_height="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:src="@drawable/search_icon"
-                app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
-                app:layout_constraintStart_toStartOf="@id/searchBarBg"
-                app:layout_constraintTop_toTopOf="@id/searchBarBg"
-                app:tint="?text_border_color_hint" />
-
-            <EditText
-                android:id="@+id/searchBox"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:background="@null"
-                android:hint="@string/search"
-                android:imeOptions="flagNoPersonalizedLearning"
-                android:textColor="?active_text_color"
-                android:textColorHint="?text_border_color_hint"
-                app:layout_constraintBottom_toBottomOf="@id/searchBarBg"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@drawable/round_black_btn_bg"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchIcon"
-                app:layout_constraintTop_toTopOf="@id/searchBarBg" />
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/searchBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/search"
+                    android:imeOptions="flagNoPersonalizedLearning"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:textColorHint="?text_border_color_hint"
+                    android:textSize="@dimen/_13sdp" />
+
+                <ImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/search_icon"
+                    app:tint="?text_border_color_hint" />
+
+            </RelativeLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.cardview.widget.CardView
@@ -185,7 +145,9 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:fillViewport="true"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar"
             app:layout_constraintVertical_bias="1.0"
@@ -197,25 +159,25 @@
 
                 <ImageView
                     android:id="@+id/group_icon"
-                    android:layout_width="@dimen/_30sdp"
+                    android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:src="@drawable/group_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/bg_one" />
+                    app:tint="@color/yellow" />
 
                 <TextView
                     android:id="@+id/newGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:fontFamily="?mediumFont"
                     android:onClick="onNewGroupClicked"
                     android:text="@string/new_group"
                     android:textColor="?title_color"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_14sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/group_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/group_icon"
@@ -225,7 +187,7 @@
                     android:id="@+id/line1"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:background="?sub_title_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -239,7 +201,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="?regularFont"
                     android:text="@string/krypt_code"
-                    android:textColor="?text_color_content"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -256,7 +218,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/krypt_code_title"
-                    tools:itemCount="5"
+                    tools:itemCount="1"
                     tools:listitem="@layout/item_contact" />
 
                 <View
@@ -276,7 +238,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="?regularFont"
                     android:text="@string/my_contact"
-                    android:textColor="?text_color_content"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -293,7 +255,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/contactsTitle"
-                    tools:itemCount="5"
+                    tools:itemCount="1"
                     tools:listitem="@layout/item_contact" />
 
                 <include

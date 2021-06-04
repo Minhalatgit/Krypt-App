@@ -17,7 +17,6 @@ class SelectedListAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
@@ -33,7 +32,6 @@ class SelectedListAdapter(
         return viewModel?.selectedList?.size ?: 0
     }
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder
 
@@ -41,7 +39,6 @@ class SelectedListAdapter(
         viewHolder.binding.userImage.loadImage(viewModel?.getSelectedImage(position))
 
     }
-
 
     inner class MyViewHolder(itemView: ItemContactBinding) :
         RecyclerView.ViewHolder(itemView.root) {

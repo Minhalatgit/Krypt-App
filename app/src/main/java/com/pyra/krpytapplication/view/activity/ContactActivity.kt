@@ -11,6 +11,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -157,9 +158,6 @@ class ContactActivity : BaseActivity() {
     }
 
     private fun listener() {
-        backButton.setOnClickListener {
-            onBackPressed()
-        }
 
         searchBox.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -218,39 +216,37 @@ class ContactActivity : BaseActivity() {
 
     }
 
-    fun onSearchClicked(view: View) {
+//    fun onSearchClicked(view: View) {
+//
+//        AnimationHelper.enterRevelAnimation(searchView)
+//        AnimationHelper.enterRevelAnimation(randomSearchList)
+//
+//    }
 
-        AnimationHelper.enterRevelAnimation(searchView)
-        AnimationHelper.enterRevelAnimation(randomSearchList)
-
-    }
-
-    override fun onBackPressed() {
-        if (searchView.visibility == View.VISIBLE) {
-            searchBox.setText("")
-            AnimationHelper.exitRevelAnimation(searchView)
-            AnimationHelper.exitRevelAnimation(randomSearchList)
-
-        } else {
-            super.onBackPressed()
-        }
-    }
+//    override fun onBackPressed() {
+//        if (searchView.visibility == View.VISIBLE) {
+//            searchBox.setText("")
+//            AnimationHelper.exitRevelAnimation(searchView)
+//            AnimationHelper.exitRevelAnimation(randomSearchList)
+//
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 
     fun onNewGroupClicked(view: View) {
         showGroupTypeDialog()
     }
 
     private fun showGroupTypeDialog() {
-
-
         val dialogView = View.inflate(this, R.layout.dialog_group_type, null)
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(dialogView)
         val window: Window = dialog.window!!
-        window.setGravity(Gravity.BOTTOM)
+        window.setGravity(Gravity.CENTER)
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show()
 
         val privateText = dialog.findViewById<TextView>(R.id.privateText)
@@ -284,14 +280,13 @@ class ContactActivity : BaseActivity() {
             selectedType = "GENERAL"
         }
 
-        val submitText = dialog.findViewById<TextView>(R.id.submitText)
+        val submitText = dialog.findViewById<Button>(R.id.submitText)
         val cancelText = dialog.findViewById<TextView>(R.id.cancelText)
         submitText.setOnClickListener {
             dialog.dismiss()
             onSubmitTextClicked()
         }
         cancelText.setOnClickListener { dialog.dismiss() }
-
     }
 
     private fun onSubmitTextClicked() {

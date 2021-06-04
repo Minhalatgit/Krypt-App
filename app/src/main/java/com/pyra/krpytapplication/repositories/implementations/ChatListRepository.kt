@@ -30,7 +30,7 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         chatListDao = appDataBase?.chatListDao()
         chatMessageDao = appDataBase?.chatMessagesDao()
         clearDb = appDataBase?.clearDbDao()
-        groupParticipationDao = appDataBase?.groupPaticipationDao()
+        groupParticipationDao = appDataBase?.groupParticipationDao()
         blockListDao = appDataBase?.blockListDao()
     }
 

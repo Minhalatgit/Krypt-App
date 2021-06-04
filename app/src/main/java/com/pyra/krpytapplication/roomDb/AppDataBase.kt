@@ -58,7 +58,7 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun chatListDao(): ChatListDao?
     abstract fun chatMessagesDao(): ChatMessagesDao?
     abstract fun clearDbDao(): ClearDbDao?
-    abstract fun groupPaticipationDao(): GroupParticipationDao?
+    abstract fun groupParticipationDao(): GroupParticipationDao?
     abstract fun blockListDao(): BlockListDao?
     abstract fun burnMessageDao(): BurnMessageDao?
 

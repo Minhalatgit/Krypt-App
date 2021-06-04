@@ -64,8 +64,8 @@
     <string name="example_time">1.17 PM</string>
     <string name="pick_color_sender">Pick a Color For Sender Bubble</string>
     <string name="pick_color_receiver">Pick a Color For Receiver Bubble</string>
-    <string name="add_contact">Add contact</string>
-    <string name="enter_contact_name">Enter contact name</string>
+    <string name="add_contact">Add to contact</string>
+    <string name="enter_contact_name">Name</string>
     <string name="camera">Camera</string>
     <string name="audio">Audio</string>
     <string name="record">Record</string>
@@ -108,11 +108,11 @@
     <string name="take_photo">Take Photo</string>
     <string name="upload_from_gallery">Upload from Gallery</string>
     <string name="remove_photo">Remove photo</string>
-    <string name="choose_group_type">Choose group type</string>
+    <string name="choose_group_type">Choose Group type</string>
     <string name="private_text">Private</string>
     <string name="general">General</string>
     <string name="cancel">Cancel</string>
-    <string name="add_people">Add people...</string>
+    <string name="add_people">Add people</string>
     <string name="enter_group_name">Enter group name</string>
     <string name="you_deleted_the_message">You deleted the message</string>
     <string name="edit_name">Edit Name</string>

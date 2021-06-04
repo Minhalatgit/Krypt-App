@@ -40,7 +40,6 @@ class NewGroupDetailsActivity : BaseActivity() {
     var uploadFile: File? = null
     var sharedHelper = SharedHelper(this)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_group_details)
@@ -81,19 +80,14 @@ class NewGroupDetailsActivity : BaseActivity() {
     }
 
     private fun initAdapter() {
-
         chatListViewModel?.getSelectedUsers()
         adapter = SelectedListAdapter(this, chatListViewModel)
         val contactListLayoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-
         contactList.layoutManager = contactListLayoutManager
         contactList.adapter = adapter
-
-
     }
-
 
     private fun showEditImageDialog() {
         val dialogView = View.inflate(this, R.layout.dialog_edit_profile_image, null)
@@ -137,9 +131,7 @@ class NewGroupDetailsActivity : BaseActivity() {
             profileImage.setImageDrawable(getDrawable(R.drawable.camera_icon))
             dialog.dismiss()
         }
-
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -155,7 +147,6 @@ class NewGroupDetailsActivity : BaseActivity() {
 
         }
     }
-
 
     private fun handleGallery(data: Intent?) {
         if (data != null) {
@@ -209,7 +200,6 @@ class NewGroupDetailsActivity : BaseActivity() {
             } else {
 
                 showToast(getString(R.string.camera_permission_error))
-
 
             }
         }

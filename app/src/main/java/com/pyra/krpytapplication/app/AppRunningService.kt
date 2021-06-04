@@ -28,7 +28,7 @@ class AppRunningService : Service() {
             socket?.let {
                 if (it.connected()) {
 
-                    var jsonObject = JSONObject()
+                    val jsonObject = JSONObject()
                     jsonObject.put(
                         Constants.SocketKeys.USERNAME,
                         sharedHelper?.kryptKey.toString().toUpperCase()
@@ -127,7 +127,7 @@ class AppRunningService : Service() {
             if (socket == null || !socket?.connected()!!) {
                 initSockets()
             }
-            var jsonObject = JSONObject()
+            val jsonObject = JSONObject()
             jsonObject.put(
                 Constants.SocketKeys.USERNAME,
                 sharedHelper?.kryptKey.toString().toUpperCase()

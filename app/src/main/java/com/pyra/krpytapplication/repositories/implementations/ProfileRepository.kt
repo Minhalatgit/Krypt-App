@@ -25,7 +25,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
 
     init {
-        groupParticipationDao = appDataBase?.groupPaticipationDao()
+        groupParticipationDao = appDataBase?.groupParticipationDao()
         chatListDao = appDataBase?.chatListDao()
         chatMessagesDao = appDataBase?.chatMessagesDao()
         blockListDao = appDataBase?.blockListDao()

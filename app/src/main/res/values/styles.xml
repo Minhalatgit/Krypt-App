@@ -23,7 +23,6 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
 
-
     </style>
 
     <style name="DarkTheme.WithActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
@@ -84,7 +83,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-
         <item name="page_default_bg">@color/light_page_bg</item>
         <item name="toolbar_color">@color/light_toolbar_color</item>
         <item name="toolbar_icon_color">@color/light_toolbar_icon_tint</item>
@@ -122,7 +120,7 @@
     </style>
 
     <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:layout_width">24dp</item>
@@ -197,7 +195,7 @@
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 
     <style name="SwitchStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">@color/bg_one</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorSwitchThumbNormal">@color/white</item>
         <item name="android:colorForeground">@color/text_color_grey_light</item>
     </style>

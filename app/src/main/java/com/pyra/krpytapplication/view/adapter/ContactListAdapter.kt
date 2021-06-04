@@ -27,7 +27,6 @@ class ContactListAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
@@ -42,7 +41,6 @@ class ContactListAdapter(
     override fun getItemCount(): Int {
         return viewModel?.namedContacts?.size ?: 0
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder
@@ -80,7 +78,6 @@ class ContactListAdapter(
         }
 
     }
-
 
     inner class MyViewHolder(itemView: ItemContactBinding) :
         RecyclerView.ViewHolder(itemView.root) {

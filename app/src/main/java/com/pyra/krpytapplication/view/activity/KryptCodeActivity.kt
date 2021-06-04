@@ -92,8 +92,8 @@ class KryptCodeActivity : BaseActivity() {
         val dialogView = View.inflate(this, R.layout.dialog_terms_of_services, null)
         val dialog = Dialog(this)
         val termsCheckBox = dialogView.findViewById<CheckBox>(R.id.termsCheckBox)
-        val cancelBtn = dialogView.findViewById<CardView>(R.id.cancelBtn)
-        val proceedBtn = dialogView.findViewById<CardView>(R.id.proceedBtn)
+        val cancelBtn = dialogView.findViewById<Button>(R.id.cancelBtn)
+        val proceedBtn = dialogView.findViewById<Button>(R.id.proceedBtn)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(dialogView)
         val window: Window = dialog.window!!
@@ -127,10 +127,10 @@ class KryptCodeActivity : BaseActivity() {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
 
-        val backButton = dialog.findViewById<ImageView>(R.id.backIcon)
+        val backButton = dialog.findViewById<RelativeLayout>(R.id.backIcon)
         backButton.setOnClickListener { dialog.dismiss() }
 
-        val submitButton = dialog.findViewById<TextView>(R.id.submitButton)
+        val submitButton = dialog.findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
             val kryptCode = kryptCodeEditText.text.toString()
             if (isValidKryptCode(kryptCode)) {

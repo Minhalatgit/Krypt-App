@@ -59,7 +59,6 @@ fun fetchThemeColor(id: Int, context: Context): Int {
     return color
 }
 
-
 fun getStringFromRawFile(context: Context): String {
     val inputStream: InputStream =
         context.resources.openRawResource(R.raw.name)
@@ -73,7 +72,6 @@ fun getStringFromRawFile(context: Context): String {
     reader.close()
     return result.toString()
 }
-
 
 fun getNameList(context: Context): List<String>? {
     var response = ""

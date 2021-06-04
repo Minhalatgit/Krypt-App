@@ -267,7 +267,6 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
                 }
             }
 
-
             if (contains) {
 //            selectedList.remove(chatListSchema)
             } else {

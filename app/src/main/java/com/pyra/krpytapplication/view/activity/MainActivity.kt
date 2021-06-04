@@ -2,13 +2,8 @@ package com.pyra.krpytapplication.view.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.PowerManager
-import android.provider.Settings
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -30,6 +25,7 @@ import com.pyra.krpytapplication.view.fragment.VaultPassDialogFragment
 import com.pyra.krpytapplication.viewmodel.CallViewModel
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import getImei
+import org.jetbrains.anko.toast
 import kotlin.properties.Delegates
 
 class MainActivity : BaseActivity(), OnClickButtonListener {
@@ -38,7 +34,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
 
     private val chatListViewModel: ChatListViewModel by viewModels()
 
-    private lateinit var profielFragment: ProfileFragment
+    private lateinit var profileFragment: ProfileFragment
     private lateinit var vaultFragment: VaultFragment
 
     private val vaultPassDialogFragment: VaultPassDialogFragment by lazy {
@@ -49,7 +45,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     }
 
     val bottomNavigation: BottomNavigationView by lazy {
-        findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        findViewById(R.id.bottomNavigation)
     }
 
     val fm: FragmentManager = supportFragmentManager
@@ -150,15 +146,15 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
                 }
 
                 R.id.profile -> {
-                    if (this@MainActivity::profielFragment.isInitialized) {
-                        fm.beginTransaction().hide(active).show(profielFragment).commit()
-                        active = profielFragment
+                    if (this@MainActivity::profileFragment.isInitialized) {
+                        fm.beginTransaction().hide(active).show(profileFragment).commit()
+                        active = profileFragment
                         lastSelectedTab = R.id.profile
                     } else {
-                        profielFragment = ProfileFragment()
-                        fm.beginTransaction().add(R.id.nav_host, profielFragment, "ProfielFragment")
+                        profileFragment = ProfileFragment()
+                        fm.beginTransaction().add(R.id.nav_host, profileFragment, "ProfielFragment")
                             .hide(active).commit()
-                        active = profielFragment
+                        active = profileFragment
                         lastSelectedTab = R.id.profile
                     }
 
@@ -208,6 +204,10 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
                         }
 
                     }
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.more -> {
+                    toast("More menus")
                     return@OnNavigationItemSelectedListener true
                 }
             }

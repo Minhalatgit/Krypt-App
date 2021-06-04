@@ -35,7 +35,6 @@ class GalleryImageActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_gallery)
 
-
         cameraFAB.clickWithDebounce {
             Intent(this, CameraActivity::class.java).apply {
                 putExtra(Constants.IntentKeys.ISVIDEOAVAILABLE, true)

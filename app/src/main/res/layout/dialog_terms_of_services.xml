@@ -56,51 +56,28 @@
             android:layout_marginRight="@dimen/_10sdp"
             android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
+            <Button
                 android:id="@+id/cancelBtn"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="?colorPrimary"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="0dp">
-
-                <TextView
-                    android:id="@+id/cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="?regularFont"
-                    android:text="Cancel"
-                    android:textColor="@color/text_color_white"
-                    android:textSize="@dimen/_11sdp" />
-
-            </androidx.cardview.widget.CardView>
+                android:background="@drawable/round_black_btn_bg"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
 
             <View
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="wrap_content" />
 
-            <androidx.cardview.widget.CardView
+            <Button
                 android:id="@+id/proceedBtn"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="?colorPrimary"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="0dp">
-
-                <TextView
-                    android:id="@+id/proceedText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="?regularFont"
-                    android:text="Proceed"
-                    android:textColor="@color/text_color_white"
-                    android:textSize="@dimen/_11sdp" />
-
-            </androidx.cardview.widget.CardView>
+                android:background="@drawable/round_yellow_btn_bg"
+                android:text="Proceed"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 

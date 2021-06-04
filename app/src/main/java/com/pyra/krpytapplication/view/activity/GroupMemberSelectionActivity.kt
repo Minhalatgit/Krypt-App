@@ -33,7 +33,6 @@ class GroupMemberSelectionActivity : BaseActivity() {
         header.text = getString(R.string.new_group)
         initAdapter()
         initListeners()
-
     }
 
     private fun getIntentValues() {
@@ -53,7 +52,6 @@ class GroupMemberSelectionActivity : BaseActivity() {
         }
     }
 
-
     private fun initAdapter() {
 
         chatListViewModel?.getNamedUser()
@@ -69,7 +67,6 @@ class GroupMemberSelectionActivity : BaseActivity() {
             contactList.adapter = chatListAdapter
         })
 
-
         chatListViewModel?.getUnnamedUser()
         chatListViewModel?.updateUnnameList?.observe(this, Observer {
 
@@ -82,13 +79,10 @@ class GroupMemberSelectionActivity : BaseActivity() {
 
             })
             kryptLists.adapter = kryptCodeAdapter
-
         })
-
 
         val selectedContactLayoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
 
         selectedContactAdapter = SelectedContactAdapter(this, chatListViewModel) { position ->
             chatListViewModel?.removeSelectedUser(position)
@@ -96,11 +90,9 @@ class GroupMemberSelectionActivity : BaseActivity() {
         selectedContactLists.layoutManager = selectedContactLayoutManager
         selectedContactLists.adapter = selectedContactAdapter
 
-
         chatListViewModel?.selectedListUpdate?.observe(this, Observer {
             selectedContactAdapter.notifyChanges()
         })
     }
-
 
 }
