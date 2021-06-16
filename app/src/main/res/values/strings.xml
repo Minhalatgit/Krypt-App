@@ -14,7 +14,7 @@
     <string name="gallery">Gallery</string>
     <string name="media">Media</string>
     <string name="status">Status</string>
-    <string name="account">Account</string>
+    <string name="account">Accounts</string>
     <string name="phone_number">Phone Number</string>
     <string name="phone">Phone</string>
     <string name="available">Available</string>
@@ -61,10 +61,10 @@
     <string name="change_chat_color">Change Chat Color</string>
     <string name="hello">Hello</string>
     <string name="hi_how">Hi how r u?</string>
-    <string name="example_time">1.17 PM</string>
+    <string name="example_time">2:30 PM</string>
     <string name="pick_color_sender">Pick a Color For Sender Bubble</string>
     <string name="pick_color_receiver">Pick a Color For Receiver Bubble</string>
-    <string name="add_contact">Add to contact</string>
+    <string name="add_contact">Add to Contact</string>
     <string name="enter_contact_name">Name</string>
     <string name="camera">Camera</string>
     <string name="audio">Audio</string>
@@ -155,7 +155,7 @@
     <string name="password_should_contain_atleast_one_numeric">must have atleast one numeric character !!</string>
     <string name="password">Password</string>
     <string name="delete_all_chat">Delete all chat</string>
-    <string name="are_you_sure_delete_all_the_nchat_messages">Are you sure delete all the \nchat messages?</string>
+    <string name="are_you_sure_delete_all_the_nchat_messages">Are you sure delete all the chat messages?</string>
     <string name="hours">hours</string>
     <string name="minutes">minutes</string>
     <string name="days">days</string>
@@ -195,7 +195,7 @@
 
     <string name="slide_to_cancel">"Slide to cancel"</string>
     <string name="app_info">"A WhatsApp style audio recording view to send voice notes in chat.\nHold the Mic to record, then slide left to cancel or swipe up to Lock and record.\n\nCredit:\nVarun John\nhttps://github.com/varunjohn\nvarunjohn1990@gmail.com"</string>
-    <string name="type_a_message">Type a message</string>
+    <string name="type_a_message">Type your message here</string>
     <string name="create_room">Create room</string>
 
     <bool name="is_right_to_left">false</bool>

@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -23,9 +24,6 @@ import com.pyra.krpytapplication.viewmodel.SearchViewModel
 import com.pyra.network.UrlHelper
 import kotlinx.android.synthetic.main.fragment_chat.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class ChatFragment : Fragment(R.layout.fragment_chat) {
 
     lateinit var chatListAdapter: ChatListAdapter
@@ -116,44 +114,41 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         profileViewModel.getUserDeatilsResponse(
             SharedHelper(requireContext()).kryptKey,
             UrlHelper.GETUSERDETAILS
-        )
-            .observe(viewLifecycleOwner) {
+        ).observe(viewLifecycleOwner) {
 
-                if (it.error == "false") {
+            if (it.error == "false") {
 
-                    it.data[0].subsEnddate?.let {
+                it.data[0].subsEnddate?.let {
 
-                        val endDatedate = getFormatedDate(
-                            it,
-                            "yyyy-MM-dd'T'HH:mm:ss",
-                            "yyyy-MM-dd"
-                        )
+                    val endDatedate = getFormatedDate(
+                        it,
+                        "yyyy-MM-dd'T'HH:mm:ss",
+                        "yyyy-MM-dd"
+                    )
 
-                        endDatedate?.let {
-                            if (endDatedate != "Not Updated") {
-                                val isSubscriptionEnded =
-                                    isSubScriptionEnded(endDatedate, "yyyy-MM-dd")
+                    endDatedate?.let {
+                        if (endDatedate != "Not Updated") {
+                            val isSubscriptionEnded =
+                                isSubScriptionEnded(endDatedate, "yyyy-MM-dd")
 
-                                if (isSubscriptionEnded) {
-                                    clearAllData()
-                                }
+                            if (isSubscriptionEnded) {
+                                clearAllData()
                             }
                         }
-
                     }
 
                 }
 
             }
 
+        }
+
     }
 
     private fun clearAllData() {
-
         val bundle = Bundle()
         bundle.putBoolean("isSubEnded", true)
         requireActivity().openNewTaskActivity(KryptCodeActivity::class.java, bundle)
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -178,6 +173,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
             }
             selectedCount.text = chatListViewModel.getSelectedCount().toString()
         }
+
+        chatListViewModel.chatListCount.observe(viewLifecycleOwner, Observer {
+            messageCount.text = "( $it messages )"
+        })
 
         chatListViewModel.getChatList()
     }

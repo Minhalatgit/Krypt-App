@@ -6,7 +6,6 @@ import android.media.*
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -32,7 +31,6 @@ import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.*
-import java.lang.IllegalStateException
 import java.lang.RuntimeException
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,7 +38,7 @@ import kotlin.collections.ArrayList
 class ChatMessagesViewModel(application: Application) : AndroidViewModel(application) {
 
     private var observer: Observer<PagedList<ChatMessagesSchema>>
-    private var savedMessageobserver: Observer<PagedList<ChatMessagesSchema>>
+    private var savedMessageObserver: Observer<PagedList<ChatMessagesSchema>>
     var chatMessagePagedList: PagedList<ChatMessagesSchema>? = null
     private lateinit var kryptId: String
     private lateinit var roomId: String
@@ -102,7 +100,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         }
 
 
-        savedMessageobserver = Observer {
+        savedMessageObserver = Observer {
 
             //            val list = it as List<ChatMessagesSchema>
 
@@ -139,7 +137,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
                 if (!isGroup) {
 
-                    var jsonObject = JSONObject()
+                    val jsonObject = JSONObject()
                     jsonObject.put("fromUserName", SharedHelper(app).kryptKey.toLowerCase())
                     jsonObject.put("toUserName", kryptId.toLowerCase())
 
@@ -210,7 +208,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun getSavedMessages() {
-        chatMessagesRepository.getsavedMessages()?.observeForever(observer)
+        chatMessagesRepository.getSavedMessages()?.observeForever(observer)
     }
 
     fun getChatMessagesCount(): Int {
@@ -1146,7 +1144,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     fun setReply(it: Int) {
         Coroutine.iOWorker {
-            val message = chatMessagesRepository.getreplyMessage(chatMessages[it].messageId)
+            val message = chatMessagesRepository.getReplyMessage(chatMessages[it].messageId)
             Coroutine.mainWorker { message?.let { reply.value = it } }
         }
     }
@@ -1316,7 +1314,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
     fun getOnlineStatus(kryptCode: String) {
 
         Coroutine.mainWorker {
-            chatListRepository.getonlineStatus(kryptCode)?.observeForever {
+            chatListRepository.getOnlineStatus(kryptCode)?.observeForever {
 
                 if (it.isOnline == 1) {
                     onlineStatus.value = app.getString(R.string.online)

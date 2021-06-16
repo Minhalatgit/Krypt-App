@@ -60,15 +60,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/headerText">
+
+            <ImageView
+                android:id="@+id/senderCorner"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/chat_bubble_corner_sender"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <LinearLayout
                 android:id="@+id/chatBubbleColor"
@@ -76,17 +84,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:background="@drawable/message_bg_oval"
+                android:background="@drawable/chat_bubble_bg_sender"
                 android:minWidth="@dimen/_200sdp"
                 android:orientation="vertical"
                 android:padding="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-
 
                 <LinearLayout
                     android:id="@+id/layoutReply"
@@ -99,26 +103,19 @@
 
                 </LinearLayout>
 
-
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
 
                     <TextView
                         android:id="@+id/messageTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:fontFamily="?regularFont"
                         android:text="1.17 PM"
-                        android:textColor="?toolbar_text_color"
-                        android:textSize="@dimen/_9sdp"
+                        android:theme="@style/ChatMessageTimeStyle"
                         app:layout_constraintBottom_toBottomOf="@id/messageStatus"
                         app:layout_constraintEnd_toStartOf="@id/messageStatus" />
-
 
                     <ImageView
                         android:id="@+id/messageStatus"
@@ -126,13 +123,11 @@
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:src="@drawable/ic_seen_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/documentDetails" />
-
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/documentDetails"
@@ -154,14 +149,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-
                         <TextView
                             android:id="@+id/messageContent"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_31sdp"
-                            android:fontFamily="?regularFont"
+                            android:fontFamily="@font/jost_regular"
                             android:padding="@dimen/_8sdp"
                             android:singleLine="true"
                             android:text="File Name (1)"
@@ -171,7 +165,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/documentIcon"
                             app:layout_constraintTop_toTopOf="parent" />
-
 
                         <include
                             android:id="@+id/uploadingLayout"

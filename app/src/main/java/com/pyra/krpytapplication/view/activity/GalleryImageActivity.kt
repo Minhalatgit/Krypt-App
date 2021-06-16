@@ -51,10 +51,7 @@ class GalleryImageActivity : BaseActivity() {
         initObservers()
         setImageAdapter()
         viewModel.getImageList()
-
-
     }
-
 
     private fun setImageAdapter() {
 
@@ -71,7 +68,6 @@ class GalleryImageActivity : BaseActivity() {
         imageRecycler.layoutManager = linearLayoutManager
         imageRecycler.adapter = imageViewAdapter
 
-
     }
 
     private fun initObservers() {
@@ -80,7 +76,6 @@ class GalleryImageActivity : BaseActivity() {
             imageViewAdapter?.notifyDataChanged()
         })
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

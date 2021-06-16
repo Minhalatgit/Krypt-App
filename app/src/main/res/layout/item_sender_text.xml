@@ -39,7 +39,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <TextView
             android:id="@+id/dateSectionHeader"
             android:layout_width="wrap_content"
@@ -62,39 +61,47 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/headerText">
 
+            <ImageView
+                android:id="@+id/senderCorner"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/chat_bubble_corner_sender"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <LinearLayout
                 android:id="@+id/chatBubbleColor"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/message_bg_oval"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:background="@drawable/chat_bubble_bg_sender"
                 android:orientation="vertical"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/senderCorner"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
                     android:id="@+id/layoutReply"
-                    android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:visibility="gone">
 
-                    <include
-                        layout="@layout/include_item_reply"/>
+                    <include layout="@layout/include_item_reply" />
 
                 </LinearLayout>
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -111,9 +118,10 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:gravity="end"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/messageContent">
 
@@ -122,11 +130,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:fontFamily="?regularFont"
                             android:text="1.17 PM"
-                            android:textColor="?toolbar_text_color"
-                            android:textSize="@dimen/_10sdp" />
-
+                            android:theme="@style/ChatMessageTimeStyle" />
 
                         <ImageView
                             android:id="@+id/messageStatus"
@@ -134,20 +139,16 @@
                             android:layout_height="@dimen/_13sdp"
                             android:src="@drawable/ic_seen_icon" />
 
-
                     </LinearLayout>
-
 
                     <com.vanniktech.emoji.EmojiTextView
                         android:id="@+id/messageContent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:fontFamily="?regularFont"
                         android:paddingStart="@dimen/_5sdp"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
                         android:text="12345678"
+                        android:theme="@style/ChatMessageStyle"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"

@@ -100,7 +100,6 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             } else {
                 requireContext().showToast(getString(R.string.storage_permission_error))
 
-
             }
 
             Constants.Permission.CAMERA_STORAGE_PERMISSIONS -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED
@@ -123,9 +122,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             }
         }
 
-
     }
-
 
     open fun handleGallery(data: Intent?) {
 

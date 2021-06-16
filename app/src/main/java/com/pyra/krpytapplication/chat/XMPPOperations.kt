@@ -59,13 +59,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-
 object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceivedListener,
     RosterListener,
     SubscribeListener, ChatStateListener, MessageListener, StanzaListener {
     var listener: AuthenticationListner? = null
     lateinit var chatManager: ChatManager
-
 
     enum class ConnectionState {
         CONNECTED, AUTHENTICATED, CONNECTING, DISCONNECTING, DISCONNECTED
@@ -102,8 +100,6 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
             DeliveryReceiptRequest().namespace,
             DeliveryReceiptRequest.Provider()
         )
-
-
     }
 
     private fun getBasicBuilder(): XMPPTCPConnectionConfiguration.Builder {
@@ -527,10 +523,8 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
         groupType: String
     ) {
 
-
         val mutliUserChatMessagerjoin =
             MultiUserChatManager.getInstanceFor(XMPP.getInstance().getUserConnection())
-
 
         //joining the group if not joined
         val joinBareId: EntityBareJid =
@@ -603,7 +597,7 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
     override fun authenticated(connection: XMPPConnection?, resumed: Boolean) {
         listener?.isSuccess(true)
 //        listenerInvitation()
-        println("LXMPP authenticated. Resumed " + resumed)
+        println("LXMPP authenticated. Resumed $resumed")
     }
 
     override fun presenceAvailable(address: FullJid?, availablePresence: Presence?) {
@@ -660,8 +654,7 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
         WorkManager
             .getInstance(MyApp.getInstance().applicationContext)
             .enqueueUniqueWork(
-                messageId + messageStatus
-                ,
+                messageId + messageStatus,
                 ExistingWorkPolicy.KEEP, connectRequest
             )
     }
@@ -829,21 +822,21 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
         entity: ChatListSchema
     ) {
 
-        var barejid: EntityBareJid =
+        val barejid: EntityBareJid =
             entityBareFrom("$roomId@conference.${Constants.XMPPKeys.CHAT_DOMAIN}")
-        var mutliUserChatMessager =
+        val mutliUserChatMessager =
             MultiUserChatManager.getInstanceFor(XMPP.getInstance().getUserConnection())
 
-        var multiUserChat =
+        val multiUserChat =
             mutliUserChatMessager.getMultiUserChat(barejid)
 
         multiUserChat.create(Resourcepart.from(roomId))
 
-        var form = multiUserChat.configurationForm
-        var submitForm = form.createAnswerForm()
+        val form = multiUserChat.configurationForm
+        val submitForm = form.createAnswerForm()
 
-        var owners = ArrayList<String>()
-        var admins = ArrayList<String>()
+        val owners = ArrayList<String>()
+        val admins = ArrayList<String>()
 
         owners.add(SharedHelper(MyApp.getInstance().baseContext).kryptKey + "@" + Constants.XMPPKeys.CHAT_DOMAIN)
 
@@ -864,12 +857,11 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
         submitForm.setAnswer("muc#roomconfig_roomowners", owners)
         submitForm.setAnswer("muc#roomconfig_roomadmins", admins)
 
-
         multiUserChat.sendConfigurationForm(submitForm)
 
         multiUserChat.join(Resourcepart.from(SharedHelper(MyApp.getInstance().baseContext).kryptKey))
 
-        var message = Message()
+        val message = Message()
         // message.setType(Type.normal);  //optional
         message.subject = Constants.XMPPKeys.GROUP_CHAT_INVITATION
         message.body = Constants.XMPPKeys.GROUP_GREETINGS
@@ -880,7 +872,7 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
         message.addBody("from", SharedHelper(MyApp.getInstance().baseContext).kryptKey)
 
         for (i in userList.indices) {
-            var eJId =
+            val eJId =
                 entityBareFrom(userList[i].kryptId + "@" + Constants.XMPPKeys.CHAT_DOMAIN)
             multiUserChat.invite(message, eJId, grpName)
         }
@@ -897,7 +889,6 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
 //        }, 2000)
 
     }
-
 
     fun listenerInvitation() {
         MultiUserChatManager.getInstanceFor(XMPP.getInstance().getUserConnection())
@@ -920,7 +911,6 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
 
                     }
                 }
-
 
                 val barejid: EntityBareJid =
                     entityBareFrom("$groupId@conference.${Constants.XMPPKeys.CHAT_DOMAIN}")
@@ -996,7 +986,6 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
                         ExistingWorkPolicy.KEEP, connectRequest
                     )
 
-
             }
     }
 
@@ -1019,7 +1008,6 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
                 )
             )
 
-
         val cal = Calendar.getInstance()
         cal.add(Calendar.DATE, -1)
 
@@ -1028,11 +1016,8 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
             mucConfig.requestHistorySince(it)
         }
 
-
         val mucEnterConfig = mucConfig.build()
         multiUserChat.join(mucEnterConfig)
-
-
     }
 
     fun XMPPAddNewPrivacyList(
@@ -1149,10 +1134,8 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
         messageId: String
     ) {
 
-
         val mutliUserChatMessagerjoin =
             MultiUserChatManager.getInstanceFor(XMPP.getInstance().getUserConnection())
-
 
         //joining the group if not joined
         val joinBareId: EntityBareJid =
@@ -1213,7 +1196,7 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
             val manager = MamManager.getInstanceFor(XMPP.getInstance().getUserConnection())
             val r: MamManager.MamQuery = manager.queryMostRecentPage(jid, messageToBeTaken)
 
-            var messagesList = r.messages
+            val messagesList = r.messages
 
             Log.d("Messages ", messagesList.toString())
             if (messagesList.size != 0) {
@@ -1230,8 +1213,6 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
             return false
         }
 
-
     }
-
 
 }

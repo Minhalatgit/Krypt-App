@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_constrainedWidth="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:layout_constrainedWidth="true">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardReply"
@@ -13,18 +13,18 @@
         android:animateLayoutChanges="true"
         android:visibility="visible"
         app:cardBackgroundColor="?reply_bg_clr"
-        app:layout_constraintHorizontal_bias="0"
         app:cardCornerRadius="5dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:minWidth="@dimen/_160sdp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:minWidth="@dimen/_160sdp">
 
             <View
                 android:layout_width="@dimen/_3sdp"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:fontFamily="?regularFont"
+                android:fontFamily="@font/jost_medium"
                 android:singleLine="true"
                 android:text="@string/add_to_contacts"
                 android:textColor="@color/colorPrimary"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:fontFamily="?regularFont"
+                android:fontFamily="@font/jost_regular"
                 android:singleLine="true"
                 android:text="@string/add_to_contacts"
                 android:textColor="?text_color_content"
@@ -72,7 +72,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

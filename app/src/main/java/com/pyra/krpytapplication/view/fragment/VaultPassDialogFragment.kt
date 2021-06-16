@@ -38,17 +38,6 @@ class VaultPassDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (SharedHelper(requireContext()).theme == "light") {
-            hideShowPassword.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.dark_page_bg
-                )
-            )
-        } else {
-            hideShowPassword.setColorFilter(ContextCompat.getColor(requireContext(), R.color.white))
-        }
-
         hideShowPassword.setOnClickListener {
             password.showHidePass(it)
         }

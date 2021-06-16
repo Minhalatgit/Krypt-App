@@ -21,7 +21,6 @@
         app:constraint_referenced_ids="switchCallsIcon,userImage,userIcon"
         android:layout_height="0dp"/>
 
-
     <SurfaceView
         android:layout_width="match_parent"
         android:id="@+id/biggerVideoLayout"
@@ -32,8 +31,6 @@
         android:src="?page_default_bg"
         android:layout_height="match_parent"/>
 
-
-
     <ImageView
         android:layout_width="match_parent"
         android:id="@+id/userImage"
@@ -43,8 +40,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:src="?page_default_bg"
         android:layout_height="match_parent"/>
-
-
 
     <TextView
         android:id="@+id/userName"
@@ -59,7 +54,6 @@
         android:textSize="@dimen/_15sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/callStatus"
@@ -78,14 +72,11 @@
         android:layout_height="@dimen/_30sdp"
         android:id="@+id/userIcon"
         android:src="@drawable/call_user_icon"
-        android:tint="?toolbar_icon_color"
+        app:tint="?toolbar_icon_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
 
     <ImageView
         android:layout_width="0dp"
@@ -97,7 +88,7 @@
         android:id="@+id/muteIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:tint="?toolbar_icon_color" />
+        app:tint="?toolbar_icon_color" />
 
     <ImageView
         android:layout_width="0dp"
@@ -109,7 +100,7 @@
         android:id="@+id/switchCameraIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/muteIcon"
-        android:tint="?toolbar_icon_color" />
+        app:tint="?toolbar_icon_color" />
 
     <ImageView
         android:layout_width="0dp"
@@ -120,8 +111,7 @@
         android:id="@+id/switchCallsIcon"
         app:layout_constraintStart_toEndOf="@id/muteIcon"
         app:layout_constraintTop_toTopOf="@id/muteIcon"
-        android:tint="?toolbar_icon_color" />
-
+        app:tint="?toolbar_icon_color" />
 
     <ImageView
         android:layout_width="0dp"
@@ -132,9 +122,7 @@
         android:id="@+id/speakerIcon"
         app:layout_constraintTop_toTopOf="@id/muteIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        android:tint="?toolbar_icon_color" />
-
-
+        app:tint="?toolbar_icon_color" />
 
     <ImageView
         android:layout_width="@dimen/_35sdp"
@@ -142,7 +130,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/_25sdp"
         android:src="@drawable/end_call_icon"
-        android:tint="@color/red_color"
+        app:tint="@color/red_color"
         android:id="@+id/endCallIcon"
         android:onClick="onEndCallClicked"
         app:layout_constraintBottom_toTopOf="@id/muteIcon"
@@ -158,6 +146,5 @@
         app:layout_constraintBottom_toTopOf="@id/endCallIcon"
         android:background="@android:color/darker_gray"
         android:layout_marginRight="@dimen/_10sdp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

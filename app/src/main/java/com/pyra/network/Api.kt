@@ -16,13 +16,13 @@ object Api {
     fun postMethod(input: ApiInput, apiResponseCallback: ApiResponseCallback) {
         if (input.context!!.isNetworkConnected()) {
 
-            Log.d("api request ", input.url + "  " + input.jsonObject.toString())
+            Log.d("ApiRequest", input.url + "  " + input.jsonObject.toString())
             val jsonObjectRequest =
                 object : JsonObjectRequest(Method.POST, input.url, input.jsonObject, {
                     apiResponseCallback.setResponseSuccess(it)
-                    Log.d("api response ", input.url + "  " + it.toString())
+                    Log.d("ApiResponse", input.url + "  " + it.toString())
                 }, {
-                    Log.d("response ", input.url + "  " + it.toString())
+                    Log.d("ApiResponse", input.url + "  " + it.toString())
                     if (it is TimeoutError || it is NoConnectionError) {
                         input.context?.getString(R.string.no_internet_connection)
                             ?.let { it1 -> apiResponseCallback.setErrorResponse(it1) }

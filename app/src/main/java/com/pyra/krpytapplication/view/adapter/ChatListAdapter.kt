@@ -24,7 +24,7 @@ import fetchThemeColor
 
 class ChatListAdapter(
     private val context: Context,
-    var viewmodel: ChatListViewModel
+    var viewModel: ChatListViewModel
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -40,13 +40,13 @@ class ChatListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return viewmodel.getNumberOfChatList()
+        return viewModel.getNumberOfChatList()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder
 
-        if (viewmodel.getUnreadMessagesCount(position) == "") {
+        if (viewModel.getUnreadMessagesCount(position) == "") {
             viewHolder.binding.lastMsgTime.setTextColor(
                 fetchThemeColor(
                     R.attr.sub_title_color,
@@ -63,36 +63,36 @@ class ChatListAdapter(
             )
             viewHolder.binding.unreadCountText.show()
         }
-        viewHolder.binding.lastMessage.text = viewmodel.getLastMessage(position)
-        viewHolder.binding.lastMsgTime.text = viewmodel.getLastMessageTime(position)
+        viewHolder.binding.lastMessage.text = viewModel.getLastMessage(position)
+        viewHolder.binding.lastMsgTime.text = viewModel.getLastMessageTime(position)
         viewHolder.binding.removeViewCheck.hide()
-        viewHolder.binding.unreadCountText.text = viewmodel.getUnreadMessagesCount(position)
-        viewHolder.binding.userName.text = viewmodel.getChatListDisplayName(position)
-        viewHolder.binding.userImage.loadImage(viewmodel.getChatListImage(position))
+        viewHolder.binding.unreadCountText.text = viewModel.getUnreadMessagesCount(position)
+        viewHolder.binding.userName.text = viewModel.getChatListDisplayName(position)?.capitalize()
+        viewHolder.binding.userImage.loadImage(viewModel.getChatListImage(position))
 
         viewHolder.itemView.setOnClickListener {
-            if (viewmodel.isMultiSelectionEnabled) {
-                viewmodel.makeSelection(position)
+            if (viewModel.isMultiSelectionEnabled) {
+                viewModel.makeSelection(position)
             } else {
                 val intent = Intent(context, ChatActivity::class.java)
-                intent.putExtra(KRYPTKEY, viewmodel.getChatListKryptId(position))
-                intent.putExtra(ROOMID, viewmodel.getChatListRoomId(position))
-                intent.putExtra(ISGROUP, viewmodel.isGroupChat(position))
-                intent.putExtra(DISPLAY_NAME, viewmodel.getChatListDisplayName(position))
+                intent.putExtra(KRYPTKEY, viewModel.getChatListKryptId(position))
+                intent.putExtra(ROOMID, viewModel.getChatListRoomId(position))
+                intent.putExtra(ISGROUP, viewModel.isGroupChat(position))
+                intent.putExtra(DISPLAY_NAME, viewModel.getChatListDisplayName(position))
                 intent.putExtra(
                     Constants.IntentKeys.IS_ADDED_TO_CONTACTS,
-                    viewmodel.isAlreadyAddedToContacts(position)
+                    viewModel.isAlreadyAddedToContacts(position)
                 )
                 context.startActivity(intent)
             }
         }
 
         viewHolder.itemView.setOnLongClickListener {
-            viewmodel.makeSelection(position)
+            viewModel.makeSelection(position)
             true
         }
 
-        if (viewmodel.getIsSelected(position)) {
+        if (viewModel.getIsSelected(position)) {
             holder.binding.parentView.setBackgroundColor(
                 ContextCompat.getColor(
                     context,

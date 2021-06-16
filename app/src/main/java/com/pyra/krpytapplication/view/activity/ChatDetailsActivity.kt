@@ -60,7 +60,6 @@ class ChatDetailsActivity : BaseActivity() {
         popup.menu.findItem(R.id.delete)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         chatDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_chat_details)
@@ -76,15 +75,11 @@ class ChatDetailsActivity : BaseActivity() {
         initObserver()
         chatDetailsBinding.profileViewModel = profileViewModel
         chatDetailsBinding.executePendingBindings()
-
-
     }
-
 
     private fun initListener() {
 
-
-        audioCall?.setOnClickListener {
+        audioCallLayout?.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
                     Constants.Permission.AUDIO_CALL_PERMISSION_LIST,
@@ -95,7 +90,7 @@ class ChatDetailsActivity : BaseActivity() {
             }
         }
 
-        videoCall?.setOnClickListener {
+        videoCallLayout?.setOnClickListener {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
@@ -106,7 +101,6 @@ class ChatDetailsActivity : BaseActivity() {
                 createCall(Constants.ChatTypes.VIDEO_CALL)
             }
         }
-
 
         addMember.setOnClickListener {
             startActivity(
@@ -141,7 +135,6 @@ class ChatDetailsActivity : BaseActivity() {
         }
     }
 
-
     private fun createCall(callType: String) {
 
         val intent = Intent(this, VideoCallActivity::class.java)
@@ -174,7 +167,7 @@ class ChatDetailsActivity : BaseActivity() {
             sharedHelper.kryptKey, profileViewModel.kryptId.get()!!, callType
         )?.observe(this, Observer {
 
-            var displayName = if (profileViewModel.profileName.get() == "") {
+            val displayName = if (profileViewModel.profileName.get() == "") {
                 profileViewModel.kryptId.get() ?: ""
             } else {
                 profileViewModel.profileName.get() ?: ""
@@ -221,7 +214,7 @@ class ChatDetailsActivity : BaseActivity() {
 
         profileViewModel.getUser(roomId)?.observe(this, Observer {
             it?.roomName?.let { name ->
-                titleTxt.text = it.roomName
+                //titleTxt.text = it.roomName
                 deleteItem.isVisible = !it.roomName.isNullOrEmpty()
                 switch1.isChecked = it.showNotification!!
 
@@ -245,7 +238,6 @@ class ChatDetailsActivity : BaseActivity() {
 
     }
 
-
     private fun initAdapter() {
 
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -256,7 +248,6 @@ class ChatDetailsActivity : BaseActivity() {
         }
         memberLists.layoutManager = linearLayoutManager
         memberLists.adapter = groupMembersAdapter
-
     }
 
     fun onBackButtonPressed(view: View) {

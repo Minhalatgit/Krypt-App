@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/headerText"
             android:layout_width="match_parent"
@@ -27,7 +26,6 @@
             <include layout="@layout/item_saved_message_header" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <TextView
             android:id="@+id/dateSectionHeader"
@@ -48,7 +46,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <include
             android:id="@+id/selectedLayout"
             layout="@layout/receiver_selected_message_layout"
@@ -63,6 +60,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -78,20 +76,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/receiverCorner"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/chat_bubble_corner_receiver"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/chatBubbleColor" />
+
             <LinearLayout
                 android:id="@+id/chatBubbleColor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginLeft="@dimen/_5sdp"
-                android:background="@drawable/message_bg_oval"
+                android:background="@drawable/chat_bubble_bg_receiver"
                 android:minWidth="@dimen/_220sdp"
                 android:orientation="vertical"
                 android:padding="@dimen/_6sdp"
                 app:layout_constraintStart_toEndOf="@id/userImage"
                 app:layout_constraintTop_toTopOf="@id/userImage">
 
-                   <LinearLayout
+                <LinearLayout
                     android:id="@+id/layoutReply"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

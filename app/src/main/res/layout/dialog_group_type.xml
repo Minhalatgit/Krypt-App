@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_20sdp"
-    app:cardBackgroundColor="?page_default_bg"
+    app:cardBackgroundColor="?dialog_bg"
     app:cardCornerRadius="@dimen/_20sdp">
 
     <RelativeLayout
@@ -18,10 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:fontFamily="?mediumFont"
             android:text="@string/choose_group_type"
-            android:textColor="?dialog_text_color"
-            android:textSize="@dimen/_16sdp" />
+            android:theme="@style/DialogTitle" />
 
         <LinearLayout
             android:id="@+id/optionsLayout"
@@ -45,10 +43,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_30sdp"
-                android:fontFamily="?mediumFont"
                 android:text="@string/private_text"
-                android:textColor="?dialog_text_color"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="16sp"
+                android:theme="@style/ProfileTextStyle" />
 
             <ImageView
                 android:id="@+id/secondIcon"
@@ -63,10 +60,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:fontFamily="?mediumFont"
                 android:text="@string/general"
-                android:textColor="?dialog_text_color"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="16sp"
+                android:theme="@style/ProfileTextStyle" />
 
         </LinearLayout>
 
@@ -84,23 +80,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
-                android:fontFamily="?mediumFont"
+                android:fontFamily="@font/jost_semibold"
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:text="@string/cancel"
-                android:textColor="?dialog_text_color"
-                android:textSize="@dimen/_12sdp" />
+                android:textColor="?title_color"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/submitText"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_30sdp"
                 android:background="@drawable/round_yellow_btn_bg"
-                android:fontFamily="?mediumFont"
                 android:text="@string/submit"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:theme="@style/ButtonStyle" />
 
         </LinearLayout>
 

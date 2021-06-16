@@ -17,7 +17,6 @@ class BlockedListAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
@@ -33,7 +32,6 @@ class BlockedListAdapter(
         return viewModel?.blockedUsers?.size ?: 0
     }
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder
 
@@ -44,7 +42,6 @@ class BlockedListAdapter(
             viewModel?.unblockUser(position)
         }
     }
-
 
     inner class MyViewHolder(itemView: ChildBlockListBinding) :
         RecyclerView.ViewHolder(itemView.root) {

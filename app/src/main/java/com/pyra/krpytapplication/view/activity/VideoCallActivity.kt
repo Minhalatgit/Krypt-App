@@ -44,7 +44,6 @@ import kotlinx.coroutines.launch
 
 class VideoCallActivity : BaseActivity(), LifecycleOwner {
 
-
     private var isMute: Boolean = false
     private var isVideoMute: Boolean = false
     private var isFrontCamera: Boolean = false
@@ -117,7 +116,6 @@ class VideoCallActivity : BaseActivity(), LifecycleOwner {
             runOnUiThread { onRemoteUserVideoMuted(uid, muted) }
         }
 
-
     }
 
     override fun onResume() {
@@ -129,7 +127,6 @@ class VideoCallActivity : BaseActivity(), LifecycleOwner {
         super.onPause()
         SharedHelper(this).currentScreen = ""
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -333,8 +330,6 @@ class VideoCallActivity : BaseActivity(), LifecycleOwner {
         setSpeakerUi()
         setMicUi()
         setVideoMuteUi()
-
-
     }
 
     private fun setSpeakerType() {

@@ -227,7 +227,8 @@
                                     android:paddingRight="4dp"
                                     android:paddingBottom="8dp"
                                     android:textColor="?text_color_content"
-                                    android:textColorHint="?text_color_hint" />
+                                    android:textColorHint="?text_color_hint"
+                                    android:textSize="@dimen/_10sdp" />
 
                                 <ImageView
                                     android:id="@+id/imageViewAttachment"
@@ -444,33 +445,27 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/imageViewAudio"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:layout_gravity="bottom|right"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginBottom="6dp"
-        android:background="@color/white"
+        android:background="@drawable/dark_oval_background"
         android:clickable="true"
         android:elevation="2dp"
-        android:translationZ="2dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="22dp"
-        app:cardElevation="2dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="false"
-        app:contentPadding="0dp">
+        android:translationZ="2dp">
 
         <ImageView
             android:id="@+id/imageAudio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/record_audio_ic" />
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/mic_icon_chat" />
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/imageViewStop"

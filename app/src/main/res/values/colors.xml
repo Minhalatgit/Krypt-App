@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#dead06</color>
+    <color name="colorPrimary">#edbe02</color>
     <color name="colorPrimaryDark">#1F2A3D</color>
-    <color name="colorAccent">#0B68DF</color>
+    <color name="colorAccent">#edbe02</color>
 
     <!--    dark theme  1F2A3D  -->
-    <color name="dark_page_bg">#191a1d</color>
+    <color name="dark_page_bg">#32373d</color>
     <color name="dark_toolbar_color">#394351</color>
     <color name="dark_toolbar_icon_tint">#ffffff</color>
     <color name="dark_toolbar_text_color">#ffffff</color>
@@ -41,7 +41,7 @@
     <color name="dialog_text_color_light">#15171A</color>
     <color name="light_toolbar_search_color">#FFFFFF</color>
 
-    <color name="text_color_white_light">#000000</color>
+    <color name="text_color_white_light">#26272b</color>
     <color name="text_color_grey_light">#707275</color>
     <color name="green_color_light">#18E247</color>
 
@@ -61,10 +61,8 @@
     <color name="positive_bg_color_light">#18E247</color>
     <color name="selected_bg_light">#1A0B68DF</color>
 
-
     <color name="text_color_heading">#000000</color>
     <color name="transparent_gray">#906f6f6f</color>
-    <color name="white">#ffffff</color>
 
     <color name="white_trans">#44ffffff</color>
 
@@ -80,7 +78,7 @@
     <color name="remoteBackground">#484258</color>
     <color name="videoicon_color">#3C7ADB</color>
 
-    <color name="green">#83F52C</color>
+    <color name="green">#499f75</color>
 
 
     <color name="chat_unselected">#00000000</color>
@@ -109,9 +107,22 @@
 
     <color name="default_chat_bubble">#0B68DF</color>
 
+    <!--  Color define by Minhal  -->
+    <color name="white">#ffffff</color>
     <color name="yellow">#dead06</color>
-    <color name="black">#26272b</color>
+    <color name="dark">#26272b</color>
     <color name="grey">#828588</color>
-    <color name="bottom_view">#2c2e33</color>
-
+    <color name="bottom_view">#2b2d32</color>
+    <color name="dark_two">#2b2f35</color>
+    <color name="grey_two">#6b6e72</color>
+    <color name="blue">#0B68DF</color>
+    <color name="dialog_bg">#18191d</color>
+    <color name="yellow_gradient_start">#be7908</color>
+    <color name="yellow_gradient_end">#ffe554</color>
+    <color name="black_gradient_start">#1c1e20</color>
+    <color name="black_gradient_end">#3a3f46</color>
+    <color name="morph_gradient_start">#27282d</color>
+    <color name="morph_gradient_end">#32373d</color>
+    <color name="red_circle">#fe6764</color>
+    <color name="selected_msg">#1d1e22</color>
 </resources>

@@ -9,6 +9,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.TypedArray
 import android.database.Cursor
+import android.graphics.Color
+import android.graphics.drawable.*
 import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Build
@@ -38,8 +40,6 @@ import com.pyra.krpytapplication.Utils.Constants
 import com.pyra.krpytapplication.Utils.MediaType
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
-import kotlinx.android.synthetic.main.activity_create_password.*
-import org.jetbrains.anko.collections.forEachByIndex
 import org.jivesoftware.smack.packet.Presence
 import org.json.JSONObject
 import java.io.*
@@ -104,7 +104,7 @@ fun getImei(context: Context): String {
             Manifest.permission.READ_PHONE_STATE
         ) == PackageManager.PERMISSION_GRANTED
     ) {
-        val imei = when {
+        return when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
                 uid
             }
@@ -115,7 +115,6 @@ fun getImei(context: Context): String {
                 telephonyManager.deviceId
             }
         }
-        return imei
     }
     return "dosa"
 }
@@ -125,19 +124,19 @@ fun isValidPassword(
     password: String,
     passwordType: String
 ): String {
-    val specailCharPatten =
+    val specialCharPatten =
         Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE)
-    val UpperCasePatten = Pattern.compile("[A-Z ]")
+    val upperCasePatten = Pattern.compile("[A-Z ]")
     val lowerCasePatten = Pattern.compile("[a-z ]")
     val digitCasePatten = Pattern.compile("[0-9 ]")
 
     return if (password.length < 11) {
         "$passwordType " + context.resources
             .getString(R.string.password_length_should_be_eight_characters)
-    } else if (!specailCharPatten.matcher(password).find()) {
+    } else if (!specialCharPatten.matcher(password).find()) {
         "$passwordType " + context.resources
             .getString(R.string.password_should_contain_atleast_one_special_character)
-    } else if (!UpperCasePatten.matcher(password).find()) {
+    } else if (!upperCasePatten.matcher(password).find()) {
         "$passwordType " + context.resources
             .getString(R.string.password_should_contain_atleast_one_uppercase_character)
     } else if (!digitCasePatten.matcher(password).find()) {
@@ -186,7 +185,6 @@ fun getApiParams(
 
     return apiInputs
 }
-
 
 fun openCamera(activity: Activity) {
 
@@ -791,7 +789,7 @@ fun isAppIsInBackground(context: Context): Boolean {
 
 fun isWifiTurnOn(context: Activity): Boolean {
 
-    var wifiManager: WifiManager =
+    val wifiManager: WifiManager =
         MyApp.getInstance().baseContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
     return wifiManager.isWifiEnabled
 //    if (wifiManager.isWifiEnabled) {
@@ -853,5 +851,25 @@ fun EditText.showHidePass(view: View) {
     } else {
         (view as ImageView).setImageResource(R.drawable.eye_icon_show)
         this.transformationMethod = PasswordTransformationMethod.getInstance()
+    }
+}
+
+fun setColorToBackground(background: Drawable, color: String) {
+
+    when (background) {
+        is ShapeDrawable -> {
+            background.paint.color = Color.parseColor(color)
+        }
+        is GradientDrawable -> {
+            background.setColor(Color.parseColor(color))
+        }
+        is ColorDrawable -> {
+            background.color = Color.parseColor(color)
+        }
+        is LayerDrawable -> {
+            val layer =
+                background.findDrawableByLayerId(R.id.chat_bubble_layer) as RotateDrawable
+            (layer.drawable as GradientDrawable).setColor(Color.parseColor(color))
+        }
     }
 }

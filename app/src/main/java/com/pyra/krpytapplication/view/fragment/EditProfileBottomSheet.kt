@@ -16,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class EditProfileBottomSheet :BottomSheetDialogFragment(),View.OnClickListener {
+class EditProfileBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
 
     private lateinit var profileViewModel: ProfileViewModel
 
@@ -25,49 +25,49 @@ class EditProfileBottomSheet :BottomSheetDialogFragment(),View.OnClickListener {
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?  =  inflater.inflate(R.layout.dialog_add_contact, container, false)
-
+    ): View? = inflater.inflate(R.layout.dialog_add_contact, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         arguments?.let {
-            profileViewModel.getUser(it.getString(Constants.IntentKeys.ROOMID,""))?.observe(this, Observer {chat->
-                enterKrypt.setText(chat.kryptId)
-                contactName.setText(chat.roomName)
+            profileViewModel.getUser(it.getString(Constants.IntentKeys.ROOMID, ""))
+                ?.observe(this, Observer { chat ->
+                    enterKrypt.setText(chat.kryptId)
+                    contactName.setText(chat.roomName)
 
-            })
+                })
         }
 
-        buttonBg.setOnClickListener(this)
+        submitButton.setOnClickListener(this)
         backIcon.setOnClickListener(this)
 
     }
 
-
     override fun onClick(v: View?) {
-        when(v){
-            buttonBg->{
+        when (v) {
+            submitButton -> {
                 arguments?.let {
                     CoroutineScope(Dispatchers.IO).launch {
-                        AppDataBase.getInstance(requireActivity())?.chatListDao()?.updateUser(it.getString(Constants.IntentKeys.ROOMID,""),contactName.text.toString())
+                        AppDataBase.getInstance(requireActivity())?.chatListDao()?.updateUser(
+                            it.getString(Constants.IntentKeys.ROOMID, ""),
+                            contactName.text.toString()
+                        )
                     }
                 }
                 dismiss()
             }
-            backIcon->{
+            backIcon -> {
                 dismiss()
             }
         }
     }
 
-    companion object{
+    companion object {
 
         fun newInstance(): EditProfileBottomSheet {
             return EditProfileBottomSheet()

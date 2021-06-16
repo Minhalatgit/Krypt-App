@@ -27,8 +27,8 @@
 
         <ImageView
             android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_19sdp"
+            android:layout_height="@dimen/_19sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:src="@drawable/back_icon"
@@ -41,10 +41,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
-            android:fontFamily="?mediumFont"
             android:text="@string/new_message"
-            android:textColor="?toolbar_text_color"
-            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/jost_semibold"
+            android:textColor="?title_color"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/backButton"
             app:layout_constraintStart_toEndOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="@id/backButton" />
@@ -112,11 +112,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:background="@null"
-                    android:hint="@string/add_people"
-                    android:textColor="?dialog_text_color"
-                    android:textColorHint="?colorPrimary"
-                    android:textSize="@dimen/_11sdp"
+                    android:text="@string/add_people"
+                    android:theme="@style/ProfileLabelStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/toolBar" />
@@ -153,7 +150,7 @@
             android:src="@drawable/ic_done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/black" />
+            app:tint="@color/dark" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

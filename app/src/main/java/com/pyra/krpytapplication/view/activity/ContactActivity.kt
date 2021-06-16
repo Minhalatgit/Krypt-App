@@ -53,7 +53,6 @@ class ContactActivity : BaseActivity() {
         listener()
     }
 
-
     private fun initAdapter() {
 
         chatListViewModel?.getNamedUser()
@@ -100,7 +99,6 @@ class ContactActivity : BaseActivity() {
             })
             contactList.adapter = chatListAdapter
         })
-
 
         chatListViewModel?.getUnnamedUser()
         chatListViewModel?.updateUnnameList?.observe(this, Observer {
@@ -153,8 +151,6 @@ class ContactActivity : BaseActivity() {
 
         contactList.layoutManager = contactListLayoutManager
         kryptLists.layoutManager = kryptListLayoutManager
-
-
     }
 
     private fun listener() {
@@ -192,7 +188,6 @@ class ContactActivity : BaseActivity() {
         }
     }
 
-
     private fun searchUser(userName: String) {
 
         searchViewModel?.getSearchResult(userName)
@@ -210,7 +205,6 @@ class ContactActivity : BaseActivity() {
                     }
                 })
             randomSearchList.adapter = searchAdapter
-
 
         })
 

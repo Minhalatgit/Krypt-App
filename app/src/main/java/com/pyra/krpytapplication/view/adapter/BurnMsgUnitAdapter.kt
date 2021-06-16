@@ -12,9 +12,7 @@ import java.util.*
 class BurnMsgUnitAdapter(var context: Context) :
     RecyclerView.Adapter<BurnMsgUnitAdapter.BurnMsgUnitViewHolder>() {
 
-
-    var unitList = ArrayList(Arrays.asList("Seconds", "Minutes", "Hours", "Days"))
-
+    var unitList = ArrayList(listOf("Seconds", "Minutes", "Hours", "Days"))
 
     class BurnMsgUnitViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var childBurnMsgUnitBinding: ChildBurnMsgUnitBinding = ChildBurnMsgUnitBinding.bind(view)
@@ -27,11 +25,10 @@ class BurnMsgUnitAdapter(var context: Context) :
     }
 
     override fun getItemCount(): Int {
-       return unitList.size
+        return unitList.size
     }
 
     override fun onBindViewHolder(holder: BurnMsgUnitViewHolder, position: Int) {
-
 
         holder.childBurnMsgUnitBinding.burnMsgCountUnit.text = unitList.get(position)
 

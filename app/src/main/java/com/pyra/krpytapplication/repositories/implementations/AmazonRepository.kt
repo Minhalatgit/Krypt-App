@@ -41,7 +41,6 @@ class AmazonRepository private constructor() {
         }
     }
 
-
     fun uploadToAWS(
         context: Context,
         file: File
@@ -56,7 +55,6 @@ class AmazonRepository private constructor() {
         TransferNetworkLossHandler.getInstance(context)
         val tuOptions = TransferUtilityOptions()
         tuOptions.transferThreadPoolSize = 10
-
 
         transferUtility = TransferUtility.builder()
             .s3Client(s3Client)
@@ -74,7 +72,6 @@ class AmazonRepository private constructor() {
                 id: Int,
                 state: TransferState
             ) {
-
 
                 if (state.toString().equals("COMPLETED", ignoreCase = true)) {
 
@@ -116,15 +113,8 @@ class AmazonRepository private constructor() {
             }
         })
 
-
         return apiUploadResponse
     }
-
-
-
-
-
-
 
     // get auth details for aws
     private fun getClient(context: Context): AmazonS3Client {
@@ -132,7 +122,6 @@ class AmazonRepository private constructor() {
             SDKGlobalConfiguration.ENFORCE_S3_SIGV4_SYSTEM_PROPERTY,
             "true"
         )
-
 
         credentialsProvider =
             CognitoCachingCredentialsProvider(
@@ -151,13 +140,10 @@ class AmazonRepository private constructor() {
 
     }
 
-
     fun downloadFile(context: Context, url: String): LiveData<AwsDownloadResponse>? {
         val apiUploadResponse: MutableLiveData<AwsDownloadResponse> = MutableLiveData()
 
-
-        var file = File(url)
-
+        val file = File(url)
 
         var newFileName = getNewFileName(MediaType.IMAGE.value, "")
 
@@ -169,9 +155,7 @@ class AmazonRepository private constructor() {
                 getNewFileName(MediaType.VIDEO.value, "")
         }
 
-
         var destiniFile = File(context.getExternalFilesDir(null)!!.absolutePath, "/download")
-
 
         if (!destiniFile.exists()) {
             destiniFile.mkdirs()
@@ -183,15 +167,11 @@ class AmazonRepository private constructor() {
             destiniFile.createNewFile()
         }
 
-
-
-
         s3Client = getClient(context.applicationContext)
 
         TransferNetworkLossHandler.getInstance(context)
         val tuOptions = TransferUtilityOptions()
         tuOptions.transferThreadPoolSize = 10
-
 
         transferUtility = TransferUtility.builder()
             .s3Client(s3Client)
@@ -202,19 +182,17 @@ class AmazonRepository private constructor() {
         transferObserver =
             transferUtility!!.download(Constants.AWS.BUCKET_NAME, file.name, destiniFile)
 
-
         transferObserver!!.setTransferListener(object : TransferListener {
             override fun onStateChanged(
                 id: Int,
                 state: TransferState
             ) {
 
-
                 if (state.toString().equals("COMPLETED", ignoreCase = true)) {
 
                     println("Image Download completed $url")
 
-                    var response = AwsDownloadResponse()
+                    val response = AwsDownloadResponse()
                     response.error = false
                     response.message = ""
                     response.file = destiniFile
@@ -236,7 +214,7 @@ class AmazonRepository private constructor() {
             }
 
             override fun onError(id: Int, ex: Exception) {
-                var response = AwsDownloadResponse()
+                val response = AwsDownloadResponse()
                 response.error = true
                 response.message = ex.message
                 apiUploadResponse.postValue(response)
@@ -254,12 +232,9 @@ class AmazonRepository private constructor() {
     ): LiveData<AwsDownloadResponse>? {
         val apiUploadResponse: MutableLiveData<AwsDownloadResponse> = MutableLiveData()
 
-
-        var file = File(url)
-
+        val file = File(url)
 
         var destiniFile = File(context.getExternalFilesDir(null)!!.absolutePath, "/download")
-
 
         if (!destiniFile.exists()) {
             destiniFile.mkdirs()
@@ -273,15 +248,11 @@ class AmazonRepository private constructor() {
             destiniFile.createNewFile()
         }
 
-
-
-
         s3Client = getClient(context.applicationContext)
 
         TransferNetworkLossHandler.getInstance(context)
         val tuOptions = TransferUtilityOptions()
         tuOptions.transferThreadPoolSize = 10
-
 
         transferUtility = TransferUtility.builder()
             .s3Client(s3Client)
@@ -292,19 +263,17 @@ class AmazonRepository private constructor() {
         transferObserver =
             transferUtility!!.download(Constants.AWS.BUCKET_NAME, file.name, destiniFile)
 
-
         transferObserver!!.setTransferListener(object : TransferListener {
             override fun onStateChanged(
                 id: Int,
                 state: TransferState
             ) {
 
-
                 if (state.toString().equals("COMPLETED", ignoreCase = true)) {
 
                     println("Image Download completed $url")
 
-                    var response = AwsDownloadResponse()
+                    val response = AwsDownloadResponse()
                     response.error = false
                     response.message = ""
                     response.file = destiniFile
@@ -326,7 +295,7 @@ class AmazonRepository private constructor() {
             }
 
             override fun onError(id: Int, ex: Exception) {
-                var response = AwsDownloadResponse()
+                val response = AwsDownloadResponse()
                 response.error = true
                 response.message = ex.message
                 apiUploadResponse.postValue(response)
@@ -343,12 +312,9 @@ class AmazonRepository private constructor() {
     ): LiveData<AwsDownloadResponse>? {
         val apiUploadResponse: MutableLiveData<AwsDownloadResponse> = MutableLiveData()
 
-
-        var file = File(url)
-
+        val file = File(url)
 
         var destiniFile = File(context.getExternalFilesDir(null)!!.absolutePath, "/download")
-
 
         if (!destiniFile.exists()) {
             destiniFile.mkdirs()
@@ -362,15 +328,11 @@ class AmazonRepository private constructor() {
             destiniFile.createNewFile()
         }
 
-
-
-
         s3Client = getClient(context.applicationContext)
 
         TransferNetworkLossHandler.getInstance(context)
         val tuOptions = TransferUtilityOptions()
         tuOptions.transferThreadPoolSize = 10
-
 
         transferUtility = TransferUtility.builder()
             .s3Client(s3Client)
@@ -381,19 +343,17 @@ class AmazonRepository private constructor() {
         transferObserver =
             transferUtility!!.download(Constants.AWS.BUCKET_NAME, file.name, destiniFile)
 
-
         transferObserver!!.setTransferListener(object : TransferListener {
             override fun onStateChanged(
                 id: Int,
                 state: TransferState
             ) {
 
-
                 if (state.toString().equals("COMPLETED", ignoreCase = true)) {
 
                     println("Image Download completed $url")
 
-                    var response = AwsDownloadResponse()
+                    val response = AwsDownloadResponse()
                     response.error = false
                     response.message = ""
                     response.file = destiniFile
@@ -415,7 +375,7 @@ class AmazonRepository private constructor() {
             }
 
             override fun onError(id: Int, ex: Exception) {
-                var response = AwsDownloadResponse()
+                val response = AwsDownloadResponse()
                 response.error = true
                 response.message = ex.message
                 apiUploadResponse.postValue(response)

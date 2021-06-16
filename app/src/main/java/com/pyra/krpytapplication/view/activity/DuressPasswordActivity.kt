@@ -24,39 +24,6 @@ class DuressPasswordActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_duress_password)
 
-        //setting eye color wrt to theme
-        if (SharedHelper(this).theme == "light") {
-            hideShowDuressPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-            hideShowConfirmDuressPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
-            hideShowConfirmVaultPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-        } else {
-            hideShowDuressPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-            hideShowConfirmDuressPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
-            )
-            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-            hideShowConfirmVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-        }
-
         intent?.extras?.let {
             isChangePasswordFlow = it.getBoolean(Constants.IntentKeys.CHANGEPASSWORDFLOW)
         }

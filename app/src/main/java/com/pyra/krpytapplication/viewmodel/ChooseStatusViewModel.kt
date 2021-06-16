@@ -64,7 +64,7 @@ class ChooseStatusViewModel(application: Application) : AndroidViewModel(applica
 
     fun changeStatus() {
 
-        var propertiesValue = JSONArray()
+        val propertiesValue = JSONArray()
 
         var jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.KEY, Constants.ApiKeys.IMAGE)
@@ -78,8 +78,7 @@ class ChooseStatusViewModel(application: Application) : AndroidViewModel(applica
 
         propertiesValue.put(jsonObject)
 
-
-        var requestPayload = JSONObject()
+        val requestPayload = JSONObject()
         requestPayload.put(Constants.ApiKeys.PROPERTIES, propertiesValue.toString())
         requestPayload.put(Constants.ApiKeys.IMEI, getImei(app.applicationContext))
         requestPayload.put(Constants.ApiKeys.USER_NAME, sharedHelper?.kryptKey)

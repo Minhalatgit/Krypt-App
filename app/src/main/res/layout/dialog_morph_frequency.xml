@@ -1,44 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?page_default_bg"
-    android:padding="10dp">
+    android:background="@drawable/round_black_dialog_bg">
 
     <TextView
         android:id="@+id/morphLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:fontFamily="?regularFont"
+        android:layout_margin="@dimen/_20sdp"
         android:text="Set Morph Frequency"
-        android:textColor="?toolbar_text_color"
-        android:textSize="@dimen/_16sdp" />
+        android:theme="@style/DialogTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.warkiz.widget.IndicatorSeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/zero"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/morphLabel"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        app:isb_indicator_color="@color/text_color_grey"
-        app:isb_indicator_text_color="@color/colorAccent"
-        app:isb_indicator_text_size="18sp"
-        app:isb_max="3"
-        app:isb_min="0.5"
-        app:isb_only_thumb_draggable="true"
-        app:isb_progress_value_float="true"
-        app:isb_seek_smoothly="true"
-        app:isb_show_tick_marks_type="oval"
-        app:isb_show_tick_texts="true"
-        app:isb_thumb_color="@color/colorAccent"
-        app:isb_thumb_size="20dp"
-        app:isb_tick_marks_color="@color/text_color_grey"
-        app:isb_tick_texts_color="@color/colorAccent"
-        app:isb_ticks_count="12"
-        app:isb_track_background_size="2dp"
-        app:isb_track_progress_color="@color/colorAccent" />
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="0"
+        android:textSize="18sp"
+        android:theme="@style/DialogTitle"
+        app:layout_constraintEnd_toStartOf="@+id/one"
+        app:layout_constraintStart_toEndOf="@+id/three"
+        app:layout_constraintTop_toBottomOf="@+id/morphLabel" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_7sdp"
+        android:text="1"
+        android:textSize="18sp"
+        android:theme="@style/DialogTitle"
+        app:layout_constraintBottom_toTopOf="@+id/two"
+        app:layout_constraintStart_toEndOf="@+id/circularSeekBar"
+        app:layout_constraintTop_toBottomOf="@+id/zero" />
+
+    <TextView
+        android:id="@+id/two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="2"
+        android:textSize="18sp"
+        android:theme="@style/DialogTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circularSeekBar" />
+
+    <TextView
+        android:id="@+id/three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_7sdp"
+        android:text="3"
+        android:textSize="18sp"
+        android:theme="@style/DialogTitle"
+        app:layout_constraintBottom_toTopOf="@+id/two"
+        app:layout_constraintEnd_toStartOf="@+id/circularSeekBar"
+        app:layout_constraintTop_toBottomOf="@+id/zero" />
+
+    <me.tankery.lib.circularseekbar.CircularSeekBar
+        android:id="@+id/circularSeekBar"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/morph_gradient_bg"
+        app:cs_circle_color="#53555c"
+        app:cs_circle_progress_color="@color/yellow"
+        app:cs_circle_stroke_width="@dimen/_10sdp"
+        app:cs_circle_style="round"
+        app:cs_disable_pointer="false"
+        app:cs_lock_enabled="true"
+        app:cs_maintain_equal_circle="true"
+        app:cs_max="4"
+        app:cs_move_outside_circle="false"
+        app:cs_negative_enabled="false"
+        app:cs_pointer_color="@color/yellow"
+        app:cs_pointer_halo_border_width="0dp"
+        app:cs_pointer_halo_width="0dp"
+        app:cs_pointer_stroke_width="@dimen/_10sdp"
+        app:cs_progress="50"
+        app:cs_use_custom_radii="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zero" />
+
+    <ImageView
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/app_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/two"
+        app:layout_constraintEnd_toEndOf="@+id/one"
+        app:layout_constraintStart_toStartOf="@+id/three"
+        app:layout_constraintTop_toTopOf="@+id/zero" />
+
+    <Button
+        android:id="@+id/done"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:background="@drawable/round_yellow_btn_bg"
+        android:text="@string/done"
+        android:theme="@style/ButtonStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/two" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

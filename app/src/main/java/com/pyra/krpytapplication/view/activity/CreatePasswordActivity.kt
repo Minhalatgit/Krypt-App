@@ -26,19 +26,6 @@ class CreatePasswordActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_password)
 
-        if (SharedHelper(this).theme == "light") {
-            hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
-            hideShowConfirmPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-        } else {
-            hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-            hideShowConfirmPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-        }
-
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
     }
 

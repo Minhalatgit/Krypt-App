@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
 import dp
 
-class MessageSwipeController(private val context: Context, private val swipeControllerActions: (Int) -> Unit) :
+class MessageSwipeController(
+    private val context: Context,
+    private val swipeControllerActions: (Int) -> Unit
+) :
     ItemTouchHelper.Callback() {
 
     private lateinit var imageDrawable: Drawable
@@ -30,10 +33,13 @@ class MessageSwipeController(private val context: Context, private val swipeCont
     private var isVibrate = false
     private var startTracking = false
 
-    override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+    override fun getMovementFlags(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder
+    ): Int {
         mView = viewHolder.itemView
-        imageDrawable = ContextCompat.getDrawable(context,R.drawable.forward)!!
-        shareRound = ContextCompat.getDrawable(context,R.drawable.rounded_white_bg)!!
+        imageDrawable = ContextCompat.getDrawable(context, R.drawable.forward)!!
+        shareRound = ContextCompat.getDrawable(context, R.drawable.rounded_white_bg)!!
         return ItemTouchHelper.Callback.makeMovementFlags(ACTION_STATE_IDLE, RIGHT)
     }
 
@@ -81,7 +87,8 @@ class MessageSwipeController(private val context: Context, private val swipeCont
     @SuppressLint("ClickableViewAccessibility")
     private fun setTouchListener(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         recyclerView.setOnTouchListener { _, event ->
-            swipeBack = event.action == MotionEvent.ACTION_CANCEL || event.action == MotionEvent.ACTION_UP
+            swipeBack =
+                event.action == MotionEvent.ACTION_CANCEL || event.action == MotionEvent.ACTION_UP
             if (swipeBack) {
                 if (Math.abs(mView.translationX) >= this@MessageSwipeController.convertTodp(100)) {
                     swipeControllerActions(viewHolder.adapterPosition)
@@ -157,7 +164,10 @@ class MessageSwipeController(private val context: Context, private val swipeCont
 
         val y = (mView.top + mView.measuredHeight / 2).toFloat()
         shareRound.colorFilter =
-            PorterDuffColorFilter(ContextCompat.getColor(context, R.color.colorE), PorterDuff.Mode.MULTIPLY)
+            PorterDuffColorFilter(
+                ContextCompat.getColor(context, R.color.colorE),
+                PorterDuff.Mode.MULTIPLY
+            )
 
         shareRound.setBounds(
             (x - convertTodp(18) * scale).toInt(),

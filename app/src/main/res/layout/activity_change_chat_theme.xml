@@ -8,77 +8,128 @@
     android:background="?page_default_bg"
     tools:context=".view.activity.ChangeChatThemeActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
-        android:translationY="-20dp"
-        app:cardBackgroundColor="?toolbar_color"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/backButton"
-        android:layout_width="@dimen/_20sdp"
+        android:layout_width="@dimen/_19sdp"
         android:layout_height="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:src="@drawable/ic_arrow_back_black_24dp"
-        app:layout_constraintStart_toStartOf="@+id/toolBar"
-        app:layout_constraintTop_toTopOf="@id/toolBar"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="?toolbar_icon_color" />
 
     <ImageView
         android:id="@+id/confirmButton"
-        android:layout_width="@dimen/_20sdp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:onClick="onConfirmClicked"
         android:padding="@dimen/_3sdp"
         android:src="@drawable/ic_baseline_check_24"
-        app:layout_constraintEnd_toEndOf="@+id/toolBar"
-        app:layout_constraintTop_toTopOf="@id/toolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="?toolbar_icon_color" />
 
     <TextView
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:fontFamily="?regularFont"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/jost_medium"
         android:text="@string/change_chat_color"
-        android:textColor="?toolbar_text_color"
-        android:textSize="@dimen/_12sdp"
+        android:textColor="?title_color"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/backButton"
         app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="@id/backButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/receiverCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_50sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
 
-    <androidx.cardview.widget.CardView
+        <ImageView
+            android:id="@+id/receiverCorner"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="-1.5dp"
+            android:background="@drawable/chat_bubble_corner_receiver" />
+
+        <TextView
+            android:id="@+id/receiverText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_bubble_bg_receiver"
+            android:lineHeight="@dimen/_16sdp"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingTop="@dimen/_15sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_15sdp"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the "
+            android:fontFamily="@font/jost_medium"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:text="@string/example_time"
+        android:fontFamily="@font/jost_medium"
+        android:textColor="?sub_title_color"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/receiverCardView"
+        app:layout_constraintTop_toBottomOf="@id/receiverCardView" />
+
+    <LinearLayout
         android:id="@+id/senderCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolBar">
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
 
         <TextView
             android:id="@+id/senderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/default_chat_bubble"
-            android:fontFamily="?regularFont"
-            android:padding="@dimen/_7sdp"
+            android:background="@drawable/chat_bubble_bg_sender"
+            android:fontFamily="@font/jost_medium"
+            android:lineHeight="@dimen/_16sdp"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_10sdp"
             android:text="@string/hello"
             android:textColor="@color/white"
-            android:textSize="@dimen/_11sdp" />
+            android:textSize="12sp" />
 
-    </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/senderCorner"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="-6dp"
+            android:background="@drawable/chat_bubble_corner_sender" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/messageStatus"
@@ -94,91 +145,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
-        android:fontFamily="?regularFont"
+        android:fontFamily="@font/jost_medium"
         android:text="@string/example_time"
-        android:textColor="?toolbar_text_color"
-
-        android:textSize="@dimen/_9sdp"
+        android:textColor="?sub_title_color"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/messageStatus"
         app:layout_constraintEnd_toStartOf="@id/messageStatus"
         app:layout_constraintTop_toTopOf="@id/messageStatus" />
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userImage"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:src="@drawable/user"
-        app:civ_border_width="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageStatus" />
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/receiverCardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userImage"
-        app:layout_constraintStart_toEndOf="@+id/userImage"
-        app:layout_constraintTop_toTopOf="@+id/userImage">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/receiverparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/default_chat_bubble">
-
-            <TextView
-                android:id="@+id/receiverText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="?regularFont"
-                android:padding="10dp"
-                android:text="@string/hi_how"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_11sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:src="@drawable/emoj_icon"
-                app:layout_constraintBottom_toBottomOf="@id/receiverText"
-                app:layout_constraintStart_toEndOf="@id/receiverText"
-                app:layout_constraintTop_toTopOf="@id/receiverText" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:fontFamily="?regularFont"
-        android:text="@string/example_time"
-        android:textColor="?toolbar_text_color"
-        android:textSize="@dimen/_9sdp"
-        app:layout_constraintStart_toStartOf="@+id/receiverCardView"
-        app:layout_constraintTop_toBottomOf="@id/receiverCardView" />
-
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="?toolbar_color"
+        android:background="@drawable/round_chat_color_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp"
         app:layout_constraintBottom_toTopOf="@+id/cardView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -186,38 +166,37 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?toolbar_color"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:id="@+id/themeChangeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="?regularFont"
+                android:fontFamily="@font/jost_semibold"
                 android:padding="10dp"
                 android:text="@string/pick_color_sender"
-                android:textColor="?toolbar_text_color"
-                android:textSize="@dimen/_12sdp"
+                android:textColor="?title_color"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chatThemeList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_30sdp"
+                android:orientation="horizontal"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/themeChangeTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/themeChangeTitle"
+                tools:listitem="@layout/item_chat_color" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
-
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
@@ -232,35 +211,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?toolbar_color"
+            android:padding="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:id="@+id/themeChangeTitleReciver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="?regularFont"
+                android:fontFamily="@font/jost_semibold"
                 android:padding="10dp"
                 android:text="@string/pick_color_receiver"
-                android:textColor="?toolbar_text_color"
-                android:textSize="@dimen/_12sdp"
+                android:textColor="?title_color"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chatThemeListReciver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_30sdp"
+                android:orientation="horizontal"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/themeChangeTitleReciver" />
+                app:layout_constraintTop_toBottomOf="@+id/themeChangeTitleReciver"
+                tools:listitem="@layout/item_chat_color" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.cardview.widget.CardView>
 

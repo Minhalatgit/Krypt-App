@@ -32,12 +32,21 @@ import com.pyra.krpytapplication.videocallutils.events.MyEngineEventHandler
 import com.vanniktech.emoji.EmojiManager
 import com.vanniktech.emoji.ios.IosEmojiProvider
 import io.agora.rtc.RtcEngine
+import java.security.KeyManagementException
+import java.security.NoSuchAlgorithmException
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
+import javax.net.ssl.*
 
 class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        //disable ssl checking
+        disableSSLCertificateChecking()
 
         EmojiManager.install(IosEmojiProvider())
 
@@ -224,14 +233,40 @@ class MyApp : Application() {
 
         messageGroup.setSound(Uri.parse(messageTone), messageAttributesCall)
 
-
         incomingCall.setSound(Uri.parse(callTone), attributesCall)
         chatGroup.setSound(null, null)
 
         notificationManager.createNotificationChannel(incomingCall)
         notificationManager.createNotificationChannel(chatGroup)
         notificationManager.createNotificationChannel(messageGroup)
+    }
 
+    private fun disableSSLCertificateChecking() {
+        val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
+            @Throws(CertificateException::class)
+            override fun checkClientTrusted(arg0: Array<X509Certificate?>?, arg1: String?) {
+                // Not implemented
+            }
+
+            @Throws(CertificateException::class)
+            override fun checkServerTrusted(arg0: Array<X509Certificate?>?, arg1: String?) {
+                // Not implemented
+            }
+
+            override fun getAcceptedIssuers(): Array<X509Certificate>? {
+                return null
+            }
+        })
+        try {
+            val sc: SSLContext = SSLContext.getInstance("TLS")
+            sc.init(null, trustAllCerts, SecureRandom())
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.socketFactory)
+            HttpsURLConnection.setDefaultHostnameVerifier { _, _ -> true }
+        } catch (e: KeyManagementException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
     }
 
 }

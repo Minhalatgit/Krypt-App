@@ -28,7 +28,6 @@ import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.util.*
 
-
 class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
 
     init {
@@ -78,7 +77,6 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
         // val factory: DataSource.Factory<Int, ChatMessagesSchema>? =
         return chatMessagesDao?.getChatMessages(roomId.toUpperCase(Locale.ROOT))?.toLiveData(20, 1)
 
-//
 //        val loadConfig = PagedList.Config.Builder()
 //            .setEnablePlaceholders(false)
 //            .setPrefetchDistance(10)
@@ -124,7 +122,6 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
         }
     }
 
-
     fun deleteMessage(messagesEntity: ChatMessagesSchema) {
         MyApp.xmppOperations.sendMessage(messagesEntity.kryptId, messagesEntity)
     }
@@ -152,11 +149,11 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     suspend fun getIsAllSaved(selectedChatMessage: ArrayList<String>): Boolean {
-        var count = chatMessagesDao?.getIsAllSaved(selectedChatMessage as List<String>)
+        val count = chatMessagesDao?.getIsAllSaved(selectedChatMessage as List<String>)
         return count == 0
     }
 
-    fun getsavedMessages(): LiveData<PagedList<ChatMessagesSchema>>? {
+    fun getSavedMessages(): LiveData<PagedList<ChatMessagesSchema>>? {
 
         val factory: DataSource.Factory<Int, ChatMessagesSchema>? =
             chatMessagesDao?.getSavedMessages()
@@ -214,7 +211,6 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
             }
         }
     }
-
 
     fun updateSendVideoMessage(
         messageId: String, imageUrl: String?, isGroup: Boolean,
@@ -369,7 +365,7 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
         return chatMessagesDao?.getChatMessage(selectedChatMessage)
     }
 
-    fun getreplyMessage(messageId: String): ChatMessagesSchema? {
+    fun getReplyMessage(messageId: String): ChatMessagesSchema? {
         return chatMessagesDao?.getreplyMessage(messageId.toUpperCase())
     }
 
@@ -395,7 +391,7 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
         Coroutine.iOWorker {
             if (burnMessageDao?.isMessageAvailable(messageId.toUpperCase()) == 0) {
 
-                var message = BurnMessageSchema()
+                val message = BurnMessageSchema()
                 message.messageId = messageId
                 message.kryptId = kryptId
 
@@ -420,13 +416,13 @@ class ChatMessagesRepository private constructor(appDataBase: AppDataBase?) {
         Api.postMethod(apiParams, object : ApiResponseCallback {
             override fun setResponseSuccess(jsonObject: JSONObject) {
                 val gson = Gson()
-                var response: CommonResponseModel =
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 apiResponse.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 apiResponse.value = response

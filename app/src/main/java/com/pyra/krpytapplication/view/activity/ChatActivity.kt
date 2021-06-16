@@ -68,7 +68,6 @@ import kotlin.collections.ArrayList
 
 class ChatActivity : BaseActivity(), RecordingListener {
 
-    private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var chatMessageAdapter: ChatMessageAdapter
     lateinit var callViewModel: CallViewModel
     lateinit var chatListViewModel: ChatListViewModel
@@ -339,7 +338,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
             audioRecordView.stopRecording(AudioRecordView.RecordingBehaviour.CANCELED)
         }
 
-
         groupCall?.setOnClickListener {
             initCreateRoomDialog()
         }
@@ -559,7 +557,6 @@ class ChatActivity : BaseActivity(), RecordingListener {
         }
         setCallUi()
     }
-
 
     private fun setCallUi() {
 

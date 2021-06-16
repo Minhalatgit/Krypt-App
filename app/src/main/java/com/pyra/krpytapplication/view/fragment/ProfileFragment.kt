@@ -15,9 +15,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -42,13 +40,11 @@ import com.warkiz.widget.SeekParams
 import fetchThemeColor
 import getImei
 import kotlinx.android.synthetic.main.fragment_profile.*
+import me.tankery.lib.circularseekbar.CircularSeekBar
 import showToast
 import java.io.File
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     var uploadFile: File? = null
@@ -62,7 +58,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     var minutes: TextView? = null
     var hours: TextView? = null
     var days: TextView? = null
-    var done: TextView? = null
+    var done: Button? = null
+    var backIcon: RelativeLayout? = null
     var seconds: TextView? = null
     lateinit var viewPager: RecyclerViewPager
     lateinit var unitViewPager: RecyclerViewPager
@@ -137,9 +134,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         morphVoice.isChecked = sharedHelper.isMorphVoiceEnabled
 
         if (burnDisableSwitch.isChecked) {
-            hideBurnView()
-        } else {
             showBurnView()
+        } else {
+            hideBurnView()
         }
         if (morphVoice.isChecked) {
             showMorphFrequencyView()
@@ -189,7 +186,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
         }
 
-        editIcon.setOnClickListener {
+        availableLayout.setOnClickListener {
             moveStatusActivity()
         }
 
@@ -255,6 +252,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         autoLogoutLayout.setOnClickListener {
             val dialog = getMessageBurnDialog(requireContext())
+            backIcon = dialog.findViewById(R.id.backIcon)
             done = dialog.findViewById(R.id.done)
             dialogTitle = dialog.findViewById(R.id.dialog_title)
             viewPager = dialog.findViewById(R.id.timeSelector)
@@ -288,6 +286,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                  changeView(MessageBurnType.SECONDS.type)
              }*/
 
+            backIcon?.setOnClickListener {
+                dialog.dismiss()
+            }
+
             done?.setOnClickListener {
 
                 selectedType =
@@ -309,10 +311,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun showBurnMessageDialog() {
         val dialog = getMessageBurnDialog(requireContext())
+        backIcon = dialog.findViewById(R.id.backIcon)
         done = dialog.findViewById(R.id.done)
         viewPager = dialog.findViewById(R.id.timeSelector)
         unitViewPager = dialog.findViewById(R.id.unitSelector)
-
 
         //  minutes = dialog.findViewById(R.id.minutes)
         //   hours = dialog.findViewById(R.id.hours)
@@ -345,6 +347,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             changeView(MessageBurnType.SECONDS.type)
         }
 */
+        backIcon?.setOnClickListener {
+            dialog.dismiss()
+        }
 
         done?.setOnClickListener {
             selectedType =
@@ -717,37 +722,51 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     }
 
     private fun showMorphFrequencyDialog() {
+
+        var morphFrequency: String? = null
+
         val dialogView = View.inflate(activity, R.layout.dialog_morph_frequency, null)
         val dialog = Dialog(requireActivity())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(dialogView)
-        //dialog.setCancelable(true)
-        //dialog.setCanceledOnTouchOutside(true)
         val window: Window = dialog.window!!
-        window.setGravity(Gravity.CENTER)
-        //window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+//        window.setGravity(Gravity.CENTER)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
-        val seekbar = dialog.findViewById<IndicatorSeekBar>(R.id.seekBar)
-        if (sharedHelper.morphVoiceFrequency == "")
-            seekbar.setProgress(0.0f)
-        else
-            seekbar.setProgress(sharedHelper.morphVoiceFrequency.toFloat())
+        val seekbar = dialog.findViewById<CircularSeekBar>(R.id.circularSeekBar)
+        val done = dialog.findViewById<Button>(R.id.done)
 
-        seekbar.onSeekChangeListener = object : OnSeekChangeListener {
-            override fun onSeeking(seekParams: SeekParams?) {
-                Log.d("onSeeking", "onSeeking: ${seekParams?.tickText}")
-            }
-
-            override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
-                Log.d("Seekbar", "onStartTrackingTouch: $seekBar")
-            }
-
-            override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
-                Log.d("SeekbarStop", "onStopTrackingTouch: ${seekBar?.progressFloat}")
-                sharedHelper.morphVoiceFrequency = seekBar?.progressFloat?.toString()!!
-            }
+        done.setOnClickListener {
+            sharedHelper.morphVoiceFrequency = morphFrequency ?: ""
+            dialog.dismiss()
         }
+
+        if (sharedHelper.morphVoiceFrequency == "")
+            seekbar.progress = 0.0f
+        else
+            seekbar.progress = sharedHelper.morphVoiceFrequency.toFloat()
+
+        seekbar.setOnSeekBarChangeListener(object :
+            CircularSeekBar.OnCircularSeekBarChangeListener {
+            override fun onProgressChanged(
+                circularSeekBar: CircularSeekBar?,
+                progress: Float,
+                fromUser: Boolean
+            ) {
+                Log.d("onProgressChanged", "onProgressChanged: $progress")
+            }
+
+            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
+                Log.d("onStartTrackingTouch", "onStartTrackingTouch: $seekBar")
+            }
+
+            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
+                Log.d("SeekbarStop", "onStopTrackingTouch: ${seekBar?.progress}")
+                morphFrequency = seekBar?.progress?.toString()!!
+            }
+
+        })
     }
 
     private fun showEditImageDialog() {
@@ -919,12 +938,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     }
 
-
     override fun onPause() {
         super.onPause()
         if (this::timer.isInitialized) {
-
-
             timer.cancel()
         }
     }

@@ -31,28 +31,26 @@ class ChatThemeListAdapter(
 
     override fun onBindViewHolder(holder: ChatThemeListAdapter.Viewholder, position: Int) {
 
-        holder.chatThemeColor.setCardBackgroundColor(Color.parseColor(colorList.get(position)))
+        holder.chatThemeColor.setCardBackgroundColor(Color.parseColor(colorList[position]))
         if (selectedColor.equals("", ignoreCase = true) && position == 0) {
             holder.selectedItem.visibility = View.VISIBLE
-        } else if (selectedColor.equals(colorList.get(position), ignoreCase = true)) {
+        } else if (selectedColor.equals(colorList[position], ignoreCase = true)) {
             holder.selectedItem.visibility = View.VISIBLE
         } else {
             holder.selectedItem.visibility = View.INVISIBLE
         }
 
         holder.chatThemeColor.setOnClickListener {
-            selectedColor = colorList.get(position)
+            selectedColor = colorList[position]
             setColor(selectedColor)
             notifyDataSetChanged()
         }
-
 
     }
 
     inner class Viewholder(view: View) : RecyclerView.ViewHolder(view) {
         var chatThemeColor: CardView
-        lateinit var selectedItem: View
-
+        var selectedItem: View
 
         init {
             // Define click listener for the ViewHolder's View.

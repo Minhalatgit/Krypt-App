@@ -40,22 +40,12 @@ class PasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var isLight = false
-
         if (SharedHelper(this).theme == "light") {
             setTheme(R.style.lightTheme)
-            isLight = true
         } else {
             setTheme(R.style.darkTheme)
-            isLight = false
         }
         setContentView(R.layout.activity_password)
-
-        if (isLight) {
-            hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
-        } else {
-            hideShowPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-        }
 
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         chatListViewModel = ViewModelProvider(this).get(ChatListViewModel::class.java)

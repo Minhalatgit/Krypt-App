@@ -9,7 +9,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.view.*
+import android.widget.Button
 import android.widget.EditText
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -151,8 +153,9 @@ fun deleteAllChat(
     val dialogView = View.inflate(context, R.layout.dialog_delete_all_chat, null)
     val dialog = Dialog(context)
 
-    val ok = dialogView.findViewById<TextView>(R.id.ok)
+    val ok = dialogView.findViewById<Button>(R.id.ok)
     val cancel = dialogView.findViewById<TextView>(R.id.cancel)
+    val close = dialogView.findViewById<RelativeLayout>(R.id.backIcon)
 
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setContentView(dialogView)
@@ -161,7 +164,7 @@ fun deleteAllChat(
     window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     val width = (context.resources.displayMetrics.widthPixels * 0.8).roundToInt()
     var height = (context.resources.displayMetrics.heightPixels * 0.25).roundToInt()
-    window.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+    //window.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
 
     ok.setOnClickListener {
         onOkClicked()
@@ -171,6 +174,10 @@ fun deleteAllChat(
     cancel.setOnClickListener {
         dialog.dismiss()
     }
+    close.setOnClickListener {
+        dialog.dismiss()
+    }
+
     dialog.show()
     return dialog
 }
@@ -288,9 +295,9 @@ fun getMessageBurnDialog(context: Context): Dialog {
     window.setGravity(Gravity.CENTER)
     window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-    var width = (context.resources.displayMetrics.widthPixels * 0.85).roundToInt()
+    val width = (context.resources.displayMetrics.widthPixels * 0.85).roundToInt()
     var height = (context.resources.displayMetrics.heightPixels * 0.25).roundToInt()
-    window.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+    //window.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
 
     dialog.show()
     return dialog

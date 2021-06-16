@@ -73,7 +73,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         profileRepository =
             ProfileRepository.getInstance((application as MyApp).getAppDatabase())
         sharedHelper = SharedHelper(application)
-
     }
 
     fun getUserDeatilsResponse(username: String, url: String): LiveData<GetUserDetailsResponse> {
@@ -154,7 +153,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun updateImage(image: String) {
 
-        var propertiesValue = JSONArray()
+        val propertiesValue = JSONArray()
 
         var jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.KEY, Constants.ApiKeys.IMAGE)
@@ -168,8 +167,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
         propertiesValue.put(jsonObject)
 
-
-        var requestPayload = JSONObject()
+        val requestPayload = JSONObject()
         requestPayload.put(Constants.ApiKeys.PROPERTIES, propertiesValue.toString())
         requestPayload.put(
             Constants.ApiKeys.IMEI,

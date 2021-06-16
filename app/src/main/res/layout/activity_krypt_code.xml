@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/generate_krypt_bg"
+    android:background="?page_default_bg"
     tools:context=".view.activity.KryptCodeActivity">
 
     <TextView
@@ -20,30 +20,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/profileIcon"
-        android:layout_width="@dimen/_140sdp"
-        android:layout_height="@dimen/_140sdp"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:src="@drawable/user_icon"
+    <RelativeLayout
+        android:id="@+id/profileIconLayout"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_90sdp"
+        android:background="@drawable/black_oval_gradient_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_17sdp"
+            android:src="@drawable/user_icon" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/generateKrypt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:layout_marginRight="@dimen/_30sdp"
         android:background="@drawable/round_yellow_btn_bg"
         android:elevation="20dp"
-        android:fontFamily="?mediumFont"
         android:onClick="onGenerateButtonClicked"
         android:text="@string/generate_krypt_code"
-        android:textAllCaps="false"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
+        android:theme="@style/ButtonStyle"
+        app:layout_constraintTop_toBottomOf="@+id/profileIconLayout" />
 
     <Button
         android:id="@+id/enterKrypt"
@@ -54,12 +62,10 @@
         android:layout_marginRight="@dimen/_30sdp"
         android:background="@drawable/round_black_btn_bg"
         android:elevation="20dp"
-        android:fontFamily="?mediumFont"
         android:onClick="onKryptButtonClicked"
         android:text="@string/enter_krypt_code"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_11sdp"
+        android:textColor="?sub_title_color"
+        android:theme="@style/ButtonStyle"
         app:layout_constraintTop_toBottomOf="@+id/generateKrypt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

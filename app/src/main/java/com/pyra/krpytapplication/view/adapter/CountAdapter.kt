@@ -12,7 +12,6 @@ import com.pyra.krpytapplication.databinding.ChildCountBinding
 class CountAdapter(var context: Context, var type: String) :
     RecyclerView.Adapter<CountAdapter.CountViewHolder>() {
 
-
     class CountViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var childCountBinding: ChildCountBinding = ChildCountBinding.bind(view)
     }
@@ -34,7 +33,6 @@ class CountAdapter(var context: Context, var type: String) :
     }
 
     override fun onBindViewHolder(holder: CountViewHolder, position: Int) {
-
 
         holder.childCountBinding.count.text = (position + 1).toString()
 

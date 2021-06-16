@@ -29,13 +29,11 @@ class StatusAdapter(
             false
         )
         return MyViewHolder(binding as ItemStatusBinding)
-
     }
 
     override fun getItemCount(): Int {
         return this.viewModel.numberOfStatuses()
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder: MyViewHolder = holder as MyViewHolder

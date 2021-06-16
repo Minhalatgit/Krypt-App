@@ -33,12 +33,9 @@ import fetchThemeColor
 import kotlinx.coroutines.launch
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class VaultFragment : Fragment() {
 
-    lateinit var fragmentVaultBinding: FragmentVaultBinding
+    private lateinit var fragmentVaultBinding: FragmentVaultBinding
     lateinit var imageViewAdapter: ImageViewAdapter
     lateinit var videoViewAdapter: ImageViewAdapter
     lateinit var chatMessageAdapter: ChatMessageAdapter
@@ -85,8 +82,8 @@ class VaultFragment : Fragment() {
     }
 
     private fun handlingFab() {
-        if (currentTab == 0 || currentTab == 1) fragmentVaultBinding.cameraFAB.setImageResource(R.drawable.ic_camera_alt_24)
-        else fragmentVaultBinding.cameraFAB.setImageResource(R.drawable.add_doc)
+        if (currentTab == 0 || currentTab == 1) fragmentVaultBinding.fabIcon.setImageResource(R.drawable.ic_camera_alt_24)
+        else fragmentVaultBinding.fabIcon.setImageResource(R.drawable.document_icon)
     }
 
     private fun initListners() {
@@ -97,15 +94,15 @@ class VaultFragment : Fragment() {
             setGallerySelected()
         }
 
-        fragmentVaultBinding.imageText.setOnClickListener {
+        fragmentVaultBinding.imageLayout.setOnClickListener {
             setImageSelected()
         }
 
-        fragmentVaultBinding.videoText.setOnClickListener {
+        fragmentVaultBinding.videoLayout.setOnClickListener {
             setVideoSelected()
         }
 
-        fragmentVaultBinding.docText.setOnClickListener {
+        fragmentVaultBinding.documentLayout.setOnClickListener {
             setDocSelected()
         }
 
@@ -215,9 +212,9 @@ class VaultFragment : Fragment() {
     private fun setDocSelected() {
 
         currentTab = 2
-        fragmentVaultBinding.docText.activeText()
-        fragmentVaultBinding.videoText.inActiveText()
-        fragmentVaultBinding.imageText.inActiveText()
+//        fragmentVaultBinding.docText.activeText()
+//        fragmentVaultBinding.videoText.inActiveText()
+//        fragmentVaultBinding.imageText.inActiveText()
         setDocumentAdapter()
         handlingFab()
     }
@@ -225,9 +222,9 @@ class VaultFragment : Fragment() {
     private fun setVideoSelected() {
 
         currentTab = 1
-        fragmentVaultBinding.docText.inActiveText()
-        fragmentVaultBinding.videoText.activeText()
-        fragmentVaultBinding.imageText.inActiveText()
+//        fragmentVaultBinding.docText.inActiveText()
+//        fragmentVaultBinding.videoText.activeText()
+//        fragmentVaultBinding.imageText.inActiveText()
         setVideoAdapter()
         handlingFab()
 
@@ -236,9 +233,9 @@ class VaultFragment : Fragment() {
     private fun setImageSelected() {
 
         currentTab = 0
-        fragmentVaultBinding.docText.inActiveText()
-        fragmentVaultBinding.videoText.inActiveText()
-        fragmentVaultBinding.imageText.activeText()
+//        fragmentVaultBinding.docText.inActiveText()
+//        fragmentVaultBinding.videoText.inActiveText()
+//        fragmentVaultBinding.imageText.activeText()
         setImageAdapter()
         handlingFab()
     }

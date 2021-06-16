@@ -21,9 +21,9 @@
             android:id="@+id/relativeLayout"
             android:layout_width="55dp"
             android:layout_height="55dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -61,18 +61,17 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:singleLine="true"
                 android:text="@string/demo_user_name"
-                android:textColor="?title_color"
-                android:textSize="@dimen/_12sdp" />
+                android:theme="@style/ProfileTextStyle" />
         </RelativeLayout>
 
         <View
             android:id="@+id/selectedView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:background="@color/selected_bg"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,13 +79,13 @@
             android:id="@+id/copyCode"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:src="@drawable/copy"
             android:visibility="gone"
-            app:tint="@color/yellow"
-            android:layout_marginEnd="@dimen/_15sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/selectedImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/yellow" />
 
         <ImageView
             android:id="@+id/selectedImage"
@@ -94,8 +93,8 @@
             android:layout_height="25dp"
             android:layout_margin="@dimen/_5sdp"
             android:padding="3dp"
-            android:visibility="gone"
             android:src="@drawable/chat_selected"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

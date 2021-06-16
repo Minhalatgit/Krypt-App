@@ -25,6 +25,7 @@ import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
 import com.pyra.krpytapplication.viewmodel.ChatMessagesViewModel
 import getDocumentIcon
 import getViewIntent
+import setColorToBackground
 import java.io.File
 
 public enum class MessageViewTypes(val value: Int) {
@@ -48,9 +49,8 @@ public enum class MessageViewTypes(val value: Int) {
 }
 
 class ChatMessageAdapter(
-    private val context: Context, val isSaved: Boolean, val viewmodel: ChatMessagesViewModel
+    private val context: Context, val isSaved: Boolean, val viewModel: ChatMessagesViewModel
 ) : PagedListAdapter<ChatMessagesSchema, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
-
 
 //    private val adapterCallback = AdapterListUpdateCallback(this)
 
@@ -87,13 +87,12 @@ class ChatMessageAdapter(
 //        notifyDataSetChanged()
 //    }
 
-
     override fun getItemViewType(position: Int): Int {
-        when (viewmodel.getChatMessageType(position)) {
+        when (viewModel.getChatMessageType(position)) {
 
             MessageType.TEXT -> {
-                return if (viewmodel.isSender(position) != null) {
-                    if (viewmodel.isSender(position)!!) {
+                return if (viewModel.isSender(position) != null) {
+                    if (viewModel.isSender(position)!!) {
                         MessageViewTypes.SENDER_TEXT.value
                     } else {
                         MessageViewTypes.RECEIVER_TEXT.value
@@ -105,8 +104,8 @@ class ChatMessageAdapter(
             }
 
             MessageType.IMAGE -> {
-                return if (viewmodel.isSender(position) != null) {
-                    if (viewmodel.isSender(position)!!) {
+                return if (viewModel.isSender(position) != null) {
+                    if (viewModel.isSender(position)!!) {
                         MessageViewTypes.SENDER_IMAGE.value
                     } else {
                         MessageViewTypes.RECEIVER_IMAGE.value
@@ -117,8 +116,8 @@ class ChatMessageAdapter(
                 }
             }
             MessageType.AUDIO -> {
-                return if (viewmodel.isSender(position) != null) {
-                    if (viewmodel.isSender(position)!!) {
+                return if (viewModel.isSender(position) != null) {
+                    if (viewModel.isSender(position)!!) {
                         MessageViewTypes.SENDER_AUDIO.value
                     } else {
                         MessageViewTypes.RECEIVER_AUDIO.value
@@ -129,8 +128,8 @@ class ChatMessageAdapter(
                 }
             }
             MessageType.VIDEO -> {
-                return if (viewmodel.isSender(position) != null) {
-                    if (viewmodel.isSender(position)!!) {
+                return if (viewModel.isSender(position) != null) {
+                    if (viewModel.isSender(position)!!) {
                         MessageViewTypes.SENDER_VIDEO.value
                     } else {
                         MessageViewTypes.RECEIVER_VIDEO.value
@@ -141,8 +140,8 @@ class ChatMessageAdapter(
                 }
             }
             MessageType.DOCUMENT -> {
-                return if (viewmodel.isSender(position) != null) {
-                    if (viewmodel.isSender(position)!!) {
+                return if (viewModel.isSender(position) != null) {
+                    if (viewModel.isSender(position)!!) {
                         MessageViewTypes.SENDER_DOCUMENT.value
                     } else {
                         MessageViewTypes.RECEIVER_DOCUMENT.value
@@ -153,8 +152,8 @@ class ChatMessageAdapter(
                 }
             }
             MessageType.CONTACT -> {
-                return if (viewmodel.isSender(position) != null) {
-                    if (viewmodel.isSender(position)!!) {
+                return if (viewModel.isSender(position) != null) {
+                    if (viewModel.isSender(position)!!) {
                         MessageViewTypes.SENDER_CONTACT.value
                     } else {
                         MessageViewTypes.RECEIVER_CONTACT.value
@@ -165,8 +164,8 @@ class ChatMessageAdapter(
                 }
             }
             MessageType.MISSEDCALL -> {
-                return if (viewmodel.isSender(position) != null) {
-                    if (viewmodel.isSender(position)!!) {
+                return if (viewModel.isSender(position) != null) {
+                    if (viewModel.isSender(position)!!) {
                         MessageViewTypes.MISSEDCALL.value
                     } else {
                         MessageViewTypes.MISSEDCALL.value
@@ -320,8 +319,6 @@ class ChatMessageAdapter(
                 )
                 return MissedCallViewHolder(binding as ItemReceiverMissedcallBinding)
             }
-
-
         }
 
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
@@ -333,7 +330,6 @@ class ChatMessageAdapter(
         return viewHolderSenderText(binding as ItemSenderTextBinding)
     }
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         holder.itemView.findViewById<TextView>(R.id.messageTime)
@@ -341,35 +337,63 @@ class ChatMessageAdapter(
         holder.itemView.findViewById<TextView>(R.id.dateSectionHeader)
             .setTextColor(context.getResources().getColor(R.color.white))
 
-        viewmodel.isSender(position)?.let {
+        viewModel.isSender(position)?.let {
             if (it) {
                 if (!SharedHelper(context).chatBubbleColor.equals("", ignoreCase = true)) {
+                    val value = SharedHelper(context).chatBubbleColor
                     holder.itemView.findViewById<TextView>(R.id.dateSectionHeader).background.setColorFilter(
-                        Color.parseColor(SharedHelper(context).chatBubbleColor),
+                        Color.parseColor(value),
                         PorterDuff.Mode.SRC_ATOP
                     )
-                    holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background.setColorFilter(
-                        Color.parseColor(SharedHelper(context).chatBubbleColor),
-                        PorterDuff.Mode.SRC_ATOP
-                    )
+//                    holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background.setColorFilter(
+//                        Color.parseColor(value),
+//                        PorterDuff.Mode.SRC_ATOP
+//                    )
+
+                    //view other than text msg
+                    if (holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background != null)
+                        setColorToBackground(
+                            holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background,
+                            value
+                        )
+                    //view other than text msg
+                    if (holder.itemView.findViewById<ImageView>(R.id.senderCorner) != null)
+                        setColorToBackground(
+                            holder.itemView.findViewById<ImageView>(R.id.senderCorner).background,
+                            value
+                        )
                 }
             } else {
                 if (!SharedHelper(context).chatBubbleColorReciver.equals("", ignoreCase = true)) {
+                    val value = SharedHelper(context).chatBubbleColorReciver
                     holder.itemView.findViewById<TextView>(R.id.dateSectionHeader).background.setColorFilter(
-                        Color.parseColor(SharedHelper(context).chatBubbleColorReciver),
+                        Color.parseColor(value),
                         PorterDuff.Mode.SRC_ATOP
                     )
-                    holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background.setColorFilter(
-                        Color.parseColor(SharedHelper(context).chatBubbleColorReciver),
-                        PorterDuff.Mode.SRC_ATOP
-                    )
+//                    holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background.setColorFilter(
+//                        Color.parseColor(value),
+//                        PorterDuff.Mode.SRC_ATOP
+//                    )
+
+                    //view other than text msg
+                    if (holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background != null)
+                        setColorToBackground(
+                            holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background,
+                            value
+                        )
+                    //view other than text msg
+                    if (holder.itemView.findViewById<ImageView>(R.id.receiverCorner) != null)
+                        setColorToBackground(
+                            holder.itemView.findViewById<ImageView>(R.id.receiverCorner).background,
+                            value
+                        )
                 }
             }
 
         }
 
         holder.itemView.rootView.setOnLongClickListener {
-            viewmodel.selectededPosition(position)
+            viewModel.selectededPosition(position)
             return@setOnLongClickListener true
         }
 
@@ -377,9 +401,9 @@ class ChatMessageAdapter(
             holder.itemView.findViewById<TextView>(R.id.dateSectionHeader).visibility =
                 View.GONE
         } else {
-            viewmodel.getDateDisplay(position, itemCount).let { value ->
+            viewModel.getDateDisplay(position, itemCount).let { value ->
 
-                viewmodel.isSender(position)?.let {
+                viewModel.isSender(position)?.let {
                     if (it) {
                         if (!SharedHelper(context).chatBubbleColor.equals("", ignoreCase = true)) {
                             holder.itemView.findViewById<TextView>(R.id.dateSectionHeader).background.setColorFilter(
@@ -414,8 +438,6 @@ class ChatMessageAdapter(
             }
         }
 
-
-
         when (getItemViewType(position)) {
 
             MessageViewTypes.MISSEDCALL.value -> {
@@ -423,13 +445,12 @@ class ChatMessageAdapter(
                 val missedCallViewHolder = holder as MissedCallViewHolder
 
                 missedCallViewHolder.binding.messageTime.text =
-                    viewmodel.getChatMessageTime(position)
+                    viewModel.getChatMessageTime(position)
 //                if(!SharedHelper(context).chatBubbleColor.equals("",ignoreCase = false)) {
 //                    missedCallViewHolder.binding.messageTime.setTextColor(context.getResources().getColor(R.color.white))
 //                    missedCallViewHolder.binding.chatBubbleColor.background.setColorFilter(Color.parseColor(SharedHelper(context).chatBubbleColor), PorterDuff.Mode.SRC_ATOP)
 //                }
             }
-
 
             MessageViewTypes.SENDER_TEXT.value -> {
                 val senderText: viewHolderSenderText = holder as viewHolderSenderText
@@ -438,28 +459,28 @@ class ChatMessageAdapter(
                     senderText.binding.headerText.show()
                     senderText.binding.layoutReply.hide()
                     (senderText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (senderText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (senderText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     senderText.binding.headerText.hide()
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
 
                         senderText.binding.layoutReply.show()
 
                         (senderText.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyName)
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (senderText.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyMessage)
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (senderText.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -467,7 +488,7 @@ class ChatMessageAdapter(
                             (senderText.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (senderText.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -479,16 +500,16 @@ class ChatMessageAdapter(
                     }
 
                 }
-                senderText.binding.messageTime.text = viewmodel.getChatMessageTime(position)
-                senderText.binding.messageContent.text = viewmodel.getTextChatMessage(position)
+                senderText.binding.messageTime.text = viewModel.getChatMessageTime(position)
+                senderText.binding.messageContent.text = viewModel.getTextChatMessage(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     senderText.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     senderText.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
-                when (viewmodel.getChatMessageStatus(position)) {
+                when (viewModel.getChatMessageStatus(position)) {
                     MessageStatus.SENDING -> senderText.binding.messageStatus.setImageResource(R.drawable.ic_not_send)
                     MessageStatus.SENT -> senderText.binding.messageStatus.setImageResource(R.drawable.ic_single_tick)
                     MessageStatus.DELIVERED -> senderText.binding.messageStatus.setImageResource(
@@ -498,8 +519,8 @@ class ChatMessageAdapter(
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     }
                 }
             }
@@ -509,27 +530,27 @@ class ChatMessageAdapter(
                     senderImage.binding.headerText.show()
                     senderImage.binding.layoutReply.hide()
                     (senderImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (senderImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (senderImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     senderImage.binding.headerText.hide()
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
                         senderImage.binding.layoutReply.show()
 
                         (senderImage.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyName)
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (senderImage.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyMessage)
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (senderImage.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -537,7 +558,7 @@ class ChatMessageAdapter(
                             (senderImage.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (senderImage.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -549,20 +570,20 @@ class ChatMessageAdapter(
                     }
 
                 }
-                senderImage.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+                senderImage.binding.messageTime.text = viewModel.getChatMessageTime(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     senderImage.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     senderImage.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
                 senderImage.binding.messageContent.loadChatImage(
-                    viewmodel.getSenderImage(position),
-                    viewmodel.getThumbNail(position)
+                    viewModel.getSenderImage(position),
+                    viewModel.getThumbNail(position)
                 )
 
-                if (viewmodel.isUploaded(position)) {
+                if (viewModel.isUploaded(position)) {
 
                     setUploaded(
                         senderImage.binding.uploadingLayout.uploadLayout,
@@ -571,7 +592,7 @@ class ChatMessageAdapter(
 
                 } else {
 
-                    if (viewmodel.isUploadCancelledByUser(position)) {
+                    if (viewModel.isUploadCancelledByUser(position)) {
 
                         setUploadPending(
                             senderImage.binding.uploadingLayout.uploadLayout,
@@ -588,14 +609,14 @@ class ChatMessageAdapter(
                 }
 
                 senderImage.binding.uploadLayout.uploadLayout.setOnClickListener {
-                    viewmodel.startUpload(position)
+                    viewModel.startUpload(position)
                 }
 
                 senderImage.binding.uploadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.uploadCancelledByUser(position)
+                    viewModel.uploadCancelledByUser(position)
                 }
 
-                when (viewmodel.getChatMessageStatus(position)) {
+                when (viewModel.getChatMessageStatus(position)) {
                     MessageStatus.SENDING -> senderImage.binding.messageStatus.setImageResource(
                         R.drawable.ic_not_send
                     )
@@ -607,12 +628,12 @@ class ChatMessageAdapter(
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     } else {
                         val intent = Intent(context, ImageAndVideoViewer::class.java)
                         intent.putExtra(
-                            Constants.IntentKeys.CONTENT, viewmodel.getLocalFilePath(position)
+                            Constants.IntentKeys.CONTENT, viewModel.getLocalFilePath(position)
                         )
                         intent.putExtra(Constants.IntentKeys.ISVIDEO, false)
                         context.startActivity(intent)
@@ -628,27 +649,27 @@ class ChatMessageAdapter(
                     senderAudio.binding.headerText.show()
                     senderAudio.binding.layoutReply.hide()
                     (senderAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (senderAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (senderAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     senderAudio.binding.headerText.hide()
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
                         senderAudio.binding.layoutReply.show()
 
                         (senderAudio.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyName)
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (senderAudio.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyMessage)
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (senderAudio.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -656,7 +677,7 @@ class ChatMessageAdapter(
                             (senderAudio.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (senderAudio.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -668,18 +689,18 @@ class ChatMessageAdapter(
                     }
 
                 }
-                senderAudio.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+                senderAudio.binding.messageTime.text = viewModel.getChatMessageTime(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     senderAudio.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     senderAudio.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
-                senderAudio.binding.messageContent.text = viewmodel.getDocumentName(position)
+                senderAudio.binding.messageContent.text = viewModel.getDocumentName(position)
 
-                if (viewmodel.isUploaded(position)) {
-                    if (viewmodel.getIsAudioPlaying(position)) {
+                if (viewModel.isUploaded(position)) {
+                    if (viewModel.getIsAudioPlaying(position)) {
                         setAudioUploadedPlaying(
                             senderAudio.binding.uploadingLayout.uploadLayout,
                             senderAudio.binding.uploadLayout.uploadLayout,
@@ -697,7 +718,7 @@ class ChatMessageAdapter(
 
                     }
                 } else {
-                    if (viewmodel.isUploadCancelledByUser(position)) {
+                    if (viewModel.isUploadCancelledByUser(position)) {
                         setAudioUpload(
                             senderAudio.binding.uploadingLayout.uploadLayout,
                             senderAudio.binding.uploadLayout.uploadLayout,
@@ -715,28 +736,28 @@ class ChatMessageAdapter(
                 }
 
                 senderAudio.binding.pause.setOnClickListener {
-                    viewmodel.pauseAudio()
+                    viewModel.pauseAudio()
                 }
 
                 senderAudio.binding.uploadedLayout.playLayout.setOnClickListener {
-                    viewmodel.playAudio(position)
+                    viewModel.playAudio(position)
                 }
 
                 senderAudio.binding.uploadLayout.uploadLayout.setOnClickListener {
-                    viewmodel.startUploadAudio(position)
+                    viewModel.startUploadAudio(position)
                 }
 
                 senderAudio.binding.uploadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.uploadCancelledByUser(position)
+                    viewModel.uploadCancelledByUser(position)
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     }
                 }
 
-                when (viewmodel.getChatMessageStatus(position)) {
+                when (viewModel.getChatMessageStatus(position)) {
                     MessageStatus.SENDING -> senderAudio.binding.messageStatus.setImageResource(
                         R.drawable.ic_not_send
                     )
@@ -755,26 +776,26 @@ class ChatMessageAdapter(
                     senderVideo.binding.headerText.show()
                     senderVideo.binding.layoutReply.hide()
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     senderVideo.binding.headerText.hide()
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
                         senderVideo.binding.layoutReply.show()
 
                         (senderVideo.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyName)
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (senderVideo.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyMessage)
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (senderVideo.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -782,7 +803,7 @@ class ChatMessageAdapter(
                             (senderVideo.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (senderVideo.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -794,28 +815,27 @@ class ChatMessageAdapter(
                     }
 
                 }
-                senderVideo.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+                senderVideo.binding.messageTime.text = viewModel.getChatMessageTime(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     senderVideo.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     senderVideo.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
                 senderVideo.binding.messageContent.loadChatImage(
-                    viewmodel.getSenderVideo(position),
-                    viewmodel.getThumbNail(position)
+                    viewModel.getSenderVideo(position),
+                    viewModel.getThumbNail(position)
                 )
 
-
-                if (viewmodel.isUploaded(position)) {
+                if (viewModel.isUploaded(position)) {
                     setVideoUploded(
                         senderVideo.binding.uploadingLayout.uploadLayout,
                         senderVideo.binding.uploadLayout.uploadLayout,
                         senderVideo.binding.uploadedLayout.playLayout
                     )
                 } else {
-                    if (viewmodel.isUploadCancelledByUser(position)) {
+                    if (viewModel.isUploadCancelledByUser(position)) {
                         setVideoUplodedPending(
                             senderVideo.binding.uploadingLayout.uploadLayout,
                             senderVideo.binding.uploadLayout.uploadLayout,
@@ -832,21 +852,21 @@ class ChatMessageAdapter(
                 }
 
                 senderVideo.binding.uploadLayout.uploadLayout.setOnClickListener {
-                    viewmodel.startUpload(position)
+                    viewModel.startUpload(position)
                 }
 
                 senderVideo.binding.uploadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.uploadCancelledByUser(position)
+                    viewModel.uploadCancelledByUser(position)
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     } else {
                         var intent = Intent(context, ImageAndVideoViewer::class.java)
                         intent.putExtra(
                             Constants.IntentKeys.CONTENT,
-                            viewmodel.getLocalFilePath(position)
+                            viewModel.getLocalFilePath(position)
                         )
                         intent.putExtra(Constants.IntentKeys.ISVIDEO, true)
                         context.startActivity(intent)
@@ -854,8 +874,7 @@ class ChatMessageAdapter(
 
                 }
 
-
-                when (viewmodel.getChatMessageStatus(position)) {
+                when (viewModel.getChatMessageStatus(position)) {
                     MessageStatus.SENDING -> senderVideo.binding.messageStatus.setImageResource(
                         R.drawable.ic_not_send
                     )
@@ -875,17 +894,17 @@ class ChatMessageAdapter(
                     senderDocument.binding.headerText.show()
                     senderDocument.binding.layoutReply.hide()
                     (senderDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (senderDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (senderDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
                 } else {
                     senderDocument.binding.headerText.hide()
 
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
 
                         senderDocument.binding.layoutReply.show()
@@ -893,14 +912,14 @@ class ChatMessageAdapter(
                         (senderDocument.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyName
                         )
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (senderDocument.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyMessage
                         )
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (senderDocument.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -908,7 +927,7 @@ class ChatMessageAdapter(
                             (senderDocument.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (senderDocument.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -920,9 +939,9 @@ class ChatMessageAdapter(
                     }
 
                 }
-                senderDocument.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+                senderDocument.binding.messageTime.text = viewModel.getChatMessageTime(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     senderDocument.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     senderDocument.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
@@ -931,19 +950,19 @@ class ChatMessageAdapter(
                 senderDocument.binding.documentIcon.setImageDrawable(
                     ContextCompat.getDrawable(
                         context,
-                        getDocumentIcon(viewmodel.getSenderFile(position)?.getFileExtension())
+                        getDocumentIcon(viewModel.getSenderFile(position)?.getFileExtension())
                     )
                 )
 
-                senderDocument.binding.messageContent.text = viewmodel.getDocumentName(position)
+                senderDocument.binding.messageContent.text = viewModel.getDocumentName(position)
 
-                if (viewmodel.isUploaded(position)) {
+                if (viewModel.isUploaded(position)) {
                     setDocumentUploaded(
                         senderDocument.binding.uploadLayout.uploadLayout,
                         senderDocument.binding.uploadingLayout.uploadLayout
                     )
                 } else {
-                    if (viewmodel.isUploadCancelledByUser(position)) {
+                    if (viewModel.isUploadCancelledByUser(position)) {
                         setDocumentUpload(
                             senderDocument.binding.uploadLayout.uploadLayout,
                             senderDocument.binding.uploadingLayout.uploadLayout
@@ -957,23 +976,23 @@ class ChatMessageAdapter(
                 }
 
                 senderDocument.binding.uploadLayout.uploadLayout.setOnClickListener {
-                    viewmodel.startUploadDocument(position)
+                    viewModel.startUploadDocument(position)
                 }
 
                 senderDocument.binding.uploadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.uploadCancelledByUser(position)
+                    viewModel.uploadCancelledByUser(position)
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     } else {
-                        openDocument(viewmodel.getLocalFile(position), position)
+                        openDocument(viewModel.getLocalFile(position), position)
                     }
 
                 }
 
-                when (viewmodel.getChatMessageStatus(position)) {
+                when (viewModel.getChatMessageStatus(position)) {
                     MessageStatus.SENDING -> senderDocument.binding.messageStatus.setImageResource(
                         R.drawable.ic_not_send
                     )
@@ -1003,22 +1022,22 @@ class ChatMessageAdapter(
                     receiverText.binding.headerText.show()
 
                     (receiverText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (receiverText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (receiverText.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     receiverText.binding.headerText.hide()
-                    if (viewmodel.getIsGroupChat()) {
+                    if (viewModel.getIsGroupChat()) {
                         receiverText.binding.userImage.show()
                         receiverText.binding.messageUserName.show()
                         receiverText.binding.messageUserName.text =
-                            viewmodel.getSenderName(position)
+                            viewModel.getSenderName(position)
                         receiverText.binding.userImage.loadImage(
-                            viewmodel.getSenderProfilePic(
+                            viewModel.getSenderProfilePic(
                                 position
                             )
                         )
@@ -1027,23 +1046,23 @@ class ChatMessageAdapter(
                         receiverText.binding.messageUserName.hide()
                     }
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
                         receiverText.binding.layoutReply.show()
 
                         (receiverText.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyName)
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (receiverText.binding.layoutReply as ViewGroup).findViewById<TextView>(R.id.replyMessage)
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (receiverText.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             ).show()
                             (receiverText.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
-                            ).loadImage(viewmodel.getReplyUrl(position))
+                            ).loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (receiverText.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -1057,18 +1076,18 @@ class ChatMessageAdapter(
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     }
                 }
 
                 receiverText.binding.messageStatus.visibility = View.GONE
 
-                receiverText.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+                receiverText.binding.messageTime.text = viewModel.getChatMessageTime(position)
                 receiverText.binding.messageContent.text =
-                    viewmodel.getTextChatMessage(position)
+                    viewModel.getTextChatMessage(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     receiverText.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     receiverText.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
@@ -1083,17 +1102,17 @@ class ChatMessageAdapter(
                     receiverImage.binding.messageUserName.hide()
                     receiverImage.binding.layoutReply.hide()
                     (receiverImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (receiverImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (receiverImage.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     receiverImage.binding.headerText.hide()
 
-                    if (viewmodel.getIsGroupChat()) {
+                    if (viewModel.getIsGroupChat()) {
                         receiverImage.binding.userImage.show()
                         receiverImage.binding.messageUserName.show()
                     } else {
@@ -1101,22 +1120,21 @@ class ChatMessageAdapter(
                         receiverImage.binding.messageUserName.hide()
                     }
 
-                    if (viewmodel.getIsReply(position)) {
-
+                    if (viewModel.getIsReply(position)) {
 
                         receiverImage.binding.layoutReply.show()
 
                         (receiverImage.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyName
                         )
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (receiverImage.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyMessage
                         )
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (receiverImage.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -1124,7 +1142,7 @@ class ChatMessageAdapter(
                             (receiverImage.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (receiverImage.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -1138,27 +1156,27 @@ class ChatMessageAdapter(
                 }
 
                 receiverImage.binding.messageUserName.hide()
-//                receiverImage.binding.messageUserName.text = viewmodel.getSenderName(position)
-                receiverImage.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+//                receiverImage.binding.messageUserName.text = viewModel.getSenderName(position)
+                receiverImage.binding.messageTime.text = viewModel.getChatMessageTime(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     receiverImage.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     receiverImage.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
                 receiverImage.binding.messageContent.loadChatImage(
-                    viewmodel.getReciverImageUrl(position),
-                    viewmodel.getReciverThumbUrl(position)
+                    viewModel.getReciverImageUrl(position),
+                    viewModel.getReciverThumbUrl(position)
                 )
 
-                if (viewmodel.isMediaDownload(position)) {
+                if (viewModel.isMediaDownload(position)) {
                     setDownloded(
                         receiverImage.binding.downloadingLayout.uploadLayout,
                         receiverImage.binding.downloadLayout.downloadLayout
                     )
                 } else {
-                    if (viewmodel.isDownloadCancelByUser(position)) {
+                    if (viewModel.isDownloadCancelByUser(position)) {
                         setDownloadPending(
                             receiverImage.binding.downloadingLayout.uploadLayout,
                             receiverImage.binding.downloadLayout.downloadLayout
@@ -1173,23 +1191,23 @@ class ChatMessageAdapter(
                 }
 
                 receiverImage.binding.downloadLayout.downloadLayout.setOnClickListener {
-                    viewmodel.downloadMedia(position)
+                    viewModel.downloadMedia(position)
                 }
 
                 receiverImage.binding.downloadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.downloadCanceledByUser(position)
+                    viewModel.downloadCanceledByUser(position)
                 }
 
                 holder.itemView.rootView.setOnClickListener {
 
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     } else {
-                        if (viewmodel.isFileExist(position)) {
-                            var intent = Intent(context, ImageAndVideoViewer::class.java)
+                        if (viewModel.isFileExist(position)) {
+                            val intent = Intent(context, ImageAndVideoViewer::class.java)
                             intent.putExtra(
                                 Constants.IntentKeys.CONTENT,
-                                viewmodel.getLocalFilePath(position)
+                                viewModel.getLocalFilePath(position)
                             )
                             intent.putExtra(Constants.IntentKeys.ISVIDEO, false)
                             context.startActivity(intent)
@@ -1208,16 +1226,16 @@ class ChatMessageAdapter(
                     receiverAudio.binding.messageUserName.hide()
                     receiverAudio.binding.layoutReply.hide()
                     (receiverAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (receiverAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (receiverAudio.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     receiverAudio.binding.headerText.hide()
-                    if (viewmodel.getIsGroupChat()) {
+                    if (viewModel.getIsGroupChat()) {
                         receiverAudio.binding.userImage.show()
                         receiverAudio.binding.messageUserName.show()
                     } else {
@@ -1225,7 +1243,7 @@ class ChatMessageAdapter(
                         receiverAudio.binding.messageUserName.hide()
                     }
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
 
                         receiverAudio.binding.layoutReply.show()
@@ -1233,14 +1251,14 @@ class ChatMessageAdapter(
                         (receiverAudio.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyName
                         )
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (receiverAudio.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyMessage
                         )
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (receiverAudio.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -1248,7 +1266,7 @@ class ChatMessageAdapter(
                             (receiverAudio.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (receiverAudio.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -1260,19 +1278,19 @@ class ChatMessageAdapter(
                     }
 
                 }
-                receiverAudio.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+                receiverAudio.binding.messageTime.text = viewModel.getChatMessageTime(position)
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     receiverAudio.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     receiverAudio.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
-                receiverAudio.binding.messageContent.text = viewmodel.getDocumentName(position)
+                receiverAudio.binding.messageContent.text = viewModel.getDocumentName(position)
 
-                if (viewmodel.isMediaDownload(position)) {
+                if (viewModel.isMediaDownload(position)) {
 
-                    if (viewmodel.getIsAudioPlaying(position)) {
+                    if (viewModel.getIsAudioPlaying(position)) {
 
                         setDownlodedAudioPlaying(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
@@ -1292,7 +1310,7 @@ class ChatMessageAdapter(
 
                 } else {
 
-                    if (viewmodel.isDownloadCancelByUser(position)) {
+                    if (viewModel.isDownloadCancelByUser(position)) {
                         setDownlodAudio(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
@@ -1310,24 +1328,24 @@ class ChatMessageAdapter(
                 }
 
                 receiverAudio.binding.pause.setOnClickListener {
-                    viewmodel.pauseAudio()
+                    viewModel.pauseAudio()
                 }
 
                 receiverAudio.binding.downloadedLayout.playLayout.setOnClickListener {
-                    viewmodel.playAudio(position)
+                    viewModel.playAudio(position)
                 }
 
                 receiverAudio.binding.downloadLayout.downloadLayout.setOnClickListener {
-                    viewmodel.downloadAudio(position)
+                    viewModel.downloadAudio(position)
                 }
 
                 receiverAudio.binding.downloadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.downloadCanceledByUser(position)
+                    viewModel.downloadCanceledByUser(position)
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     }
                 }
             }
@@ -1340,15 +1358,15 @@ class ChatMessageAdapter(
                     receiverVideo.binding.messageUserName.hide()
                     receiverVideo.binding.layoutReply.hide()
                     (receiverVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (receiverVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (receiverVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
                 } else {
                     receiverVideo.binding.headerText.hide()
-                    if (viewmodel.getIsGroupChat()) {
+                    if (viewModel.getIsGroupChat()) {
                         receiverVideo.binding.userImage.show()
                         receiverVideo.binding.messageUserName.show()
                     } else {
@@ -1356,21 +1374,21 @@ class ChatMessageAdapter(
                         receiverVideo.binding.messageUserName.hide()
                     }
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
                         receiverVideo.binding.layoutReply.show()
 
                         (receiverVideo.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyName
                         )
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (receiverVideo.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyMessage
                         )
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (receiverVideo.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -1378,7 +1396,7 @@ class ChatMessageAdapter(
                             (receiverVideo.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (receiverVideo.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -1392,16 +1410,15 @@ class ChatMessageAdapter(
                 }
 
                 receiverVideo.binding.messageUserName.hide()
-                receiverVideo.binding.messageTime.text = viewmodel.getChatMessageTime(position)
+                receiverVideo.binding.messageTime.text = viewModel.getChatMessageTime(position)
 
-
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     receiverVideo.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     receiverVideo.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
-                if (viewmodel.isMediaDownload(position)) {
+                if (viewModel.isMediaDownload(position)) {
                     setVideoDownloded(
                         receiverVideo.binding.downloadingLayout.uploadLayout,
                         receiverVideo.binding.downloadLayout.downloadLayout,
@@ -1409,7 +1426,7 @@ class ChatMessageAdapter(
                     )
                 } else {
 
-                    if (viewmodel.isDownloadCancelByUser(position)) {
+                    if (viewModel.isDownloadCancelByUser(position)) {
                         setDownloadVideo(
                             receiverVideo.binding.downloadingLayout.uploadLayout,
                             receiverVideo.binding.downloadLayout.downloadLayout,
@@ -1425,27 +1442,27 @@ class ChatMessageAdapter(
 
                 }
                 receiverVideo.binding.messageContent.loadChatImage(
-                    viewmodel.getReciverVideo(position),
-                    viewmodel.getThumbNail(position)
+                    viewModel.getReciverVideo(position),
+                    viewModel.getThumbNail(position)
                 )
 
                 receiverVideo.binding.downloadLayout.downloadLayout.setOnClickListener {
-                    viewmodel.downloadMedia(position)
+                    viewModel.downloadMedia(position)
                 }
 
                 receiverVideo.binding.downloadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.downloadCanceledByUser(position)
+                    viewModel.downloadCanceledByUser(position)
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     } else {
-                        if (viewmodel.isFileExist(position)) {
+                        if (viewModel.isFileExist(position)) {
                             val intent = Intent(context, ImageAndVideoViewer::class.java)
                             intent.putExtra(
                                 Constants.IntentKeys.CONTENT,
-                                viewmodel.getLocalFilePath(position)
+                                viewModel.getLocalFilePath(position)
                             )
                             intent.putExtra(Constants.IntentKeys.ISVIDEO, true)
                             context.startActivity(intent)
@@ -1465,16 +1482,16 @@ class ChatMessageAdapter(
                     receiverDocument.binding.layoutReply.hide()
 
                     (receiverDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
-                        .text = viewmodel.getSenderName(position)
+                        .text = viewModel.getSenderName(position)
                     (receiverDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
-                        .text = viewmodel.getReceiverName(position)
+                        .text = viewModel.getReceiverName(position)
 
                     (receiverDocument.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
-                        .text = viewmodel.getChatMessageTime(position)
+                        .text = viewModel.getChatMessageTime(position)
 
                 } else {
                     receiverDocument.binding.headerText.hide()
-                    if (viewmodel.getIsGroupChat()) {
+                    if (viewModel.getIsGroupChat()) {
                         receiverDocument.binding.userImage.show()
                         receiverDocument.binding.messageUserName.show()
                     } else {
@@ -1482,7 +1499,7 @@ class ChatMessageAdapter(
                         receiverDocument.binding.messageUserName.hide()
                     }
 
-                    if (viewmodel.getIsReply(position)) {
+                    if (viewModel.getIsReply(position)) {
 
 
                         receiverDocument.binding.layoutReply.show()
@@ -1490,14 +1507,14 @@ class ChatMessageAdapter(
                         (receiverDocument.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyName
                         )
-                            .text = viewmodel.getReplySendName(position)
+                            .text = viewModel.getReplySendName(position)
 
                         (receiverDocument.binding.layoutReply as ViewGroup).findViewById<TextView>(
                             R.id.replyMessage
                         )
-                            .text = viewmodel.getReplyMessage(position)
+                            .text = viewModel.getReplyMessage(position)
 
-                        if (viewmodel.isImageOrVideoMessage(position)) {
+                        if (viewModel.isImageOrVideoMessage(position)) {
                             (receiverDocument.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
@@ -1505,7 +1522,7 @@ class ChatMessageAdapter(
                             (receiverDocument.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
                             )
-                                .loadImage(viewmodel.getReplyUrl(position))
+                                .loadImage(viewModel.getReplyUrl(position))
                         } else {
                             (receiverDocument.binding.layoutReply as ViewGroup).findViewById<ImageView>(
                                 R.id.replyImage
@@ -1518,33 +1535,33 @@ class ChatMessageAdapter(
 
                 }
                 receiverDocument.binding.messageTime.text =
-                    viewmodel.getChatMessageTime(position)
+                    viewModel.getChatMessageTime(position)
 
                 receiverDocument.binding.documentIcon.setImageDrawable(
                     ContextCompat.getDrawable(
                         context,
-                        getDocumentIcon(viewmodel.getReciverFile(position)?.getFileExtension())
+                        getDocumentIcon(viewModel.getReciverFile(position)?.getFileExtension())
                     )
                 )
 
                 receiverDocument.binding.messageUserName.hide()
 
-                if (viewmodel.isSelected(position)) {
+                if (viewModel.isSelected(position)) {
                     receiverDocument.binding.rootLayout.setBackgroundResource(R.color.chat_selected)
                 } else {
                     receiverDocument.binding.rootLayout.setBackgroundResource(R.color.chat_unselected)
                 }
 
                 receiverDocument.binding.messageContent.text =
-                    viewmodel.getDocumentName(position)
+                    viewModel.getDocumentName(position)
 
-                if (viewmodel.isMediaDownload(position)) {
+                if (viewModel.isMediaDownload(position)) {
                     setDownloded(
                         receiverDocument.binding.downloadingLayout.uploadLayout,
                         receiverDocument.binding.downloadLayout.downloadLayout
                     )
                 } else {
-                    if (viewmodel.isDownloadCancelByUser(position)) {
+                    if (viewModel.isDownloadCancelByUser(position)) {
                         setDownloadPending(
                             receiverDocument.binding.downloadingLayout.uploadLayout,
                             receiverDocument.binding.downloadLayout.downloadLayout
@@ -1558,19 +1575,19 @@ class ChatMessageAdapter(
                 }
 
                 receiverDocument.binding.downloadLayout.downloadLayout.setOnClickListener {
-                    viewmodel.downloadDocument(position)
+                    viewModel.downloadDocument(position)
                 }
 
                 receiverDocument.binding.downloadingLayout.uploadLayout.setOnClickListener {
-                    viewmodel.downloadCanceledByUser(position)
+                    viewModel.downloadCanceledByUser(position)
                 }
 
                 holder.itemView.rootView.setOnClickListener {
-                    if (viewmodel.isMultiSelectedEnabled) {
-                        viewmodel.singleClick(position)
+                    if (viewModel.isMultiSelectedEnabled) {
+                        viewModel.singleClick(position)
                     } else {
-                        if (viewmodel.isFileExist(position))
-                            openDocument(viewmodel.getLocalFile(position), position)
+                        if (viewModel.isFileExist(position))
+                            openDocument(viewModel.getLocalFile(position), position)
                     }
 
                 }
@@ -1582,7 +1599,6 @@ class ChatMessageAdapter(
 
             }
         }
-
 
     }
 
@@ -1659,7 +1675,6 @@ class ChatMessageAdapter(
         uploadLayout.show()
         uploadedLayout.hide()
         pause.hide()
-
     }
 
     private fun setAudioUploaded(
@@ -1673,7 +1688,6 @@ class ChatMessageAdapter(
         uploadLayout.hide()
         uploadedLayout.show()
         pause.hide()
-
     }
 
     private fun setAudioUploadedPlaying(
@@ -1722,7 +1736,6 @@ class ChatMessageAdapter(
         downloadLayout.show()
         downloadingLayout.hide()
         downloadedLayout.hide()
-
     }
 
     private fun setDownloadingVideo(
@@ -1743,7 +1756,6 @@ class ChatMessageAdapter(
         uploadingLayout.hide()
         uploadLayout.hide()
         uploadedLayout.show()
-
     }
 
     private fun setVideoDownloded(
@@ -1827,7 +1839,7 @@ class ChatMessageAdapter(
     }
 
     fun notifySelection() {
-        submitList(viewmodel.chatMessagePagedList)
+        submitList(viewModel.chatMessagePagedList)
         notifyDataSetChanged()
     }
 
@@ -1953,27 +1965,26 @@ class ChatMessageAdapter(
         file?.getDocumentType()?.let {
             when {
                 it.contains("image", true) -> {
-                    var intent = Intent(context, ImageAndVideoViewer::class.java)
+                    val intent = Intent(context, ImageAndVideoViewer::class.java)
                     intent.putExtra(
                         Constants.IntentKeys.CONTENT,
-                        viewmodel.getLocalFilePath(position)
+                        viewModel.getLocalFilePath(position)
                     )
                     intent.putExtra(Constants.IntentKeys.ISVIDEO, false)
                     context.startActivity(intent)
                 }
                 it.contains("video", true) -> {
-                    var intent = Intent(context, ImageAndVideoViewer::class.java)
+                    val intent = Intent(context, ImageAndVideoViewer::class.java)
                     intent.putExtra(
                         Constants.IntentKeys.CONTENT,
-                        viewmodel.getLocalFilePath(position)
+                        viewModel.getLocalFilePath(position)
                     )
                     intent.putExtra(Constants.IntentKeys.ISVIDEO, true)
                     context.startActivity(intent)
                 }
                 else -> {
 
-
-                    var intent = getViewIntent(
+                    val intent = getViewIntent(
                         FileProvider.getUriForFile(
                             context,
                             context.applicationContext.packageName + ".provider",
@@ -1984,7 +1995,6 @@ class ChatMessageAdapter(
                     val chooser =
                         Intent.createChooser(intent, "Choose an application to open with:")
                     context.startActivity(chooser)
-
 
                 }
             }
@@ -2002,7 +2012,6 @@ class ChatMessageAdapter(
                 ): Boolean {
                     return oldItem.messageId == newItem.messageId
                 }
-
 
                 override fun areContentsTheSame(
                     oldItem: ChatMessagesSchema,

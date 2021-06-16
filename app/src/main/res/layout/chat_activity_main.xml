@@ -8,5 +8,4 @@
     android:background="?page_default_bg"
     tools:context=".view.activity.ChatActivity">
 
-
 </FrameLayout>

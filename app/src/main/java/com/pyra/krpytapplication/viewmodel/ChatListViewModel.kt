@@ -41,6 +41,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     var updateUnnameList: MutableLiveData<Boolean>? = MutableLiveData()
     var updateNameList: MutableLiveData<Boolean>? = MutableLiveData()
     var update: MutableLiveData<Boolean> = MutableLiveData()
+    var chatListCount: MutableLiveData<Int> = MutableLiveData()
     var amazonRepository = AmazonRepository.getInstance()
 
     //create group
@@ -88,16 +89,13 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
             } catch (e: SQLiteException) {
                 println("You've already inserted it once")
             }
-
         }
-
     }
 
     fun insertOrReplace(entity: ChatListSchema) {
         Coroutine.iOWorker {
             chatListRepository.insertOrReplace(entity)
         }
-
     }
 
     fun updateUserName(kryptKey: String, userName: String) {
@@ -144,6 +142,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     fun getChatListAsync() {
         chatListRepository.getChatList()?.observeForever(Observer {
             chatList = it as ArrayList<ChatListSchema>
+            chatListCount.value = it.size
             update.value = true
         })
     }
@@ -151,6 +150,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     fun getChatList() {
         chatListRepository.getChatList()?.observeForever(Observer {
             chatList = it as ArrayList<ChatListSchema>
+            chatListCount.value = it.size
             update.value = true
         })
     }
@@ -194,7 +194,6 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     fun getNamedUserImage(position: Int): String? {
         return namedContacts[position].roomImage
     }
-
 
     fun getNamedRoomName(at: Int): String? {
         return namedContacts[at].roomName
@@ -253,7 +252,6 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
             }
         }
     }
-
 
     /////create group
     fun onItemAddContact(chatListSchema: ChatListSchema?) {
@@ -339,9 +337,9 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
         entity.roomImage = groupImageUrl
 
 
-        var nameList = getNameList(applicationInstance?.baseContext!!)
+        val nameList = getNameList(applicationInstance?.baseContext!!)
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(
             Constants.ApiKeys.USERNAME,
             sharedHelper?.kryptKey.toString().toLowerCase() + "@" + Constants.XMPPKeys.CHAT_DOMAIN
@@ -383,9 +381,9 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
         nameList: List<String>?
     ) {
 
-        var userList = JSONArray()
+        val userList = JSONArray()
         for (i in 0 until selectedList.size) {
-            var jsonObject = JSONObject()
+            val jsonObject = JSONObject()
             jsonObject.put(
                 Constants.ApiKeys.USERNAME,
                 selectedList[i].kryptId + "@" + Constants.XMPPKeys.CHAT_DOMAIN
@@ -393,11 +391,10 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
             userList.put(jsonObject)
         }
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.USERNAME, userList.toString())
         jsonObject.put(Constants.ApiKeys.GROUPNAME, entity.roomId)
         jsonObject.put(Constants.ApiKeys.ROLE, "members")
-
 
         chatListRepository.joinGroupMembers(
             getApiParams(
@@ -417,12 +414,11 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
             }
         }
 
-
     }
 
     fun getGroupDetails() {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(
             Constants.ApiKeys.USERNAME,
             sharedHelper?.kryptKey + "@" + Constants.XMPPKeys.CHAT_DOMAIN
@@ -440,7 +436,6 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
                 getOldMessages(it.data.chatUsers)
             }
         }
-
 
     }
 
@@ -464,18 +459,17 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
                 )
         }
 
-
     }
 
     private fun syncBlockedUser(blockedUsers: ArrayList<BlockedUsers>) {
 
         Coroutine.iOWorker {
-            var kryptList = ArrayList<String>()
+            val kryptList = ArrayList<String>()
             for (i in blockedUsers.indices) {
                 kryptList.add(blockedUsers[i].toUser.toUpperCase())
-                var count = chatListRepository.isUserBlocked(blockedUsers[i].toUser)
+                val count = chatListRepository.isUserBlocked(blockedUsers[i].toUser)
                 if (count == 0) {
-                    chatListRepository.inserBlockedUser(blockedUsers[i].toUser.toUpperCase())
+                    chatListRepository.insertBlockedUser(blockedUsers[i].toUser.toUpperCase())
                 }
             }
 
@@ -489,7 +483,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
             Coroutine.iOWorker {
 
-                var nameList = getNameList(applicationInstance?.baseContext!!)
+                val nameList = getNameList(applicationInstance?.baseContext!!)
 
                 for (i in 0 until data.size) {
 
@@ -623,7 +617,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
         for (i in groupList.indices) {
 
-            var presentMemberList = ArrayList<String>()
+            val presentMemberList = ArrayList<String>()
             groupList[i].participants?.let { memberList ->
                 for (j in memberList.indices) {
                     presentMemberList.add(memberList[j].userName.bareUsername().toUpperCase())
@@ -640,7 +634,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
     fun removeGrpNotExist(groupList: ArrayList<GroupDetails>) {
 
-        var presentGrpList = ArrayList<String>()
+        val presentGrpList = ArrayList<String>()
         for (i in groupList.indices) {
             presentGrpList.add(groupList[i].groupName.toUpperCase())
         }
@@ -651,15 +645,15 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     fun getProfileImages() {
 
         Coroutine.iOWorker {
-            var chatListSchema = chatListRepository.getPrivateMessageUsers()
+            val chatListSchema = chatListRepository.getPrivateMessageUsers()
             chatListSchema?.let {
 
-                var request = JSONObject()
+                val request = JSONObject()
                 if (it.isNotEmpty()) {
-                    var array = JSONArray()
+                    val array = JSONArray()
 
                     for (i in it.indices) {
-                        var jsonObject = JSONObject()
+                        val jsonObject = JSONObject()
                         jsonObject.put(Constants.ApiKeys.USERNAME, it[i])
                         array.put(jsonObject)
                     }
@@ -680,7 +674,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
                                         for (i in response.data!!.indices) {
                                             if (!response.data?.get(i)?.properties.isNullOrEmpty()) {
 
-                                                var userName = response?.data?.get(i)?.username
+                                                val userName = response?.data?.get(i)?.username
 
 
                                                 userName?.let {
@@ -741,7 +735,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     private fun getRoomName() {
         Coroutine.iOWorker {
             if (selectedRoomIds.size == 1) {
-                var detail = chatListRepository.getRoomDetails(selectedRoomIds[0])
+                val detail = chatListRepository.getRoomDetails(selectedRoomIds[0])
                 detail?.let {
                     if (detail.chatType == "PRIVATE") {
                         if (detail.roomName == "") {
@@ -761,7 +755,6 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 
     fun getIsSelected(position: Int): Boolean =
         selectedRoomIds.contains(chatList[position].roomId.toUpperCase())
-
 
     fun removeSelection() {
         isMultiSelectionEnabled = false
@@ -786,9 +779,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
                     removeSelection()
                 }
 
-
             }
-
 
         }
     }

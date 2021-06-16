@@ -28,7 +28,7 @@
 
                 <ImageView
                     android:id="@+id/backButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_19sdp"
                     android:layout_height="@dimen/_19sdp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
@@ -43,10 +43,8 @@
                     android:layout_alignTop="@id/backButton"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_toEndOf="@id/backButton"
-                    android:fontFamily="?mediumFont"
                     android:text="@string/account"
-                    android:textColor="?toolbar_text_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileTextStyle" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -64,9 +62,9 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:fontFamily="?mediumFont"
-                    android:textColor="?toolbar_text_color"
-                    android:textSize="@dimen/_16sdp"
+                    android:fontFamily="@font/jost_semibold"
+                    android:textColor="?title_color"
+                    android:textSize="26sp"
                     tools:text="@string/demo_user_name" />
 
                 <ImageView
@@ -84,11 +82,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/userName"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="?regularFont"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/jost_regular"
                     android:text="@string/available"
                     android:textColor="?colorPrimary"
-                    android:textSize="@dimen/_11sdp" />
+                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:id="@+id/profileImageLayout"
@@ -117,7 +115,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:padding="@dimen/_5sdp"
+                            android:padding="@dimen/_6sdp"
                             android:src="@drawable/camera_icon"
                             app:tint="@color/emoji_black" />
 
@@ -137,10 +135,8 @@
                     android:id="@+id/phoneNumberText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?mediumFont"
                     android:text="@string/krypt_code"
-                    android:textColor="?colorPrimary"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileLabelStyle" />
 
                 <TextView
                     android:id="@+id/kryptCode"
@@ -148,10 +144,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/phoneNumberText"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="?regularFont"
                     android:text="+91 8754676789"
-                    android:textColor="?primary_text_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileTextStyle" />
 
                 <ImageView
                     android:id="@+id/copyCode"
@@ -160,8 +154,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="3dp"
-                    android:src="@drawable/copy"
-                    app:tint="?colorPrimary" />
+                    android:src="@drawable/copy_icon" />
 
                 <View
                     android:id="@+id/divider"
@@ -181,40 +174,36 @@
                 android:layout_margin="@dimen/_10sdp">
 
                 <TextView
-                    android:id="@+id/currentStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="?regularFont"
-                    android:text="@string/available"
-                    android:textColor="?primary_text_color"
-                    android:textSize="@dimen/_12sdp" />
-
-                <TextView
                     android:id="@+id/availableText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/currentStatus"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="?mediumFont"
                     android:text="@string/about"
-                    android:textColor="?colorPrimary"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileLabelStyle" />
+
+                <TextView
+                    android:id="@+id/currentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/availableText"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/available"
+                    android:theme="@style/ProfileTextStyle" />
 
                 <ImageView
                     android:id="@+id/editIcon"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:tint="?colorPrimary"
-                    android:src="@drawable/edit_icon" />
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/edit_icon"
+                    app:tint="?colorPrimary" />
 
                 <View
                     android:id="@+id/view3"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_below="@id/availableText"
+                    android:layout_below="@id/currentStatus"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:alpha="0.2"
                     android:background="?text_color_hint" />
@@ -231,10 +220,8 @@
                     android:id="@+id/sub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="?mediumFont"
                     android:text="@string/subscription"
-                    android:textColor="?colorPrimary"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileLabelStyle" />
 
                 <TextView
                     android:id="@+id/start"
@@ -242,10 +229,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/sub"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="?regularFont"
                     android:text="@string/start_date"
-                    android:textColor="?primary_text_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileTextStyle" />
 
                 <TextView
                     android:id="@+id/startDate"
@@ -253,10 +238,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/start"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="?regularFont"
                     android:text="@string/not_updated"
-                    android:textColor="?primary_text_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileTextStyle" />
 
                 <TextView
                     android:id="@+id/end"
@@ -264,10 +247,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/start"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="?regularFont"
                     android:text="@string/end_date"
-                    android:textColor="?primary_text_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileTextStyle" />
 
                 <TextView
                     android:id="@+id/endDate"
@@ -275,10 +256,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/end"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="?regularFont"
                     android:text="@string/not_updated"
-                    android:textColor="?primary_text_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:theme="@style/ProfileTextStyle" />
 
                 <View
                     android:id="@+id/view19"
@@ -317,15 +296,13 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="?mediumFont"
                         android:text="@string/settings"
-                        android:textColor="?colorPrimary"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileLabelStyle" />
 
                     <ImageView
                         android:id="@+id/changePasswordImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:layout_below="@id/textView2"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:padding="@dimen/_2sdp"
@@ -337,12 +314,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@id/changePasswordImage"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/changePasswordImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/change_password"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <View
                         android:id="@+id/view4"
@@ -363,8 +338,8 @@
 
                     <ImageView
                         android:id="@+id/blockImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_2sdp"
                         android:src="@drawable/blocked_contact"
                         app:tint="?text_color_hint" />
@@ -373,12 +348,10 @@
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toRightOf="@id/blockImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/blocked_contacts"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <View
                         android:id="@+id/view6"
@@ -399,8 +372,8 @@
 
                     <ImageView
                         android:id="@+id/autoLockImg"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_2sdp"
                         android:src="@drawable/logout"
                         app:tint="?text_color_hint" />
@@ -410,12 +383,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@id/autoLockImg"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/autoLockImg"
-                        android:fontFamily="?regularFont"
                         android:text="@string/auto_logout"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <TextView
                         android:id="@+id/autoLockTxtTime"
@@ -423,10 +394,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@id/autoLockTxt"
                         android:layout_alignParentEnd="true"
-                        android:fontFamily="?mediumFont"
                         android:text="@string/_1_month"
                         android:textColor="?colorPrimary"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <View
                         android:id="@+id/autoLockView"
@@ -447,8 +417,8 @@
 
                     <ImageView
                         android:id="@+id/deleteImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_2sdp"
                         android:src="@drawable/delete_chat"
                         app:tint="?text_color_hint" />
@@ -457,12 +427,10 @@
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/deleteImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/delete_all_chat"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <View
                         android:id="@+id/view8"
@@ -483,8 +451,8 @@
 
                     <ImageView
                         android:id="@+id/morphVoiceImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_1sdp"
                         android:src="@drawable/mic_icon"
                         app:tint="?text_color_hint" />
@@ -493,19 +461,27 @@
                         android:id="@+id/morphVoiceLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/morphVoiceImage"
-                        android:fontFamily="?regularFont"
                         android:text="Morph Voice"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <com.suke.widget.SwitchButton
                         android:id="@+id/morphVoice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
-                        android:theme="@style/SwitchStyle" />
+                        android:thumbTint="@color/colorPrimary"
+                        app:sb_button_color="?page_default_bg"
+                        app:sb_checked_color="@color/colorPrimary"
+                        app:sb_show_indicator="false" />
+
+                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
+                    <!--                        android:id="@+id/morphVoice"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_alignParentEnd="true"-->
+                    <!--                        android:theme="@style/SwitchStyle" />-->
 
                     <View
                         android:layout_width="match_parent"
@@ -525,8 +501,8 @@
 
                     <ImageView
                         android:id="@+id/morphFrequencyImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_1sdp"
                         android:src="@drawable/mic_icon"
                         app:tint="?text_color_hint" />
@@ -535,12 +511,10 @@
                         android:id="@+id/morphFrequencyLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/morphFrequencyImage"
-                        android:fontFamily="?regularFont"
                         android:text="Morph Frequency"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <View
                         android:layout_width="match_parent"
@@ -560,8 +534,8 @@
 
                     <ImageView
                         android:id="@+id/changeThemeImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_1sdp"
                         android:src="@drawable/change_theme"
                         app:tint="?text_color_hint" />
@@ -570,19 +544,27 @@
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/changeThemeImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/light_theme"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <com.suke.widget.SwitchButton
                         android:id="@+id/darkTheme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
-                        android:theme="@style/SwitchStyle" />
+                        android:thumbTint="@color/colorPrimary"
+                        app:sb_button_color="?page_default_bg"
+                        app:sb_checked_color="@color/colorPrimary"
+                        app:sb_show_indicator="false" />
+
+                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
+                    <!--                        android:id="@+id/darkTheme"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_alignParentEnd="true"-->
+                    <!--                        android:theme="@style/SwitchStyle" />-->
 
                     <View
                         android:id="@+id/view10"
@@ -603,8 +585,8 @@
 
                     <ImageView
                         android:id="@+id/changeChatThemeImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_1sdp"
                         android:src="@drawable/change_chat_theme"
                         app:tint="?text_color_hint" />
@@ -613,12 +595,10 @@
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/changeChatThemeImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/change_chat_theme"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <View
                         android:id="@+id/view12"
@@ -639,29 +619,37 @@
 
                     <ImageView
                         android:id="@+id/vaultPasswordImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_2sdp"
-                        android:src="@drawable/vault_passowrd_enable"
+                        android:src="@drawable/vault_password_icon"
                         app:tint="?text_color_hint" />
 
                     <TextView
                         android:id="@+id/textView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/vaultPasswordImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/enable_vault_password"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <com.suke.widget.SwitchButton
                         android:id="@+id/enableVaultPassword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
-                        android:theme="@style/SwitchStyle" />
+                        android:thumbTint="@color/colorPrimary"
+                        app:sb_button_color="?page_default_bg"
+                        app:sb_checked_color="@color/colorPrimary"
+                        app:sb_show_indicator="false" />
+
+                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
+                    <!--                        android:id="@+id/enableVaultPassword"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_alignParentEnd="true"-->
+                    <!--                        android:theme="@style/SwitchStyle" />-->
 
                     <View
                         android:id="@+id/view11"
@@ -682,8 +670,8 @@
 
                     <ImageView
                         android:id="@+id/burnDisableImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_2sdp"
                         android:src="@drawable/burn_message"
                         app:tint="?text_color_hint" />
@@ -692,19 +680,27 @@
                         android:id="@+id/textView21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/burnDisableImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/enable_burn_message"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <com.suke.widget.SwitchButton
                         android:id="@+id/burnDisableSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
-                        android:theme="@style/SwitchStyle" />
+                        android:thumbTint="@color/colorPrimary"
+                        app:sb_button_color="?page_default_bg"
+                        app:sb_checked_color="@color/colorPrimary"
+                        app:sb_show_indicator="false" />
+
+                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
+                    <!--                        android:id="@+id/burnDisableSwitch"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_alignParentEnd="true"-->
+                    <!--                        android:theme="@style/SwitchStyle" />-->
 
                     <View
                         android:id="@+id/view13"
@@ -724,8 +720,8 @@
 
                     <ImageView
                         android:id="@+id/burnMessageImage"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_2sdp"
                         android:src="@drawable/burn_message"
                         app:tint="?text_color_hint" />
@@ -734,22 +730,19 @@
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_toEndOf="@id/burnMessageImage"
-                        android:fontFamily="?regularFont"
                         android:text="@string/burn_message"
-                        android:textColor="?primary_text_color"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <TextView
                         android:id="@+id/messageBurnTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:fontFamily="?mediumFont"
                         android:text="@string/_1_month"
                         android:textColor="?colorPrimary"
-                        android:textSize="@dimen/_12sdp" />
+                        android:theme="@style/ProfileTextStyleTwo" />
 
                     <View
                         android:id="@+id/view5"

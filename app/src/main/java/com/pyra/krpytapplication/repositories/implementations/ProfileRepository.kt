@@ -23,7 +23,6 @@ import java.util.*
 
 class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
-
     init {
         groupParticipationDao = appDataBase?.groupParticipationDao()
         chatListDao = appDataBase?.chatListDao()
@@ -48,19 +47,19 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun updateProperties(apiInput: ApiInput): LiveData<CommonResponseModel>? {
-        var responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
+        val responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
 
         Api.postMethod(apiInput, object : ApiResponseCallback {
 
             override fun setResponseSuccess(jsonObject: JSONObject) {
-                var gson = Gson()
-                var response: CommonResponseModel =
+                val gson = Gson()
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 responseModel?.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 responseModel?.value = response
@@ -68,7 +67,6 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
             }
         })
         return responseModel
-
     }
 
     fun getProfileDetails(apiInput: ApiInput): MutableLiveData<GetProfileResponseModel>? {
@@ -95,19 +93,19 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun removeUserFromGroup(apiInput: ApiInput): MutableLiveData<CommonResponseModel>? {
-        var responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
+        val responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
 
         Api.postMethod(apiInput, object : ApiResponseCallback {
 
             override fun setResponseSuccess(jsonObject: JSONObject) {
-                var gson = Gson()
-                var response: CommonResponseModel =
+                val gson = Gson()
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 responseModel?.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 responseModel?.value = response
@@ -130,32 +128,29 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun removeUserFromGroupDb(roomId: String, userId: String) {
-
         groupParticipationDao?.removeUserFromGroupDb(roomId, userId)
     }
 
     fun updateGroupProfile(apiParams: ApiInput): MutableLiveData<CommonResponseModel>? {
-        var responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
+        val responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
             override fun setResponseSuccess(jsonObject: JSONObject) {
-                var gson = Gson()
-                var response: CommonResponseModel =
+                val gson = Gson()
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 responseModel?.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 responseModel?.value = response
-
             }
         })
         return responseModel
-
     }
 
     fun updateGroupInfo(image: String, name: String, id: String) {
@@ -180,7 +175,7 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
     fun blockUser(kryptId: String?, roomImage: String) {
 
         Coroutine.iOWorker {
-            var blockListSchema = BlockListSchema()
+            val blockListSchema = BlockListSchema()
             blockListSchema.kryptId = kryptId.toString().toUpperCase()
             blockListSchema.roomName = kryptId.toString().toUpperCase()
             blockListSchema.roomImage = roomImage
@@ -195,19 +190,19 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
     fun blockCall(apiParams: ApiInput): MutableLiveData<CommonResponseModel>? {
 
-        var responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
+        val responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
             override fun setResponseSuccess(jsonObject: JSONObject) {
-                var gson = Gson()
-                var response: CommonResponseModel =
+                val gson = Gson()
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 responseModel?.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 responseModel?.value = response
@@ -225,19 +220,19 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
     fun leaveGroup(apiParams: ApiInput): MutableLiveData<CommonResponseModel>? {
 
-        var responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
+        val responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
             override fun setResponseSuccess(jsonObject: JSONObject) {
-                var gson = Gson()
-                var response: CommonResponseModel =
+                val gson = Gson()
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 responseModel?.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 responseModel?.value = response
@@ -259,19 +254,19 @@ class ProfileRepository private constructor(appDataBase: AppDataBase?) {
 
     fun changePassword(apiParams: ApiInput): MutableLiveData<CommonResponseModel>? {
 
-        var responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
+        val responseModel: MutableLiveData<CommonResponseModel>? = MutableLiveData()
 
         Api.postMethod(apiParams, object : ApiResponseCallback {
 
             override fun setResponseSuccess(jsonObject: JSONObject) {
-                var gson = Gson()
-                var response: CommonResponseModel =
+                val gson = Gson()
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 responseModel?.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 responseModel?.value = response

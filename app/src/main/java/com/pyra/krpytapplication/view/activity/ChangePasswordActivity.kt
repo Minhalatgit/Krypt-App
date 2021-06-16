@@ -23,48 +23,6 @@ class ChangePasswordActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
-
-        //setting eye color wrt theme
-        if (SharedHelper(this).theme == "light") {
-            hideShowLoginPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
-            hideShowConfirmLoginPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-            hideShowDuressPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-            hideShowConfirmDuressPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.dark_page_bg))
-            hideShowConfirmVaultPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark_page_bg
-                )
-            )
-        } else {
-            hideShowLoginPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-            hideShowConfirmLoginPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-            hideShowDuressPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-            hideShowConfirmDuressPassword.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
-            )
-            hideShowVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-            hideShowConfirmVaultPassword.setColorFilter(ContextCompat.getColor(this, R.color.white))
-        }
     }
 
     fun showHidePass(view: View) {

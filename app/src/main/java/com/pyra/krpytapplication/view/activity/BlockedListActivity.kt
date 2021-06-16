@@ -48,7 +48,6 @@ class BlockedListActivity : BaseActivity() {
     }
 
     private fun getBlockedList() {
-
         viewModel.getBlockedUsers()
     }
 }

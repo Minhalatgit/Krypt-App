@@ -26,10 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_15sdp"
-                android:fontFamily="?mediumFont"
                 android:text="@string/new_message"
                 android:textColor="?toolbar_text_color"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="20sp"
+                android:fontFamily="@font/jost_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,11 +50,12 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="@string/search"
+                    android:fontFamily="@font/jost_semibold"
                     android:imeOptions="flagNoPersonalizedLearning"
                     android:paddingStart="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textColorHint="?text_border_color_hint"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="12sp" />
 
                 <ImageView
                     android:id="@+id/searchIcon"
@@ -173,11 +174,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="?mediumFont"
+                    android:fontFamily="@font/jost_semibold"
                     android:onClick="onNewGroupClicked"
                     android:text="@string/new_group"
                     android:textColor="?title_color"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/group_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/group_icon"
@@ -199,10 +200,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="?regularFont"
                     android:text="@string/krypt_code"
-                    android:textColor="@color/yellow"
-                    android:textSize="@dimen/_11sdp"
+                    android:theme="@style/ProfileLabelStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/line1" />

@@ -143,7 +143,7 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     fun getSearchedList(searchString: String): LiveData<List<ChatListSchema>>? {
-        var searchableString = "%$searchString%"
+        val searchableString = "%$searchString%"
         return chatListDao?.getSearchedList(searchableString)
     }
 
@@ -173,13 +173,13 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         Api.postMethod(apiParams, object : ApiResponseCallback {
             override fun setResponseSuccess(jsonObject: JSONObject) {
                 val gson = Gson()
-                var response: CommonResponseModel =
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 apiResponse.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 apiResponse.value = response
@@ -195,13 +195,13 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         Api.postMethod(apiParams, object : ApiResponseCallback {
             override fun setResponseSuccess(jsonObject: JSONObject) {
                 val gson = Gson()
-                var response: CommonResponseModel =
+                val response: CommonResponseModel =
                     gson.fromJson(jsonObject.toString(), CommonResponseModel::class.java)
                 apiResponse.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = CommonResponseModel()
+                val response = CommonResponseModel()
                 response.error = "true"
                 response.message = error
                 apiResponse.value = response
@@ -217,13 +217,13 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         Api.postMethod(apiParams, object : ApiResponseCallback {
             override fun setResponseSuccess(jsonObject: JSONObject) {
                 val gson = Gson()
-                var response: GroupDetailsResponse =
+                val response: GroupDetailsResponse =
                     gson.fromJson(jsonObject.toString(), GroupDetailsResponse::class.java)
                 apiResponse.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = GroupDetailsResponse()
+                val response = GroupDetailsResponse()
                 response.error = "true"
                 response.message = error
                 apiResponse.value = response
@@ -234,13 +234,12 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
     }
 
     suspend fun getGroupExist(roomid: String): Boolean {
-        var count = chatListDao?.getRoomExist(roomid.toUpperCase())
+        val count = chatListDao?.getRoomExist(roomid.toUpperCase())
         return count != 0
-
     }
 
     suspend fun getParticipationExist(roomID: String, userId: String): Boolean {
-        var count =
+        val count =
             groupParticipationDao?.getParticipationExist(roomID.toUpperCase(), userId.toUpperCase())
         return count != 0
     }
@@ -276,13 +275,13 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         Api.postMethod(apiParams, object : ApiResponseCallback {
             override fun setResponseSuccess(jsonObject: JSONObject) {
                 val gson = Gson()
-                var response: GetUserProfile =
+                val response: GetUserProfile =
                     gson.fromJson(jsonObject.toString(), GetUserProfile::class.java)
                 apiResponse.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = GetUserProfile()
+                val response = GetUserProfile()
                 response.error = true
                 response.message = error
                 apiResponse.value = response
@@ -319,8 +318,8 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         return blockListDao?.isBlocked(kryptId.toUpperCase())
     }
 
-    fun inserBlockedUser(kryptId: String) {
-        var blockListSchema = BlockListSchema()
+    fun insertBlockedUser(kryptId: String) {
+        val blockListSchema = BlockListSchema()
         blockListSchema.kryptId = kryptId.toUpperCase()
         blockListSchema.kryptId = kryptId.toUpperCase()
         blockListSchema.roomImage = ""
@@ -366,13 +365,12 @@ class ChatListRepository private constructor(appDataBase: AppDataBase?) {
         }
     }
 
-    fun getonlineStatus(kryptCode: String): LiveData<ChatListSchema>? {
+    fun getOnlineStatus(kryptCode: String): LiveData<ChatListSchema>? {
         return chatListDao?.getonlineStatus(kryptCode.toUpperCase())
     }
 
     fun updateStatus(kryptId: String, status: Int, lastSeen: String) {
         chatListDao?.updateOnline(kryptId, status, lastSeen)
     }
-
 
 }

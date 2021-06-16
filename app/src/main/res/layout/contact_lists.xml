@@ -21,10 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:fontFamily="?regularFont"
         android:text="@string/krypt_code"
-        android:textColor="?colorPrimary"
-        android:textSize="@dimen/_12sdp"
+        android:theme="@style/ProfileLabelStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line1" />
@@ -58,10 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:fontFamily="?regularFont"
         android:text="@string/my_contact"
-        android:textColor="?colorPrimary"
-        android:textSize="@dimen/_12sdp"
+        android:theme="@style/ProfileLabelStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line2" />

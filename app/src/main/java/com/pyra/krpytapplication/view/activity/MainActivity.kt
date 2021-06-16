@@ -18,10 +18,7 @@ import com.pyra.krpytapplication.Utils.openActivity
 import com.pyra.krpytapplication.domain.OnClickButtonListener
 import com.pyra.krpytapplication.notification.NotificationUtils
 import com.pyra.krpytapplication.videocallutils.events.ConstantApp
-import com.pyra.krpytapplication.view.fragment.ChatFragment
-import com.pyra.krpytapplication.view.fragment.ProfileFragment
-import com.pyra.krpytapplication.view.fragment.VaultFragment
-import com.pyra.krpytapplication.view.fragment.VaultPassDialogFragment
+import com.pyra.krpytapplication.view.fragment.*
 import com.pyra.krpytapplication.viewmodel.CallViewModel
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import getImei
@@ -36,6 +33,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
 
     private lateinit var profileFragment: ProfileFragment
     private lateinit var vaultFragment: VaultFragment
+    private lateinit var moreMenuFragment: MoreMenuFragment
 
     private val vaultPassDialogFragment: VaultPassDialogFragment by lazy {
         VaultPassDialogFragment()
@@ -43,7 +41,6 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     private val chatFragment: ChatFragment by lazy {
         ChatFragment()
     }
-
     val bottomNavigation: BottomNavigationView by lazy {
         findViewById(R.id.bottomNavigation)
     }
@@ -74,7 +71,6 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
 //                startActivity(intent)
 //            }
 //        }
-
     }
 
     private fun getGroupDetails() {
@@ -207,7 +203,18 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.more -> {
-                    toast("More menus")
+                    if (this@MainActivity::moreMenuFragment.isInitialized) {
+                        fm.beginTransaction().hide(active).show(moreMenuFragment).commit()
+                        active = moreMenuFragment
+                        lastSelectedTab = R.id.moreMenuFragment
+                    } else {
+                        moreMenuFragment = MoreMenuFragment()
+                        fm.beginTransaction()
+                            .add(R.id.nav_host, moreMenuFragment, "MoreMenuFragment")
+                            .hide(active).commit()
+                        active = moreMenuFragment
+                        lastSelectedTab = R.id.vault
+                    }
                     return@OnNavigationItemSelectedListener true
                 }
             }

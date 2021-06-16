@@ -34,7 +34,6 @@ class ChooseStatusActivity : BaseActivity() {
                 finish()
             }
         })
-
     }
 
     private fun initStatusAdapter() {
