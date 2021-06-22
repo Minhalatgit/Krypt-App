@@ -6,10 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.*
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.*
 import com.pyra.krpytapplication.R
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.app.AppRunningService
 import com.pyra.krpytapplication.app.MyApp
@@ -135,7 +135,7 @@ open class BaseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Log.e("CountDown", "Done")
+                LogUtil.e("CountDown", "Done")
                 this.cancel()
                 Intent(this@BaseActivity, PasswordActivity::class.java).apply {
                     putExtra("kryptCode", sharedHelper.kryptKey)

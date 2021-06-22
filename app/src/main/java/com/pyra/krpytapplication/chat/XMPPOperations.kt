@@ -1,7 +1,6 @@
 package com.pyra.krpytapplication.chat
 
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -957,13 +956,13 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
                         )
                     )
 
-                    Log.d(
+                    LogUtil.d(
                         "$i username  ",
                         itemList[i].entityID.toString().substring(
                             itemList[i].entityID.toString().lastIndexOf("/") + 1
                         )
                     )
-                    Log.d(
+                    LogUtil.d(
                         "$i groupname  ",
                         itemList[i].entityID.toString().substring(
                             0,
@@ -1198,7 +1197,7 @@ object XMPPOperations : ConnectionListener, PresenceEventListener, ReceiptReceiv
 
             val messagesList = r.messages
 
-            Log.d("Messages ", messagesList.toString())
+            LogUtil.d("Messages ", messagesList.toString())
             if (messagesList.size != 0) {
                 for (i in messagesList.indices) {
                     handleIncomingMessage(

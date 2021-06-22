@@ -1,7 +1,6 @@
 package com.pyra.krpytapplication.chat
 
 import android.content.Context
-import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.pyra.krpytapplication.R
@@ -78,7 +77,7 @@ class ChatMessageReceiverWorker(appContext: Context, workerParams: WorkerParamet
         val replyedMessageType = parameters.inputData.getString("replyedMessageType").toString()
         val replyedMessage = parameters.inputData.getString("replyedMessage").toString()
 
-        Log.d("Message ", message)
+        LogUtil.d("Message ", message)
         var messagesEntity = ChatMessagesSchema()
 
         when (messageType) {

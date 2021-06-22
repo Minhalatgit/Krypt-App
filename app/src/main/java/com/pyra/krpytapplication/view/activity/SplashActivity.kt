@@ -9,7 +9,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.TelephonyManager
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -23,6 +22,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.Utils.openNewTaskActivity
 import com.pyra.krpytapplication.app.AppRunningService
@@ -111,7 +111,7 @@ class SplashActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     task.result?.let { token ->
                         saveToken(token)
-                        Log.d("token", token);
+                        LogUtil.d("token", token);
 
                     }
                 }

@@ -3,6 +3,7 @@ package com.pyra.krpytapplication.view.activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.provider.Settings
@@ -13,15 +14,16 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
-import androidx.cardview.widget.CardView
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.openActivity
 import com.pyra.krpytapplication.Utils.subEnded
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import isValidKryptCode
-import org.jetbrains.anko.toast
+import jp.wasabeef.blurry.Blurry
+import kotlinx.android.synthetic.main.activity_krypt_code.*
+import kotlinx.android.synthetic.main.fragment_chat.*
 import showToast
+import takeScreenShot
 
 class KryptCodeActivity : BaseActivity() {
 
@@ -124,6 +126,14 @@ class KryptCodeActivity : BaseActivity() {
         val window: Window = dialog.window!!
         window.setGravity(Gravity.CENTER)
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        window.setDimAmount(0.0f)
+        Blurry.with(this).radius(10).sampling(2).onto(rootView)
+
+        dialog.setOnDismissListener {
+            Blurry.delete(rootView)
+        }
+
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
 

@@ -1,11 +1,11 @@
 package com.pyra.network
 
-import android.util.Log
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.R
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.isNetworkConnected
 import com.pyra.krpytapplication.repositories.interfaces.ApiResponseCallback
 
@@ -16,13 +16,13 @@ object Api {
     fun postMethod(input: ApiInput, apiResponseCallback: ApiResponseCallback) {
         if (input.context!!.isNetworkConnected()) {
 
-            Log.d("ApiRequest", input.url + "  " + input.jsonObject.toString())
+            LogUtil.d("ApiRequest", input.url + "  " + input.jsonObject.toString())
             val jsonObjectRequest =
                 object : JsonObjectRequest(Method.POST, input.url, input.jsonObject, {
                     apiResponseCallback.setResponseSuccess(it)
-                    Log.d("ApiResponse", input.url + "  " + it.toString())
+                    LogUtil.d("ApiResponse", input.url + "  " + it.toString())
                 }, {
-                    Log.d("ApiResponse", input.url + "  " + it.toString())
+                    LogUtil.d("ApiResponse", input.url + "  " + it.toString())
                     if (it is TimeoutError || it is NoConnectionError) {
                         input.context?.getString(R.string.no_internet_connection)
                             ?.let { it1 -> apiResponseCallback.setErrorResponse(it1) }

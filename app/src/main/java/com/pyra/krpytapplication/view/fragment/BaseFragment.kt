@@ -5,12 +5,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.view.activity.CameraActivity
 import com.pyra.krpytapplication.view.activity.GalleryImageActivity
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -66,7 +66,6 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
         option.show()
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -76,7 +75,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             }
             Constants.RequestCode.CAMERA_INTENT//camera
             -> if (resultCode == Activity.RESULT_OK) {
-                Log.e("result", "true")
+                LogUtil.e("result", "true")
                 if (!data?.getStringExtra(Constants.IntentKeys.FILE).isNullOrEmpty()) {
                     handleCamera(File(data?.getStringExtra(Constants.IntentKeys.FILE)!!))
                 }
@@ -84,7 +83,6 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
 
         }
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

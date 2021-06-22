@@ -10,14 +10,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
+import android.os.Handler
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -34,11 +34,10 @@ import com.pyra.krpytapplication.viewmodel.AmazonViewModel
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 import com.pyra.network.UrlHelper
-import com.warkiz.widget.IndicatorSeekBar
-import com.warkiz.widget.OnSeekChangeListener
-import com.warkiz.widget.SeekParams
 import fetchThemeColor
 import getImei
+import jp.wasabeef.blurry.Blurry
+import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import showToast
@@ -245,13 +244,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         deleteChatLayout.setOnClickListener {
 
-            deleteAllChat(requireContext()) {
+            val dialog = deleteAllChat(requireContext()) {
                 profileViewModel.deleteAllChatMessages()
+            }
+
+            dialog.window?.setDimAmount(0.0f)
+            Blurry.with(requireContext()).radius(10).sampling(2).onto(activity?.rootLayout)
+            dialog.setOnDismissListener {
+                Blurry.delete(activity?.rootLayout)
             }
         }
 
         autoLogoutLayout.setOnClickListener {
-            val dialog = getMessageBurnDialog(requireContext())
+            val dialog = getMessageBurnDialog(requireContext(), activity?.rootLayout as ViewGroup)
             backIcon = dialog.findViewById(R.id.backIcon)
             done = dialog.findViewById(R.id.done)
             dialogTitle = dialog.findViewById(R.id.dialog_title)
@@ -310,7 +315,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     }
 
     private fun showBurnMessageDialog() {
-        val dialog = getMessageBurnDialog(requireContext())
+        val dialog = getMessageBurnDialog(requireContext(), activity?.rootLayout as ViewGroup)
         backIcon = dialog.findViewById(R.id.backIcon)
         done = dialog.findViewById(R.id.done)
         viewPager = dialog.findViewById(R.id.timeSelector)
@@ -555,7 +560,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
 
             override fun onScrolled(recyclerView: RecyclerView, i: Int, i2: Int) {
-                Log.d("Value", "SCroll Called")
+                LogUtil.d("Value", "SCroll Called")
 
                 val childCount = viewPager.childCount
                 val width = viewPager.getChildAt(0).width
@@ -586,7 +591,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewPager.addOnPageChangedListener(
             RecyclerViewPager.OnPageChangedListener
             { oldPosition, newPosition ->
-                Log.d(
+                LogUtil.d(
                     "test",
                     "oldPosition:$oldPosition newPosition:$newPosition "
 
@@ -594,7 +599,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             })
 
         viewPager.addOnLayoutChangeListener(View.OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            Log.d("Value", "Called")
+            LogUtil.d("Value", "Called")
             if (viewPager.childCount < 3) {
                 if (viewPager.getChildAt(1) != null) {
                     if (viewPager.currentPosition == 0) {
@@ -636,7 +641,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
 
             override fun onScrolled(recyclerView: RecyclerView, i: Int, i2: Int) {
-                Log.d("Value", "SCroll Called")
+                LogUtil.d("Value", "SCroll Called")
                 val childCount = unitViewPager.childCount
                 val width = unitViewPager.getChildAt(0).width
                 val padding = (unitViewPager.width - width) / 2
@@ -666,14 +671,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         unitViewPager.addOnPageChangedListener(
             RecyclerViewPager.OnPageChangedListener
             { oldPosition, newPosition ->
-                Log.d(
+                LogUtil.d(
                     "test",
                     "oldPosition:$oldPosition newPosition:$newPosition"
                 )
             })
 
         unitViewPager.addOnLayoutChangeListener(View.OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            Log.d("Value", "Called")
+            LogUtil.d("Value", "Called")
             if (unitViewPager.childCount < 3) {
                 if (unitViewPager.getChildAt(1) != null) {
                     if (unitViewPager.currentPosition == 0) {
@@ -732,6 +737,13 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         val window: Window = dialog.window!!
 //        window.setGravity(Gravity.CENTER)
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        window.setDimAmount(0.0f)
+        Blurry.with(requireContext()).radius(10).sampling(2).onto(activity?.rootLayout)
+        dialog.setOnDismissListener {
+            Blurry.delete(activity?.rootLayout)
+        }
+
 //        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
         val seekbar = dialog.findViewById<CircularSeekBar>(R.id.circularSeekBar)
@@ -754,15 +766,15 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                 progress: Float,
                 fromUser: Boolean
             ) {
-                Log.d("onProgressChanged", "onProgressChanged: $progress")
+                LogUtil.d("onProgressChanged", "onProgressChanged: $progress")
             }
 
             override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
-                Log.d("onStartTrackingTouch", "onStartTrackingTouch: $seekBar")
+                LogUtil.d("onStartTrackingTouch", "onStartTrackingTouch: $seekBar")
             }
 
             override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
-                Log.d("SeekbarStop", "onStopTrackingTouch: ${seekBar?.progress}")
+                LogUtil.d("SeekbarStop", "onStopTrackingTouch: ${seekBar?.progress}")
                 morphFrequency = seekBar?.progress?.toString()!!
             }
 
@@ -791,7 +803,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     override fun handleGallery(data: Intent?) {
         if (data != null) {
             data.getStringExtra("imageUrl")?.let { mediaUrl ->
-                Log.d("ImageUrl", mediaUrl)
+                LogUtil.d("ImageUrl", mediaUrl)
                 profileViewModel.updateImage(mediaUrl)
                 userImage.loadImage(mediaUrl)
                 sharedHelper.imageUrlPath = mediaUrl
@@ -895,7 +907,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                     (requireActivity() as BaseActivity).countDownForAutoLogout()
                 }
             }
-            Log.e(
+            LogUtil.e(
                 "time",
                 sharedHelper.autoLockTime.toString() + " " + sharedHelper.autoLockType.toString()
             )

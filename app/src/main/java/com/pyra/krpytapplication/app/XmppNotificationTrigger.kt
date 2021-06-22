@@ -3,10 +3,10 @@ package com.pyra.krpytapplication.app
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import android.widget.Toast
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.repositories.interfaces.ApiResponseCallback
 import com.pyra.network.UrlHelper
@@ -26,7 +26,7 @@ class XmppNotificationTrigger : Service() {
     override fun onTaskRemoved(rootIntent: Intent?) {
 
 //        Toast.makeText(this,"OnTaskRemoved",Toast.LENGTH_SHORT).show()
-        Log.d("OnTaskRemoved ","OnTaskRemoved")
+        LogUtil.d("OnTaskRemoved ","OnTaskRemoved")
         super.onTaskRemoved(rootIntent)
 
         if (SharedHelper(this).kryptKey != "") {

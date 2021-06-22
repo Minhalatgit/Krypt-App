@@ -14,7 +14,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -46,6 +45,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.view.activity.CameraActivity
 import com.pyra.krpytapplication.view.activity.KEY_EVENT_ACTION
 import com.pyra.krpytapplication.view.activity.KEY_EVENT_EXTRA
@@ -122,7 +122,7 @@ class CameraFragment : Fragment() {
         override fun onDisplayRemoved(displayId: Int) = Unit
         override fun onDisplayChanged(displayId: Int) = view?.let { view ->
             if (displayId == this@CameraFragment.displayId) {
-                Log.d(TAG, "Rotation changed: ${view.display.rotation}")
+                LogUtil.d(TAG, "Rotation changed: ${view.display.rotation}")
                 imageCapture?.targetRotation = view.display.rotation
                 imageAnalyzer?.targetRotation = view.display.rotation
             }
@@ -258,10 +258,10 @@ class CameraFragment : Fragment() {
 
         // Get screen metrics used to setup camera for full screen resolution
         val metrics = DisplayMetrics().also { viewFinder.display.getRealMetrics(it) }
-        Log.d(TAG, "Screen metrics: ${metrics.widthPixels} x ${metrics.heightPixels}")
+        LogUtil.d(TAG, "Screen metrics: ${metrics.widthPixels} x ${metrics.heightPixels}")
 
         val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
-        Log.d(TAG, "Preview aspect ratio: $screenAspectRatio")
+        LogUtil.d(TAG, "Preview aspect ratio: $screenAspectRatio")
 
         val rotation = viewFinder.display.rotation
 
@@ -305,7 +305,7 @@ class CameraFragment : Fragment() {
                     // Values returned from our analyzer are passed to the attached listener
                     // We log image analysis results here - you should do something useful
                     // instead!
-                    Log.d(TAG, "Average luminosity: $luma")
+                    LogUtil.d(TAG, "Average luminosity: $luma")
                 })
             }
 
@@ -322,7 +322,7 @@ class CameraFragment : Fragment() {
             // Attach the viewfinder's surface provider to preview use case
             preview?.setSurfaceProvider(viewFinder.surfaceProvider)
         } catch (exc: Exception) {
-            Log.e(TAG, "Use case binding failed", exc)
+            LogUtil.e(TAG, "Use case binding failed$exc")
         }
     }
 
@@ -411,12 +411,12 @@ class CameraFragment : Fragment() {
                 imageCapture.takePicture(
                     outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
                         override fun onError(exc: ImageCaptureException) {
-                            Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                            LogUtil.e(TAG, "Photo capture failed: ${exc.message} $exc")
                         }
 
                         override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                             val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
-                            Log.e(TAG, "Photo capture succeeded: $savedUri")
+                            LogUtil.e(TAG, "Photo capture succeeded: $savedUri")
                             savedFile = savedUri.toFile()
 
                             // We can only change the foreground Drawable using API level 23+ API
@@ -443,7 +443,7 @@ class CameraFragment : Fragment() {
                                 arrayOf(savedUri.toFile().absolutePath),
                                 arrayOf(mimeType)
                             ) { _, uri ->
-                                Log.d(TAG, "Image capture scanned into media store: $uri")
+                                LogUtil.d(TAG, "Image capture scanned into media store: $uri")
                             }
 
                             CoroutineScope(Dispatchers.Main).launch {

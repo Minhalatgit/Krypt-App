@@ -1,7 +1,6 @@
 package com.pyra.krpytapplication.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.gson.Gson
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.dismissLoader
 import com.pyra.krpytapplication.Utils.showLoader
 import com.pyra.krpytapplication.model.SearchUserResult
@@ -70,7 +70,7 @@ class AddContactDialog : BottomSheetDialogFragment() {
         }
 
         contactSubmit.clickWithDebounce {
-            Log.e("usernam", "true")
+            LogUtil.e("usernam", "true")
             if (kryptCodeEditText.text.toString()
                     .isNotEmpty() && contactNameEditText.text.toString().isNotEmpty()
             ) {
@@ -120,7 +120,7 @@ class AddContactDialog : BottomSheetDialogFragment() {
 
                     })
 
-                Log.e("usernam", contactNameEditText.text.toString())
+                LogUtil.e("usernam", contactNameEditText.text.toString())
 
             } else {
                 dialog?.window?.decorView?.let { view ->

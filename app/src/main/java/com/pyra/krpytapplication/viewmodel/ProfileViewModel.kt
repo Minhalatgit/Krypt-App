@@ -38,7 +38,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     var success: MutableLiveData<Boolean> = MutableLiveData()
     var image: String = ""
     var participationList: List<GroupParticipationSchema> = ArrayList()
-    var notifiAdapter = MutableLiveData<Void>()
+    var notifiAdapter :MutableLiveData<Void>?= MutableLiveData<Void>()
     var profileData = ChatListSchema()
     var refreshView: MutableLiveData<Void> = MutableLiveData()
 
@@ -56,7 +56,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     var updateBlockList = MutableLiveData<Boolean>()
 
-    var updateBlockedUser = MutableLiveData<Void>()
+    var updateBlockedUser:MutableLiveData<Void>? = MutableLiveData<Void>()
     var blockedUsers = ArrayList<BlockListSchema>()
 
     fun getUser(roomId: String): LiveData<ChatListSchema>? =
@@ -211,7 +211,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                             }
                         }
                         canAddMember.set(isGroupAdmin && profileData.chatType != "PRIVATE")
-                        notifiAdapter.value = null
+                        notifiAdapter?.value = null
 
                     }
                 } else {
@@ -248,7 +248,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                             }
                         }
                         canAddMember.set(isGroupAdmin && profileData.chatType != "PRIVATE")
-                        notifiAdapter.value = null
+                        notifiAdapter?.value = null
                     }
 
                 }
@@ -443,7 +443,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         Coroutine.mainWorker {
             profileRepository.getAllBlockedUsers()?.observeForever {
                 blockedUsers = it as ArrayList<BlockListSchema>
-                updateBlockedUser.value = null
+                updateBlockedUser?.value = null
             }
         }
     }

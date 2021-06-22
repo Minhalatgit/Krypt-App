@@ -10,12 +10,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?page_default_bg">
+        android:background="?page_default_bg"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:context=".view.fragment.VaultFragment">
 
@@ -95,64 +101,129 @@
                     app:layout_constraintStart_toStartOf="@id/divider" />
 
                 <RelativeLayout
-                    android:id="@+id/imageLayout"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:background="@drawable/black_oval_gradient_bg"
-                    app:layout_constraintEnd_toStartOf="@id/videoLayout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/toolBar"
-                    app:layout_constraintTop_toTopOf="@id/videoLayout">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:padding="@dimen/_15sdp"
-                        android:src="@drawable/image_icon" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/videoLayout"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:id="@+id/galleryLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:background="@drawable/black_oval_gradient_bg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:gravity="center_horizontal"
                     app:layout_constraintTop_toBottomOf="@id/toolBar">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:padding="@dimen/_15sdp"
-                        android:src="@drawable/video_call"
-                        app:tint="@color/white" />
+                    <net.orandja.shadowlayout.ShadowLayout
+                        android:id="@+id/imageLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/black_oval_gradient_bg"
+                        app:shadow_cast_only_background="true"
+                        app:shadow_color="@color/shadow"
+                        app:shadow_radius="10"
+                        app:shadow_with_color="false"
+                        app:shadow_with_css_scale="true"
+                        app:shadow_with_dpi_scale="true">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:padding="@dimen/_15sdp"
+                            android:src="@drawable/image_icon" />
 
-                <RelativeLayout
-                    android:id="@+id/documentLayout"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:background="@drawable/black_oval_gradient_bg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/videoLayout"
-                    app:layout_constraintTop_toBottomOf="@id/toolBar"
-                    app:layout_constraintTop_toTopOf="@id/videoLayout">
+                    </net.orandja.shadowlayout.ShadowLayout>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:padding="@dimen/_15sdp"
-                        android:src="@drawable/book_icon" />
+                    <net.orandja.shadowlayout.ShadowLayout
+                        android:id="@+id/videoLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_toEndOf="@id/imageLayout"
+                        android:background="@drawable/black_oval_gradient_bg"
+                        app:shadow_cast_only_background="true"
+                        app:shadow_color="@color/shadow"
+                        app:shadow_radius="10"
+                        app:shadow_with_color="false"
+                        app:shadow_with_css_scale="true"
+                        app:shadow_with_dpi_scale="true">
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:padding="@dimen/_15sdp"
+                            android:src="@drawable/video_call"
+                            app:tint="@color/white" />
+
+                    </net.orandja.shadowlayout.ShadowLayout>
+
+                    <net.orandja.shadowlayout.ShadowLayout
+                        android:id="@+id/micLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_toEndOf="@id/videoLayout"
+                        android:background="@drawable/black_oval_gradient_bg"
+                        app:shadow_cast_only_background="true"
+                        app:shadow_color="@color/shadow"
+                        app:shadow_radius="10"
+                        app:shadow_with_color="false"
+                        app:shadow_with_css_scale="true"
+                        app:shadow_with_dpi_scale="true">
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:padding="@dimen/_15sdp"
+                            android:src="@drawable/mic_icon_chat" />
+
+                    </net.orandja.shadowlayout.ShadowLayout>
+
+                    <net.orandja.shadowlayout.ShadowLayout
+                        android:id="@+id/documentLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_toEndOf="@id/micLayout"
+                        android:background="@drawable/black_oval_gradient_bg"
+                        app:shadow_cast_only_background="true"
+                        app:shadow_color="@color/shadow"
+                        app:shadow_radius="10"
+                        app:shadow_with_color="false"
+                        app:shadow_with_css_scale="true"
+                        app:shadow_with_dpi_scale="true">
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:padding="@dimen/_15sdp"
+                            android:src="@drawable/book_icon" />
+
+                    </net.orandja.shadowlayout.ShadowLayout>
+
+                    <net.orandja.shadowlayout.ShadowLayout
+                        android:id="@+id/msgLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_toEndOf="@id/documentLayout"
+                        android:background="@drawable/black_oval_gradient_bg"
+                        app:shadow_cast_only_background="true"
+                        app:shadow_color="@color/shadow"
+                        app:shadow_radius="10"
+                        app:shadow_with_color="false"
+                        app:shadow_with_css_scale="true"
+                        app:shadow_with_dpi_scale="true">
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:padding="@dimen/_15sdp"
+                            android:src="@drawable/chat_icon" />
+
+                    </net.orandja.shadowlayout.ShadowLayout>
 
                 </RelativeLayout>
 
@@ -160,7 +231,7 @@
                     android:id="@+id/topToolbarLayout"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    app:constraint_referenced_ids="imageLayout,videoLayout,documentLayout" />
+                    app:constraint_referenced_ids="galleryLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,7 +249,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_60sdp"
                     android:translationY="-10dp"
-                    app:cardBackgroundColor="?toolbar_color"
+                    app:cardBackgroundColor="?page_default_bg"
                     app:cardCornerRadius="25dp"
                     app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +260,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_55sdp"
                         android:layout_gravity="bottom"
-                        android:background="?toolbar_color"
+                        android:background="?page_default_bg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@id/toolBar"
                         app:layout_constraintTop_toTopOf="@+id/searchBarBg">

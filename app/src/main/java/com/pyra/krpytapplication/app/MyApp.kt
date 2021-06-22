@@ -11,7 +11,6 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
@@ -23,6 +22,7 @@ import com.android.volley.toolbox.Volley
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.chat.ChatWorker
 import com.pyra.krpytapplication.chat.XMPPOperations
 import com.pyra.krpytapplication.roomDb.AppDataBase
@@ -96,7 +96,7 @@ class MyApp : Application() {
             RtcEngine.create(context, appId, mEventHandler)
         } catch (e: Exception) {
             throw RuntimeException(
-                "NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e)
+                "NEED TO check rtc sdk init fatal error\n" + LogUtil.getStackTraceString(e)
             )
         }
 
@@ -119,14 +119,14 @@ class MyApp : Application() {
     }
 
     private fun initXmpp() {
-        Log.d("Fcm XMPP", "Called")
+        LogUtil.d("Fcm XMPP", "Called")
         xmppOperations = XMPPOperations.getInstance()
     }
 
     private fun subscribeToTopic() {
 
         FirebaseMessaging.getInstance().subscribeToTopic("heartbeat").addOnSuccessListener {
-            Log.d("Susbscribed", "HeartBeat")
+            LogUtil.d("Susbscribed", "HeartBeat")
         }
 
     }
@@ -183,9 +183,7 @@ class MyApp : Application() {
     private fun getRequestQueue(): RequestQueue? {
 
         if (requestQueue == null)
-            requestQueue = Volley.newRequestQueue(
-                instance
-            )
+            requestQueue = Volley.newRequestQueue(instance)
 
         return requestQueue
     }

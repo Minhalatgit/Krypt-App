@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import android.os.Handler
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +19,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.view.activity.CameraActivity
+import jp.wasabeef.blurry.Blurry
+import kotlinx.android.synthetic.main.fragment_profile.*
 import openGalleryforPhoto
 import java.util.*
 import kotlin.math.roundToInt
@@ -284,7 +287,7 @@ fun getDeleteContactDialog(context: Context): Dialog {
 }
 
 
-fun getMessageBurnDialog(context: Context): Dialog {
+fun getMessageBurnDialog(context: Context, rootLayout: ViewGroup): Dialog {
     val dialogView = View.inflate(context, R.layout.dialog_burnmessage, null)
     val dialog = Dialog(context)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -294,6 +297,12 @@ fun getMessageBurnDialog(context: Context): Dialog {
     val window: Window = dialog.window!!
     window.setGravity(Gravity.CENTER)
     window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+    window.setDimAmount(0.0f)
+    Blurry.with(context).radius(10).sampling(2).onto(rootLayout)
+    dialog.setOnDismissListener {
+        Blurry.delete(rootLayout)
+    }
 
     val width = (context.resources.displayMetrics.widthPixels * 0.85).roundToInt()
     var height = (context.resources.displayMetrics.heightPixels * 0.25).roundToInt()

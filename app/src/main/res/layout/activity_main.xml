@@ -2,9 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?page_default_bg"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:context=".view.activity.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -14,25 +17,130 @@
         android:layout_height="0dp"
         android:visibility="visible"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintBottom_toTopOf="@id/bottomView"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/bottom_nav_graph"
         tools:context=".view.activity.CameraActivity" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottomNavigation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@drawable/round_bottom_view_bg"-->
+    <!--        android:paddingLeft="@dimen/_30sdp"-->
+    <!--        android:paddingTop="@dimen/_10sdp"-->
+    <!--        android:paddingRight="@dimen/_30sdp"-->
+    <!--        android:paddingBottom="@dimen/_10sdp"-->
+    <!--        android:visibility="visible"-->
+    <!--        app:itemIconTint="@color/bottom_nav_color"-->
+    <!--        app:labelVisibilityMode="unlabeled"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:menu="@menu/bottom_menu" />-->
+
+    <LinearLayout
+        android:id="@+id/bottomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_bottom_view_bg"
-        android:paddingLeft="@dimen/_30sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingRight="@dimen/_30sdp"
-        android:paddingBottom="@dimen/_10sdp"
-        android:visibility="visible"
-        app:itemIconTint="@color/bottom_nav_color"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_menu" />
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="@dimen/_15sdp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <net.orandja.shadowlayout.ShadowLayout
+            android:id="@+id/chatLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/unselected_round_bg"
+            android:onClick="onMenuClick"
+            app:shadow_cast_only_background="true"
+            app:shadow_color="@color/shadow"
+            app:shadow_radius="10"
+            app:shadow_with_color="false"
+            app:shadow_with_css_scale="true"
+            app:shadow_with_dpi_scale="true">
+
+            <ImageView
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:padding="@dimen/_15sdp"
+                android:src="@drawable/chat_icon" />
+
+        </net.orandja.shadowlayout.ShadowLayout>
+
+        <net.orandja.shadowlayout.ShadowLayout
+            android:id="@+id/profileLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/unselected_round_bg"
+            android:onClick="onMenuClick"
+            app:shadow_cast_only_background="true"
+            app:shadow_color="@color/shadow"
+            app:shadow_radius="10"
+            app:shadow_with_color="false"
+            app:shadow_with_css_scale="true"
+            app:shadow_with_dpi_scale="true">
+
+            <ImageView
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:padding="@dimen/_15sdp"
+                android:src="@drawable/profile_icon" />
+
+        </net.orandja.shadowlayout.ShadowLayout>
+
+        <net.orandja.shadowlayout.ShadowLayout
+            android:id="@+id/vaultLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/unselected_round_bg"
+            android:onClick="onMenuClick"
+            app:shadow_cast_only_background="true"
+            app:shadow_color="@color/shadow"
+            app:shadow_radius="10"
+            app:shadow_with_color="false"
+            app:shadow_with_css_scale="true"
+            app:shadow_with_dpi_scale="true">
+
+            <ImageView
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:padding="@dimen/_15sdp"
+                android:src="@drawable/vault_icon" />
+
+        </net.orandja.shadowlayout.ShadowLayout>
+
+        <net.orandja.shadowlayout.ShadowLayout
+            android:id="@+id/moreMenuLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/unselected_round_bg"
+            android:onClick="onMenuClick"
+            app:shadow_cast_only_background="true"
+            app:shadow_color="@color/shadow"
+            app:shadow_radius="10"
+            app:shadow_with_color="false"
+            app:shadow_with_css_scale="true"
+            app:shadow_with_dpi_scale="true">
+
+            <ImageView
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:padding="@dimen/_15sdp"
+                android:src="@drawable/more_menu_icon" />
+
+        </net.orandja.shadowlayout.ShadowLayout>
+
+    </LinearLayout>
 
     <!--    <LinearLayout-->
     <!--        android:id="@+id/tabLayout"-->

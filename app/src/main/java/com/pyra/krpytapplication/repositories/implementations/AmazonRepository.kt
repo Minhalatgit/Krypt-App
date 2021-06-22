@@ -66,7 +66,6 @@ class AmazonRepository private constructor() {
             transferUtility!!.upload(Constants.AWS.BUCKET_NAME, fileName, file)
         val finalFileName: String = fileName
 
-
         transferObserver!!.setTransferListener(object : TransferListener {
             override fun onStateChanged(
                 id: Int,

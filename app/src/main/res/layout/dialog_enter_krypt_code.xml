@@ -36,7 +36,8 @@
                 android:layout_marginLeft="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_25sdp"
-                android:background="@drawable/round_black_btn_bg"
+                android:background="@drawable/edit_text_bg_two"
+                android:elevation="@dimen/password_eye_elevation"
                 android:hint="@string/enter_krypt_code"
                 android:imeOptions="flagNoPersonalizedLearning"
                 android:paddingLeft="@dimen/_10sdp"
@@ -46,7 +47,7 @@
             <Button
                 android:id="@+id/submitButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_below="@id/kryptCode"
                 android:layout_marginLeft="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_20sdp"

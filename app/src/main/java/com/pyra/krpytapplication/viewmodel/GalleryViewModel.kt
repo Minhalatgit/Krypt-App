@@ -129,7 +129,6 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
                             }
                         } else {
                             _awsUploadData.value = UploadStatus.Error(it.message!!)
-
                         }
                     }
                 }

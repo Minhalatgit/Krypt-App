@@ -14,7 +14,6 @@ import android.media.*
 import android.os.*
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -227,7 +226,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
         groupMembers?.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         groupMembers?.adapter = participationAdapter
 
-        createRoomViewModel.notifyAdapter.observe(this, Observer {
+        createRoomViewModel.notifyAdapter?.observe(this, Observer {
             selectedAdapter.notifyChanges()
             participationAdapter.notifyChanges()
 
@@ -454,7 +453,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
                 timer = Timer()
                 timer.schedule(object : TimerTask() {
                     override fun run() {
-                        Log.e("TAG", "timer stopped")
+                        LogUtil.e("TAG", "timer stopped")
                         chatMessagesViewModel.sendTypingStatus(false)
                     }
                 }, DELAY)
@@ -464,7 +463,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 chatMessagesViewModel.sendTypingStatus(true)
-                Log.e("TAG", "typing started ")
+                LogUtil.e("TAG", "typing started ")
                 timer.cancel() //Terminates this timer,discarding any currently scheduled tasks.
                 timer.purge() //Removes all cancelled tasks from this timer's task queue.
             }
@@ -533,7 +532,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
         })
 
         chatMessagesViewModel.update.observe(this, Observer {
-            Log.d("messageList", "true")
+            LogUtil.d("messageList", "true")
             chatMessageAdapter.notifySelection()
             chatMessagesViewModel.updateSeenStatus()
             userImage?.loadImage(chatMessagesViewModel.getProfileImage())
@@ -934,7 +933,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
             runOnUiThread {
                 val value = JSONObject(it[0].toString())
-                Log.d("socket recived ", value.toString())
+                LogUtil.d("socket recived ", value.toString())
 
                 if (value.has("lastLoginTime") && value.getString("lastLoginTime") != "") {
 //                    membersCount?.text = "Last Seen At ${
@@ -974,13 +973,13 @@ class ChatActivity : BaseActivity(), RecordingListener {
         }
 
         socket?.on(Socket.EVENT_DISCONNECT) {
-            Log.d(" Socket ", " DisConnected")
+            LogUtil.d(" Socket ", " DisConnected")
             initSockets()
 
         }
 
         socket?.on(Socket.EVENT_CONNECT) {
-            Log.d(" Socket ", " Connected")
+            LogUtil.d(" Socket ", " Connected")
 //            initSockets()
             checkOnline()
         }
@@ -1237,7 +1236,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
     override fun onRecordingStarted() {
 
-        Log.d(TAG, "onRecordingStarted")
+        LogUtil.d(TAG, "onRecordingStarted")
         audioRecordView.cancelTxt?.visibility = View.GONE
 
         try {
@@ -1257,7 +1256,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
                 try {
                     prepare()
                 } catch (e: IOException) {
-                    Log.e("Record", "prepare() failed")
+                    LogUtil.e("Record", "prepare() failed")
                 }
 
                 start()
@@ -1271,12 +1270,12 @@ class ChatActivity : BaseActivity(), RecordingListener {
     }
 
     override fun onRecordingLocked() {
-        Log.d("ChatActivity", "onRecordingLocked")
+        LogUtil.d("ChatActivity", "onRecordingLocked")
         audioRecordView.cancelTxt?.visibility = View.VISIBLE
     }
 
     override fun onRecordingCompleted() {
-        Log.d(TAG, "onRecordingCompleted")
+        LogUtil.d(TAG, "onRecordingCompleted")
         audioRecordView.cancelTxt?.visibility = View.GONE
         val recordTime = (System.currentTimeMillis() / 1000 - time).toInt()
         if (recordTime > 1) {
@@ -1291,7 +1290,7 @@ class ChatActivity : BaseActivity(), RecordingListener {
     }
 
     override fun onRecordingCanceled() {
-        Log.d(TAG, "onRecordingCanceled")
+        LogUtil.d(TAG, "onRecordingCanceled")
         audioRecordView.cancelTxt?.visibility = View.GONE
         try {
             myAudioRecorder.stop()

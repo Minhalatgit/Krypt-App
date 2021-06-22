@@ -31,13 +31,13 @@ class RegisterRepository private constructor() {
         Api.postMethod(input, object : ApiResponseCallback {
             override  fun setResponseSuccess(jsonObject: JSONObject) {
                 val gson = Gson()
-                var response: SignupResponseModel =
+                val response: SignupResponseModel =
                     gson.fromJson(jsonObject.toString(), SignupResponseModel::class.java)
                 apiResponse.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = SignupResponseModel()
+                val response = SignupResponseModel()
                 response.error = true
                 response.message = error
                 apiResponse.value = response
@@ -54,13 +54,13 @@ class RegisterRepository private constructor() {
         Api.postMethod(apiParams, object : ApiResponseCallback {
             override  fun setResponseSuccess(jsonObject: JSONObject) {
                 val gson = Gson()
-                var response: LoginResponseModel =
+                val response: LoginResponseModel =
                     gson.fromJson(jsonObject.toString(), LoginResponseModel::class.java)
                 apiResponse.value = response
             }
 
             override fun setErrorResponse(error: String) {
-                var response = LoginResponseModel()
+                val response = LoginResponseModel()
                 response.error = true
                 response.message = error
                 apiResponse.value = response
@@ -68,6 +68,5 @@ class RegisterRepository private constructor() {
         })
 
         return apiResponse
-
     }
 }

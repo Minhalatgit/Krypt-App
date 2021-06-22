@@ -4,8 +4,8 @@ import android.app.Service
 import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
-import android.util.Log
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.implementations.ChatListRepository
@@ -96,7 +96,7 @@ class ChatRoomConnection : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("Destroyed Service", ":)")
+        LogUtil.d("Destroyed Service", ":)")
     }
 
 }

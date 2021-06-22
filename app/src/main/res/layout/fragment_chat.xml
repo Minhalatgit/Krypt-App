@@ -55,11 +55,11 @@
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_33sdp"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_20sdp"
-                    android:background="@drawable/round_black_btn_bg"
+                    android:background="@drawable/edit_text_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/chat"
                     app:layout_constraintTop_toTopOf="parent">
@@ -68,6 +68,7 @@
                         android:id="@+id/searchText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_margin="2dp"
                         android:background="@null"
                         android:fontFamily="@font/jost_semibold"
                         android:hint="@string/search"
@@ -80,8 +81,8 @@
 
                     <ImageView
                         android:id="@+id/searchIcon"
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="@dimen/_12sdp"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_15sdp"

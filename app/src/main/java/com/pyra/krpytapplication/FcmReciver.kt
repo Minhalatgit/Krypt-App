@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.work.*
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -33,7 +32,6 @@ import java.util.*
 
 class FcmReciver : FirebaseMessagingService() {
 
-
     var chatListRepository: ChatListRepository? = null
 
     private lateinit var database: ChatMessagesDao
@@ -56,9 +54,9 @@ class FcmReciver : FirebaseMessagingService() {
 
         startChatWorkerService()
 
-        Log.e("Fcm Message Recived", "recived")
+        LogUtil.e("Fcm Message Recived", "recived")
         val jsonObject = JSONObject(p0.data as Map<*, *>)
-        Log.e("Fcm Message Recived", jsonObject.toString())
+        LogUtil.e("Fcm Message Recived", jsonObject.toString())
         if (jsonObject.has("type"))
             when {
                 jsonObject["type"] == "call_notification" -> {
@@ -325,7 +323,7 @@ class FcmReciver : FirebaseMessagingService() {
 
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
-        Log.d("token", p0)
+        LogUtil.d("token", p0)
         saveToken(p0)
     }
 
@@ -335,7 +333,7 @@ class FcmReciver : FirebaseMessagingService() {
     }
 
     private fun sampleNotification() {
-        Log.d("Workmanager ", "notification start running")
+        LogUtil.d("Workmanager ", "notification start running")
         val manager =
             applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "task_channel"

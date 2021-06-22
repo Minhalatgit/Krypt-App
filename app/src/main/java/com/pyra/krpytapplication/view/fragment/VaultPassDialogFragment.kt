@@ -14,6 +14,7 @@ import com.pyra.krpytapplication.Utils.openNewTaskActivity
 import com.pyra.krpytapplication.view.activity.KryptCodeActivity
 import com.pyra.krpytapplication.view.activity.MainActivity
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_password.*
 import showHidePass
 import showToast
@@ -42,14 +43,14 @@ class VaultPassDialogFragment : BottomSheetDialogFragment() {
             password.showHidePass(it)
         }
 
-        buttonBg.setOnClickListener {
+        submitButton.setOnClickListener {
 
             if (password.text.trim().toString() != "") {
                 when {
                     password.text.trim()
                         .toString() == SharedHelper(requireActivity()).vaultPassword -> {
                         (requireActivity() as MainActivity).isVerified = true
-                        (requireActivity() as MainActivity).bottomNavigation.selectedItemId =
+                        (requireActivity() as MainActivity).selectedItemId =
                             R.id.vault
                         password.setText("")
                         dismiss()
@@ -84,7 +85,7 @@ class VaultPassDialogFragment : BottomSheetDialogFragment() {
         super.onDismiss(dialog)
 
         if (!(requireActivity() as MainActivity).isVerified)
-            (requireActivity() as MainActivity).bottomNavigation.selectedItemId =
+            (requireActivity() as MainActivity).selectedItemId =
                 (requireActivity() as MainActivity).lastSelectedTab
 
     }

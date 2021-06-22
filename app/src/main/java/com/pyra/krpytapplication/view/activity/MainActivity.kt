@@ -2,19 +2,26 @@ package com.pyra.krpytapplication.view.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.SharedHelper
-import com.pyra.krpytapplication.Utils.openActivity
+import com.pyra.krpytapplication.Utils.*
 import com.pyra.krpytapplication.domain.OnClickButtonListener
 import com.pyra.krpytapplication.notification.NotificationUtils
 import com.pyra.krpytapplication.videocallutils.events.ConstantApp
@@ -22,7 +29,13 @@ import com.pyra.krpytapplication.view.fragment.*
 import com.pyra.krpytapplication.viewmodel.CallViewModel
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import getImei
-import org.jetbrains.anko.toast
+import jp.wasabeef.blurry.Blurry
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_password.*
+import kotlinx.android.synthetic.main.fragment_chat.*
+import kotlinx.android.synthetic.main.fragment_chat.rootLayout
+import showHidePass
+import showToast
 import kotlin.properties.Delegates
 
 class MainActivity : BaseActivity(), OnClickButtonListener {
@@ -35,14 +48,13 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     private lateinit var vaultFragment: VaultFragment
     private lateinit var moreMenuFragment: MoreMenuFragment
 
+    var selectedItemId: Int = 0
+
     private val vaultPassDialogFragment: VaultPassDialogFragment by lazy {
         VaultPassDialogFragment()
     }
     private val chatFragment: ChatFragment by lazy {
         ChatFragment()
-    }
-    val bottomNavigation: BottomNavigationView by lazy {
-        findViewById(R.id.bottomNavigation)
     }
 
     val fm: FragmentManager = supportFragmentManager
@@ -58,7 +70,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
         sharedHelper = SharedHelper(this)
         updateDeviceToken()
 
-        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        chatSelected()
         fm.beginTransaction().add(R.id.nav_host, chatFragment, "ChatFragment").commit()
         FirebaseAnalytics.getInstance(this)
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -71,6 +83,122 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
 //                startActivity(intent)
 //            }
 //        }
+    }
+
+    private fun chatSelected() {
+        chatLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+        profileLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+    }
+
+    private fun profileSelected() {
+        chatLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        profileLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+        vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+    }
+
+    private fun vaultSelected() {
+        chatLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        profileLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+        moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+    }
+
+    private fun moreMenuSelected() {
+        chatLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        profileLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+    }
+
+    fun onMenuClick(view: View) {
+        when (view.id) {
+            R.id.chatLayout -> {
+                chatSelected()
+                fm.beginTransaction().hide(active).show(chatFragment).commit()
+                active = chatFragment
+                lastSelectedTab = R.id.chat
+            }
+
+            R.id.profileLayout -> {
+                profileSelected()
+                if (this@MainActivity::profileFragment.isInitialized) {
+                    fm.beginTransaction().hide(active).show(profileFragment).commit()
+                    active = profileFragment
+                    lastSelectedTab = R.id.profile
+                } else {
+                    profileFragment = ProfileFragment()
+                    fm.beginTransaction().add(R.id.nav_host, profileFragment, "ProfielFragment")
+                        .hide(active).commit()
+                    active = profileFragment
+                    lastSelectedTab = R.id.profile
+                }
+
+            }
+
+            R.id.vaultLayout -> {
+                if (sharedHelper?.vaultPasswordEnabled!!) {
+                    if (isVerified) {
+                        vaultSelected()
+                        if (this@MainActivity::vaultFragment.isInitialized) {
+                            fm.beginTransaction().hide(active).show(vaultFragment).commit()
+                            active = vaultFragment
+                            lastSelectedTab = R.id.vault
+                        } else {
+                            vaultFragment = VaultFragment()
+                            fm.beginTransaction()
+                                .add(R.id.nav_host, vaultFragment, "VaultFragment")
+                                .hide(active).commit()
+                            active = vaultFragment
+                            lastSelectedTab = R.id.vault
+                        }
+
+                        isVerified = false
+
+                    } else {
+                        showVaultPasswordDialogDialog()
+//                        if (!vaultPassDialogFragment.isAdded) {
+//                            vaultPassDialogFragment.show(
+//                                supportFragmentManager,
+//                                "vaultPassDialogFragment"
+//                            )
+//                        }
+                    }
+                } else {
+
+                    if (this@MainActivity::vaultFragment.isInitialized) {
+                        fm.beginTransaction().hide(active).show(vaultFragment).commit()
+                        active = vaultFragment
+                        lastSelectedTab = R.id.vault
+                    } else {
+                        vaultFragment = VaultFragment()
+                        fm.beginTransaction()
+                            .add(R.id.nav_host, vaultFragment, "VaultFragment")
+                            .hide(active).commit()
+                        active = vaultFragment
+                        lastSelectedTab = R.id.vault
+                    }
+
+                }
+            }
+            R.id.moreMenuLayout -> {
+                moreMenuSelected()
+                if (this@MainActivity::moreMenuFragment.isInitialized) {
+                    fm.beginTransaction().hide(active).show(moreMenuFragment).commit()
+                    active = moreMenuFragment
+                    lastSelectedTab = R.id.moreMenuFragment
+                } else {
+                    moreMenuFragment = MoreMenuFragment()
+                    fm.beginTransaction()
+                        .add(R.id.nav_host, moreMenuFragment, "MoreMenuFragment")
+                        .hide(active).commit()
+                    active = moreMenuFragment
+                    lastSelectedTab = R.id.moreMenuFragment
+                }
+            }
+        }
     }
 
     private fun getGroupDetails() {
@@ -120,7 +248,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     }
 
     private fun updateDeviceToken() {
-        Log.d("krypt ", sharedHelper?.kryptKey)
+        LogUtil.d("krypt ", sharedHelper?.kryptKey)
         callViewModel.updateDeviceToken(
             "android",
             getImei(this),
@@ -129,100 +257,74 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
         )
     }
 
-    private val mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener =
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-
-            when (item.itemId) {
-
-                R.id.chat -> {
-                    fm.beginTransaction().hide(active).show(chatFragment).commit()
-                    active = chatFragment
-                    lastSelectedTab = R.id.chat
-                    return@OnNavigationItemSelectedListener true
-                }
-
-                R.id.profile -> {
-                    if (this@MainActivity::profileFragment.isInitialized) {
-                        fm.beginTransaction().hide(active).show(profileFragment).commit()
-                        active = profileFragment
-                        lastSelectedTab = R.id.profile
-                    } else {
-                        profileFragment = ProfileFragment()
-                        fm.beginTransaction().add(R.id.nav_host, profileFragment, "ProfielFragment")
-                            .hide(active).commit()
-                        active = profileFragment
-                        lastSelectedTab = R.id.profile
-                    }
-
-                    return@OnNavigationItemSelectedListener true
-                }
-
-                R.id.vault -> {
-
-                    if (sharedHelper?.vaultPasswordEnabled!!) {
-                        if (isVerified) {
-                            if (this@MainActivity::vaultFragment.isInitialized) {
-                                fm.beginTransaction().hide(active).show(vaultFragment).commit()
-                                active = vaultFragment
-                                lastSelectedTab = R.id.vault
-                            } else {
-                                vaultFragment = VaultFragment()
-                                fm.beginTransaction()
-                                    .add(R.id.nav_host, vaultFragment, "VaultFragment")
-                                    .hide(active).commit()
-                                active = vaultFragment
-                                lastSelectedTab = R.id.vault
-                            }
-
-                            isVerified = false
-
-                        } else {
-                            if (!vaultPassDialogFragment.isAdded) {
-                                vaultPassDialogFragment.show(
-                                    supportFragmentManager,
-                                    "vaultPassDialogFragment"
-                                )
-                            }
-                        }
-                    } else {
-
-                        if (this@MainActivity::vaultFragment.isInitialized) {
-                            fm.beginTransaction().hide(active).show(vaultFragment).commit()
-                            active = vaultFragment
-                            lastSelectedTab = R.id.vault
-                        } else {
-                            vaultFragment = VaultFragment()
-                            fm.beginTransaction()
-                                .add(R.id.nav_host, vaultFragment, "VaultFragment")
-                                .hide(active).commit()
-                            active = vaultFragment
-                            lastSelectedTab = R.id.vault
-                        }
-
-                    }
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.more -> {
-                    if (this@MainActivity::moreMenuFragment.isInitialized) {
-                        fm.beginTransaction().hide(active).show(moreMenuFragment).commit()
-                        active = moreMenuFragment
-                        lastSelectedTab = R.id.moreMenuFragment
-                    } else {
-                        moreMenuFragment = MoreMenuFragment()
-                        fm.beginTransaction()
-                            .add(R.id.nav_host, moreMenuFragment, "MoreMenuFragment")
-                            .hide(active).commit()
-                        active = moreMenuFragment
-                        lastSelectedTab = R.id.vault
-                    }
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-
-            return@OnNavigationItemSelectedListener false
-        }
-
     override fun onClickListener() {
         openActivity(ContactActivity::class.java)
     }
+
+    private fun showVaultPasswordDialogDialog() {
+        val dialogView = View.inflate(this, R.layout.dialog_password, null)
+        val dialog = Dialog(this)
+        val passwordEditText = dialogView.findViewById<EditText>(R.id.password)
+        val submitButton = dialogView.findViewById<Button>(R.id.submitButton)
+        val hideShowPassword = dialogView.findViewById<ImageView>(R.id.hideShowPassword)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogView)
+        val window: Window = dialog.window!!
+        window.setGravity(Gravity.CENTER)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        window.setDimAmount(0.0f)
+        Blurry.with(this).radius(10).sampling(2).onto(rootLayout)
+
+        dialog.setOnDismissListener {
+            Blurry.delete(rootLayout)
+        }
+
+        //window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.show()
+
+        val backButton = dialog.findViewById<RelativeLayout>(R.id.backIcon)
+        backButton.setOnClickListener { dialog.dismiss() }
+
+        hideShowPassword.setOnClickListener {
+            passwordEditText.showHidePass(it)
+        }
+
+        submitButton.clickWithDebounce {
+            if (passwordEditText.text.trim().toString() != "") {
+                when {
+                    passwordEditText.text.trim()
+                        .toString() == SharedHelper(this).vaultPassword -> {
+                        isVerified = true
+                        selectedItemId = R.id.vault
+                        passwordEditText.setText("")
+                        dialog.dismiss()
+                    }
+                    passwordEditText.text.trim()
+                        .toString() == SharedHelper(this).duressPassword -> {
+                        chatListViewModel.clearDb()
+                        chatListViewModel.removeCache()
+                        chatListViewModel.clearLocalStorage()
+                        openNewTaskActivity(KryptCodeActivity::class.java)
+                        dialog.dismiss()
+                    }
+                    else -> {
+
+                        dialog.window?.decorView?.let {
+
+                            showToast(this.getString(R.string.invalid_password))
+
+                        }
+
+                    }
+                }
+
+            } else
+                dialog.window?.decorView?.let {
+                    showToast(this.getString(R.string.invalid_password))
+                }
+        }
+
+    }
+
 }

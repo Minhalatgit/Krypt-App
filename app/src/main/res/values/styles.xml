@@ -22,7 +22,6 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
-
     </style>
 
     <style name="DarkTheme.WithActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
@@ -203,12 +202,13 @@
         <item name="android:editTextColor">@color/white</item>
         <item name="android:textColorHint">?text_color_hint</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:elevation">20dp</item>
         <item name="fontFamily">@font/jost_regular</item>
     </style>
 
     <style name="AuthScreenTitleStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">?title_color</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">25sp</item>
         <item name="textAllCaps">true</item>
         <item name="fontFamily">@font/jost_bold</item>
     </style>
@@ -221,6 +221,7 @@
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/dark</item>
+        <item name="android:elevation">20dp</item>
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">@font/jost_semibold</item>
         <item name="textAllCaps">false</item>
@@ -261,4 +262,12 @@
         <item name="android:textSize">10sp</item>
         <item name="fontFamily">@font/jost_medium</item>
     </style>
+
+    <style name="PasswordEye" parent="">
+        <item name="android:textColor">?title_color</item>
+        <item name="android:textSize">25sp</item>
+        <item name="textAllCaps">true</item>
+        <item name="fontFamily">@font/jost_bold</item>
+    </style>
+
 </resources>

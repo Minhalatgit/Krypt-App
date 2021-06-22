@@ -2,8 +2,11 @@ package com.pyra.krpytapplication.view.fragment
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
+import android.view.*
 import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -13,16 +16,30 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.*
 import com.pyra.krpytapplication.domain.OnClickButtonListener
+import com.pyra.krpytapplication.model.SearchUserResult
+import com.pyra.krpytapplication.repositories.interfaces.ApiResponseCallback
 import com.pyra.krpytapplication.view.activity.KryptCodeActivity
+import com.pyra.krpytapplication.view.activity.PasswordActivity
 import com.pyra.krpytapplication.view.adapter.ChatListAdapter
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 import com.pyra.krpytapplication.viewmodel.SearchViewModel
+import com.pyra.network.Api
 import com.pyra.network.UrlHelper
+import getApiParams
+import jp.wasabeef.blurry.Blurry
+import kotlinx.android.synthetic.main.activity_krypt_code.*
 import kotlinx.android.synthetic.main.fragment_chat.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import showToast
 
 class ChatFragment : Fragment(R.layout.fragment_chat) {
 
@@ -186,8 +203,99 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
             onClickButtonListener?.onClickListener()
         }
         newUser.setOnClickListener {
-            findNavController().navigate(ChatFragmentDirections.actionChatToAddContactDialog())
+            showAddContactDialog()
+            //findNavController().navigate(ChatFragmentDirections.actionChatToAddContactDialog())
         }
+    }
+
+    private fun showAddContactDialog() {
+        val dialogView = View.inflate(requireContext(), R.layout.fragment_add_contact_dialog, null)
+        val dialog = Dialog(requireContext())
+        val kryptCodeEditText = dialogView.findViewById<EditText>(R.id.enterKrypt)
+        val contactNameEditText = dialogView.findViewById<EditText>(R.id.contactName)
+        val submitButton = dialogView.findViewById<Button>(R.id.submitButton)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogView)
+        val window: Window = dialog.window!!
+        window.setGravity(Gravity.CENTER)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setDimAmount(0.0f)
+        Blurry.with(requireContext()).radius(10).sampling(2).onto(activity?.rootLayout)
+
+        dialog.setOnDismissListener {
+            Blurry.delete(activity?.rootLayout)
+        }
+
+        //window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.show()
+
+        val backButton = dialog.findViewById<RelativeLayout>(R.id.backIcon)
+        backButton.setOnClickListener { dialog.dismiss() }
+
+        submitButton.clickWithDebounce {
+            LogUtil.e("usernam", "true")
+            if (kryptCodeEditText.text.toString()
+                    .isNotEmpty() && contactNameEditText.text.toString().isNotEmpty()
+            ) {
+                if (!loadBar.isShowing) {
+                    loadBar.show()
+                }
+
+                val jsonObject = JSONObject()
+                jsonObject.put(Constants.ApiKeys.NAME, kryptCodeEditText.text.toString())
+
+                Api.postMethod(
+                    getApiParams(requireContext(), jsonObject, UrlHelper.SEARCHUSER),
+                    object : ApiResponseCallback {
+
+                        override fun setResponseSuccess(jsonObject: JSONObject) {
+                            val gson = Gson()
+                            val response: SearchUserResult =
+                                gson.fromJson(
+                                    jsonObject.toString(),
+                                    SearchUserResult::class.java
+                                )
+                            dismissLoader(loader)
+                            if (response.error) {
+                                dialog.window?.decorView?.let { view ->
+                                    requireActivity().showToast(getString(R.string.enter_valid_contact_name))
+                                }
+                            } else {
+                                searchViewModel.insertAddContacts(
+                                    data = response.data!!,
+                                    name = contactNameEditText.text.toString()
+                                )
+
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    delay(500)
+                                    dialog.dismiss()
+                                }
+
+                            }
+                        }
+
+                        override fun setErrorResponse(error: String) {
+
+                            requireContext().showToast(error)
+
+                        }
+                    })
+
+                searchViewModel.getSearchResultAndAddUser(kryptCodeEditText.text.toString())
+                    ?.observe(viewLifecycleOwner, Observer {
+
+                    })
+
+                LogUtil.e("usernam", contactNameEditText.text.toString())
+
+            } else {
+                dialog.window?.decorView?.let { view ->
+                    requireContext().showToast(getString(R.string.enter_valid_contact_name))
+
+                }
+            }
+        }
+
     }
 
     private fun setMenuInflater() {

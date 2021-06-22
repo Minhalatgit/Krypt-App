@@ -10,7 +10,6 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.View.OnTouchListener
@@ -22,6 +21,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.pyra.krpytapplication.R
+import com.pyra.krpytapplication.Utils.LogUtil
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
@@ -607,7 +607,7 @@ class AudioRecordView {
     }
 
     private fun showErrorLog(s: String) {
-        Log.e(TAG, s)
+        LogUtil.e(TAG, s)
     }
 
 

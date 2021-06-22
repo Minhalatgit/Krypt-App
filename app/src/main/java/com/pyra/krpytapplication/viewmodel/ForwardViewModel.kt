@@ -18,19 +18,19 @@ class ForwardViewModel(application: Application) : AndroidViewModel(application)
     val repository = ForwardRepository.getInstance((application as MyApp).getAppDatabase())
 
     var chatList = ArrayList<ChatListSchema>()
-    var notifyData = MutableLiveData<Void>()
+    var notifyData: MutableLiveData<Void>? = MutableLiveData<Void>()
     var selectedList = ArrayList<String>()
 
     var messageList = ArrayList<ChatMessagesSchema>()
     var isUsersSelected = MutableLiveData<Boolean>()
 
-    var messageForwarded = MutableLiveData<Void>()
+    var messageForwarded: MutableLiveData<Void>? = MutableLiveData<Void>()
     fun getChatList() {
 
         repository.getChatList()?.observeForever(Observer {
             it?.let {
                 chatList = it as ArrayList<ChatListSchema>
-                notifyData.value = null
+                notifyData?.value = null
             }
 
         })
@@ -55,7 +55,7 @@ class ForwardViewModel(application: Application) : AndroidViewModel(application)
         }
 
         isUsersSelected.value = selectedList.size != 0
-        notifyData.value = null
+        notifyData?.value = null
     }
 
     fun getUserName(position: Int): String? {
@@ -114,7 +114,7 @@ class ForwardViewModel(application: Application) : AndroidViewModel(application)
 
             Coroutine.mainWorker {
                 android.os.Handler(Looper.getMainLooper()).postDelayed({
-                    messageForwarded.value = null
+                    messageForwarded?.value = null
                 }, 500)
 
             }

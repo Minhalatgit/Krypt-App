@@ -33,7 +33,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
         password: String
     ): LiveData<SignupResponseModel>? {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.USER_NAME, krypt)
         jsonObject.put(Constants.ApiKeys.IMEI, imei)
         jsonObject.put(Constants.ApiKeys.PASSWORD, password)
@@ -47,7 +47,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
         kryptCode: String
     ) {
 
-        var jsonObject = JSONObject()
+        val jsonObject = JSONObject()
         jsonObject.put(Constants.ApiKeys.IMEI, imei)
         jsonObject.put(Constants.ApiKeys.PASSWORD, password)
         jsonObject.put(Constants.ApiKeys.USER_NAME, kryptCode)

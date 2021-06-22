@@ -200,7 +200,7 @@ class ChatDetailsActivity : BaseActivity() {
     }
 
     private fun initObserver() {
-        profileViewModel.notifiAdapter.observe(this, Observer {
+        profileViewModel.notifiAdapter?.observe(this, Observer {
             groupMembersAdapter.notifyDataSetChanged()
         })
 

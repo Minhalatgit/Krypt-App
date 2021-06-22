@@ -9,7 +9,6 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.SurfaceView
 import android.view.View
 import android.view.WindowManager
@@ -23,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.Utils.loadImage
 import com.pyra.krpytapplication.notification.NotificationUtils
@@ -349,7 +349,7 @@ class VideoCallActivity : BaseActivity(), LifecycleOwner {
                 RtcEngine.create(baseContext, getString(R.string.agora_app_id), mRtcEventHandler)
         } catch (e: Exception) {
             throw RuntimeException(
-                "NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(
+                "NEED TO check rtc sdk init fatal error\n" + LogUtil.getStackTraceString(
                     e
                 )
             )

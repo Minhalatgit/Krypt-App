@@ -2,7 +2,6 @@ package com.pyra.krpytapplication.viewmodel
 
 import android.app.Application
 import android.database.sqlite.SQLiteException
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +9,7 @@ import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.Utils.Constants
 import com.pyra.krpytapplication.Utils.Coroutine
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.model.SearchUserData
 import com.pyra.krpytapplication.model.SearchUserResult
@@ -126,7 +126,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
 
     fun insertAddContacts(data: SearchUserData, name: String) {
-        Log.e("username ", "true")
+        LogUtil.e("username ", "true")
         if (!data.username.isNullOrEmpty()) {
             val entity = ChatListSchema(
                 chatType = "PRIVATE",

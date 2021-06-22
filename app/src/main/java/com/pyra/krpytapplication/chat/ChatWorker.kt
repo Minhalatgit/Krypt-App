@@ -1,8 +1,8 @@
 package com.pyra.krpytapplication.chat
 
 import android.content.Context
-import android.util.Log
 import androidx.work.*
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.interfaces.AuthenticationListner
@@ -15,7 +15,7 @@ class ChatWorker(appContext: Context, workerParams: WorkerParameters) :
     override fun doWork(): Result {
 //        println("LXMPP Init " + parameters.inputData.getString("Type"))
         val helper = SharedHelper(context)
-        Log.e("worker", "true ")
+        LogUtil.e("worker", "true ")
         if (helper.loggedIn) {
             MyApp.xmppOperations.connectToXMPPServer(
                 helper.kryptKey,

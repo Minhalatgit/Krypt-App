@@ -3,7 +3,6 @@ package com.pyra.krpytapplication.viewmodel
 import android.app.Application
 import android.content.Intent
 import android.database.sqlite.SQLiteException
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -58,7 +57,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
     var selectedContactList = ArrayList<String>()
 
     var selectedDetail = ChatListSchema()
-    var notifyContact = MutableLiveData<Void>()
+    var notifyContact: MutableLiveData<Void>? = MutableLiveData<Void>()
 
     init {
         applicationInstance = application
@@ -845,7 +844,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
             Coroutine.iOWorker {
                 val details = chatListRepository.getRoomData(selectedContactList[0].toUpperCase())
                 details?.let { selectedDetail = it }
-                Coroutine.mainWorker { notifyContact.value = null }
+                Coroutine.mainWorker { notifyContact?.value = null }
             }
 
         }
@@ -918,7 +917,7 @@ class ChatListViewModel(application: Application) : AndroidViewModel(application
 //                Log.d("MessageBurn  time", burnTimeMins.toString())
 
                 if (elapsedSecs >= burnTimeSecs) {
-                    Log.d("Burnmessage ", "cleared")
+                    LogUtil.d("Burnmessage ", "cleared")
                     // clearDb()
                     chatListRepository.burnSentMessage()
 

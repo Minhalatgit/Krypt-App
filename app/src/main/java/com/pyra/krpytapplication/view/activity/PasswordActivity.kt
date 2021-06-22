@@ -2,7 +2,6 @@ package com.pyra.krpytapplication.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.krpytapplication.Utils.openNewTaskActivity
 import com.pyra.krpytapplication.app.MyApp
@@ -118,7 +118,7 @@ class PasswordActivity : AppCompatActivity() {
                                                             Calendar.MINUTE,
                                                             sharedHelper.autoLockTime
                                                         )
-                                                        Log.e(
+                                                        LogUtil.e(
                                                             "passwordActivity",
                                                             sharedHelper.autoLockTime.toString()
                                                         )
@@ -166,7 +166,7 @@ class PasswordActivity : AppCompatActivity() {
                                                             Calendar.MINUTE,
                                                             sharedHelper.autoLockTime
                                                         )
-                                                        Log.e(
+                                                        LogUtil.e(
                                                             "passwordActivity",
                                                             sharedHelper.autoLockTime.toString()
                                                         )

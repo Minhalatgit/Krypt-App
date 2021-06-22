@@ -44,7 +44,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
     }
 
     kotlinOptions { jvmTarget = "1.8" }
@@ -210,4 +209,9 @@ dependencies {
 
     // Custom switch button
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+
+    // Shadow box
+    implementation "net.orandja.shadowlayout:shadowlayout:1.0.1"
+
+    implementation 'jp.wasabeef:blurry:3.0.0'
 }

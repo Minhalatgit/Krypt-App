@@ -5,7 +5,6 @@ import android.content.Context
 import android.media.*
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -836,7 +835,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
         uploadingFile = file
         val filename = file.name
 
-        Log.e("ChatMessagesView", "File: ${file.absolutePath}")
+        LogUtil.e("ChatMessagesView", "File: ${file.absolutePath}")
 
         val retriever = MediaMetadataRetriever()
 
@@ -866,7 +865,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
             uploadAudioToAws(file)
         } catch (e: RuntimeException) {
-            Log.e("ChatMessagesView", "uploadAudio: ${e.message}")
+            LogUtil.e("ChatMessagesView", "uploadAudio: ${e.message}")
         }
     }
 
@@ -1041,7 +1040,7 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     private fun startNewPlayer(position: Int) {
 
-        Log.d("ChatMessagesView", "Audio file path: ${chatMessages[position].localMediaPath}")
+        LogUtil.d("ChatMessagesView", "Audio file path: ${chatMessages[position].localMediaPath}")
 
         mediaPlayer?.let {
             if (it.isPlaying) {

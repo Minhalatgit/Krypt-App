@@ -112,17 +112,21 @@
     <color name="yellow">#dead06</color>
     <color name="dark">#26272b</color>
     <color name="grey">#828588</color>
+    <color name="ripple_color">#5A5C5E</color>
     <color name="bottom_view">#2b2d32</color>
     <color name="dark_two">#2b2f35</color>
     <color name="grey_two">#6b6e72</color>
     <color name="blue">#0B68DF</color>
     <color name="dialog_bg">#18191d</color>
-    <color name="yellow_gradient_start">#be7908</color>
-    <color name="yellow_gradient_end">#ffe554</color>
-    <color name="black_gradient_start">#1c1e20</color>
-    <color name="black_gradient_end">#3a3f46</color>
+    <color name="yellow_gradient_start">#bf7a08</color>
+    <color name="yellow_gradient_end">#fbd433</color>
+    <color name="black_gradient_start">#1a1b1d</color>
+    <color name="black_gradient_end">#3b4047</color>
+    <color name="unselected_gradient_start">#292a2f</color>
+    <color name="unselected_gradient_end">#30343a</color>
     <color name="morph_gradient_start">#27282d</color>
     <color name="morph_gradient_end">#32373d</color>
     <color name="red_circle">#fe6764</color>
     <color name="selected_msg">#1d1e22</color>
+    <color name="shadow">#202224</color>
 </resources>

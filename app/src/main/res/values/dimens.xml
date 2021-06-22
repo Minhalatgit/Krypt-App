@@ -44,4 +44,7 @@
 
     <dimen name="video_indicator_bottom_margin">20dp</dimen>
 
+    <dimen name="password_eye_elevation">20dp</dimen>
+    <dimen name="round_icon_elevation">50dp</dimen>
+
 </resources>

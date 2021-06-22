@@ -18,7 +18,7 @@ class CreateRoomViewModel(application: Application) : AndroidViewModel(applicati
     var participationList = ArrayList<GroupParticipationSchema>()
     var selectedList = ArrayList<GroupParticipationSchema>()
 
-    var notifyAdapter = MutableLiveData<Void>()
+    var notifyAdapter:MutableLiveData<Void>? = MutableLiveData<Void>()
 
     var profileRepository = ProfileRepository.getInstance((application as MyApp).getAppDatabase())
 
@@ -40,7 +40,7 @@ class CreateRoomViewModel(application: Application) : AndroidViewModel(applicati
                                 i++
                             }
                         }
-                        notifyAdapter.value = null
+                        notifyAdapter?.value = null
                     }
                 } else {
                     profileRepository.getParticipationList(roomId)?.observeForever {
@@ -53,7 +53,7 @@ class CreateRoomViewModel(application: Application) : AndroidViewModel(applicati
                                 i++
                             }
                         }
-                        notifyAdapter.value = null
+                        notifyAdapter?.value = null
 
                     }
                 }
@@ -93,7 +93,7 @@ class CreateRoomViewModel(application: Application) : AndroidViewModel(applicati
         if ((!selectedIds.contains(participationList[position].kryptId.toUpperCase())) && selectedIds.size <= 5) {
             selectedIds.add(participationList[position].kryptId.toUpperCase())
             selectedList.add(participationList[position])
-            notifyAdapter.value = null
+            notifyAdapter?.value = null
         }
 
     }
@@ -102,7 +102,7 @@ class CreateRoomViewModel(application: Application) : AndroidViewModel(applicati
         if (selectedIds.contains(selectedList[position].kryptId.toUpperCase())) {
             selectedIds.remove(selectedList[position].kryptId.toUpperCase())
             selectedList.removeAt(position)
-            notifyAdapter.value = null
+            notifyAdapter?.value = null
         }
     }
 

@@ -42,7 +42,7 @@ class BlockedListActivity : BaseActivity() {
 
     private fun initObservers() {
 
-        viewModel.updateBlockedUser.observe(this, Observer {
+        viewModel.updateBlockedUser?.observe(this, Observer {
             adapter?.notifyDataSetChanged()
         })
     }

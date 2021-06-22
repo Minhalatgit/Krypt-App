@@ -1,7 +1,6 @@
 package com.pyra.krpytapplication.Utils
 
 import android.content.Context
-import android.util.Log
 import java.util.*
 
 class SharedHelper(context: Context) {
@@ -278,7 +277,7 @@ class SharedHelper(context: Context) {
             return sharedPreference.getKey("chatBubbleColor")
         }
         set(value) {
-            Log.d("TAG", ": $value")
+            LogUtil.d("TAG", ": $value")
             return sharedPreference.putKey("chatBubbleColor", value)
         }
 
@@ -287,7 +286,7 @@ class SharedHelper(context: Context) {
             return sharedPreference.getKey("chatBubbleColorReciver")
         }
         set(value) {
-            Log.d("TAG", ": " + value)
+            LogUtil.d("TAG", ": " + value)
             return sharedPreference.putKey("chatBubbleColorReciver", value)
         }
 }

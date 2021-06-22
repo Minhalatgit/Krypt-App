@@ -4,8 +4,8 @@ import android.app.Service
 import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
-import android.util.Log
 import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.Utils.LogUtil
 import com.pyra.krpytapplication.Utils.SharedHelper
 import com.pyra.network.UrlHelper
 import io.socket.client.Ack
@@ -35,7 +35,7 @@ class AppRunningService : Service() {
                     )
 
                     sharedHelper?.isSocketUpdatedToOffline = true
-                    Log.d(" Socket ", " offline updated")
+                    LogUtil.d(" Socket ", " offline updated")
                     socket?.emit(UrlHelper.UPDATEOFFLINE, jsonObject, object : Ack {
                         override fun call(vararg args: Any?) {
                         }
@@ -56,7 +56,7 @@ class AppRunningService : Service() {
                     )
 
                     sharedHelper?.isSocketUpdatedToOffline = false
-                    Log.d(" Socket ", " online updated")
+                    LogUtil.d(" Socket ", " online updated")
                     socket?.emit(UrlHelper.UPDATEONLINE, jsonObject, object : Ack {
                         override fun call(vararg args: Any?) {
                         }
@@ -107,13 +107,13 @@ class AppRunningService : Service() {
         }
 
         socket?.on(Socket.EVENT_DISCONNECT) {
-            Log.d(" Socket ", " DisConnected")
+            LogUtil.d(" Socket ", " DisConnected")
             initSockets()
 
         }
 
         socket?.on(Socket.EVENT_CONNECT) {
-            Log.d(" Socket ", " Connected")
+            LogUtil.d(" Socket ", " Connected")
 //            initSockets()
         }
 
