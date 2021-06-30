@@ -10,7 +10,9 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/parentView"
@@ -196,8 +198,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/edit_icon"
-                    app:tint="?colorPrimary" />
+                    android:src="@drawable/edit_gradient_icon" />
 
                 <View
                     android:id="@+id/view3"
@@ -273,6 +274,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
                 <TextView
@@ -290,7 +292,7 @@
                     android:id="@+id/changePassLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -334,7 +336,7 @@
                     android:id="@+id/blockContactLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/blockImage"
@@ -368,7 +370,7 @@
                     android:id="@+id/autoLogoutLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/autoLockImg"
@@ -413,7 +415,7 @@
                     android:id="@+id/deleteChatLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/deleteImage"
@@ -447,14 +449,14 @@
                     android:id="@+id/morphVoiceLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/morphVoiceImage"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_1sdp"
-                        android:src="@drawable/mic_icon"
+                        android:src="@drawable/morph_icon"
                         app:tint="?text_color_hint" />
 
                     <TextView
@@ -476,13 +478,6 @@
                         app:sb_checked_color="@color/colorPrimary"
                         app:sb_show_indicator="false" />
 
-                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
-                    <!--                        android:id="@+id/morphVoice"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_alignParentEnd="true"-->
-                    <!--                        android:theme="@style/SwitchStyle" />-->
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
@@ -497,14 +492,14 @@
                     android:id="@+id/morphFrequencyLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/morphFrequencyImage"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:padding="@dimen/_1sdp"
-                        android:src="@drawable/mic_icon"
+                        android:src="@drawable/morph_icon"
                         app:tint="?text_color_hint" />
 
                     <TextView
@@ -530,7 +525,7 @@
                     android:id="@+id/themeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/changeThemeImage"
@@ -559,13 +554,6 @@
                         app:sb_checked_color="@color/colorPrimary"
                         app:sb_show_indicator="false" />
 
-                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
-                    <!--                        android:id="@+id/darkTheme"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_alignParentEnd="true"-->
-                    <!--                        android:theme="@style/SwitchStyle" />-->
-
                     <View
                         android:id="@+id/view10"
                         android:layout_width="match_parent"
@@ -581,7 +569,7 @@
                     android:id="@+id/changeThemeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/changeChatThemeImage"
@@ -615,7 +603,7 @@
                     android:id="@+id/enableVaultLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/vaultPasswordImage"
@@ -644,13 +632,6 @@
                         app:sb_checked_color="@color/colorPrimary"
                         app:sb_show_indicator="false" />
 
-                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
-                    <!--                        android:id="@+id/enableVaultPassword"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_alignParentEnd="true"-->
-                    <!--                        android:theme="@style/SwitchStyle" />-->
-
                     <View
                         android:id="@+id/view11"
                         android:layout_width="match_parent"
@@ -666,7 +647,7 @@
                     android:id="@+id/enableBurnMessageLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/burnDisableImage"
@@ -695,13 +676,6 @@
                         app:sb_checked_color="@color/colorPrimary"
                         app:sb_show_indicator="false" />
 
-                    <!--                    <androidx.appcompat.widget.SwitchCompat-->
-                    <!--                        android:id="@+id/burnDisableSwitch"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_alignParentEnd="true"-->
-                    <!--                        android:theme="@style/SwitchStyle" />-->
-
                     <View
                         android:id="@+id/view13"
                         android:layout_width="match_parent"
@@ -716,7 +690,7 @@
                     android:id="@+id/burnMessageLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
+                    android:padding="@dimen/_10sdp">
 
                     <ImageView
                         android:id="@+id/burnMessageImage"

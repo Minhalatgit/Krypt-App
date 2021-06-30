@@ -1,8 +1,8 @@
 package com.pyra.krpytapplication.roomDb
 
-import com.pyra.krpytapplication.Utils.MessageStatus
-import com.pyra.krpytapplication.Utils.MessageType
-import com.pyra.krpytapplication.Utils.toMessageString
+import com.pyra.krpytapplication.utils.MessageStatus
+import com.pyra.krpytapplication.utils.MessageType
+import com.pyra.krpytapplication.utils.toMessageString
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema
 import java.util.*
 

@@ -2,8 +2,8 @@ package com.pyra.krpytapplication.chat
 
 import android.content.Context
 import androidx.work.*
-import com.pyra.krpytapplication.Utils.LogUtil
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.LogUtil
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.interfaces.AuthenticationListner
 

@@ -1,7 +1,6 @@
 package com.pyra.krpytapplication.view.adapter
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,12 +11,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.databinding.ItemDocumentsBinding
 import com.pyra.krpytapplication.view.activity.DocumentActivity
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
-import com.pyra.krpytapplication.view.activity.MainActivity
-import com.pyra.krpytapplication.view.activity.ShowDocumentActivity
 import com.pyra.krpytapplication.viewmodel.VaultFragViewModel
 import getDocumentIcon
 import getViewIntent

@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.utils.Constants
 import com.pyra.krpytapplication.roomDb.AppDataBase
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.dialog_add_contact.*

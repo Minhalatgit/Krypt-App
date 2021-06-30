@@ -8,10 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.hide
-import com.pyra.krpytapplication.Utils.loadImage
-import com.pyra.krpytapplication.Utils.show
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.hide
+import com.pyra.krpytapplication.utils.loadImage
+import com.pyra.krpytapplication.utils.show
 import com.pyra.krpytapplication.databinding.ItemVaultBinding
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
 import com.pyra.krpytapplication.viewmodel.GalleryViewModel

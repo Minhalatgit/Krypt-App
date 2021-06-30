@@ -5,9 +5,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.hide
-import com.pyra.krpytapplication.Utils.openNewTaskActivity
-import com.pyra.krpytapplication.Utils.show
+import com.pyra.krpytapplication.utils.hide
+import com.pyra.krpytapplication.utils.openNewTaskActivity
+import com.pyra.krpytapplication.utils.show
 import com.pyra.krpytapplication.view.adapter.ForwardAdapter
 import com.pyra.krpytapplication.viewmodel.ForwardViewModel
 import kotlinx.android.synthetic.main.activity_forward.*

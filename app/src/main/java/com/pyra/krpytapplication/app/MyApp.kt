@@ -21,8 +21,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.LogUtil
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.LogUtil
 import com.pyra.krpytapplication.chat.ChatWorker
 import com.pyra.krpytapplication.chat.XMPPOperations
 import com.pyra.krpytapplication.roomDb.AppDataBase

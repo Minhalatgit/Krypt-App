@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -27,7 +28,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <TextView
             android:id="@+id/dateSectionHeader"
             android:layout_width="wrap_content"
@@ -46,7 +46,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <include
             android:id="@+id/selectedLayout"
@@ -91,7 +90,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginLeft="@dimen/_5sdp"
                 android:background="@drawable/chat_bubble_bg_receiver"
                 android:minWidth="@dimen/_220sdp"
                 android:orientation="vertical"
@@ -119,16 +117,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:fontFamily="?regularFont"
-                        android:text="@string/demo_user_name"
                         android:textColor="@color/text_color_heading"
                         android:textSize="@dimen/_12sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/demo_user_name" />
 
                     <TextView
                         android:id="@+id/messageTime"
@@ -147,19 +143,16 @@
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
                         android:src="@drawable/ic_seen_icon"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/documentDetails" />
-
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/documentDetails"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/transparent_circle_pattern"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/messageUserName">
@@ -169,8 +162,8 @@
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_15sdp"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginLeft="@dimen/_8sdp"
                             android:src="@drawable/audio_icon"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -180,7 +173,7 @@
                             android:id="@+id/messageContent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_15sdp"
                             android:ellipsize="end"
                             android:fontFamily="@font/jost_regular"
                             android:padding="@dimen/_8sdp"
@@ -189,54 +182,50 @@
                             android:textColor="?toolbar_text_color"
                             android:textSize="@dimen/_11sdp"
                             app:layout_constrainedWidth="true"
-                            app:layout_constraintStart_toEndOf="@+id/documentIcon"
+                            app:layout_constraintStart_toEndOf="@+id/playPauseLayout"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <include
-                            android:id="@+id/downloadingLayout"
-                            layout="@layout/uploading_layout"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            android:visibility="gone"
+                        <RelativeLayout
+                            android:id="@+id/playPauseLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:background="@drawable/rounded_white_bg"
+                            android:gravity="center"
+                            android:padding="@dimen/_3sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                        <include
-                            android:id="@+id/downloadLayout"
-                            layout="@layout/download_layout"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <include
+                                android:id="@+id/downloadingLayout"
+                                layout="@layout/uploading_layout"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:visibility="gone" />
 
-                        <include
-                            android:id="@+id/downloadedLayout"
-                            layout="@layout/play_video"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <include
+                                android:id="@+id/downloadLayout"
+                                layout="@layout/download_layout"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:visibility="gone" />
 
-                        <ImageView
-                            android:id="@+id/pause"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:padding="3dp"
-                            android:src="@drawable/ic_pause"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <include
+                                android:id="@+id/downloadedLayout"
+                                layout="@layout/play_video"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp" />
+
+                            <ImageView
+                                android:id="@+id/pause"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:padding="2dp"
+                                android:src="@drawable/ic_pause"
+                                app:tint="@color/blue" />
+
+                        </RelativeLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

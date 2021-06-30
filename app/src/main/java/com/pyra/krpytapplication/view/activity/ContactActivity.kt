@@ -19,10 +19,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.AnimationHelper
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.hide
-import com.pyra.krpytapplication.Utils.show
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.hide
+import com.pyra.krpytapplication.utils.show
 import com.pyra.krpytapplication.databinding.ActivityContactListBinding
 import com.pyra.krpytapplication.repositories.interfaces.OnItemClickListener
 import com.pyra.krpytapplication.view.adapter.ContactListAdapter

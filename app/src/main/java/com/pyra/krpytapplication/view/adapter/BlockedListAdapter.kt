@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.loadImage
+import com.pyra.krpytapplication.utils.loadImage
 import com.pyra.krpytapplication.databinding.ChildBlockListBinding
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 

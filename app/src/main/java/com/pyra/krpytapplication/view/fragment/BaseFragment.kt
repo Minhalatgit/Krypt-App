@@ -7,13 +7,11 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.LogUtil
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.LogUtil
 import com.pyra.krpytapplication.view.activity.CameraActivity
 import com.pyra.krpytapplication.view.activity.GalleryImageActivity
-import kotlinx.android.synthetic.main.fragment_profile.*
 import showToast
 import java.io.File
 

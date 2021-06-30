@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.camera.core.VideoCapture
 import androidx.camera.view.video.ExperimentalVideo
 import androidx.camera.view.video.OnVideoSavedCallback
 import androidx.camera.view.video.OutputFileResults
@@ -20,11 +19,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.getFileType
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.getFileType
 import com.pyra.krpytapplication.domain.UploadStatus
 import com.pyra.krpytapplication.viewmodel.GalleryViewModel
 import kotlinx.android.synthetic.main.fragment_gallery.*

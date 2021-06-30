@@ -1,13 +1,10 @@
 package com.pyra.krpytapplication.view.activity
 
-import android.graphics.Color
-import android.graphics.drawable.*
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.view.adapter.ChatThemeListAdapter
 import kotlinx.android.synthetic.main.activity_change_chat_theme.*
 import kotlinx.android.synthetic.main.activity_change_chat_theme.backButton
@@ -42,7 +39,7 @@ class ChangeChatThemeActivity : BaseActivity() {
         }
 
         if (!SharedHelper(this).chatBubbleColorReciver.equals("", ignoreCase = true)) {
-            val value = SharedHelper(this).chatBubbleColor
+            val value = SharedHelper(this).chatBubbleColorReciver
 
             setColorToBackground(receiverText.background, value)
             setColorToBackground(receiverCorner.background, value)

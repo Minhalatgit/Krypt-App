@@ -5,7 +5,7 @@ import android.os.Looper
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.pyra.krpytapplication.Utils.Coroutine
+import com.pyra.krpytapplication.utils.Coroutine
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.implementations.ForwardRepository
 import com.pyra.krpytapplication.roomDb.ChatMessageSchemaFactory

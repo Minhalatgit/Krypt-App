@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.MessageBurnType
+import com.pyra.krpytapplication.utils.MessageBurnType
 import com.pyra.krpytapplication.databinding.ChildCountBinding
 
 class CountAdapter(var context: Context, var type: String) :

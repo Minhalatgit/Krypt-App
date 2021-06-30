@@ -8,9 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.MessageType
-import com.pyra.krpytapplication.Utils.toMessageString
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.MessageType
+import com.pyra.krpytapplication.utils.toMessageString
 import com.pyra.krpytapplication.roomDb.AppDataBase
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema
 import com.pyra.krpytapplication.view.adapter.GalleryImageViewAdapter

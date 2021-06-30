@@ -8,17 +8,12 @@ import com.amazonaws.auth.CognitoCachingCredentialsProvider
 import com.amazonaws.mobileconnectors.s3.transferutility.*
 import com.amazonaws.regions.Region
 import com.amazonaws.services.s3.AmazonS3Client
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.MediaType
-import com.pyra.krpytapplication.Utils.getFileType
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.MediaType
+import com.pyra.krpytapplication.utils.getFileType
 import com.pyra.krpytapplication.model.AwsDownloadResponse
 import com.pyra.krpytapplication.model.AwsUploadResponse
 import getNewFileName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.File
 

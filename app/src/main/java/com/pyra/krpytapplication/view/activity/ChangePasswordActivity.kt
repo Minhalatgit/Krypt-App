@@ -3,15 +3,13 @@ package com.pyra.krpytapplication.view.activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.chat.XMPPOperations
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 import isValidPassword
 import kotlinx.android.synthetic.main.activity_change_password.*
-import kotlinx.android.synthetic.main.activity_create_password.*
 import showHidePass
 import showToast
 

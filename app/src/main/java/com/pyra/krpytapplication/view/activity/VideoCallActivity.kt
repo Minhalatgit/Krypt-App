@@ -19,12 +19,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.LogUtil
-import com.pyra.krpytapplication.Utils.SharedHelper
-import com.pyra.krpytapplication.Utils.loadImage
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.LogUtil
+import com.pyra.krpytapplication.utils.SharedHelper
+import com.pyra.krpytapplication.utils.loadImage
 import com.pyra.krpytapplication.notification.NotificationUtils
 import com.pyra.krpytapplication.roomDb.AppDataBase
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema

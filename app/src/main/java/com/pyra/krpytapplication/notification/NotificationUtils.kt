@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.utils.Constants
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.view.activity.ChatActivity
 import java.util.*

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -17,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.databinding.FragmentVaultBinding
 import com.pyra.krpytapplication.roomDb.AppDataBase
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema
@@ -29,7 +28,7 @@ import com.pyra.krpytapplication.view.adapter.DocumentListAdapter
 import com.pyra.krpytapplication.view.adapter.ImageViewAdapter
 import com.pyra.krpytapplication.viewmodel.ChatMessagesViewModel
 import com.pyra.krpytapplication.viewmodel.VaultFragViewModel
-import fetchThemeColor
+import kotlinx.android.synthetic.main.fragment_vault.*
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -57,14 +56,12 @@ class VaultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         fragmentVaultBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_vault, container, false)
         topToolbarLayout = fragmentVaultBinding.topToolbarLayout
-        setImageAdapter()
         initListners()
-        setGallerySelected()
         setImageSelected()
 
         fragmentVaultBinding.forward.setOnClickListener {
@@ -87,11 +84,8 @@ class VaultFragment : Fragment() {
     }
 
     private fun initListners() {
-        fragmentVaultBinding.savedText.setOnClickListener {
+        fragmentVaultBinding.msgLayout.setOnClickListener {
             setSavedSelected()
-        }
-        fragmentVaultBinding.galleryText.setOnClickListener {
-            setGallerySelected()
         }
 
         fragmentVaultBinding.imageLayout.setOnClickListener {
@@ -209,53 +203,61 @@ class VaultFragment : Fragment() {
         }
     }
 
-    private fun setDocSelected() {
+    private fun setImageSelected() {
 
-        currentTab = 2
-//        fragmentVaultBinding.docText.activeText()
-//        fragmentVaultBinding.videoText.inActiveText()
-//        fragmentVaultBinding.imageText.inActiveText()
-        setDocumentAdapter()
+        fragmentVaultBinding.apply {
+            imageIcon.setIconColor(requireContext(), R.color.yellow)
+            videoIcon.setIconColor(requireContext(), R.color.white)
+            micIcon.setIconColor(requireContext(), R.color.white)
+            docIcon.setIconColor(requireContext(), R.color.white)
+            messageIcon.setIconColor(requireContext(), R.color.white)
+        }
+
+        currentTab = 0
+        setImageAdapter()
         handlingFab()
     }
 
     private fun setVideoSelected() {
 
+        fragmentVaultBinding.apply {
+            imageIcon.setIconColor(requireContext(), R.color.white)
+            videoIcon.setIconColor(requireContext(), R.color.yellow)
+            micIcon.setIconColor(requireContext(), R.color.white)
+            docIcon.setIconColor(requireContext(), R.color.white)
+            messageIcon.setIconColor(requireContext(), R.color.white)
+        }
+
         currentTab = 1
-//        fragmentVaultBinding.docText.inActiveText()
-//        fragmentVaultBinding.videoText.activeText()
-//        fragmentVaultBinding.imageText.inActiveText()
         setVideoAdapter()
         handlingFab()
-
     }
 
-    private fun setImageSelected() {
+    private fun setDocSelected() {
 
-        currentTab = 0
-//        fragmentVaultBinding.docText.inActiveText()
-//        fragmentVaultBinding.videoText.inActiveText()
-//        fragmentVaultBinding.imageText.activeText()
-        setImageAdapter()
+        fragmentVaultBinding.apply {
+            imageIcon.setIconColor(requireContext(), R.color.white)
+            videoIcon.setIconColor(requireContext(), R.color.white)
+            micIcon.setIconColor(requireContext(), R.color.white)
+            docIcon.setIconColor(requireContext(), R.color.yellow)
+            messageIcon.setIconColor(requireContext(), R.color.white)
+        }
+
+        currentTab = 2
+        setDocumentAdapter()
         handlingFab()
-    }
-
-    private fun setGallerySelected() {
-        fragmentVaultBinding.galleryText.activeText()
-        fragmentVaultBinding.savedText.inActiveText()
-        fragmentVaultBinding.gallerySelectedView.show()
-        fragmentVaultBinding.savedSelectedView.hide()
-        topToolbarLayout.show()
-        setImageSelected()
     }
 
     private fun setSavedSelected() {
-        fragmentVaultBinding.galleryText.inActiveText()
-        fragmentVaultBinding.savedText.activeText()
-        fragmentVaultBinding.gallerySelectedView.hide()
-        fragmentVaultBinding.savedSelectedView.show()
+        fragmentVaultBinding.apply {
+            imageIcon.setIconColor(requireContext(), R.color.white)
+            videoIcon.setIconColor(requireContext(), R.color.white)
+            micIcon.setIconColor(requireContext(), R.color.white)
+            docIcon.setIconColor(requireContext(), R.color.white)
+            messageIcon.setIconColor(requireContext(), R.color.yellow)
+        }
+
         setChatMessageAdapter()
-        topToolbarLayout.hide()
     }
 
     private fun setImageAdapter() {
@@ -346,10 +348,12 @@ class VaultFragment : Fragment() {
     private fun setSelectionPannel(chatMessagesViewModel: ChatMessagesViewModel) {
 
         if (chatMessagesViewModel.selectedChatMessage.size != 0) {
+            fragmentVaultBinding.constraintLayout.hide()
             fragmentVaultBinding.selectionPanelSaved.show()
             fragmentVaultBinding.selectedCountsaved.text =
                 chatMessagesViewModel.selectedChatMessage.size.toString()
         } else {
+            fragmentVaultBinding.constraintLayout.show()
             fragmentVaultBinding.selectionPanelSaved.hide()
         }
     }
@@ -371,12 +375,4 @@ class VaultFragment : Fragment() {
 
     }
 
-}
-
-private fun TextView.activeText() {
-    this.setTextColor(fetchThemeColor(R.attr.active_text_color, this.context))
-}
-
-private fun TextView.inActiveText() {
-    this.setTextColor(fetchThemeColor(R.attr.inactive_text_color, this.context))
 }

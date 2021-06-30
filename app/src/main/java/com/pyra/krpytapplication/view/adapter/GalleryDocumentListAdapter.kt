@@ -10,9 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.getDocumentType
-import com.pyra.krpytapplication.Utils.getFileExtension
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.getDocumentType
+import com.pyra.krpytapplication.utils.getFileExtension
 import com.pyra.krpytapplication.databinding.ItemDocumentsBinding
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
 import com.pyra.krpytapplication.viewmodel.GalleryViewModel

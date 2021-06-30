@@ -3,8 +3,6 @@ package com.pyra.krpytapplication.view.activity
 import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
@@ -21,29 +19,34 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.LogUtil
-import com.pyra.krpytapplication.Utils.SharedHelper
-import com.pyra.krpytapplication.Utils.openNewTaskActivity
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.LogUtil
+import com.pyra.krpytapplication.utils.SharedHelper
+import com.pyra.krpytapplication.utils.openNewTaskActivity
 import com.pyra.krpytapplication.app.AppRunningService
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.interfaces.AuthenticationListner
+import com.scottyab.rootbeer.RootBeer
 import isAppIsInBackground
 import isMyServiceRunning
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.doAsync
 import showToast
-import java.io.IOException
-import java.util.concurrent.TimeoutException
-
 
 class SplashActivity : AppCompatActivity() {
 
-    private val REQUEST_READ_PHONE_STATE = 0x12;
+    private val REQUEST_READ_PHONE_STATE = 0x12
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        val rootBear = RootBeer(this)
+        if (rootBear.isRooted) {
+            showToast("Device is rooted")
+        } else {
+            //showToast("Device is not rooted")
+        }
 
         if (!isMyServiceRunning(this, AppRunningService::class.java) && !isAppIsInBackground(this))
             startService(Intent(this, AppRunningService::class.java))
@@ -51,6 +54,8 @@ class SplashActivity : AppCompatActivity() {
         checkForPhoneStatePermission()
 
         getNewToken()
+
+        Glide.with(this).asGif().load(R.raw.loader_splash_logo).into(splashLogo)
 
         Glide.with(this).asGif().load(R.raw.loader)
             .listener(object : RequestListener<GifDrawable> {
@@ -71,8 +76,8 @@ class SplashActivity : AppCompatActivity() {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    resource?.setLoopCount(10)
-                    return false;
+                    resource?.setLoopCount(5)
+                    return false
                 }
 
             }).into(splashLoader)

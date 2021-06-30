@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.hakeemUser.network.ApiInput
 import com.google.gson.Gson
-import com.pyra.krpytapplication.Utils.Coroutine
+import com.pyra.krpytapplication.utils.Coroutine
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.chat.XMPPOperations
 import com.pyra.krpytapplication.model.CommonResponseModel

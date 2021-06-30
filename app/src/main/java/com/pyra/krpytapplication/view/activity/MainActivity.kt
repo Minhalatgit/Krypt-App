@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.domain.OnClickButtonListener
 import com.pyra.krpytapplication.notification.NotificationUtils
 import com.pyra.krpytapplication.videocallutils.events.ConstantApp
@@ -86,31 +86,63 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     }
 
     private fun chatSelected() {
+        bottomView.background = ContextCompat.getDrawable(this, R.drawable.round_bottom_view_bg)
         chatLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+        chatIcon.setIconColor(this, R.color.yellow)
+
         profileLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        profileIcon.setIconColor(this, R.color.white)
+
         vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        vaultIcon.setIconColor(this, R.color.white)
+
         moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        moreMenuIcon.setIconColor(this, R.color.white)
     }
 
     private fun profileSelected() {
+        bottomView.background = ContextCompat.getDrawable(this, R.drawable.round_bottom_view_bg)
         chatLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        chatIcon.setIconColor(this, R.color.white)
+
         profileLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+        profileIcon.setIconColor(this, R.color.yellow)
+
         vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        vaultIcon.setIconColor(this, R.color.white)
+
         moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        moreMenuIcon.setIconColor(this, R.color.white)
     }
 
     private fun vaultSelected() {
+        bottomView.background = null
         chatLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        chatIcon.setIconColor(this, R.color.white)
+
         profileLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        profileIcon.setIconColor(this, R.color.white)
+
         vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+        vaultIcon.setIconColor(this, R.color.yellow)
+
         moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        moreMenuIcon.setIconColor(this, R.color.white)
     }
 
     private fun moreMenuSelected() {
+        bottomView.background = ContextCompat.getDrawable(this, R.drawable.round_bottom_view_bg)
         chatLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        chatIcon.setIconColor(this, R.color.white)
+
         profileLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        profileIcon.setIconColor(this, R.color.white)
+
         vaultLayout.background = ContextCompat.getDrawable(this, R.drawable.unselected_round_bg)
+        vaultIcon.setIconColor(this, R.color.white)
+
         moreMenuLayout.background = ContextCompat.getDrawable(this, R.drawable.selected_round_bg)
+        moreMenuIcon.setIconColor(this, R.color.yellow)
     }
 
     fun onMenuClick(view: View) {
@@ -167,7 +199,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
 //                        }
                     }
                 } else {
-
+                    vaultSelected()
                     if (this@MainActivity::vaultFragment.isInitialized) {
                         fm.beginTransaction().hide(active).show(vaultFragment).commit()
                         active = vaultFragment

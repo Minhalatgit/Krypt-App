@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -109,10 +110,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:text="1.17 PM"
                         android:theme="@style/ChatMessageTimeStyle"
                         app:layout_constraintBottom_toBottomOf="@id/messageStatus"
-                        app:layout_constraintEnd_toStartOf="@id/messageStatus" />
+                        app:layout_constraintEnd_toStartOf="@id/messageStatus"
+                        tools:text="1.17 PM" />
 
                     <ImageView
                         android:id="@+id/messageStatus"
@@ -120,96 +121,83 @@
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:src="@drawable/ic_seen_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/documentDetails" />
 
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/documentDetails"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/transparent_circle_pattern"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:id="@+id/documentIcon"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginLeft="@dimen/_8sdp"
-                            android:src="@drawable/audio_icon"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/white" />
 
                         <TextView
                             android:id="@+id/messageContent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5sdp"
                             android:fontFamily="@font/jost_regular"
                             android:padding="@dimen/_8sdp"
                             android:singleLine="true"
-                            android:text="File Name (1)"
                             android:textColor="?toolbar_text_color"
                             android:textSize="@dimen/_11sdp"
+                            android:visibility="visible"
                             app:layout_constrainedWidth="true"
-                            app:layout_constraintStart_toEndOf="@+id/documentIcon"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toEndOf="@+id/playPauseLayout"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="File Name (1)" />
 
-                        <include
-                            android:id="@+id/uploadingLayout"
-                            layout="@layout/uploading_layout"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            android:visibility="gone"
+                        <RelativeLayout
+                            android:id="@+id/playPauseLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:background="@drawable/rounded_white_bg"
+                            android:elevation="0dp"
+                            android:gravity="center"
+                            android:padding="@dimen/_3sdp"
+                            android:visibility="visible"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                        <include
-                            android:id="@id/uploadLayout"
-                            layout="@layout/upload_layout"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <include
+                                android:id="@+id/uploadingLayout"
+                                layout="@layout/uploading_layout"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:visibility="gone" />
 
+                            <include
+                                android:id="@id/uploadLayout"
+                                layout="@layout/upload_layout"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:visibility="gone" />
 
-                        <include
-                            android:id="@id/uploadedLayout"
-                            layout="@layout/play_video"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <include
+                                android:id="@id/uploadedLayout"
+                                layout="@layout/play_video"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerInParent="true"
+                                android:visibility="visible" />
 
-                        <ImageView
-                            android:id="@+id/pause"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:padding="3dp"
-                            android:src="@drawable/ic_pause"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <ImageView
+                                android:id="@+id/pause"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerInParent="true"
+                                android:padding="2dp"
+                                android:src="@drawable/ic_pause"
+                                android:visibility="visible"
+                                app:tint="@color/blue" />
+
+                        </RelativeLayout>
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

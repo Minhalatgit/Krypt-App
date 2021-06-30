@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abedelazizshe.lightcompressorlibrary.CompressionListener
 import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.domain.UploadStatus
 import com.pyra.krpytapplication.repositories.implementations.AmazonRepository

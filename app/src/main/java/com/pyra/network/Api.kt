@@ -5,8 +5,8 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.LogUtil
-import com.pyra.krpytapplication.Utils.isNetworkConnected
+import com.pyra.krpytapplication.utils.LogUtil
+import com.pyra.krpytapplication.utils.isNetworkConnected
 import com.pyra.krpytapplication.repositories.interfaces.ApiResponseCallback
 
 object Api {

@@ -2,13 +2,12 @@ package com.pyra.krpytapplication.view.activity
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.openActivity
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.openActivity
 import com.pyra.krpytapplication.view.adapter.ContactListAdapter
 import com.pyra.krpytapplication.view.adapter.KryptCodeAdapter
 import com.pyra.krpytapplication.view.adapter.SelectedContactAdapter

@@ -1,7 +1,7 @@
 package com.pyra.krpytapplication.repositories.implementations
 
 import androidx.lifecycle.LiveData
-import com.pyra.krpytapplication.Utils.MessageType
+import com.pyra.krpytapplication.utils.MessageType
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.roomDb.AppDataBase
 import com.pyra.krpytapplication.roomDb.dao.ChatListDao

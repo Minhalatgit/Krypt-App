@@ -1,28 +1,9 @@
 package com.pyra.krpytapplication.view.fragment
 
-import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import android.widget.*
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
-import com.pyra.krpytapplication.domain.OnClickButtonListener
-import com.pyra.krpytapplication.view.activity.KryptCodeActivity
-import com.pyra.krpytapplication.view.adapter.ChatListAdapter
-import com.pyra.krpytapplication.viewmodel.ChatListViewModel
-import com.pyra.krpytapplication.viewmodel.ProfileViewModel
-import com.pyra.krpytapplication.viewmodel.SearchViewModel
-import com.pyra.network.UrlHelper
-import kotlinx.android.synthetic.main.fragment_chat.*
 
 class MoreMenuFragment : Fragment(R.layout.fragment_more_menu) {
 

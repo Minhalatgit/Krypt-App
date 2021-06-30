@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.media.PlaybackParams
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +20,14 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.databinding.*
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema
 import com.pyra.krpytapplication.view.activity.ImageAndVideoViewer
 import com.pyra.krpytapplication.viewmodel.ChatMessagesViewModel
 import getDocumentIcon
 import getViewIntent
+import kotlinx.android.synthetic.main.item_sender_audio.view.*
 import setColorToBackground
 import java.io.File
 
@@ -45,7 +48,7 @@ public enum class MessageViewTypes(val value: Int) {
     RECEIVER_LOCATION(14),
     REPLY(15),
     NONE(16),
-    MISSEDCALL(17)
+    MISSED_CALL(17)
 }
 
 class ChatMessageAdapter(
@@ -166,9 +169,9 @@ class ChatMessageAdapter(
             MessageType.MISSEDCALL -> {
                 return if (viewModel.isSender(position) != null) {
                     if (viewModel.isSender(position)!!) {
-                        MessageViewTypes.MISSEDCALL.value
+                        MessageViewTypes.MISSED_CALL.value
                     } else {
-                        MessageViewTypes.MISSEDCALL.value
+                        MessageViewTypes.MISSED_CALL.value
                     }
 
                 } else {
@@ -310,7 +313,7 @@ class ChatMessageAdapter(
                 return viewHolderReceiverDocument(binding as ItemReceiverDocumentBinding)
             }
 
-            MessageViewTypes.MISSEDCALL.value -> {
+            MessageViewTypes.MISSED_CALL.value -> {
                 val binding = DataBindingUtil.inflate<ViewDataBinding>(
                     layoutInflater,
                     R.layout.item_receiver_missedcall,
@@ -345,10 +348,6 @@ class ChatMessageAdapter(
                         Color.parseColor(value),
                         PorterDuff.Mode.SRC_ATOP
                     )
-//                    holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background.setColorFilter(
-//                        Color.parseColor(value),
-//                        PorterDuff.Mode.SRC_ATOP
-//                    )
 
                     //view other than text msg
                     if (holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background != null)
@@ -362,6 +361,7 @@ class ChatMessageAdapter(
                             holder.itemView.findViewById<ImageView>(R.id.senderCorner).background,
                             value
                         )
+
                 }
             } else {
                 if (!SharedHelper(context).chatBubbleColorReciver.equals("", ignoreCase = true)) {
@@ -370,10 +370,6 @@ class ChatMessageAdapter(
                         Color.parseColor(value),
                         PorterDuff.Mode.SRC_ATOP
                     )
-//                    holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background.setColorFilter(
-//                        Color.parseColor(value),
-//                        PorterDuff.Mode.SRC_ATOP
-//                    )
 
                     //view other than text msg
                     if (holder.itemView.findViewById<LinearLayout>(R.id.chatBubbleColor).background != null)
@@ -425,14 +421,13 @@ class ChatMessageAdapter(
                     }
                 }
 
-
                 if (value == "") {
                     holder.itemView.findViewById<TextView>(R.id.dateSectionHeader).visibility =
                         View.GONE
                 } else {
                     holder.itemView.findViewById<TextView>(R.id.dateSectionHeader).also {
                         it.visibility = View.VISIBLE
-                        it.text = value
+                        it.text = value.capitalize()
                     }
                 }
             }
@@ -440,7 +435,7 @@ class ChatMessageAdapter(
 
         when (getItemViewType(position)) {
 
-            MessageViewTypes.MISSEDCALL.value -> {
+            MessageViewTypes.MISSED_CALL.value -> {
 
                 val missedCallViewHolder = holder as MissedCallViewHolder
 
@@ -470,7 +465,6 @@ class ChatMessageAdapter(
                     senderText.binding.headerText.hide()
 
                     if (viewModel.getIsReply(position)) {
-
 
                         senderText.binding.layoutReply.show()
 
@@ -777,7 +771,7 @@ class ChatMessageAdapter(
                     senderVideo.binding.layoutReply.hide()
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.senderName)
                         .text = viewModel.getSenderName(position)
-                    (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.receiverName)
+                    (senderVideo.binding.headerText as (ViewGroup)).findViewById<TextView>(R.id.receiverName)
                         .text = viewModel.getReceiverName(position)
                     (senderVideo.binding.headerText as ViewGroup).findViewById<TextView>(R.id.messageDate)
                         .text = viewModel.getChatMessageTime(position)
@@ -863,7 +857,7 @@ class ChatMessageAdapter(
                     if (viewModel.isMultiSelectedEnabled) {
                         viewModel.singleClick(position)
                     } else {
-                        var intent = Intent(context, ImageAndVideoViewer::class.java)
+                        val intent = Intent(context, ImageAndVideoViewer::class.java)
                         intent.putExtra(
                             Constants.IntentKeys.CONTENT,
                             viewModel.getLocalFilePath(position)
@@ -903,9 +897,7 @@ class ChatMessageAdapter(
                 } else {
                     senderDocument.binding.headerText.hide()
 
-
                     if (viewModel.getIsReply(position)) {
-
 
                         senderDocument.binding.layoutReply.show()
 

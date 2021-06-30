@@ -15,13 +15,12 @@ import android.view.*
 import android.view.View.OnTouchListener
 import android.view.animation.*
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.LogUtil
+import com.pyra.krpytapplication.utils.LogUtil
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs

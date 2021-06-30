@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.work.*
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.chat.ChatRoomConnection
 import com.pyra.krpytapplication.chat.GetOfflineMessagesWorker

@@ -12,7 +12,7 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.databinding.ActivityEditImageBinding
 import com.pyra.krpytapplication.domain.UploadStatus
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema

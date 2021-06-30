@@ -2,14 +2,11 @@ package com.pyra.krpytapplication.view.activity
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.SharedHelper
-import com.pyra.krpytapplication.Utils.openNewTaskActivity
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.SharedHelper
+import com.pyra.krpytapplication.utils.openNewTaskActivity
 import isValidPassword
-import kotlinx.android.synthetic.main.activity_create_password.*
 import kotlinx.android.synthetic.main.activity_duress_password.*
 import showHidePass
 import showToast

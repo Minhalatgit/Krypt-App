@@ -5,8 +5,8 @@ import android.os.Handler
 import android.os.Looper
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.implementations.ChatListRepository
 import com.pyra.krpytapplication.roomDb.entity.ChatListSchema

@@ -44,8 +44,8 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.LogUtil
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.LogUtil
 import com.pyra.krpytapplication.view.activity.CameraActivity
 import com.pyra.krpytapplication.view.activity.KEY_EVENT_ACTION
 import com.pyra.krpytapplication.view.activity.KEY_EVENT_EXTRA

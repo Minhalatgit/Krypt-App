@@ -100,7 +100,6 @@
                     <View
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_40sdp"
-                        android:background="@drawable/transparent_bottom"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/messageContent"
                         app:layout_constraintStart_toStartOf="@id/messageContent" />

@@ -11,12 +11,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.hide
-import com.pyra.krpytapplication.Utils.loadImage
-import com.pyra.krpytapplication.Utils.show
+import com.pyra.krpytapplication.utils.hide
+import com.pyra.krpytapplication.utils.loadImage
+import com.pyra.krpytapplication.utils.show
 import com.pyra.krpytapplication.databinding.ItemContactBinding
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ContactListAdapter(
     private val context: Activity,

@@ -7,10 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.loadImage
+import com.pyra.krpytapplication.utils.loadImage
 import com.pyra.krpytapplication.databinding.ItemSelectedContactBinding
 import com.pyra.krpytapplication.viewmodel.AddMemberViewModel
-import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 
 class AddParticipantSelectedContactAdapter(
     private val context: Context,

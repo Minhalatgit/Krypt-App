@@ -37,8 +37,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.getFileType
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.getFileType
 import com.pyra.krpytapplication.domain.UploadStatus
 import com.pyra.krpytapplication.viewmodel.GalleryViewModel
 import kotlinx.android.synthetic.main.fragment_gallery.*

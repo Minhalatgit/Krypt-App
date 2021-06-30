@@ -30,7 +30,7 @@ class BurnMsgUnitAdapter(var context: Context) :
 
     override fun onBindViewHolder(holder: BurnMsgUnitViewHolder, position: Int) {
 
-        holder.childBurnMsgUnitBinding.burnMsgCountUnit.text = unitList.get(position)
+        holder.childBurnMsgUnitBinding.burnMsgCountUnit.text = unitList[position]
 
     }
 }

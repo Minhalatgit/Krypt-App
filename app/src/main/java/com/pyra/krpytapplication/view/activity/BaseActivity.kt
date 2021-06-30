@@ -9,8 +9,8 @@ import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.*
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.LogUtil
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.LogUtil
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.app.AppRunningService
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.chat.ChatWorker

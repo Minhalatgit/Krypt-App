@@ -3,7 +3,6 @@ package com.pyra.krpytapplication.view.activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.provider.Settings
@@ -15,15 +14,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.openActivity
-import com.pyra.krpytapplication.Utils.subEnded
+import com.pyra.krpytapplication.utils.openActivity
+import com.pyra.krpytapplication.utils.subEnded
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import isValidKryptCode
 import jp.wasabeef.blurry.Blurry
 import kotlinx.android.synthetic.main.activity_krypt_code.*
-import kotlinx.android.synthetic.main.fragment_chat.*
 import showToast
-import takeScreenShot
 
 class KryptCodeActivity : BaseActivity() {
 

@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.repositories.implementations.ProfileRepository
 import com.pyra.network.UrlHelper
 import getImei

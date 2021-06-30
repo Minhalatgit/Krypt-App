@@ -2,7 +2,6 @@ package com.pyra.krpytapplication.view.fragment
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,16 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.domain.OnClickButtonListener
 import com.pyra.krpytapplication.model.SearchUserResult
 import com.pyra.krpytapplication.repositories.interfaces.ApiResponseCallback
 import com.pyra.krpytapplication.view.activity.KryptCodeActivity
-import com.pyra.krpytapplication.view.activity.PasswordActivity
 import com.pyra.krpytapplication.view.adapter.ChatListAdapter
 import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
@@ -255,7 +252,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                                     jsonObject.toString(),
                                     SearchUserResult::class.java
                                 )
-                            dismissLoader(loader)
+                            dismissLoader(loadBar)
                             if (response.error) {
                                 dialog.window?.decorView?.let { view ->
                                     requireActivity().showToast(getString(R.string.enter_valid_contact_name))

@@ -14,10 +14,7 @@ import android.media.*
 import android.os.*
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -31,8 +28,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.pyra.krpytapplication.BuildConfig
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.app.AppRunningService
 import com.pyra.krpytapplication.customview.AudioRecordView
 import com.pyra.krpytapplication.customview.RecordingListener
@@ -174,6 +172,13 @@ class ChatActivity : BaseActivity(), RecordingListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!BuildConfig.DEBUG) {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+            )
+        }
+
         setContentView(R.layout.chat_activity_main)
         audioRecordView.initView(findViewById<View>(R.id.layoutMain) as FrameLayout)
 
@@ -507,9 +512,9 @@ class ChatActivity : BaseActivity(), RecordingListener {
 //            chatMessageLists.smoothScrollToPosition(0)
             if (chatMessagesViewModel.isAllSavedMessage) {
 
-                bookmarkIcon?.setImageDrawable(getDrawable(R.drawable.unbookmark_icon))
+                bookmarkIcon?.setImageDrawable(getDrawable(R.drawable.vault_icon))
             } else {
-                bookmarkIcon?.setImageDrawable(getDrawable(R.drawable.bookmark_icon))
+                bookmarkIcon?.setImageDrawable(getDrawable(R.drawable.vault_icon))
             }
 
             if (chatMessagesViewModel.isAllMessageForwadable && chatMessagesViewModel.isMultiSelectedEnabled) {

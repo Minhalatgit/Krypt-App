@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.pyra.krpytapplication.Utils.LogUtil;
 import com.pyra.krpytapplication.videocallutils.data.VideoInfoData;
 
 
@@ -25,14 +24,14 @@ public class ViewUtil {
     /* package */
     static final boolean checkDoubleTouchEvent(MotionEvent event, View view) {
         if (DEBUG_ENABLED) {
-            com.pyra.krpytapplication.Utils.LogUtil.Companion.d("dispatchTouchEvent " , mLastTouchTime + " " + event);
+            com.pyra.krpytapplication.utils.LogUtil.Companion.d("dispatchTouchEvent " , mLastTouchTime + " " + event);
         }
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) { // only check touch down event
             if (mLastTouchTime == DEFAULT_TOUCH_TIMESTAMP || (SystemClock.elapsedRealtime() - mLastTouchTime) >= TOUCH_COOL_DOWN_TIME) {
                 mLastTouchTime = SystemClock.elapsedRealtime();
             } else {
-                com.pyra.krpytapplication.Utils.LogUtil.Companion.e("too many touch events " , view + " " + MotionEvent.ACTION_DOWN);
+                com.pyra.krpytapplication.utils.LogUtil.Companion.e("too many touch events " , view + " " + MotionEvent.ACTION_DOWN);
                 return true;
             }
         }
@@ -42,12 +41,12 @@ public class ViewUtil {
     /* package */
     static final boolean checkDoubleKeyEvent(KeyEvent event, View view) {
         if (DEBUG_ENABLED) {
-            com.pyra.krpytapplication.Utils.LogUtil.Companion.d("dispatchKeyEvent " , mLastTouchTime + " " + event);
+            com.pyra.krpytapplication.utils.LogUtil.Companion.d("dispatchKeyEvent " , mLastTouchTime + " " + event);
         }
 
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
             if (mLastTouchTime != DEFAULT_TOUCH_TIMESTAMP && (SystemClock.elapsedRealtime() - mLastTouchTime) < TOUCH_COOL_DOWN_TIME) {
-                com.pyra.krpytapplication.Utils.LogUtil.Companion.e("too many key events " , view + " " + KeyEvent.ACTION_DOWN);
+                com.pyra.krpytapplication.utils.LogUtil.Companion.e("too many key events " , view + " " + KeyEvent.ACTION_DOWN);
                 return true;
             }
             mLastTouchTime = SystemClock.elapsedRealtime();

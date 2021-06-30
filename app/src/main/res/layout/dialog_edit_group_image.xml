@@ -11,7 +11,7 @@
         android:layout_height="@dimen/_20sdp"
         android:layout_margin="@dimen/_10sdp"
         android:src="@drawable/edit_icon"
-        android:tint="?toolbar_icon_color"
+        app:tint="?toolbar_icon_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

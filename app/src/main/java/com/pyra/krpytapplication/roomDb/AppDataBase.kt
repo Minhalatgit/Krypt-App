@@ -7,8 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.impl.WorkDatabaseMigrations.MIGRATION_1_2
+import com.pyra.krpytapplication.BuildConfig
 import com.pyra.krpytapplication.roomDb.dao.*
 import com.pyra.krpytapplication.roomDb.entity.*
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 
 
 @Database(
@@ -26,12 +29,26 @@ abstract class AppDataBase : RoomDatabase() {
             if (instance == null) {
                 synchronized(AppDataBase::class.java) {
                     if (instance == null) {
-                        instance = Room.databaseBuilder(
-                            context.applicationContext,
-                            AppDataBase::class.java,
-                            DATABASENAME
-                        ).addMigrations(MIGRATION_1_2)
-                            .build()
+                        if (BuildConfig.DEBUG) {
+                            instance = Room.databaseBuilder(
+                                context.applicationContext,
+                                AppDataBase::class.java,
+                                DATABASENAME
+                            )
+                                .addMigrations(MIGRATION_1_2)
+                                .build()
+                        } else {
+                            val factory =
+                                SupportFactory(SQLiteDatabase.getBytes("PassPhrase".toCharArray()))
+                            instance = Room.databaseBuilder(
+                                context.applicationContext,
+                                AppDataBase::class.java,
+                                DATABASENAME
+                            )
+                                .openHelperFactory(factory) //Encrypted db
+                                .addMigrations(MIGRATION_1_2)
+                                .build()
+                        }
                     }
                 }
             }

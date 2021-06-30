@@ -1,8 +1,9 @@
 package com.pyra.network
 
 import com.pyra.krpytapplication.BuildConfig
+import io.michaelrocks.paranoid.Obfuscate
 
-
+@Obfuscate
 object UrlHelper {
 
     private const val BASE = BuildConfig.BASE_URL

@@ -3,8 +3,8 @@ package com.pyra.krpytapplication.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.pyra.krpytapplication.Utils.Coroutine
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.Coroutine
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.repositories.implementations.ProfileRepository
 import com.pyra.krpytapplication.roomDb.entity.GroupParticipationSchema

@@ -7,10 +7,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.app.MyApp
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.Coroutine
-import com.pyra.krpytapplication.Utils.LogUtil
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.Coroutine
+import com.pyra.krpytapplication.utils.LogUtil
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.model.SearchUserData
 import com.pyra.krpytapplication.model.SearchUserResult
 import com.pyra.krpytapplication.repositories.implementations.ChatListRepository

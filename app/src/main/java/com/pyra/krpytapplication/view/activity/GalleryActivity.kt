@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.roomDb.AppDataBase
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema
 import com.pyra.krpytapplication.view.adapter.GalleryDocumentListAdapter

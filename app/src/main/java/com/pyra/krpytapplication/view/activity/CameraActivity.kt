@@ -8,7 +8,7 @@ import android.view.KeyEvent
 import android.widget.FrameLayout
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.view.fragment.FLAGS_FULLSCREEN
 import java.io.File
 

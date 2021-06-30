@@ -2,14 +2,12 @@ package com.pyra.krpytapplication.view.activity
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.openNewTaskActivity
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.openNewTaskActivity
 import com.pyra.krpytapplication.view.adapter.AddContactListAdapter
 import com.pyra.krpytapplication.view.adapter.AddParticipantKryptCodeAdapter
 import com.pyra.krpytapplication.view.adapter.AddParticipantSelectedContactAdapter

@@ -5,10 +5,10 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.Coroutine
-import com.pyra.krpytapplication.Utils.SharedHelper
-import com.pyra.krpytapplication.Utils.jidString
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.Coroutine
+import com.pyra.krpytapplication.utils.SharedHelper
+import com.pyra.krpytapplication.utils.jidString
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.model.CommonResponseModel
 import com.pyra.krpytapplication.model.GetUserDetailsResponse

@@ -65,6 +65,7 @@
             app:shadow_with_dpi_scale="true">
 
             <ImageView
+                android:id="@+id/chatIcon"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:padding="@dimen/_15sdp"
@@ -88,6 +89,7 @@
             app:shadow_with_dpi_scale="true">
 
             <ImageView
+                android:id="@+id/profileIcon"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:padding="@dimen/_15sdp"
@@ -111,6 +113,7 @@
             app:shadow_with_dpi_scale="true">
 
             <ImageView
+                android:id="@+id/vaultIcon"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:padding="@dimen/_15sdp"
@@ -133,6 +136,7 @@
             app:shadow_with_dpi_scale="true">
 
             <ImageView
+                android:id="@+id/moreMenuIcon"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:padding="@dimen/_15sdp"

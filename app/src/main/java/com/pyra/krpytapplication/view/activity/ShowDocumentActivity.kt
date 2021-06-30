@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
+import com.pyra.krpytapplication.utils.Constants
 import kotlinx.android.synthetic.main.activity_document.*
 import kotlinx.android.synthetic.main.activity_view_document.content
 import kotlinx.android.synthetic.main.activity_view_document.doctitle

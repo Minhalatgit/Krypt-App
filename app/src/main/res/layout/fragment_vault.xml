@@ -32,83 +32,15 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:context=".view.fragment.VaultFragment">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/toolBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
-                    android:translationY="-10dp"
-                    android:visibility="invisible"
-                    app:cardBackgroundColor="?toolbar_color"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="1dp"
-                    android:layout_height="1dp"
-                    app:layout_constraintEnd_toEndOf="@id/toolBar"
-                    app:layout_constraintStart_toStartOf="@id/toolBar"
-                    app:layout_constraintTop_toTopOf="@id/toolBar" />
-
-                <TextView
-                    android:id="@+id/galleryText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:fontFamily="@font/jost_medium"
-                    android:text="@string/gallery"
-                    android:textColor="?text_color_hint"
-                    android:textSize="@dimen/_13sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
-                    app:layout_constraintEnd_toEndOf="@id/divider"
-                    app:layout_constraintStart_toStartOf="@id/toolBar" />
-
-                <View
-                    android:id="@+id/gallerySelectedView"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_2sdp"
-                    android:background="?active_tab_icon_color"
-                    android:translationY="-10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
-                    app:layout_constraintEnd_toEndOf="@id/galleryText"
-                    app:layout_constraintStart_toStartOf="@id/galleryText" />
-
-                <View
-                    android:id="@+id/savedSelectedView"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_2sdp"
-                    android:background="?active_tab_icon_color"
-                    android:translationY="-10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
-                    app:layout_constraintEnd_toEndOf="@id/savedText"
-                    app:layout_constraintStart_toStartOf="@id/savedText" />
-
-                <TextView
-                    android:id="@+id/savedText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:fontFamily="@font/jost_medium"
-                    android:text="@string/saved"
-                    android:textColor="?text_color_hint"
-                    android:textSize="@dimen/_13sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
-                    app:layout_constraintEnd_toEndOf="@id/toolBar"
-                    app:layout_constraintStart_toStartOf="@id/divider" />
-
                 <RelativeLayout
                     android:id="@+id/galleryLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:gravity="center_horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/toolBar">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <net.orandja.shadowlayout.ShadowLayout
                         android:id="@+id/imageLayout"
@@ -126,6 +58,7 @@
                         app:shadow_with_dpi_scale="true">
 
                         <ImageView
+                            android:id="@+id/imageIcon"
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
                             android:padding="@dimen/_15sdp"
@@ -149,6 +82,7 @@
                         app:shadow_with_dpi_scale="true">
 
                         <ImageView
+                            android:id="@+id/videoIcon"
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
                             android:padding="@dimen/_15sdp"
@@ -173,10 +107,11 @@
                         app:shadow_with_dpi_scale="true">
 
                         <ImageView
+                            android:id="@+id/micIcon"
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
                             android:padding="@dimen/_15sdp"
-                            android:src="@drawable/mic_icon_chat" />
+                            android:src="@drawable/morph_icon" />
 
                     </net.orandja.shadowlayout.ShadowLayout>
 
@@ -196,6 +131,7 @@
                         app:shadow_with_dpi_scale="true">
 
                         <ImageView
+                            android:id="@+id/docIcon"
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
                             android:padding="@dimen/_15sdp"
@@ -218,10 +154,11 @@
                         app:shadow_with_dpi_scale="true">
 
                         <ImageView
+                            android:id="@+id/messageIcon"
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
                             android:padding="@dimen/_15sdp"
-                            android:src="@drawable/chat_icon" />
+                            android:src="@drawable/burn_message" />
 
                     </net.orandja.shadowlayout.ShadowLayout>
 
@@ -330,65 +267,49 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.cardview.widget.CardView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
-                    android:translationY="-10dp"
-                    app:cardBackgroundColor="?toolbar_color"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="@dimen/_55sdp"
+                    android:layout_gravity="bottom"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_55sdp"
-                        android:layout_gravity="bottom"
-                        android:background="?toolbar_color"
+                    <ImageView
+                        android:id="@+id/backPressedsaved"
+                        android:layout_width="@dimen/_19sdp"
+                        android:layout_height="@dimen/_19sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:padding="3dp"
+                        android:src="@drawable/back_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/toolBar"
-                        app:layout_constraintTop_toTopOf="@+id/searchBarBg">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
 
-                        <ImageView
-                            android:id="@+id/backPressedsaved"
-                            android:layout_width="@dimen/_19sdp"
-                            android:layout_height="@dimen/_19sdp"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:padding="3dp"
-                            android:src="@drawable/back_icon"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/white" />
+                    <TextView
+                        android:id="@+id/selectedCountsaved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:fontFamily="@font/jost_medium"
+                        android:text="1"
+                        android:textColor="?toolbar_text_color"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/backPressedsaved"
+                        app:layout_constraintStart_toEndOf="@+id/backPressedsaved"
+                        app:layout_constraintTop_toTopOf="@+id/backPressedsaved" />
 
-                        <TextView
-                            android:id="@+id/selectedCountsaved"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/jost_medium"
-                            android:text="1"
-                            android:textColor="?toolbar_text_color"
-                            android:textSize="@dimen/_14sdp"
-                            app:layout_constraintBottom_toBottomOf="@+id/backPressedsaved"
-                            app:layout_constraintStart_toEndOf="@+id/backPressedsaved"
-                            app:layout_constraintTop_toTopOf="@+id/backPressedsaved" />
+                    <ImageView
+                        android:id="@+id/unsave"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:padding="5dp"
+                        android:src="@drawable/vault_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/unsave"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:padding="5dp"
-                            android:src="@drawable/unbookmark_icon"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -400,7 +321,7 @@
             android:layout_height="@dimen/_30sdp"
             android:elevation="@dimen/_12sdp"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/ic_camera_alt_24"
+            android:src="@drawable/camera_icon"
             app:layout_constraintBottom_toBottomOf="@+id/cameraFAB"
             app:layout_constraintEnd_toEndOf="@+id/cameraFAB"
             app:layout_constraintStart_toStartOf="@+id/cameraFAB"

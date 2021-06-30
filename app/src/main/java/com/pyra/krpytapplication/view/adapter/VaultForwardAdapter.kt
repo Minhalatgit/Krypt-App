@@ -1,7 +1,6 @@
 package com.pyra.krpytapplication.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -9,10 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.hide
-import com.pyra.krpytapplication.Utils.loadImage
-import com.pyra.krpytapplication.Utils.show
-import com.pyra.krpytapplication.databinding.ItemChatsBinding
+import com.pyra.krpytapplication.utils.hide
+import com.pyra.krpytapplication.utils.loadImage
 import com.pyra.krpytapplication.databinding.ItemContactBinding
 import com.pyra.krpytapplication.roomDb.entity.ChatListSchema
 

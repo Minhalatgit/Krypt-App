@@ -14,7 +14,7 @@ import com.abedelazizshe.lightcompressorlibrary.CompressionListener
 import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
 import com.app.hakeemUser.network.ApiInput
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.app.MyApp
 import com.pyra.krpytapplication.model.CommonResponseModel
 import com.pyra.krpytapplication.repositories.implementations.AmazonRepository
@@ -1040,46 +1040,55 @@ class ChatMessagesViewModel(application: Application) : AndroidViewModel(applica
 
     private fun startNewPlayer(position: Int) {
 
-        LogUtil.d("ChatMessagesView", "Audio file path: ${chatMessages[position].localMediaPath}")
+        try {
 
-        mediaPlayer?.let {
-            if (it.isPlaying) {
-                it.pause()
-                it.release()
+            LogUtil.d(
+                "ChatMessagesView",
+                "Audio file path: ${chatMessages[position].localMediaPath}"
+            )
+
+            mediaPlayer?.let {
+                if (it.isPlaying) {
+                    it.pause()
+                    it.release()
+                }
             }
-        }
 
-        playingMessageId = chatMessages[position].messageId
-        mediaPlayer = MediaPlayer()
-        mediaPlayer?.setAudioAttributes(
-            AudioAttributes
-                .Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build()
-        )
-        mediaPlayer?.setDataSource(chatMessages[position].localMediaPath)
+            playingMessageId = chatMessages[position].messageId
+            mediaPlayer = MediaPlayer()
+            mediaPlayer?.setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+                    .build()
+            )
+            mediaPlayer?.setDataSource(chatMessages[position].localMediaPath)
 
-        val sharedPref = SharedHelper(app)
+            val sharedPref = SharedHelper(app)
 
-        if (sharedPref.isMorphVoiceEnabled) {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                mediaPlayer?.playbackParams = PlaybackParams().apply {
-                    if (sharedPref.morphVoiceFrequency != "") {
-                        pitch = sharedPref.morphVoiceFrequency.toFloat()
+            if (sharedPref.isMorphVoiceEnabled) {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                    mediaPlayer?.playbackParams = PlaybackParams().apply {
+                        if (sharedPref.morphVoiceFrequency != "") {
+                            pitch = sharedPref.morphVoiceFrequency.toFloat()
+                        }
                     }
                 }
             }
-        }
 
-        mediaPlayer?.prepare()
-        mediaPlayer?.start()
-        isMediaPlaying = true
+            mediaPlayer?.prepare()
+            mediaPlayer?.start()
+            isMediaPlaying = true
 
-        mediaPlayer?.setOnCompletionListener {
-            //pauseAudio()
-            playingMessageId = ""
-            audioCurrentPosition = 0
-            isMediaPlaying = false
+            mediaPlayer?.setOnCompletionListener {
+                //pauseAudio()
+                playingMessageId = ""
+                audioCurrentPosition = 0
+                isMediaPlaying = false
+            }
+        } catch (e: Exception) {
+            LogUtil.e("ChatMessagesViewModel", "Error: ${e.message}")
         }
     }
 

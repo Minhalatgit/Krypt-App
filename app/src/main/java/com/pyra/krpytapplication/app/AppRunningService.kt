@@ -4,9 +4,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.LogUtil
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.LogUtil
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.network.UrlHelper
 import io.socket.client.Ack
 import io.socket.client.IO

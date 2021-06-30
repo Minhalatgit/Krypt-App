@@ -1,21 +1,16 @@
 package com.pyra.krpytapplication.view.adapter
 
 import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.hide
-import com.pyra.krpytapplication.Utils.loadImage
-import com.pyra.krpytapplication.Utils.show
+import com.pyra.krpytapplication.utils.hide
+import com.pyra.krpytapplication.utils.loadImage
+import com.pyra.krpytapplication.utils.show
 import com.pyra.krpytapplication.databinding.ItemContactBinding
-import com.pyra.krpytapplication.viewmodel.ChatListViewModel
 import com.pyra.krpytapplication.viewmodel.ForwardViewModel
 
 class ForwardAdapter(

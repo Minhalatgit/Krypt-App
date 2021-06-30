@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pyra.krpytapplication.R;
-import com.pyra.krpytapplication.Utils.SharedHelper;
+import com.pyra.krpytapplication.utils.SharedHelper;
 import com.pyra.krpytapplication.notification.NotificationUtils;
 import com.pyra.krpytapplication.roomDb.entity.ChatListSchema;
 import com.pyra.krpytapplication.rxbus.RxBusNotification;
@@ -115,22 +115,22 @@ public class GroupCallActivity extends BaseActivity implements DuringCallEventHa
                             @Override
                             public void run() {
                                 switch (s) {
-                                    case com.pyra.krpytapplication.Utils.Constants.EventBusKeys.ACCEPT_CALL: {
+                                    case com.pyra.krpytapplication.utils.Constants.EventBusKeys.ACCEPT_CALL: {
                                         onCallAccepted();
                                         notificationEventListener.dispose();
                                     }
                                     //made by user
-                                    case com.pyra.krpytapplication.Utils.Constants.EventBusKeys.REJECT_CALL: {
+                                    case com.pyra.krpytapplication.utils.Constants.EventBusKeys.REJECT_CALL: {
 //                                        endCall();
                                         notificationEventListener.dispose();
                                     }
                                     //made by both
-                                    case com.pyra.krpytapplication.Utils.Constants.EventBusKeys.END_CALL: {
+                                    case com.pyra.krpytapplication.utils.Constants.EventBusKeys.END_CALL: {
 //                                        endCall();
                                         notificationEventListener.dispose();
                                     }
                                     //made by both
-                                    case com.pyra.krpytapplication.Utils.Constants.EventBusKeys.HANGUP_CALL: {
+                                    case com.pyra.krpytapplication.utils.Constants.EventBusKeys.HANGUP_CALL: {
 //                                        endCall();
                                         notificationEventListener.dispose();
                                     }
@@ -168,10 +168,10 @@ public class GroupCallActivity extends BaseActivity implements DuringCallEventHa
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            channelName = bundle.getString(com.pyra.krpytapplication.Utils.Constants.NotificationIntentValues.CHANNEL_ID, "");
-            callType = bundle.getString(com.pyra.krpytapplication.Utils.Constants.NotificationIntentValues.CALL_TYPE, "");
-            incomingOutGoing = bundle.getString(com.pyra.krpytapplication.Utils.Constants.NotificationIntentValues.CALL_FROM, "");
-            roomId = bundle.getString(com.pyra.krpytapplication.Utils.Constants.IntentKeys.ROOMID, "");
+            channelName = bundle.getString(com.pyra.krpytapplication.utils.Constants.NotificationIntentValues.CHANNEL_ID, "");
+            callType = bundle.getString(com.pyra.krpytapplication.utils.Constants.NotificationIntentValues.CALL_TYPE, "");
+            incomingOutGoing = bundle.getString(com.pyra.krpytapplication.utils.Constants.NotificationIntentValues.CALL_FROM, "");
+            roomId = bundle.getString(com.pyra.krpytapplication.utils.Constants.IntentKeys.ROOMID, "");
 
             setUi();
             getData();
@@ -194,9 +194,9 @@ public class GroupCallActivity extends BaseActivity implements DuringCallEventHa
 
     private void setUi() {
 
-        if (incomingOutGoing.equalsIgnoreCase(com.pyra.krpytapplication.Utils.Constants.ChatTypes.INCOMING_CALL)) {
+        if (incomingOutGoing.equalsIgnoreCase(com.pyra.krpytapplication.utils.Constants.ChatTypes.INCOMING_CALL)) {
 
-            if (callType.equalsIgnoreCase(com.pyra.krpytapplication.Utils.Constants.ChatTypes.VOICE_CALL)) {
+            if (callType.equalsIgnoreCase(com.pyra.krpytapplication.utils.Constants.ChatTypes.VOICE_CALL)) {
                 callLayout.setVisibility(View.VISIBLE);
                 videoLayout.setVisibility(View.GONE);
                 callLayout.bringToFront();
@@ -221,7 +221,7 @@ public class GroupCallActivity extends BaseActivity implements DuringCallEventHa
         } else {
 
 
-            if (callType.equalsIgnoreCase(com.pyra.krpytapplication.Utils.Constants.ChatTypes.VOICE_CALL)) {
+            if (callType.equalsIgnoreCase(com.pyra.krpytapplication.utils.Constants.ChatTypes.VOICE_CALL)) {
                 callLayout.setVisibility(View.VISIBLE);
                 videoLayout.setVisibility(View.GONE);
                 callLayout.bringToFront();
@@ -359,7 +359,7 @@ public class GroupCallActivity extends BaseActivity implements DuringCallEventHa
 
     private void onCallAccepted() {
 
-        if (callType.equalsIgnoreCase(com.pyra.krpytapplication.Utils.Constants.ChatTypes.VOICE_CALL)) {
+        if (callType.equalsIgnoreCase(com.pyra.krpytapplication.utils.Constants.ChatTypes.VOICE_CALL)) {
 
             callLayout.setVisibility(View.VISIBLE);
             videoLayout.setVisibility(View.GONE);
@@ -488,7 +488,7 @@ public class GroupCallActivity extends BaseActivity implements DuringCallEventHa
     @Override
     public void onUserJoined(int uid) {
 
-        if (mUidsList.size() == 2 || incomingOutGoing.equalsIgnoreCase(com.pyra.krpytapplication.Utils.Constants.ChatTypes.OUTGOING_CALL)) {
+        if (mUidsList.size() == 2 || incomingOutGoing.equalsIgnoreCase(com.pyra.krpytapplication.utils.Constants.ChatTypes.OUTGOING_CALL)) {
             onCallAccepted();
         }
 

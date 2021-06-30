@@ -4,11 +4,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.rxbus.RxBusNotification
 import com.pyra.krpytapplication.videocallutils.view.activity.GroupCallActivity
-import com.pyra.krpytapplication.view.activity.VideoCallActivity
 
 class GroupCallNotificationReceiver : BroadcastReceiver() {
 

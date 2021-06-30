@@ -5,8 +5,8 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.SharedHelper
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.SharedHelper
 import com.pyra.krpytapplication.model.SignupResponseModel
 import com.pyra.krpytapplication.repositories.implementations.RegisterRepository
 import com.pyra.network.UrlHelper

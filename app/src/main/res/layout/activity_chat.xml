@@ -136,8 +136,8 @@
 
         <ImageView
             android:id="@+id/forward"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:onClick="onForwardClicked"
@@ -153,7 +153,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:onClick="onSaveClicked"
-            android:src="@drawable/bookmark_icon"
+            android:src="@drawable/vault_icon"
             app:layout_constraintEnd_toStartOf="@id/deleteIcon"
             app:layout_constraintTop_toTopOf="parent" />
 

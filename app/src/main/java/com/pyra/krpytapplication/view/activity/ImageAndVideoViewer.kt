@@ -9,10 +9,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.MediaController
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.Constants
-import com.pyra.krpytapplication.Utils.hide
-import com.pyra.krpytapplication.Utils.loadImage
-import com.pyra.krpytapplication.Utils.show
+import com.pyra.krpytapplication.utils.Constants
+import com.pyra.krpytapplication.utils.hide
+import com.pyra.krpytapplication.utils.loadImage
+import com.pyra.krpytapplication.utils.show
 import kotlinx.android.synthetic.main.activity_view.*
 import kotlin.math.sqrt
 

@@ -11,7 +11,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.domain.UploadStatus
 import com.pyra.krpytapplication.roomDb.entity.ChatMessagesSchema
 import com.pyra.krpytapplication.viewmodel.ChatMessagesViewModel
@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.activity_document.doctitle
 import kotlinx.android.synthetic.main.activity_view_document.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import showToast
 import java.io.*
 import java.util.*
 

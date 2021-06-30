@@ -17,14 +17,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.databinding.ActivityChatDetailsBinding
 import com.pyra.krpytapplication.notification.NotificationUtils
 import com.pyra.krpytapplication.view.adapter.GroupMembersAdapter
 import com.pyra.krpytapplication.view.fragment.EditProfileBottomSheet
 import com.pyra.krpytapplication.viewmodel.AmazonViewModel
 import com.pyra.krpytapplication.viewmodel.CallViewModel
-import com.pyra.krpytapplication.viewmodel.ChatMessagesViewModel
 import com.pyra.krpytapplication.viewmodel.ProfileViewModel
 import getRealPathFromURI
 import getRealPathFromUriNew

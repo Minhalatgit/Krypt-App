@@ -1,5 +1,6 @@
 package com.pyra.krpytapplication.view.fragment
 
+import android.animation.LayoutTransition.CHANGING
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.ClipData
@@ -10,14 +11,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
 import com.pyra.krpytapplication.R
-import com.pyra.krpytapplication.Utils.*
+import com.pyra.krpytapplication.utils.*
 import com.pyra.krpytapplication.view.activity.*
 import com.pyra.krpytapplication.view.adapter.BurnMsgUnitAdapter
 import com.pyra.krpytapplication.view.adapter.CountAdapter
@@ -67,10 +66,13 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private lateinit var timer: CountDownTimer
     lateinit var burnMsgUnitAdapter: BurnMsgUnitAdapter
     var dialogTitle: TextView? = null
+    var isBurnMsgSelected: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         amazonViewModel = ViewModelProvider(this).get(AmazonViewModel::class.java)
+
+        scroll.layoutTransition.enableTransitionType(CHANGING)
 
         initListeners()
         setMessageTime()
@@ -144,12 +146,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             hideMorphFrequencyView()
         }
 
-//        if (sharedHelper.isBurnMessageEnabled) {
-//            showBurnView()
-//        } else {
-//            hideBurnView()
-//        }
-
 //        changeThemeView.setOnClickListener {
 //            getChangeThemeDialog(requireContext()) {
 //                requireContext().openNewTaskActivity(MainActivity::class.java)
@@ -162,6 +158,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         burnDisableSwitch.setOnCheckedChangeListener { p0, p1 ->
             if (p1) {
+                scroll.postDelayed({
+                    scroll.smoothScrollTo(0, burnMessageLayout.y.toInt())
+                }, 200)
                 showBurnView()
             } else {
                 hideBurnView()
@@ -226,10 +225,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             startActivity(intent)
         }
 
-        burnMessageLayout.setOnClickListener {
-            showBurnMessageDialog()
-        }
-
         blockContactLayout.setOnClickListener {
             context?.openActivity(BlockedListActivity::class.java)
         }
@@ -255,63 +250,73 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
         }
 
+        burnMessageLayout.setOnClickListener {
+            isBurnMsgSelected = true
+            showBurnMessageDialog()
+        }
+
         autoLogoutLayout.setOnClickListener {
-            val dialog = getMessageBurnDialog(requireContext(), activity?.rootLayout as ViewGroup)
-            backIcon = dialog.findViewById(R.id.backIcon)
-            done = dialog.findViewById(R.id.done)
-            dialogTitle = dialog.findViewById(R.id.dialog_title)
-            viewPager = dialog.findViewById(R.id.timeSelector)
-            unitViewPager = dialog.findViewById(R.id.unitSelector)
-
-            setDialogTitle("Auto Logout")
-
-            // minutes = dialog.findViewById(R.id.minutes)
-            // hours = dialog.findViewById(R.id.hours)
-            //   days = dialog.findViewById(R.id.days)
-            //   seconds = dialog.findViewById(R.id.seconds)
-
-
-            /* minutes?.setOnClickListener {
-
-                 changeView(MessageBurnType.MINUTES.type)
-             }
-
-             hours?.setOnClickListener {
-
-                 changeView(MessageBurnType.HOURS.type)
-             }
-
-             days?.setOnClickListener {
-
-                 changeView(MessageBurnType.DAYS.type)
-             }
-
-             seconds?.setOnClickListener {
-
-                 changeView(MessageBurnType.SECONDS.type)
-             }*/
-
-            backIcon?.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            done?.setOnClickListener {
-
-                selectedType =
-                    burnMsgUnitAdapter.unitList.get(unitViewPager.currentPosition).toLowerCase()
-                sharedHelper.autoLockType = selectedType
-                sharedHelper.autoLockTime = viewPager.currentPosition + 1
-                profileViewModel.updateLoginTime()
-                autoLockTime()
-                dialog.dismiss()
-            }
-            // changeView(MessageBurnType.SECONDS.type)
-            initBurnMessageScrollview()
+            isBurnMsgSelected = false
+            showAutoLogoutDialog()
         }
 
         openWallet.setOnClickListener {
             //open wallet app screens
         }
+    }
+
+    private fun showAutoLogoutDialog() {
+        val dialog = getMessageBurnDialog(requireContext(), activity?.rootLayout as ViewGroup)
+        backIcon = dialog.findViewById(R.id.backIcon)
+        done = dialog.findViewById(R.id.done)
+        dialogTitle = dialog.findViewById(R.id.dialog_title)
+        viewPager = dialog.findViewById(R.id.timeSelector)
+        unitViewPager = dialog.findViewById(R.id.unitSelector)
+
+        setDialogTitle("Auto Logout")
+
+        // minutes = dialog.findViewById(R.id.minutes)
+        // hours = dialog.findViewById(R.id.hours)
+        //   days = dialog.findViewById(R.id.days)
+        //   seconds = dialog.findViewById(R.id.seconds)
+
+
+        /* minutes?.setOnClickListener {
+
+             changeView(MessageBurnType.MINUTES.type)
+         }
+
+         hours?.setOnClickListener {
+
+             changeView(MessageBurnType.HOURS.type)
+         }
+
+         days?.setOnClickListener {
+
+             changeView(MessageBurnType.DAYS.type)
+         }
+
+         seconds?.setOnClickListener {
+
+             changeView(MessageBurnType.SECONDS.type)
+         }*/
+
+        backIcon?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        done?.setOnClickListener {
+
+            selectedType =
+                burnMsgUnitAdapter.unitList[unitViewPager.currentPosition].toLowerCase()
+            sharedHelper.autoLockType = selectedType
+            sharedHelper.autoLockTime = viewPager.currentPosition + 1
+            profileViewModel.updateLoginTime()
+            autoLockTime()
+            dialog.dismiss()
+        }
+//            changeView(MessageBurnType.SECONDS.type)
+        initBurnMessageScrollview()
     }
 
     private fun showBurnMessageDialog() {
@@ -358,7 +363,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         done?.setOnClickListener {
             selectedType =
-                burnMsgUnitAdapter.unitList.get(unitViewPager.currentPosition).toLowerCase()
+                burnMsgUnitAdapter.unitList[unitViewPager.currentPosition].toLowerCase()
             sharedHelper.burnMessageType = selectedType
             sharedHelper.burnMessageTime = viewPager.currentPosition + 1
             setMessageTime()
@@ -555,12 +560,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         viewPager.adapter = counterAdapter
 
+        //check here either auto logout is opening or burn msg then set their count accordingly
+        if (isBurnMsgSelected) {
+            viewPager.scrollToPosition(sharedHelper.burnMessageTime - 1)
+        } else {
+            viewPager.scrollToPosition(sharedHelper.autoLockTime - 1)
+        }
+
         viewPager.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, scrollState: Int) {
             }
 
             override fun onScrolled(recyclerView: RecyclerView, i: Int, i2: Int) {
-                LogUtil.d("Value", "SCroll Called")
+                LogUtil.d("Value", "Scroll Called")
 
                 val childCount = viewPager.childCount
                 val width = viewPager.getChildAt(0).width
@@ -634,6 +646,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         unitViewPager.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         burnMsgUnitAdapter = BurnMsgUnitAdapter(requireContext())
+
+        //Set unit here
+        val position = burnMsgUnitAdapter.unitList.indexOf(selectedType.capitalize())
+        LogUtil.d("PositionOf", position.toString())
+        unitViewPager.scrollToPosition(position)
+
         unitViewPager.adapter = burnMsgUnitAdapter
 
         unitViewPager.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -981,11 +999,15 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
 
     private fun initBurnMessageScrollview() {
-        selectedType = MessageBurnType.SECONDS.type
+        if (isBurnMsgSelected) {
+            selectedType = sharedHelper.burnMessageType
+        } else {
+            selectedType = sharedHelper.autoLockType
+        }
+
         setViewPager()
         setUnitViewPager()
     }
-
 
     private fun setDialogTitle(text: String) {
         dialogTitle?.text = text
