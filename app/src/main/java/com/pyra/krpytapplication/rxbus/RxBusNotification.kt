@@ -8,7 +8,6 @@ object RxBusNotification {
 
     private val bus = PublishSubject.create<Any>()
 
-
     fun send(event: Any) {
         bus.onNext(event)
     }

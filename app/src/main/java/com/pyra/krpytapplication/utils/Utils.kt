@@ -51,7 +51,6 @@ import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
-
 fun fetchThemeColor(id: Int, context: Context): Int {
     val typedValue = TypedValue()
     val a: TypedArray =

@@ -38,7 +38,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     var success: MutableLiveData<Boolean> = MutableLiveData()
     var image: String = ""
     var participationList: List<GroupParticipationSchema> = ArrayList()
-    var notifiAdapter :MutableLiveData<Void>?= MutableLiveData<Void>()
+    var notifiAdapter: MutableLiveData<Void>? = MutableLiveData<Void>()
     var profileData = ChatListSchema()
     var refreshView: MutableLiveData<Void> = MutableLiveData()
 
@@ -56,7 +56,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     var updateBlockList = MutableLiveData<Boolean>()
 
-    var updateBlockedUser:MutableLiveData<Void>? = MutableLiveData<Void>()
+    var updateBlockedUser: MutableLiveData<Void>? = MutableLiveData<Void>()
     var blockedUsers = ArrayList<BlockListSchema>()
 
     fun getUser(roomId: String): LiveData<ChatListSchema>? =
@@ -525,7 +525,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun setOnNotificationChanged(b: Boolean, roomId: String) {
         Coroutine.iOWorker {
-            profileRepository.chageNotification(b,roomId.toUpperCase())
+            profileRepository.chageNotification(b, roomId.toUpperCase())
         }
     }
 

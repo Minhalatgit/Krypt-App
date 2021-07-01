@@ -1,3 +1,4 @@
 include ':ucrop'
 rootProject.name='Krpyt'
 include ':app', ':lightcompressor'
+include ':chatvoiceplayerlibrary'

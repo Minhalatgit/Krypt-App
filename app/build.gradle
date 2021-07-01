@@ -175,6 +175,7 @@ dependencies {
 
     implementation project(path: ":lightcompressor")
     implementation project(path: ":ucrop")
+    implementation project(path: ":chatvoiceplayerlibrary")
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
 
     //pagination library
@@ -230,6 +231,6 @@ dependencies {
 
     // Root check
     implementation 'com.scottyab:rootbeer-lib:0.1.0'
-    implementation 'com.github.Armen101:AudioRecordView:1.0.1'
-    implementation 'com.github.JagarYousef:ChatVoicePlayer:1.0.8'
+
+    // Voice player
 }

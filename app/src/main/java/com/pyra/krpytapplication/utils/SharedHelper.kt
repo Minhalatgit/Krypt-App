@@ -23,7 +23,6 @@ class SharedHelper(context: Context) {
             sharedPreference.putKey("kryptKey", value)
         }
 
-
     var firebaseToken: String
         get() : String {
             return sharedPreference.getKey("firebaseToken")
@@ -257,9 +256,11 @@ class SharedHelper(context: Context) {
         }
 
     var isMorphVoiceEnabled: Boolean
+        @JvmName("getIsMorphEnabled")
         get() : Boolean {
             return sharedPreference.getBoolean("isMorphVoiceEnabled")
         }
+        @JvmName("setIsMorphEnabled")
         set(value) {
             sharedPreference.putBoolean("isMorphVoiceEnabled", value)
         }

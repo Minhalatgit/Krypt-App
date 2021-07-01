@@ -28,6 +28,7 @@ import com.pyra.krpytapplication.viewmodel.ChatMessagesViewModel
 import getDocumentIcon
 import getViewIntent
 import kotlinx.android.synthetic.main.item_sender_audio.view.*
+import kotlinx.android.synthetic.main.play_video.view.*
 import setColorToBackground
 import java.io.File
 
@@ -698,36 +699,36 @@ class ChatMessageAdapter(
                         setAudioUploadedPlaying(
                             senderAudio.binding.uploadingLayout.uploadLayout,
                             senderAudio.binding.uploadLayout.uploadLayout,
-                            senderAudio.binding.uploadedLayout.playLayout,
-                            senderAudio.binding.pause
+                            senderAudio.binding.voicePlayerView.imgPlay,
+                            senderAudio.binding.voicePlayerView.imgPause
                         )
                     } else {
-
                         setAudioUploaded(
                             senderAudio.binding.uploadingLayout.uploadLayout,
                             senderAudio.binding.uploadLayout.uploadLayout,
-                            senderAudio.binding.uploadedLayout.playLayout,
-                            senderAudio.binding.pause
+                            senderAudio.binding.voicePlayerView.imgPlay,
+                            senderAudio.binding.voicePlayerView.imgPause
                         )
-
                     }
                 } else {
                     if (viewModel.isUploadCancelledByUser(position)) {
                         setAudioUpload(
                             senderAudio.binding.uploadingLayout.uploadLayout,
                             senderAudio.binding.uploadLayout.uploadLayout,
-                            senderAudio.binding.uploadedLayout.playLayout,
-                            senderAudio.binding.pause
+                            senderAudio.binding.voicePlayerView.imgPlay,
+                            senderAudio.binding.voicePlayerView.imgPause
                         )
                     } else {
                         setAudioUploading(
                             senderAudio.binding.uploadingLayout.uploadLayout,
                             senderAudio.binding.uploadLayout.uploadLayout,
-                            senderAudio.binding.uploadedLayout.playLayout,
-                            senderAudio.binding.pause
+                            senderAudio.binding.voicePlayerView.imgPlay,
+                            senderAudio.binding.voicePlayerView.imgPause
                         )
                     }
                 }
+
+                senderAudio.binding.voicePlayerView.setAudio(viewModel.getLocalFile(position)?.absolutePath)
 
                 senderAudio.binding.pause.setOnClickListener {
                     viewModel.pauseAudio()
@@ -1284,7 +1285,7 @@ class ChatMessageAdapter(
 
                     if (viewModel.getIsAudioPlaying(position)) {
 
-                        setDownlodedAudioPlaying(
+                        setDownloadedAudioPlaying(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
                             receiverAudio.binding.downloadedLayout.playLayout,
@@ -1292,7 +1293,7 @@ class ChatMessageAdapter(
                         )
 
                     } else {
-                        setDownlodedAudio(
+                        setDownloadedAudio(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
                             receiverAudio.binding.downloadedLayout.playLayout,
@@ -1303,14 +1304,14 @@ class ChatMessageAdapter(
                 } else {
 
                     if (viewModel.isDownloadCancelByUser(position)) {
-                        setDownlodAudio(
+                        setDownloadAudio(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
                             receiverAudio.binding.downloadedLayout.playLayout,
                             receiverAudio.binding.pause
                         )
                     } else {
-                        setDownlodingAudio(
+                        setDownloadingAudio(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
                             receiverAudio.binding.downloadedLayout.playLayout,
@@ -1594,7 +1595,7 @@ class ChatMessageAdapter(
 
     }
 
-    private fun setDownlodAudio(
+    private fun setDownloadAudio(
         downloadingLayout: View,
         downloadLayout: View,
         downloadedLayout: View,
@@ -1606,7 +1607,7 @@ class ChatMessageAdapter(
         pause.hide()
     }
 
-    private fun setDownlodingAudio(
+    private fun setDownloadingAudio(
         downloadingLayout: View,
         downloadLayout: View,
         downloadedLayout: View,
@@ -1618,7 +1619,7 @@ class ChatMessageAdapter(
         pause.hide()
     }
 
-    private fun setDownlodedAudio(
+    private fun setDownloadedAudio(
         downloadingLayout: View,
         downloadLayout: View,
         downloadedLayout: View,
@@ -1630,7 +1631,7 @@ class ChatMessageAdapter(
         downloadedLayout.show()
     }
 
-    private fun setDownlodedAudioPlaying(
+    private fun setDownloadedAudioPlaying(
         downloadingLayout: View,
         downloadLayout: View,
         downloadedLayout: View,
