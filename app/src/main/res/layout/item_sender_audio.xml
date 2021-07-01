@@ -146,6 +146,7 @@
                             app:playPauseCornerRadius="100"
                             app:playProgressbarColor="#ff7700"
                             app:seekBarProgressColor="#000"
+                            app:showShareButton="false"
                             app:showTiming="false"
                             app:viewBackground="@color/transparent"
                             app:viewCornerRadius="100"

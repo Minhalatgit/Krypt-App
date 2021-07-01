@@ -157,17 +157,24 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/messageUserName">
 
-                        <ImageView
-                            android:id="@+id/documentIcon"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:src="@drawable/audio_icon"
-                            android:visibility="gone"
+                        <me.jagar.chatvoiceplayerlibrary.VoicePlayerView
+                            android:id="@+id/voicePlayerView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:enableVisualizer="true"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/white" />
+                            app:playPauseCornerRadius="100"
+                            app:playProgressbarColor="#ff7700"
+                            app:seekBarProgressColor="#000"
+                            app:showShareButton="false"
+                            app:showTiming="false"
+                            app:viewBackground="@color/transparent"
+                            app:viewCornerRadius="100"
+                            app:visualizationNotPlayedColor="@color/emoji_black"
+                            app:visualizationPlayedColor="@color/white" />
 
                         <TextView
                             android:id="@+id/messageContent"
@@ -181,6 +188,7 @@
                             android:text="FileName (2)"
                             android:textColor="?toolbar_text_color"
                             android:textSize="@dimen/_11sdp"
+                            android:visibility="gone"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintStart_toEndOf="@+id/playPauseLayout"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -189,10 +197,9 @@
                             android:id="@+id/playPauseLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_4sdp"
                             android:background="@drawable/rounded_white_bg"
                             android:gravity="center"
-                            android:padding="@dimen/_3sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -215,7 +222,8 @@
                                 android:id="@+id/downloadedLayout"
                                 layout="@layout/play_video"
                                 android:layout_width="@dimen/_20sdp"
-                                android:layout_height="@dimen/_20sdp" />
+                                android:layout_height="@dimen/_20sdp"
+                                android:visibility="gone" />
 
                             <ImageView
                                 android:id="@+id/pause"
@@ -223,6 +231,7 @@
                                 android:layout_height="@dimen/_20sdp"
                                 android:padding="2dp"
                                 android:src="@drawable/ic_pause"
+                                android:visibility="gone"
                                 app:tint="@color/blue" />
 
                         </RelativeLayout>

@@ -1288,16 +1288,16 @@ class ChatMessageAdapter(
                         setDownloadedAudioPlaying(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
-                            receiverAudio.binding.downloadedLayout.playLayout,
-                            receiverAudio.binding.pause
+                            receiverAudio.binding.voicePlayerView.imgPlay,
+                            receiverAudio.binding.voicePlayerView.imgPause
                         )
 
                     } else {
                         setDownloadedAudio(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
-                            receiverAudio.binding.downloadedLayout.playLayout,
-                            receiverAudio.binding.pause
+                            receiverAudio.binding.voicePlayerView.imgPlay,
+                            receiverAudio.binding.voicePlayerView.imgPause
                         )
                     }
 
@@ -1307,18 +1307,20 @@ class ChatMessageAdapter(
                         setDownloadAudio(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
-                            receiverAudio.binding.downloadedLayout.playLayout,
-                            receiverAudio.binding.pause
+                            receiverAudio.binding.voicePlayerView.imgPlay,
+                            receiverAudio.binding.voicePlayerView.imgPause
                         )
                     } else {
                         setDownloadingAudio(
                             receiverAudio.binding.downloadingLayout.uploadLayout,
                             receiverAudio.binding.downloadLayout.downloadLayout,
-                            receiverAudio.binding.downloadedLayout.playLayout,
-                            receiverAudio.binding.pause
+                            receiverAudio.binding.voicePlayerView.imgPlay,
+                            receiverAudio.binding.voicePlayerView.imgPause
                         )
                     }
                 }
+
+                receiverAudio.binding.voicePlayerView.setAudio(viewModel.getLocalFile(position)?.absolutePath)
 
                 receiverAudio.binding.pause.setOnClickListener {
                     viewModel.pauseAudio()

@@ -9,6 +9,7 @@ package me.jagar.chatvoiceplayerlibrary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -30,9 +31,14 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKeys;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.security.GeneralSecurityException;
 
 public class VoicePlayerView extends LinearLayout {
 
@@ -176,20 +182,39 @@ public class VoicePlayerView extends LinearLayout {
                 mediaPlayer.setDataSource(path);
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
-//                SharedHelper helper = new SharedHelper(context);
-//                if (helper.getIsMorphEnabled()) {
-//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//                        try {
-//                            if (helper.getMorphVoiceFrequency().equalsIgnoreCase("")) {
-//                                PlaybackParams playbackParams = new PlaybackParams();
-//                                playbackParams.setPitch(Float.parseFloat(helper.getMorphVoiceFrequency()));
-//                                mediaPlayer.setPlaybackParams(playbackParams);
-//                            }
-//                        } catch (Exception e) {
-//                            Log.e("VoicePlayerView", "setAudio: " + e.getCause());
-//                        }
-//                    }
-//                }
+                try {
+                    SharedPreferences preferences = context.getSharedPreferences("Cache", Context.MODE_PRIVATE);
+                    if (!BuildConfig.DEBUG) {
+                        String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
+                        EncryptedSharedPreferences.create(
+                                "Cache",
+                                masterKeyAlias,
+                                context,
+                                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                        );
+                    }
+
+                    if (preferences.getBoolean("isMorphVoiceEnabled", false)) {
+                        Log.e("VoicePlayerView", "Morph is enabled");
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                            try {
+                                String morphFrequency = preferences.getString("morphVoiceFrequency", "");
+                                if (!morphFrequency.equalsIgnoreCase("")) {
+                                    Log.e("VoicePlayerView", "setAudio: " + morphFrequency);
+                                    PlaybackParams playbackParams = new PlaybackParams();
+                                    playbackParams.setPitch(Float.parseFloat(morphFrequency));
+                                    mediaPlayer.setPlaybackParams(playbackParams);
+                                }
+                            } catch (Exception e) {
+                                Log.e("VoicePlayerView", "setAudio: " + e.getCause());
+                            }
+                        }
+                    }
+
+                } catch (GeneralSecurityException e) {
+                    e.printStackTrace();
+                }
 
                 mediaPlayer.prepare();
                 mediaPlayer.setVolume(10, 10);
@@ -270,7 +295,6 @@ public class VoicePlayerView extends LinearLayout {
             imgPlay.setVisibility(View.GONE);
             imgPause.setVisibility(View.VISIBLE);
             mediaPlayer.start();
-
         }
     };
 
@@ -336,7 +360,8 @@ public class VoicePlayerView extends LinearLayout {
     };
 
     //Updating seekBar in realtime
-    private void update(final MediaPlayer mediaPlayer, final TextView time, final SeekBar seekBar, final Context context) {
+    private void update(final MediaPlayer mediaPlayer, final TextView time,
+                        final SeekBar seekBar, final Context context) {
         ((Activity) context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -345,7 +370,6 @@ public class VoicePlayerView extends LinearLayout {
                     seekbarV.setProgress(mediaPlayer.getCurrentPosition());
                     seekbarV.updatePlayerPercent((float) mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration());
                 }
-
 
                 if (mediaPlayer.getDuration() - mediaPlayer.getCurrentPosition() > 100) {
                     time.setText(convertSecondsToHMmSs(mediaPlayer.getCurrentPosition() / 1000) + " / " + convertSecondsToHMmSs(mediaPlayer.getDuration() / 1000));
