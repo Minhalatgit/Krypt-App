@@ -78,6 +78,7 @@ class CreatePasswordActivity : BaseActivity() {
                     sharedHelper.imei = imei
                     sharedHelper.password = password
                     sharedHelper.loggedIn = true
+                    sharedHelper.token = it.token ?: ""
                     val intent = Intent(this, DuressPasswordActivity::class.java)
                     intent.putExtra(Constants.IntentKeys.CHANGEPASSWORDFLOW, false)
                     intent.flags =

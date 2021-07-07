@@ -180,7 +180,7 @@ class MyApp : Application() {
         return AppDataBase.getInstance(this)
     }
 
-    private fun getRequestQueue(): RequestQueue? {
+    fun getRequestQueue(): RequestQueue? {
 
         if (requestQueue == null)
             requestQueue = Volley.newRequestQueue(instance)

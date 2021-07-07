@@ -8,6 +8,8 @@ import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.utils.LogUtil
 import com.pyra.krpytapplication.utils.isNetworkConnected
 import com.pyra.krpytapplication.repositories.interfaces.ApiResponseCallback
+import com.pyra.krpytapplication.utils.SharedHelper
+import com.pyra.krpytapplication.utils.moveToKryptCodeActivity
 
 object Api {
 
@@ -17,6 +19,11 @@ object Api {
         if (input.context!!.isNetworkConnected()) {
 
             LogUtil.d("ApiRequest", input.url + "  " + input.jsonObject.toString())
+
+            val headerParam = HashMap<String, String>()
+            headerParam["Authorization"] = SharedHelper(input.context!!).token
+            input.headers = headerParam
+
             val jsonObjectRequest =
                 object : JsonObjectRequest(Method.POST, input.url, input.jsonObject, {
                     apiResponseCallback.setResponseSuccess(it)
@@ -27,7 +34,7 @@ object Api {
                         input.context?.getString(R.string.no_internet_connection)
                             ?.let { it1 -> apiResponseCallback.setErrorResponse(it1) }
                     } else if (it is AuthFailureError) {
-//                        moveToLoginActivity(input.context)
+                        input.context?.moveToKryptCodeActivity()
                         input.context?.getString(R.string.session_expired)
                             ?.let { it1 -> apiResponseCallback.setErrorResponse(it1) }
                     } else if (it is ServerError) {
@@ -45,6 +52,7 @@ object Api {
                     }
                 }) {
                     override fun getHeaders(): MutableMap<String, String> {
+                        LogUtil.d("ApiHeader", input.url + "  " + input.headers)
                         return if (input.headers != null) {
                             val params: HashMap<String, String> = HashMap()
 

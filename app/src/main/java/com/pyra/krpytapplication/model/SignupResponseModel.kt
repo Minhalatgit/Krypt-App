@@ -11,5 +11,6 @@ class SignupResponseModel : Serializable {
     @SerializedName("message")
     var message: String? = null
 
-
+    @SerializedName("token")
+    var token: String? = null
 }

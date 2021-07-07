@@ -33,4 +33,7 @@ class LoginData : Serializable {
     @SerializedName("passwordAttempt")
     var passwordAttempt: Int? = null
 
+    @SerializedName("token")
+    var token: String? = null
+
 }

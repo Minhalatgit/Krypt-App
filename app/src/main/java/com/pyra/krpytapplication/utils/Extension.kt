@@ -5,6 +5,7 @@ import android.content.Intent
 import android.hardware.display.DisplayManager
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.view.Display
 import android.view.View
 import android.webkit.MimeTypeMap
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.pyra.krpytapplication.R
+import com.pyra.krpytapplication.app.MyApp
+import com.pyra.krpytapplication.view.activity.KryptCodeActivity
 import org.jxmpp.jid.Jid
 import java.io.File
 
@@ -43,6 +46,23 @@ fun <T> Context.openNewTaskActivity(it: Class<T>, bundle: Bundle) {
     intent.flags =
         Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     startActivity(intent)
+}
+
+fun Context.moveToKryptCodeActivity() {
+    //
+    MyApp.getInstance().getRequestQueue()?.cancelAll {
+        true
+    }
+    Handler().postDelayed({
+        val intent = Intent(this, KryptCodeActivity::class.java)
+        SharedHelper(this).apply {
+            loggedIn = false
+            showKryptScreen = true
+        }
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }, 1000)
 }
 
 fun Context.isNetworkConnected(): Boolean {

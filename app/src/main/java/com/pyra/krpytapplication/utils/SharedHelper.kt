@@ -39,6 +39,14 @@ class SharedHelper(context: Context) {
             sharedPreference.putBoolean("loggedIn", value)
         }
 
+    var token: String
+        get() : String {
+            return sharedPreference.getKey("token")
+        }
+        set(value) {
+            sharedPreference.putKey("token", value)
+        }
+
     var password: String
         get() : String {
             return sharedPreference.getKey("password")

@@ -58,6 +58,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
                     it.data?.passwordAttempt?.let { atmp -> attempts?.value = atmp }
                 } else {
                     it.data?.name?.let { sharedHelper?.userName = it }
+                    it.data?.token?.let { sharedHelper?.token = it }
                     sharedHelper?.kryptKey = kryptCode
                     sharedHelper?.password = password
 
