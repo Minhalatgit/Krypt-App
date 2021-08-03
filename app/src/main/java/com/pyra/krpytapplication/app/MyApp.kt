@@ -20,6 +20,8 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.google.firebase.messaging.FirebaseMessaging
+import com.nicoqueijo.android.currencyconverter.kotlin.app.CurrencyApplication
+import com.oriondev.moneywallet.WalletApp
 import com.pyra.krpytapplication.R
 import com.pyra.krpytapplication.utils.Constants
 import com.pyra.krpytapplication.utils.LogUtil
@@ -29,6 +31,7 @@ import com.pyra.krpytapplication.roomDb.AppDataBase
 import com.pyra.krpytapplication.videocallutils.events.AGEventHandler
 import com.pyra.krpytapplication.videocallutils.events.EngineConfig
 import com.pyra.krpytapplication.videocallutils.events.MyEngineEventHandler
+import com.simplemobiletools.clock.ClockApp
 import com.vanniktech.emoji.EmojiManager
 import com.vanniktech.emoji.ios.IosEmojiProvider
 import io.agora.rtc.RtcEngine
@@ -40,7 +43,7 @@ import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.*
 
-class MyApp : Application() {
+class MyApp : WalletApp() {
 
     override fun onCreate() {
         super.onCreate()

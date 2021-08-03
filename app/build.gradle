@@ -173,9 +173,6 @@ dependencies {
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
-    implementation project(path: ":lightcompressor")
-    implementation project(path: ":ucrop")
-    implementation project(path: ":chatvoiceplayerlibrary")
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
 
     //pagination library
@@ -232,5 +229,17 @@ dependencies {
     // Root check
     implementation 'com.scottyab:rootbeer-lib:0.1.0'
 
-    // Voice player
+    //Integrated apps
+    implementation project(path: ":lightcompressor")
+    implementation project(path: ":ucrop")
+    implementation project(path: ":chatvoiceplayerlibrary")
+    implementation project(path: ":flashlight")
+    implementation project(path: ":translator")
+    implementation project(path: ":flightMode")
+    implementation project(path: ":clock")
+    implementation project(path: ":calculator")
+    implementation project(path: ":do_now_disturb")
+    implementation project(path: ":unitconverter")
+    implementation project(path: ":wallet")
+    implementation project(path: ":currencyconverter")
 }

@@ -1,193 +1,82 @@
 package com.pyra.krpytapplication.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.example.apaar97.translate.MainTranslatorActivity
+import com.example.flightmode.MainFlightActivity
+import com.macdems.disturbnow.SettingsDndActivity
+import com.nicoqueijo.android.currencyconverter.kotlin.view.MainActivityCurrency
+import com.oriondev.moneywallet.ui.activity.LauncherActivity
+import com.physphil.android.unitconverterultimate.MainActivityConverter
 import com.pyra.krpytapplication.R
+import com.pyra.krpytapplication.utils.LogUtil
+import com.simplemobiletools.calculator.activities.MainCalculatorActivity
+import com.simplemobiletools.clock.activities.MainClockActivity
+import com.simplemobiletools.flashlight.activities.MainFlashActivity
+import kotlinx.android.synthetic.main.fragment_more_menu.*
 
 class MoreMenuFragment : Fragment(R.layout.fragment_more_menu) {
 
-//    lateinit var chatListAdapter: ChatListAdapter
-//    var onClickButtonListener: OnClickButtonListener? = null
-//    lateinit var chatListViewModel: ChatListViewModel
-//    lateinit var searchViewModel: SearchViewModel
-//    var loader: Dialog? = null
-//    val profileViewModel: ProfileViewModel by viewModels()
-
-//    private val loadBar by lazy {
-//        showLoader(requireContext())
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        chatListViewModel = ViewModelProvider(this).get(ChatListViewModel::class.java)
-//        searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-//        initAdapter()
-//        initListener()
-//        setMenuInflater()
+
+        clockLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Clock clicked!")
+            startActivity(Intent(requireContext(), MainClockActivity::class.java))
+        }
+
+        torchLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Torch clicked!")
+            startActivity(Intent(requireContext(), MainFlashActivity::class.java))
+        }
+
+        calculatorLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Calculator clicked!")
+            startActivity(Intent(requireContext(), MainCalculatorActivity::class.java))
+        }
+
+        translatorLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Translator clicked!")
+            startActivity(Intent(requireContext(), MainTranslatorActivity::class.java))
+        }
+
+        unitConverterLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Unit Converter clicked!")
+            startActivity(Intent(requireContext(), MainActivityConverter::class.java))
+        }
+
+        dndLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Do not disturb clicked!")
+            startActivity(Intent(requireContext(), SettingsDndActivity::class.java))
+        }
+
+        airplaneLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Airplane clicked!")
+            startActivity(Intent(requireContext(), MainFlightActivity::class.java))
+        }
+
+        settingLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Factory reset clicked!")
+//            startActivity(Intent(requireContext(), MainFlightActivity::class.java))
+        }
+
+        wallet.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Wallet clicked!")
+            startActivity(Intent(requireContext(), LauncherActivity::class.java))
+        }
+
+        calendarLayout.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Calendar clicked!")
+//            startActivity(Intent(requireContext(), MainFlightActivity::class.java))
+        }
+        currencyConverter.setOnClickListener {
+            LogUtil.d("MoreMenuFragment", "Currency Converter clicked!")
+            startActivity(Intent(requireContext(), MainActivityCurrency::class.java))
+        }
+
+
     }
 
-//    private fun showSearchLayout() {
-//        selectionPanel.show()
-//        topLayout.hide()
-//    }
-//
-//    private fun showNormalLayout() {
-//        selectionPanel.hide()
-//        topLayout.show()
-//    }
-
-//    private fun initListener() {
-//
-//        searchText.addTextChangedListener {
-//            if (it.toString().trim() == "") {
-//                chatListViewModel.getChatListAsync()
-//            } else {
-//                chatListViewModel.getSearchedData(it.toString())
-//            }
-//        }
-//
-//        backPressed.setOnClickListener {
-//            chatListViewModel.removeSelection()
-//        }
-//
-//        deleteChat.setOnClickListener {
-//            showRemoveDialog()
-//        }
-//    }
-//
-//    @SuppressLint("SetTextI18n")
-//    private fun showRemoveDialog() {
-//        val dialog = getChatDeleteDialog(requireContext())
-//
-//        val title = dialog.findViewById<TextView>(R.id.title)
-//        val checkBox = dialog.findViewById<CheckBox>(R.id.checkBox)
-//        val cancel = dialog.findViewById<TextView>(R.id.cancel)
-//        val delete = dialog.findViewById<TextView>(R.id.delete)
-//
-//        if (chatListViewModel.getSelectedCount() == 1) {
-//            title.text =
-//                getString(R.string.delete_chat_with) + " \"" + chatListViewModel.selectedRoomName + "\""
-//        } else {
-//            title.text = "Delete " + chatListViewModel.getSelectedCount() + " selected chats"
-//        }
-//
-//        cancel.setOnClickListener {
-//            dialog.dismiss()
-//        }
-//
-//        delete.setOnClickListener {
-//            chatListViewModel.deleteSelectedChats(checkBox.isChecked)
-//            dialog.dismiss()
-//        }
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        chatListViewModel.checkForBurnMessage()
-//        println("LXMPP On Resume Called")
-//
-//        checkSubscription()
-//    }
-//
-//    private fun checkSubscription() {
-//
-//        profileViewModel.getUserDeatilsResponse(
-//            SharedHelper(requireContext()).kryptKey,
-//            UrlHelper.GETUSERDETAILS
-//        ).observe(viewLifecycleOwner) {
-//
-//            if (it.error == "false") {
-//
-//                it.data[0].subsEnddate?.let {
-//
-//                    val endDatedate = getFormatedDate(
-//                        it,
-//                        "yyyy-MM-dd'T'HH:mm:ss",
-//                        "yyyy-MM-dd"
-//                    )
-//
-//                    endDatedate?.let {
-//                        if (endDatedate != "Not Updated") {
-//                            val isSubscriptionEnded =
-//                                isSubScriptionEnded(endDatedate, "yyyy-MM-dd")
-//
-//                            if (isSubscriptionEnded) {
-//                                clearAllData()
-//                            }
-//                        }
-//                    }
-//
-//                }
-//
-//            }
-//
-//        }
-//
-//    }
-//
-//    private fun clearAllData() {
-//        val bundle = Bundle()
-//        bundle.putBoolean("isSubEnded", true)
-//        requireActivity().openNewTaskActivity(KryptCodeActivity::class.java, bundle)
-//    }
-//
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        onClickButtonListener = (activity as OnClickButtonListener?)
-//    }
-//
-//    private fun initAdapter() {
-//        val linearLayoutManager =
-//            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//        chatListAdapter = ChatListAdapter(requireActivity(), chatListViewModel)
-//        chatLists.layoutManager = linearLayoutManager
-//        chatLists.adapter = chatListAdapter
-//        listener()
-//
-//        chatListViewModel.update.observe(viewLifecycleOwner) {
-//            chatListAdapter.notifyDataSetChanged()
-//            if (chatListViewModel.isMultiSelectionEnabled) {
-//                showSearchLayout()
-//            } else {
-//                showNormalLayout()
-//            }
-//            selectedCount.text = chatListViewModel.getSelectedCount().toString()
-//        }
-//
-//        chatListViewModel.chatListCount.observe(viewLifecycleOwner, Observer {
-//            messageCount.text = "( $it messages )"
-//        })
-//
-//        chatListViewModel.getChatList()
-//    }
-//
-//    private fun listener() {
-//        contactButton.setOnClickListener {
-//            onClickButtonListener?.onClickListener()
-//        }
-//        newUser.setOnClickListener {
-//            findNavController().navigate(ChatFragmentDirections.actionChatToAddContactDialog())
-//        }
-//    }
-//
-//    private fun setMenuInflater() {
-//
-//        val popup = PopupMenu(requireContext(), selectionMenu)
-//        popup.menuInflater.inflate(R.menu.chat_message_menu, popup.menu)
-//
-//        popup.setOnMenuItemClickListener {
-//            when (it.itemId) {
-//                R.id.clearChat -> {
-//                    chatListViewModel.clearAllChats()
-//                }
-//            }
-//            return@setOnMenuItemClickListener true
-//        }
-//
-//        selectionMenu.setOnClickListener {
-//            popup.show()
-//        }
-//
-//    }
 }

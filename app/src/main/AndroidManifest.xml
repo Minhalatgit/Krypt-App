@@ -27,7 +27,6 @@
 
     <application
         android:name=".app.MyApp"
-        android:allowBackup="false"
         android:defaultToDeviceProtectedStorage="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -150,6 +149,29 @@
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
         </service>
+
+        <!-- Wallet provider -->
+        <provider
+            android:name="com.oriondev.moneywallet.storage.database.DataContentProvider"
+            android:authorities="authorities.storage.data"
+            android:exported="true"
+            android:readPermission="com.oriondev.moneywallet.permission.READ_DATA"
+            android:writePermission="com.oriondev.moneywallet.permission.WRITE_DATA"
+            tools:replace="android:authorities" />
+        <provider
+            android:name="com.oriondev.moneywallet.storage.database.SyncContentProvider"
+            android:authorities="com.oriondev.moneywallet.storage.sync"
+            android:exported="false" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.oriondev.moneywallet.storage.file"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
     </application>
 
 </manifest>

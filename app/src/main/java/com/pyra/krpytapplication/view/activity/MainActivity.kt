@@ -148,6 +148,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
     fun onMenuClick(view: View) {
         when (view.id) {
             R.id.chatLayout -> {
+                LogUtil.d("MainNavigation","Chat")
                 chatSelected()
                 fm.beginTransaction().hide(active).show(chatFragment).commit()
                 active = chatFragment
@@ -155,6 +156,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
             }
 
             R.id.profileLayout -> {
+                LogUtil.d("MainNavigation","Profile")
                 profileSelected()
                 if (this@MainActivity::profileFragment.isInitialized) {
                     fm.beginTransaction().hide(active).show(profileFragment).commit()
@@ -171,6 +173,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
             }
 
             R.id.vaultLayout -> {
+                LogUtil.d("MainNavigation","Vault")
                 if (sharedHelper?.vaultPasswordEnabled!!) {
                     if (isVerified) {
                         vaultSelected()
@@ -216,6 +219,7 @@ class MainActivity : BaseActivity(), OnClickButtonListener {
                 }
             }
             R.id.moreMenuLayout -> {
+                LogUtil.d("MainNavigation","MoreMenu")
                 moreMenuSelected()
                 if (this@MainActivity::moreMenuFragment.isInitialized) {
                     fm.beginTransaction().hide(active).show(moreMenuFragment).commit()
