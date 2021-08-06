@@ -16,10 +16,12 @@ public class MainTranslatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_translator);
         LinearLayout layout = (LinearLayout) findViewById(R.id.home_container);
-        AlphaAnimation animation = new AlphaAnimation(0.0f , 1.0f ) ;
+
+        AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
         animation.setFillAfter(true);
         animation.setDuration(1200);
         layout.startAnimation(animation);
+
         Button bConversation = (Button) findViewById(R.id.start_new_conversation);
         Button bTranslation = (Button) findViewById(R.id.start_new_translation);
         Button bAbout = (Button) findViewById(R.id.about);

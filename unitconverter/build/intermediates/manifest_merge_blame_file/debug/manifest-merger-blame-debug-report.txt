@@ -23,27 +23,27 @@
 23        android:targetSdkVersion="30" />
 24
 25    <application>
-25-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:19:5-31:19
+25-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:19:5-31:19
 26        <activity
-26-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:20:9-23:70
+26-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:20:9-23:70
 27            android:name="com.physphil.android.unitconverterultimate.MainActivityConverter"
-27-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:21:13-50
+27-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:21:13-50
 28            android:label="@string/app_name"
-28-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:22:13-45
+28-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:22:13-45
 29            android:windowSoftInputMode="stateHidden|adjustResize" />
-29-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:23:13-67
+29-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:23:13-67
 30        <activity
-30-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:24:9-26:63
+30-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:24:9-26:63
 31            android:name="com.physphil.android.unitconverterultimate.settings.PreferencesActivity"
-31-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:25:13-57
+31-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:25:13-57
 32            android:label="@string/title_activity_settings" />
-32-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:26:13-60
+32-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:26:13-60
 33        <activity
-33-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:27:9-29:71
+33-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:27:9-29:71
 34            android:name="com.physphil.android.unitconverterultimate.AcknowledgementsActivity"
-34-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:28:13-53
+34-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:28:13-53
 35            android:label="@string/title_activity_acknowledgements" />
-35-->C:\dev\Krypt-App - Copy\unitconverter\src\main\AndroidManifest.xml:29:13-68
+35-->C:\dev\Krypt-App\unitconverter\src\main\AndroidManifest.xml:29:13-68
 36    </application>
 37
 38</manifest>
